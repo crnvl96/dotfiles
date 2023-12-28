@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# Get Volume
+get_volume() {
+	notify-send -t 1000 Volume: "`pulsemixer --get-volume | cut -d' ' -f1`"
+}
+
+# Increase Volume
+inc_volume() {
+	[[ `pulsemixer --get-mute` == 1 ]] && pulsemixer --unmute
+	pulsemixer --max-volume 100 --change-volume +5
+	get_volume
+}
+
+# Decrease Volume
+dec_volume() {
+	[[ `pulsemixer --get-mute` == 1 ]] && pulsemixer --unmute
+	pulsemixer --max-volume 100 --change-volume -5
+	get_volume
+}
+
+# Execute accordingly
+if [[ -x `which pulsemixer` ]]
+    then
+    if [[ "$1" == "--get" ]]
+        then
+        get_volume
+        elif [[ "$1" == "--inc" ]]
+        then
+        inc_volume
+        elif [[ "$1" == "--dec" ]]
+        then
+        dec_volume
+    else
+        echo $(get_volume)%
+        fi
+else
+    ${notify_cmd} "'pulsemixer' is not installed."
+    fi

@@ -1,0 +1,16 @@
+notARepository: "quit"
+os:
+  editCommand: 'nvim'
+gui:
+  showBottomLine: false
+  theme:
+    activeBorderColor:
+      - white
+      - bold
+    selectedLineBgColor:
+      - "#383838"
+    selectedRangeBgColor:
+      - "#383838"
+      - bold
+  border: rounded
+  nerdFontsVersion: "3"

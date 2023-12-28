@@ -1,0 +1,50 @@
+[init]
+  defaultBranch = main
+[user]
+  name = "Ádran Farias Carnavale"
+  email = adran.carnavale@gmail.com
+  username = crnvl96
+  signinkey = 28D1954DE48487B5
+[core]
+  pager = delta
+  editor = nvim
+  excludesfile = /home/crnvl96/.config/git/.gitignore_global
+[gpg]
+  program = gpg
+[tag]
+  gpgsign = true
+[color]
+  ui = true
+[interactive]
+  diffFilter = delta --color-only
+[delta]
+  navigate = true
+  light = false
+  true-color = always
+  line-numbers = false
+  features = decorations
+  whitespace-error-style = 22 reverse
+[commit]
+  verbose = true
+  gpgsign = true
+[pull]
+  rebase = false
+[alias]
+  st = status
+  ap = add --patch
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  df = diff
+  ds = diff --staged
+  cm = commit
+[diff]
+	algorithm = patience
+	compactionHeuristic = true
+	prompt = false
+[difftool "nvimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE
+[merge]
+	tool = nvimdiff
+	prompt = false
+  conflictstyle = diff3
+[mergetool "nvimdiff"]
+	cmd = nvim -d $LOCAL $BASE $REMOTE $MERGED
