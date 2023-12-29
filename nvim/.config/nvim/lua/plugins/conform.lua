@@ -7,6 +7,7 @@ return {
         end,
         opts = {
             notify_on_error = false,
+            format_on_save = { timeout_ms = 1000, lsp_fallback = true },
             formatters_by_ft = {
                 fish = { "fish_indent" },
                 lua = { "stylua" },
@@ -16,7 +17,6 @@ return {
                 typescript = { "prettierd" },
                 typescriptreact = { "prettierd" },
             },
-            format_on_save = { timeout_ms = 1000, lsp_fallback = true },
         },
     },
 }
