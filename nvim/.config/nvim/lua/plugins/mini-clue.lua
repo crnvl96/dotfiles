@@ -12,6 +12,14 @@ return {
                 end,
             })
 
+            vim.api.nvim_create_autocmd("FileType", {
+                group = vim.api.nvim_create_augroup("crnvl96_enable_clue_triggers_fugitive", { clear = true }),
+                pattern = { "fugitive" },
+                callback = function(data)
+                    miniclue.enable_buf_triggers(data.buf)
+                end,
+            })
+
             -- Add a-z/A-Z marks.
             local function mark_clues()
                 local marks = {}
