@@ -377,7 +377,6 @@ return {
                         require("lspconfig").gopls.setup({
                             capabilities = capabilities,
                             on_init = function(client)
-                                print(client.name)
                                 vim.keymap.set("n", "<leader>dn", "<cmd>lua require('dap-go').debug_test()<cr>", { desc = "debug nearest (go)" })
 
                                 if client.name == "gopls" and not client.server_capabilities.semanticTokensProvider then
