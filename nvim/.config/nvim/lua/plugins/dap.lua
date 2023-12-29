@@ -19,12 +19,9 @@ return {
         {
             "mxsdev/nvim-dap-vscode-js",
             opts = {
-                debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug/",
+                debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug",
                 adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
             },
-        },
-        {
-            "stevearc/overseer.nvim",
         },
         {
             "microsoft/vscode-js-debug",
@@ -189,7 +186,7 @@ return {
     config = function()
         local dap = require("dap")
 
-        -- require("overseer").patch_dap(true)
+        require("overseer").patch_dap(true)
         require("dap.ext.vscode").json_decode = require("overseer.json").decode
 
         dap.adapters.nlua = function(callback, config)
