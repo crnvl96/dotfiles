@@ -217,6 +217,8 @@ return {
 
                     { mode = "x", keys = "i?", desc = "Inside prompt" },
                     { mode = "x", keys = "a?", desc = "Around prompt" },
+
+                    { mode = "n", keys = "dv", postkeys = "d", desc = "(Fugitive diff)" },
                 },
                 window = {
                     delay = 200,
