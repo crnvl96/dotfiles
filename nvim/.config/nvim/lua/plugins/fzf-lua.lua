@@ -78,6 +78,7 @@ return {
             { "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Find files" },
             { "<leader>fb", "<cmd>FzfLua buffers<cr>", desc = "Find Buffers" },
             { "<leader>fh", "<cmd>FzfLua highlights<cr>", desc = "Highlights" },
+            { "<leader>fq", "<cmd>FzfLua quickfix<cr>", desc = "QF" },
         },
     },
 }

@@ -7,6 +7,17 @@ return {
             { "williamboman/mason-lspconfig.nvim" },
             { "williamboman/mason.nvim", build = ":MasonUpdate" },
             { "williamboman/mason-lspconfig.nvim" },
+            { "pmizio/typescript-tools.nvim" },
+            { "dmmulroy/tsc.nvim" },
+            {
+                "hrsh7th/nvim-cmp",
+                dependencies = {
+                    { "hrsh7th/cmp-nvim-lsp" },
+                    { "hrsh7th/cmp-buffer" },
+                    { "L3MON4D3/LuaSnip" },
+                    { "windwp/nvim-autopairs" },
+                },
+            },
         },
         config = function()
             require("mason").setup()
@@ -16,6 +27,9 @@ return {
                 "gofumpt",
                 "goimports",
                 "prettierd",
+
+                "js-debug-adapter",
+                "delve",
             }
 
             local mr = require("mason-registry")
@@ -118,20 +132,6 @@ return {
                     if client.supports_method(method) then
                         fn()
                     end
-                end
-
-                -- workaround for gopls not supporting semanticTokensProvider
-                -- https://github.com/golang/go/issues/54531#issuecomment-1464982242
-                if client.name == "gopls" and not client.server_capabilities.semanticTokensProvider then
-                    local semanticTokens = client.config.capabilities.textDocument.semanticTokens
-                    client.server_capabilities.semanticTokensProvider = {
-                        full = true,
-                        legend = {
-                            tokenTypes = semanticTokens.tokenTypes,
-                            tokenModifiers = semanticTokens.tokenModifiers,
-                        },
-                        range = true,
-                    }
                 end
 
                 -- local inlay_hint = vim.lsp.protocol.Methods.textDocument_inlayHint
@@ -376,6 +376,22 @@ return {
                     gopls = function()
                         require("lspconfig").gopls.setup({
                             capabilities = capabilities,
+                            on_init = function(client)
+                                print(client.name)
+                                vim.keymap.set("n", "<leader>dn", "<cmd>lua require('dap-go').debug_test()<cr>", { desc = "debug nearest (go)" })
+
+                                if client.name == "gopls" and not client.server_capabilities.semanticTokensProvider then
+                                    local semanticTokens = client.config.capabilities.textDocument.semanticTokens
+                                    client.server_capabilities.semanticTokensProvider = {
+                                        full = true,
+                                        legend = {
+                                            tokenTypes = semanticTokens.tokenTypes,
+                                            tokenModifiers = semanticTokens.tokenModifiers,
+                                        },
+                                        range = true,
+                                    }
+                                end
+                            end,
                             settings = {
                                 gopls = {
                                     gofumpt = true,
@@ -414,36 +430,146 @@ return {
                         })
                     end,
                     tsserver = function()
-                        require("lspconfig").tsserver.setup({
+                        require("tsc").setup()
+                        require("typescript-tools").setup({
                             capabilities = capabilities,
                             settings = {
-                                javascript = {
-                                    inlayHints = {
-                                        includeInlayEnumMemberValueHints = true,
-                                        includeInlayFunctionLikeReturnTypeHints = true,
-                                        includeInlayFunctionParameterTypeHints = true,
-                                        includeInlayParameterNameHints = "all",
-                                        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                                        includeInlayPropertyDeclarationTypeHints = true,
-                                        includeInlayVariableTypeHints = true,
-                                    },
-                                },
-                                typescript = {
-                                    inlayHints = {
-                                        includeInlayEnumMemberValueHints = true,
-                                        includeInlayFunctionLikeReturnTypeHints = true,
-                                        includeInlayFunctionParameterTypeHints = true,
-                                        includeInlayParameterNameHints = "all",
-                                        includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                                        includeInlayPropertyDeclarationTypeHints = true,
-                                        includeInlayVariableTypeHints = true,
-                                    },
+                                tsserver_file_preferences = {
+                                    includeInlayParameterNameHints = "literals",
+                                    includeInlayVariableTypeHints = true,
+                                    includeInlayFunctionLikeReturnTypeHints = true,
                                 },
                             },
                         })
+                        return true
                     end,
                 },
             })
+
+            local cmp = require("cmp")
+
+            cmp.setup({
+                preselect = cmp.PreselectMode.None,
+                sorting = require("cmp.config.default")().sorting,
+                formatting = {
+                    format = function(entry, vim_item)
+                        vim_item.kind = ""
+                        vim_item.menu = ({
+                            buffer = "(Buffer)",
+                            nvim_lsp = "(LSP)",
+                        })[entry.source.name]
+                        return vim_item
+                    end,
+                },
+                completion = {
+                    completeopt = "menu,menuone,noinsert,noselect",
+                },
+                window = {
+                    completion = {
+                        border = "rounded",
+                        winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None",
+                    },
+                    documentation = {
+                        border = "rounded",
+                        winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None",
+                    },
+                },
+                snippet = {
+                    expand = function(args)
+                        require("luasnip").lsp_expand(args.body)
+                    end,
+                },
+                mapping = cmp.mapping.preset.insert({
+                    ["<C-n>"] = cmp.mapping.select_next_item(),
+                    ["<C-p>"] = cmp.mapping.select_prev_item(),
+                    ["<C-Space>"] = cmp.mapping.complete(),
+                    ["<C-e>"] = cmp.mapping.abort(),
+                    ["<C-y>"] = cmp.mapping.confirm({ select = true }),
+                }),
+                sources = cmp.config.sources({
+                    {
+                        name = "nvim_lsp",
+                        entry_filter = function(entry)
+                            local kind = cmp.lsp.CompletionItemKind[entry:get_kind()]
+                            if kind == "Text" then
+                                return false
+                            end
+                            if kind == "Snippet" then
+                                return false
+                            end
+                            return true
+                        end,
+                    },
+                }, {
+                    { name = "buffer" },
+                }),
+            })
+
+            cmp.setup.cmdline({ "/", "?" }, {
+                mapping = cmp.mapping.preset.cmdline(),
+                sources = {
+                    { name = "buffer" },
+                },
+            })
+
+            local npairs = require("nvim-autopairs")
+
+            local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+            cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+
+            npairs.setup({
+                enable_check_bracket_line = false,
+                ignored_next_char = "[%w%.]",
+            })
+
+            local Rule = require("nvim-autopairs.rule")
+            local cond = require("nvim-autopairs.conds")
+
+            local brackets = { { "(", ")" }, { "[", "]" }, { "{", "}" } }
+
+            npairs.add_rules({
+                -- Rule for a pair with left-side ' ' and right side ' '
+                Rule(" ", " ")
+                    -- Pair will only occur if the conditional function returns true
+                    :with_pair(function(opts)
+                        -- We are checking if we are inserting a space in (), [], or {}
+                        local pair = opts.line:sub(opts.col - 1, opts.col)
+                        return vim.tbl_contains({
+                            brackets[1][1] .. brackets[1][2],
+                            brackets[2][1] .. brackets[2][2],
+                            brackets[3][1] .. brackets[3][2],
+                        }, pair)
+                    end)
+                    :with_move(cond.none())
+                    :with_cr(cond.none())
+                    -- We only want to delete the pair of spaces when the cursor is as such: ( | )
+                    :with_del(function(opts)
+                        local col = vim.api.nvim_win_get_cursor(0)[2]
+                        local context = opts.line:sub(col - 1, col + 2)
+                        return vim.tbl_contains({
+                            brackets[1][1] .. "  " .. brackets[1][2],
+                            brackets[2][1] .. "  " .. brackets[2][2],
+                            brackets[3][1] .. "  " .. brackets[3][2],
+                        }, context)
+                    end),
+            })
+            -- For each pair of brackets we will add another rule
+            for _, bracket in pairs(brackets) do
+                npairs.add_rules({
+                    -- Each of these rules is for a pair with left-side '( ' and right-side ' )' for each bracket type
+                    Rule(bracket[1] .. " ", " " .. bracket[2])
+                        :with_pair(cond.none())
+                        :with_move(function(opts)
+                            return opts.char == bracket[2]
+                        end)
+                        :with_del(cond.none())
+                        :use_key(bracket[2])
+                        -- Removes the trailing whitespace that can occur without this
+                        :replace_map_cr(function(_)
+                            return "<C-c>2xi<CR><C-c>O"
+                        end),
+                })
+            end
         end,
     },
 }

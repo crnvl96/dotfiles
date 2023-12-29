@@ -3,8 +3,6 @@ return {
         "kevinhwang91/nvim-bqf",
         ft = "qf",
         init = function()
-            vim.api.nvim_set_hl(0, "BqfPreviewBorder", { link = "Normal" })
-
             local fn = vim.fn
             function _G.qftf(info)
                 local items
@@ -80,6 +78,7 @@ return {
                 tabdrop = "<C-t>",
                 tabc = "",
                 ptogglemode = "z,",
+                fzffilter = "",
             },
             filter = {
                 fzf = {
@@ -88,5 +87,9 @@ return {
                 },
             },
         },
+        config = function(_, opts)
+            vim.api.nvim_set_hl(0, "BqfPreviewBorder", { link = "Normal" })
+            require("bqf").setup(opts)
+        end,
     },
 }
