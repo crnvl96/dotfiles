@@ -11,13 +11,13 @@ bindsym $mod+q kill
 floating_modifier $mod
 # for_window [class="^.*"] floating enable
 # for_window [window_role="^.*"] floating enable
-for_window [class="^.*"] border pixel 2.5
+for_window [class="^.*"] border pixel 3
 # for_window [class="^Alacritty$"] floating enable
 # floating_minimum_size 1920 x 1074
 # floating_maximum_size 1921 x 1078
 bindsym $mod+n floating toggle
 # borders
-client.focused #ffffff #ffffff #ffffff #ffffff #ffffff
+client.focused #484848 #484848 #484848 #484848 #484848
 gaps inner 0px
 
 # Focus windows using cursor keys
