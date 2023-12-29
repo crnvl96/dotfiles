@@ -1,13 +1,3 @@
-local function open_and_close()
-    local overseer = require("overseer")
-    overseer.open({ enter = false })
-    vim.defer_fn(function()
-        if vim.bo.filetype ~= "OverseerList" then
-            overseer.close()
-        end
-    end, 10 * 1000)
-end
-
 return {
     {
         "stevearc/overseer.nvim",
@@ -23,7 +13,6 @@ return {
                     ["<C-f>"] = "ScrollOutputDown",
                     ["H"] = "IncreaseAllDetail",
                     ["L"] = "DecreaseAllDetail",
-                    -- Disable mappings I don't use.
                     ["g?"] = false,
                     ["<C-l>"] = false,
                     ["<C-h>"] = false,
