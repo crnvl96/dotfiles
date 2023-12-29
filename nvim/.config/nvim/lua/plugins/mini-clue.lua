@@ -105,6 +105,7 @@ return {
                     { mode = "x", keys = "<leader>f", desc = "+find" },
                     { mode = "n", keys = "<leader>g", desc = "+git" },
                     { mode = "x", keys = "<leader>g", desc = "+git" },
+                    { mode = "n", keys = "<leader>o", desc = "+overseer" },
                     { mode = "n", keys = "<leader>s", desc = "+search" },
                     { mode = "x", keys = "<leader>s", desc = "+search" },
                     { mode = "n", keys = "<leader>w", desc = "+windows" },
