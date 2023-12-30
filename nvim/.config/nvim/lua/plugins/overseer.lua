@@ -3,7 +3,7 @@ return {
         "stevearc/overseer.nvim",
         opts = {
             dap = false,
-            templates = { "builtin" },
+            templates = { "builtin", "user.run_file" },
             task_list = {
                 default_detail = 2,
                 direction = "bottom",
@@ -12,8 +12,8 @@ return {
                     ["<C-b>"] = "ScrollOutputUp",
                     ["<C-f>"] = "ScrollOutputDown",
                     ["<M-p>"] = "TogglePreview",
-                    ["H"] = "IncreaseAllDetail",
-                    ["L"] = "DecreaseAllDetail",
+                    ["H"] = "DecreaseAllDetail",
+                    ["L"] = "IncreaseAllDetail",
                     -- Disable mappings I don't use.
                     ["g?"] = false,
                     ["<C-l>"] = false,
