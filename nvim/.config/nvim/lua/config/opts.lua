@@ -14,7 +14,7 @@ vim.opt.laststatus = 0
 vim.opt.showtabline = 0
 
 vim.opt.cursorline = true
-vim.opt.signcolumn = "yes"
+vim.opt.signcolumn = "yes:2"
 vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.relativenumber = true
