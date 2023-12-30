@@ -83,6 +83,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
     command = [[set formatoptions-=cro]],
 })
 
+vim.api.nvim_create_autocmd("Colorscheme", {
+    group = vim.api.nvim_create_augroup("crnvl96_colorscheme", { clear = true }),
+    callback = function()
+        vim.api.nvim_set_hl(0, "StatusLine", { bg = "#282828" })
+    end,
+})
+
 local cursorGrp = vim.api.nvim_create_augroup("CursorLine", { clear = true })
 vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
     pattern = "*",
