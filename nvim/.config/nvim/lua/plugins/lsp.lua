@@ -9,6 +9,7 @@ return {
             { "williamboman/mason-lspconfig.nvim" },
             { "pmizio/typescript-tools.nvim" },
             { "dmmulroy/tsc.nvim" },
+            { "onsails/lspkind.nvim" },
             {
                 "hrsh7th/nvim-cmp",
                 dependencies = {
@@ -446,19 +447,28 @@ return {
             })
 
             local cmp = require("cmp")
+            local lspkind = require("lspkind")
 
             cmp.setup({
                 preselect = cmp.PreselectMode.None,
                 sorting = require("cmp.config.default")().sorting,
                 formatting = {
-                    format = function(entry, vim_item)
-                        vim_item.kind = ""
-                        vim_item.menu = ({
-                            buffer = "(Buffer)",
-                            nvim_lsp = "(LSP)",
-                        })[entry.source.name]
-                        return vim_item
-                    end,
+                    format = lspkind.cmp_format({
+                        mode = "text_symbol",
+                        maxwidth = 50,
+                        ellipsis_char = "...",
+                        before = function(_, vim_item)
+                            return vim_item
+                        end,
+                    }),
+                    -- format = function(entry, vim_item)
+                    --     vim_item.kind = ""
+                    --     vim_item.menu = ({
+                    --         buffer = "(Buffer)",
+                    --         nvim_lsp = "(LSP)",
+                    --     })[entry.source.name]
+                    --     return vim_item
+                    -- end,
                 },
                 completion = {
                     completeopt = "menu,menuone,noinsert,noselect",
