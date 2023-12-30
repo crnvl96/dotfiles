@@ -39,9 +39,6 @@ return {
 
         -- Lua adapter
         {"<leader>dl", function() require("osv").launch({port = 8086}) end, desc = "Launch Lua adapter"},
-
-        -- Neotest
-        { "<leader>td", function() require("neotest").run.run({strategy = "dap"}) end, desc = "Debug Nearest" },
     },
     config = function()
         require("dap-go").setup()
