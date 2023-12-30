@@ -10,7 +10,7 @@ vim.opt.clipboard = "unnamedplus"
 
 vim.opt.timeoutlen = 200
 vim.opt.updatetime = 200
-vim.opt.laststatus = 0
+vim.opt.laststatus = 3
 vim.opt.showtabline = 0
 
 vim.opt.cursorline = true
@@ -18,7 +18,7 @@ vim.opt.signcolumn = "yes:2"
 vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.cmdheight = 2
+vim.opt.cmdheight = 1
 vim.opt.showcmd = false
 
 vim.opt.virtualedit = "block"
