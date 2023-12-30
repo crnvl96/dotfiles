@@ -116,6 +116,7 @@ return {
                     { mode = "n", keys = "<leader>o", desc = "+overseer" },
                     { mode = "n", keys = "<leader>s", desc = "+search" },
                     { mode = "x", keys = "<leader>s", desc = "+search" },
+                    { mode = "x", keys = "<leader>t", desc = "+test" },
                     { mode = "n", keys = "<leader>w", desc = "+windows" },
                     { mode = "n", keys = "[", desc = "+prev" },
                     { mode = "n", keys = "]", desc = "+next" },
