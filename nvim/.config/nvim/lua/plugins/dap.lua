@@ -6,7 +6,6 @@ return {
         { "microsoft/vscode-js-debug", build = "npm i && npm run compile vsDebugServerBundle && rm -rf out && mv -f dist out" },
         { "mxsdev/nvim-dap-vscode-js" },
         { "rcarriga/nvim-dap-ui" },
-        { "stevearc/overseer.nvim" },
         { "jbyuki/one-small-step-for-vimkind" },
     },
     -- stylua: ignore
@@ -34,11 +33,10 @@ return {
         {"<leader>du", function() require("dapui").toggle({}) end, desc = "Dap UI"},
         {"<leader>de", function() require("dapui").eval() require("dapui").eval() end, desc = "Evaluate expression", mode = {"n", "v"}},
 
-        -- overseer
-        { "<leader>ot", "<cmd>OverseerToggle<cr>", desc = "Toggle task window" },
-
         -- Lua adapter
         {"<leader>dl", function() require("osv").launch({port = 8086}) end, desc = "Launch Lua adapter"},
+        {"<leader>dn", function() require("neotest").run.run({strategy = "dap"}) end, desc = "Debug nearest (other langs)"},
+
     },
     config = function()
         require("dap-go").setup()
@@ -46,10 +44,6 @@ return {
         require("dap-vscode-js").setup({
             debugger_path = vim.fn.stdpath("data") .. "/lazy/vscode-js-debug",
             adapters = { "pwa-node", "pwa-chrome", "pwa-msedge", "node-terminal", "pwa-extensionHost" },
-        })
-        require("overseer").setup({
-            dap = false,
-            templates = { "builtin", "typescript.start_dev" },
         })
 
         require("overseer").patch_dap(true)
