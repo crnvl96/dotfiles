@@ -68,6 +68,9 @@ return {
                     "gomod",
                     "gowork",
                     "gosum",
+                    "typescript",
+                    "tsx",
+                    "javascript",
                 },
                 incremental_selection = {
                     enable = true,
