@@ -48,3 +48,11 @@ vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Close Window" })
 vim.keymap.set("n", "<leader>wx", "<cmd>only<CR>", { desc = "Close Other Windows" })
 vim.keymap.set("n", "<leader>bb", "<cmd>e #<CR>", { desc = "Go to Last Buffer" })
 vim.keymap.set("n", "<leader>bx", "<cmd>%bd|edit#|bd#<CR>", { desc = "Close Other Buffers" })
+
+-- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
+vim.keymap.set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true })
+vim.keymap.set("x", "n", "'Nn'[v:searchforward]", { expr = true })
+vim.keymap.set("o", "n", "'Nn'[v:searchforward]", { expr = true })
+vim.keymap.set("n", "N", "'nN'[v:searchforward].'zv'", { expr = true })
+vim.keymap.set("x", "N", "'nN'[v:searchforward]", { expr = true })
+vim.keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true })
