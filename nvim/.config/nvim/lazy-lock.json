@@ -23,6 +23,8 @@
   "mini.clue": { "branch": "main", "commit": "f03a61b0c5e44c2aad02d17b94186ec17826d65c" },
   "mini.extra": { "branch": "main", "commit": "68a1df65f48d5eeade3736038af56ae21a2da983" },
   "mini.hipatterns": { "branch": "main", "commit": "82d348b05328705a7048f852f15f66a482562f03" },
+  "mini.jump": { "branch": "main", "commit": "6a56d60452b2380af4f3e09574c4de5c9b687e48" },
+  "mini.jump2d": { "branch": "main", "commit": "f186e2c4836f7d5baf44ca35820e7f495aa982dc" },
   "neotest": { "branch": "master", "commit": "6aa6e4529a4a125b49c48541b97ba146ceee2441" },
   "neotest-go": { "branch": "main", "commit": "d29d20d912aca81a07c50022d880cc66f0d26542" },
   "neotest-jest": { "branch": "main", "commit": "a394106cf053eef86d65ae04c4b93a1a7bd60aef" },

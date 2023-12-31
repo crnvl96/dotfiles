@@ -168,11 +168,4 @@ function Marks.BufWinEnterHandler(args)
     end
 end
 
-Marks.set_keymaps()
-
-vim.api.nvim_create_autocmd("BufWinEnter", {
-    group = vim.api.nvim_create_augroup("crnvl96_marks_handler", { clear = true }),
-    callback = function(args)
-        Marks.BufWinEnterHandler(args)
-    end,
-})
+return Marks
