@@ -86,7 +86,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 vim.api.nvim_create_autocmd("Colorscheme", {
     group = vim.api.nvim_create_augroup("crnvl96_colorscheme", { clear = true }),
     callback = function()
-        vim.api.nvim_set_hl(0, "StatusLine", { bg = "#282828" })
+        vim.api.nvim_set_hl(0, "StatusLine", { bg = "#30363d" })
     end,
 })
 
@@ -97,3 +97,16 @@ vim.api.nvim_create_autocmd({ "InsertLeave", "WinEnter" }, {
     group = cursorGrp,
 })
 vim.api.nvim_create_autocmd({ "InsertEnter", "WinLeave" }, { pattern = "*", command = "set nocursorline", group = cursorGrp })
+
+vim.api.nvim_create_autocmd("VimEnter", {
+    group = vim.api.nvim_create_augroup("crnvl96_set_signcolumn_marks", { clear = true }),
+    callback = function()
+        require("utils.marks_handler").set_keymaps()
+    end,
+})
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    group = vim.api.nvim_create_augroup("crnvl96_refresh_signcolumn_marks", { clear = true }),
+    callback = function(args)
+        require("utils.marks_handler").BufWinEnterHandler(args)
+    end,
+})
