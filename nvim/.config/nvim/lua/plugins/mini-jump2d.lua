@@ -2,7 +2,7 @@ return {
     "echasnovski/mini.jump2d",
     event = "VeryLazy",
     opts = {
-        labels = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+        labels = "abcdefghijklmnopqrstuvwxyz",
         view = {
             dim = true,
             n_steps_ahead = 0,
