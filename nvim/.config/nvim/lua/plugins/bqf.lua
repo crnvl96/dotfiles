@@ -2,6 +2,14 @@ return {
     {
         "kevinhwang91/nvim-bqf",
         ft = "qf",
+        dependencies = {
+            {
+                "junegunn/fzf",
+                build = function()
+                    vim.fn["fzf#install"]()
+                end,
+            },
+        },
         init = function()
             local fn = vim.fn
             function _G.qftf(info)
@@ -78,7 +86,7 @@ return {
                 tabdrop = "<C-t>",
                 tabc = "",
                 ptogglemode = "z,",
-                fzffilter = "",
+                fzffilter = "zf",
             },
             filter = {
                 fzf = {
