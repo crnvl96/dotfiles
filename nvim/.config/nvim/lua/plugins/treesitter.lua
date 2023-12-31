@@ -14,6 +14,56 @@ return {
             require("nvim-treesitter.query_predicates")
         end,
         config = function()
+            local clue = require("mini.clue")
+            clue.config.triggers = vim.list_extend(clue.config.triggers, {
+                { mode = "x", keys = "i" },
+                { mode = "x", keys = "a" },
+            })
+            clue.config.clues = vim.list_extend(clue.config.clues, {
+                { mode = "x", keys = "if", desc = "Inside function" },
+                { mode = "x", keys = "io", desc = "Inside block" },
+                { mode = "x", keys = "ic", desc = "Inside class" },
+                { mode = "x", keys = "it", desc = "Inside tag" },
+
+                { mode = "x", keys = "af", desc = "Around function" },
+                { mode = "x", keys = "ao", desc = "Around block" },
+                { mode = "x", keys = "ac", desc = "Around class" },
+                { mode = "x", keys = "at", desc = "Around tag" },
+
+                { mode = "x", keys = "i(", desc = "Inside ()" },
+                { mode = "x", keys = "i)", desc = "Inside () w/space" },
+                { mode = "x", keys = "i[", desc = "Inside []" },
+                { mode = "x", keys = "i]", desc = "Inside [] w/space" },
+                { mode = "x", keys = "i{", desc = "Inside {}" },
+                { mode = "x", keys = "i}", desc = "Inside {} w/ space" },
+                { mode = "x", keys = "i<", desc = "Inside <> w/ space" },
+                { mode = "x", keys = "i>", desc = "Inside <> w/ space" },
+                { mode = "x", keys = "ib", desc = "Inside <{[()]}> w/ space" },
+
+                { mode = "x", keys = "a(", desc = "Around ()" },
+                { mode = "x", keys = "a)", desc = "Around () w/space" },
+                { mode = "x", keys = "a[", desc = "Around []" },
+                { mode = "x", keys = "a]", desc = "Around [] w/space" },
+                { mode = "x", keys = "a{", desc = "Around {}" },
+                { mode = "x", keys = "a}", desc = "Around {} w/ space" },
+                { mode = "x", keys = "a<", desc = "Around <>" },
+                { mode = "x", keys = "a>", desc = "Around <> w/ space" },
+                { mode = "x", keys = "ab", desc = "Around <{[()]}> w/ space" },
+
+                { mode = "x", keys = "i'", desc = "Inside '" },
+                { mode = "x", keys = 'i"', desc = 'Inside "' },
+                { mode = "x", keys = "i`", desc = "Inside `" },
+                { mode = "x", keys = "iq", desc = "Inside '`\"" },
+
+                { mode = "x", keys = "a'", desc = "Around '" },
+                { mode = "x", keys = 'a"', desc = 'Around "' },
+                { mode = "x", keys = "a`", desc = "Around `" },
+                { mode = "x", keys = "aq", desc = "Around '`\"" },
+
+                { mode = "x", keys = "i?", desc = "Inside prompt" },
+                { mode = "x", keys = "a?", desc = "Around prompt" },
+            })
+
             vim.g.matchup_matchparen_offscreen = { method = "popup" }
 
             local ai = require("mini.ai")
