@@ -7,31 +7,14 @@ return {
         { "mxsdev/nvim-dap-vscode-js" },
         { "rcarriga/nvim-dap-ui" },
         { "jbyuki/one-small-step-for-vimkind" },
-        { "stevearc/overseer.nvim" },
     },
     config = function()
-        require("overseer").setup({
-            dap = false,
-            templates = { "builtin", "user.run_file" },
-            task_list = {
-                default_detail = 2,
-                direction = "bottom",
-                max_width = { 600, 0.7 },
-                bindings = {
-                    ["<C-b>"] = "ScrollOutputUp",
-                    ["<C-f>"] = "ScrollOutputDown",
-                    ["<M-p>"] = "TogglePreview",
-                    ["H"] = "DecreaseAllDetail",
-                    ["L"] = "IncreaseAllDetail",
-                    -- Disable mappings I don't use.
-                    ["g?"] = false,
-                    ["<C-l>"] = false,
-                    ["<C-h>"] = false,
-                    ["{"] = false,
-                    ["}"] = false,
-                },
-            },
+        local clue = require("mini.clue")
+        clue.config.clues = vim.list_extend(clue.config.clues, {
+            { mode = "n", keys = "<leader>d", desc = "+dap" },
+            { mode = "x", keys = "<leader>d", desc = "+dap" },
         })
+
         require("dap-go").setup()
         require("nvim-dap-virtual-text").setup({ virt_text_pos = "eol" })
         require("dap-vscode-js").setup({
@@ -61,10 +44,6 @@ return {
     end,
     -- stylua: ignore
     keys = {
-        -- overseer
-        { "<leader>ot", "<cmd>OverseerToggle<cr>", desc = "Toggle task window" },
-        { "<leader>or", "<cmd>OverseerRun<cr>", desc = "Run task" },
-
         -- Dap
         { "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: ")) end, desc = "Breakpoint Condition" },
         { "<leader>db", function() require("dap").toggle_breakpoint() end, desc = "Toggle Breakpoint" },
