@@ -18,6 +18,13 @@ return {
                     normal_cur = "yzz",
                 },
             })
+
+            local clue = require("mini.clue")
+            clue.config.triggers = vim.list_extend(clue.config.triggers, {
+                { mode = "n", keys = "y" },
+                { mode = "n", keys = "d" },
+                { mode = "n", keys = "c" },
+            })
         end,
     },
 }
