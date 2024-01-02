@@ -12,6 +12,11 @@ vim.keymap.set({ "n", "x" }, "K", "6k", { remap = true })
 vim.keymap.set({ "n", "x", "o" }, "H", "_", { remap = true })
 vim.keymap.set({ "n", "x", "o" }, "L", "$", { remap = true })
 
+vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Close Window" })
+vim.keymap.set("n", "<leader>wx", "<cmd>only<CR>", { desc = "Close Other Windows" })
+vim.keymap.set("n", "<leader>bb", "<cmd>e #<CR>", { desc = "Go to Last Buffer" })
+vim.keymap.set("n", "<leader>bx", "<cmd>%bd|edit#|bd#<CR>", { desc = "Close Other Buffers" })
+
 vim.keymap.set("", "Y", "y$")
 
 vim.keymap.set("v", "p", '"_dp')
