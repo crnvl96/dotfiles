@@ -10,39 +10,14 @@ return {
             { "hrsh7th/cmp-nvim-lsp" },
         },
         config = function()
-            require("mason").setup()
-
-            local ensure_installed = {
-                "stylua",
-                "gofumpt",
-                "goimports",
-                "prettierd",
-            }
-
-            local mr = require("mason-registry")
-            mr:on("package:install:success", function()
-                vim.defer_fn(function()
-                    require("lazy.core.handler.event").trigger({
-                        event = "FileType",
-                        buf = vim.api.nvim_get_current_buf(),
-                    })
-                end, 100)
-            end)
-
-            local function install()
-                for _, tool in ipairs(ensure_installed) do
-                    local p = mr.get_package(tool)
-                    if not p:is_installed() then
-                        p:install()
-                    end
-                end
-            end
-
-            if mr.refresh then
-                mr.refresh(install)
-            else
-                install()
-            end
+            require("mason").setup({
+                ensure_installed = {
+                    "stylua",
+                    "gofumpt",
+                    "goimports",
+                    "prettierd",
+                },
+            })
 
             vim.diagnostic.config({
                 float = {
