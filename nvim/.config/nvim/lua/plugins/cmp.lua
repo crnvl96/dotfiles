@@ -6,27 +6,14 @@ return {
             { "hrsh7th/cmp-nvim-lsp" },
             { "hrsh7th/cmp-buffer" },
             { "L3MON4D3/LuaSnip" },
-            { "hrsh7th/cmp-path" },
         },
         config = function()
             local cmp = require("cmp")
             local luasnip = require("luasnip")
 
             cmp.setup({
-                preselect = cmp.PreselectMode.None,
-                sorting = require("cmp.config.default")().sorting,
                 completion = {
                     completeopt = "menu,menuone,noinsert,noselect",
-                },
-                window = {
-                    completion = {
-                        border = "rounded",
-                        winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None",
-                    },
-                    documentation = {
-                        border = "rounded",
-                        winhighlight = "Normal:Normal,FloatBorder:Normal,CursorLine:Visual,Search:None",
-                    },
                 },
                 snippet = {
                     expand = function(args)
@@ -66,7 +53,6 @@ return {
                             return true
                         end,
                     },
-                    { name = "path" },
                 }, {
                     { name = "buffer" },
                 }),

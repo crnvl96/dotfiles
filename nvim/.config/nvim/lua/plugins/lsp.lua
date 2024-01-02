@@ -19,12 +19,6 @@ return {
                 },
             })
 
-            vim.diagnostic.config({
-                float = {
-                    border = "rounded",
-                },
-            })
-
             require("lspconfig.ui.windows").default_options.border = "rounded"
 
             local capabilities =

@@ -20,9 +20,6 @@ return {
                         layout = "vertical",
                         vertical = "up:40%",
                     },
-                    on_create = function()
-                        vim.keymap.set("t", "<C-r>", [['<C-\><C-N>"'.nr2char(getchar()).'pi']], { expr = true })
-                    end,
                 },
                 keymap = {
                     builtin = {

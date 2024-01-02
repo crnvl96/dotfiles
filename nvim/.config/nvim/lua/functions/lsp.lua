@@ -33,8 +33,6 @@ function M.on_lsp_attach(client, bufnr)
     handle_method(diagnostics, function()
         set("<leader>cd", vim.diagnostic.open_float, "Line diagnostics")
 
-        -- set("<leader>sd", vim.diagnostic.setqflist, "Workspace diagnostics")
-
         set("<leader>sd", function()
             require("fzf-lua").lsp_document_diagnostics()
         end, "Document diagnostics")
@@ -46,8 +44,6 @@ function M.on_lsp_attach(client, bufnr)
 
     local code_actions = vim.lsp.protocol.Methods.textDocument_codeAction
     handle_method(code_actions, function()
-        -- set("<leader>ca", vim.lsp.buf.code_action, "Code actions", { "n", "v" })
-
         set("<leader>ca", function()
             require("fzf-lua").lsp_code_actions()
         end, "Code actions", { "n", "v" })
@@ -55,8 +51,6 @@ function M.on_lsp_attach(client, bufnr)
 
     local definitions = vim.lsp.protocol.Methods.textDocument_definition
     handle_method(definitions, function()
-        -- set("gd", vim.lsp.buf.definition, "Go to definition")
-
         set("gd", function()
             require("fzf-lua").lsp_definitions({
                 jump_to_single_result = true,
@@ -66,8 +60,6 @@ function M.on_lsp_attach(client, bufnr)
 
     local declarations = vim.lsp.protocol.Methods.textDocument_declaration
     handle_method(declarations, function()
-        -- set("gD", vim.lsp.buf.declaration, "Go to declarations")
-
         set("gD", function()
             require("fzf-lua").lsp_declarations()
         end, "Go to declarations")
@@ -75,8 +67,6 @@ function M.on_lsp_attach(client, bufnr)
 
     local typedefs = vim.lsp.protocol.Methods.textDocument_typeDefinition
     handle_method(typedefs, function()
-        -- set("gy", vim.lsp.buf.type_definition, "Go to type definition")
-
         set("gy", function()
             require("fzf-lua").lsp_typedefs()
         end, "Go to type definition")
@@ -84,8 +74,6 @@ function M.on_lsp_attach(client, bufnr)
 
     local references = vim.lsp.protocol.Methods.textDocument_references
     handle_method(references, function()
-        -- set("gr", vim.lsp.buf.references, "Go to references")
-
         set("gr", function()
             require("fzf-lua").lsp_references({
                 jump_to_single_result = true,
@@ -95,8 +83,6 @@ function M.on_lsp_attach(client, bufnr)
 
     local implementations = vim.lsp.protocol.Methods.textDocument_implementation
     handle_method(implementations, function()
-        -- set("gi", vim.lsp.buf.implementation, "Go to implementations")
-
         set("gi", function()
             require("fzf-lua").lsp_implementations()
         end, "Go to implementations")
@@ -104,9 +90,6 @@ function M.on_lsp_attach(client, bufnr)
 
     local symbols = vim.lsp.protocol.Methods.textDocument_documentSymbol
     handle_method(symbols, function()
-        -- set("<leader>ss", vim.lsp.buf.document_symbol, "Document symbols")
-        -- set("<leader>sS", vim.lsp.buf.workspace_symbol, "Workspace symbols")
-
         set("<leader>ss", function()
             require("fzf-lua").lsp_document_symbols()
         end, "Document symbols")
@@ -117,31 +100,6 @@ function M.on_lsp_attach(client, bufnr)
             })
         end, "Workspace symbols")
     end)
-
-    --    local highlights = vim.lsp.protocol.Methods.textDocument_documentHighlight
-    --    handle_method(highlights, function()
-    --        vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave", "BufEnter" }, {
-    --            group = vim.api.nvim_create_augroup("crnvl96_lsp_highlights", { clear = false }),
-    --            buffer = bufnr,
-    --            callback = vim.lsp.buf.document_highlight,
-    --        })
-    --
-    --        vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter", "BufLeave" }, {
-    --            group = vim.api.nvim_create_augroup("crnvl96_lsp_highlights", { clear = false }),
-    --            buffer = bufnr,
-    --            callback = vim.lsp.buf.clear_references,
-    --        })
-    --    end)
-end
-
-local register_capability = vim.lsp.handlers["client/registerCapability"]
-vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
-    local ret = register_capability(err, res, ctx)
-    local client_id = ctx.client_id
-    local client = vim.lsp.get_client_by_id(client_id)
-    local bufnr = vim.api.nvim_get_current_buf()
-    M.on_lsp_attach(client, bufnr)
-    return ret
 end
 
 return M
