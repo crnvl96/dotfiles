@@ -2,7 +2,44 @@ return {
     {
         "ibhagwan/fzf-lua",
         cmd = "FzfLua",
-        event = "VeryLazy",
+        init = function()
+            vim.api.nvim_create_user_command("Grep", function(search_args)
+                local cmdline = { "rg", "--vimgrep", "--smart-case", search_args.args }
+                local rg_result = vim.fn.system(cmdline)
+
+                if vim.v.shell_error == 1 and rg_result == "" then
+                    vim.notify("No matches found", vim.log.levels.WARN)
+                    return
+                end
+
+                if vim.v.shell_error ~= 0 then
+                    error("Command failed with error code: " .. vim.v.shell_error .. "\n" .. rg_result)
+                end
+
+                local lines = vim.fn.map(vim.split(rg_result, "\n", { trimempty = true }), function(_, item)
+                    local next = string.gmatch(item, "([^:]+):(%d+):(%d+):(.*)")
+                    local filename, line, col, text = next()
+                    return {
+                        filename = filename,
+                        lnum = line,
+                        col = col,
+                        vcol = 1,
+                        text = text,
+                    }
+                end)
+
+                vim.fn.setqflist({}, "r", {
+                    id = vim.fn.getqflist({ id = 0 }).id,
+                    items = lines,
+                    title = table.concat(cmdline, " "),
+                })
+
+                vim.cmd("copen")
+            end, {
+                desc = "Recursively search for a pattern within the files in the current directory",
+                nargs = 1,
+            })
+        end,
         config = function()
             local actions = require("fzf-lua.actions")
             require("fzf-lua").setup({
