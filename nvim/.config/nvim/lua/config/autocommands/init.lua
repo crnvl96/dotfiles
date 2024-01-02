@@ -1,0 +1,6 @@
+require("config.autocommands.lsp_setup")
+require("config.autocommands.quickfix_utils")
+require("config.autocommands.highlight_on_yank")
+require("config.autocommands.disable_lsp_highlights")
+require("config.autocommands.set_default_node_version")
+require("config.autocommands.go_to_last_buffer_location")
