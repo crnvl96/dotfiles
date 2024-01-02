@@ -1,47 +1,5 @@
 return {
     {
-        "tpope/vim-fugitive",
-        cmd = { "G", "Git", "Gvdiffsplit", "Gwrite", "Gedit" },
-        init = function()
-            local clue = require("mini.clue")
-            clue.config.clues = vim.list_extend(clue.config.clues, {
-                { mode = "n", keys = "<leader>g", desc = "+git" },
-                { mode = "x", keys = "<leader>g", desc = "+git" },
-            })
-
-            local group = vim.api.nvim_create_augroup("crnvl96_handle_fugitive_clues", { clear = true })
-            vim.api.nvim_create_autocmd("User", {
-                group = group,
-                pattern = "FugitiveIndex",
-                callback = function()
-                    vim.opt.timeoutlen = 1000
-                    require("mini.clue").disable_all_triggers()
-                    vim.b.miniclue_disable = true
-
-                    vim.api.nvim_create_autocmd("BufUnload", {
-                        group = group,
-                        once = true,
-                        callback = function()
-                            vim.opt.timeoutlen = 200
-                            require("mini.clue").enable_all_triggers()
-                            vim.b.miniclue_disable = false
-                        end,
-                    })
-                end,
-            })
-        end,
-    },
-    keys = {
-        { "<leader>gx", "<cmd>Git mergetool --name-status<CR>", desc = "Open All Conflicts in QF" },
-        { "<leader>gc", "<cmd>Git commit <bar> wincmd J<CR>", desc = "Commit" },
-        { "<leader>gq", "<cmd>Git difftool --name-status<CR>", desc = "Open All Diffs in QF" },
-        {
-            "<leader>gl",
-            "<cmd>Git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit<CR>",
-            desc = "Log",
-        },
-    },
-    {
         "lewis6991/gitsigns.nvim",
         event = { "BufReadPre", "BufNewFile" },
         opts = {
