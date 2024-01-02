@@ -34,88 +34,42 @@ function M.on_lsp_attach(client, bufnr)
         set("<leader>cd", vim.diagnostic.open_float, "Line diagnostics")
 
         set("<leader>sd", vim.diagnostic.setqflist, "Workspace diagnostics")
-
-        -- set("<leader>sd", function()
-        --     require("fzf-lua").lsp_document_diagnostics()
-        -- end, "Document diagnostics")
-        --
-        -- set("<leader>sD", function()
-        --     require("fzf-lua").lsp_workspace_diagnostics()
-        -- end, "All diagnostics")
     end)
 
     local code_actions = vim.lsp.protocol.Methods.textDocument_codeAction
     handle_method(code_actions, function()
         set("<leader>ca", vim.lsp.buf.code_action, "Code actions", { "n", "v" })
-
-        -- set("<leader>ca", function()
-        --     require("fzf-lua").lsp_code_actions()
-        -- end, "Code actions", { "n", "v" })
     end)
 
     local definitions = vim.lsp.protocol.Methods.textDocument_definition
     handle_method(definitions, function()
         set("gd", vim.lsp.buf.definition, "Go to definition")
-
-        -- set("gd", function()
-        --     require("fzf-lua").lsp_definitions({
-        --         jump_to_single_result = true,
-        --     })
-        -- end, "Go to definition")
     end)
 
     local declarations = vim.lsp.protocol.Methods.textDocument_declaration
     handle_method(declarations, function()
         set("gD", vim.lsp.buf.declaration, "Go to declarations")
-
-        -- set("gD", function()
-        --     require("fzf-lua").lsp_declarations()
-        -- end, "Go to declarations")
     end)
 
     local typedefs = vim.lsp.protocol.Methods.textDocument_typeDefinition
     handle_method(typedefs, function()
         set("gy", vim.lsp.buf.type_definition, "Go to type definition")
-
-        -- set("gy", function()
-        --     require("fzf-lua").lsp_typedefs()
-        -- end, "Go to type definition")
     end)
 
     local references = vim.lsp.protocol.Methods.textDocument_references
     handle_method(references, function()
         set("gr", vim.lsp.buf.references, "Go to references")
-
-        -- set("gr", function()
-        --     require("fzf-lua").lsp_references({
-        --         jump_to_single_result = true,
-        --     })
-        -- end, "Go to references")
     end)
 
     local implementations = vim.lsp.protocol.Methods.textDocument_implementation
     handle_method(implementations, function()
         set("gi", vim.lsp.buf.implementation, "Go to implementations")
-
-        -- set("gi", function()
-        --     require("fzf-lua").lsp_implementations()
-        -- end, "Go to implementations")
     end)
 
     local symbols = vim.lsp.protocol.Methods.textDocument_documentSymbol
     handle_method(symbols, function()
         set("<leader>ss", vim.lsp.buf.document_symbol, "Document symbols")
         set("<leader>sS", vim.lsp.buf.workspace_symbol, "Workspace symbols")
-
-        -- set("<leader>ss", function()
-        --     require("fzf-lua").lsp_document_symbols()
-        -- end, "Document symbols")
-        --
-        -- set("<leader>sS", function()
-        --     require("fzf-lua").lsp_live_workspace_symbols({
-        --         no_header_i = true,
-        --     })
-        -- end, "Workspace symbols")
     end)
 end
 

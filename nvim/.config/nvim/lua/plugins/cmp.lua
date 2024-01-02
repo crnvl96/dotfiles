@@ -12,9 +12,6 @@ return {
             local luasnip = require("luasnip")
 
             cmp.setup({
-                completion = {
-                    completeopt = "menu,menuone,noinsert,noselect",
-                },
                 snippet = {
                     expand = function(args)
                         luasnip.lsp_expand(args.body)

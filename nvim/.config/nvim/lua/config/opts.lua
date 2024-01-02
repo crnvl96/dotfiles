@@ -37,6 +37,8 @@ vim.opt.shiftround = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true
 
+vim.opt.completeopt = "menu,menuone,noinsert,noselect"
+
 vim.opt.smartcase = true
 vim.opt.ignorecase = true
 

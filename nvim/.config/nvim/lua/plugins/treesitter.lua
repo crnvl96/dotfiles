@@ -14,7 +14,6 @@ return {
             require("nvim-treesitter.configs").setup({
                 autotag = { enable = true },
                 indent = { enable = true },
-                matchup = { enable = true },
                 highlight = {
                     enable = true,
                     disable = function(_, buf)
