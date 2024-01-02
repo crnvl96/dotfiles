@@ -1,6 +1,12 @@
 notARepository: "quit"
+gui:
+  sidePanelWidth: 0.2
 os:
-  editCommand: 'nvim'
+  Edit: 'nvim'
+git:
+  paging:
+    colorArg: always
+    useConfig: true
 gui:
   showBottomLine: false
   theme:
