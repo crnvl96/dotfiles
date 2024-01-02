@@ -1,4 +1,6 @@
-local function on_lsp_attach(client, bufnr)
+local M = {}
+
+function M.on_lsp_attach(client, bufnr)
     local function set(lhs, rhs, desc, mode)
         mode = mode or "n"
         vim.keymap.set(mode, lhs, rhs, { buffer = bufnr, desc = desc })
@@ -132,47 +134,14 @@ local function on_lsp_attach(client, bufnr)
     end)
 end
 
-vim.api.nvim_create_autocmd("ModeChanged", {
-    pattern = { "n:i", "v:s" },
-    desc = "Disable diagnostics in insert and select mode",
-    callback = function(e)
-        vim.diagnostic.disable(e.buf)
-    end,
-})
-
-vim.api.nvim_create_autocmd("ModeChanged", {
-    pattern = "i:n",
-    desc = "Enable diagnostics when leaving insert mode",
-    callback = function(e)
-        vim.diagnostic.enable(e.buf)
-    end,
-})
-
-vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if not client then
-            return
-        end
-        on_lsp_attach(client, args.buf)
-    end,
-})
-
-vim.api.nvim_create_autocmd("ColorScheme", {
-    desc = "Clear LSP highlight groups",
-    callback = function()
-        for _, group in ipairs(vim.fn.getcompletion("@lsp", "highlight")) do
-            vim.api.nvim_set_hl(0, group, {})
-        end
-    end,
-})
-
 local register_capability = vim.lsp.handlers["client/registerCapability"]
 vim.lsp.handlers["client/registerCapability"] = function(err, res, ctx)
     local ret = register_capability(err, res, ctx)
     local client_id = ctx.client_id
     local client = vim.lsp.get_client_by_id(client_id)
     local bufnr = vim.api.nvim_get_current_buf()
-    on_lsp_attach(client, bufnr)
+    M.on_lsp_attach(client, bufnr)
     return ret
 end
+
+return M

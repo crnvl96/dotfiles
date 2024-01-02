@@ -1,8 +1,6 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
--- vim.opt.guicursor = ""
-
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
@@ -17,7 +15,7 @@ vim.opt.showtabline = 0
 
 vim.opt.cursorline = true
 
-vim.opt.signcolumn = "auto:3-9"
+vim.opt.signcolumn = "yes"
 vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.relativenumber = true
