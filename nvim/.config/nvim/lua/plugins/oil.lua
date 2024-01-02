@@ -9,6 +9,7 @@ return {
             keymaps = {
                 ["<C-h>"] = false,
                 ["<C-l>"] = false,
+                ["<C-p>"] = false,
                 ["g;"] = "actions.toggle_trash",
             },
             view_options = {
