@@ -17,7 +17,7 @@ vim.opt.showtabline = 0
 
 vim.opt.cursorline = true
 
-vim.opt.signcolumn = "auto:2-9"
+vim.opt.signcolumn = "auto:3-9"
 vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.relativenumber = true

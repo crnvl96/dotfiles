@@ -2,13 +2,6 @@ return {
     {
         "lewis6991/gitsigns.nvim",
         event = { "BufReadPre", "BufNewFile" },
-        init = function()
-            local clue = require("mini.clue")
-            clue.config.clues = vim.list_extend(clue.config.clues, {
-                { mode = "n", keys = "<leader>g", desc = "+git" },
-                { mode = "x", keys = "<leader>g", desc = "+git" },
-            })
-        end,
         opts = {
             signs = {
                 add = { text = "▎" },

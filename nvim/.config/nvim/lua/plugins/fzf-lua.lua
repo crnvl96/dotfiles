@@ -4,14 +4,6 @@ return {
         cmd = "FzfLua",
         event = "VeryLazy",
         config = function()
-            local clue = require("mini.clue")
-            clue.config.clues = vim.list_extend(clue.config.clues, {
-                { mode = "n", keys = "<leader>f", desc = "+find" },
-                { mode = "x", keys = "<leader>f", desc = "+find" },
-                { mode = "n", keys = "<leader>s", desc = "+search" },
-                { mode = "x", keys = "<leader>s", desc = "+search" },
-            })
-
             local actions = require("fzf-lua.actions")
             require("fzf-lua").setup({
                 file_ignore_patterns = { "%.svg$", "node_modules$", "%-lock.json$" },

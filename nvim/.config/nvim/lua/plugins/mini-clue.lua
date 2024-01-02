@@ -95,6 +95,21 @@ return {
                 },
                 window = {
                     delay = 200,
+                    config = function(bufnr)
+                        local max_width = 0
+                        for _, line in ipairs(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)) do
+                            max_width = math.max(max_width, vim.fn.strchars(line))
+                        end
+
+                        -- Keep some right padding.
+                        max_width = max_width + 2
+
+                        return {
+                            border = "rounded",
+                            -- Dynamic width capped at 45.
+                            width = math.min(45, max_width),
+                        }
+                    end,
                 },
             }
         end,

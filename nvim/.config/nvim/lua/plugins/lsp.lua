@@ -12,12 +12,6 @@ return {
             { "hrsh7th/cmp-nvim-lsp" },
         },
         config = function()
-            local clue = require("mini.clue")
-            clue.config.clues = vim.list_extend(clue.config.clues, {
-                { mode = "n", keys = "<leader>c", desc = "+code" },
-                { mode = "x", keys = "<leader>c", desc = "+code" },
-            })
-
             require("mason").setup()
 
             local ensure_installed = {
