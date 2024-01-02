@@ -2,7 +2,7 @@ vim.keymap.set("x", "@", function()
     return ":norm @" .. vim.fn.getcharstr() .. "<cr>"
 end, { expr = true })
 
-vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>")
 vim.keymap.set("i", "jk", "<esc>", { remap = true })
 vim.keymap.set("i", "kj", "<esc>", { remap = true })
 
