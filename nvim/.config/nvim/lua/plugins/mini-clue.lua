@@ -12,7 +12,6 @@ return {
                 end,
             })
 
-            -- Add a-z/A-Z marks.
             local function mark_clues()
                 local marks = {}
                 vim.list_extend(marks, vim.fn.getmarklist(vim.api.nvim_get_current_buf()))
@@ -43,21 +42,6 @@ return {
                         return { mode = "n", keys = string.format("`%s", key), desc = desc }
                     end
                 end, marks)
-            end
-
-            -- Clues for recorded macros.
-            local function macro_clues()
-                local res = {}
-                for _, register in ipairs(vim.split("abcdefghijklmnopqrstuvwxyz", "")) do
-                    local keys = string.format('"%s', register)
-                    local ok, desc = pcall(vim.fn.getreg, register, 1)
-                    if ok and desc ~= "" then
-                        table.insert(res, { mode = "n", keys = keys, desc = desc })
-                        table.insert(res, { mode = "v", keys = keys, desc = desc })
-                    end
-                end
-
-                return res
             end
 
             return {
@@ -108,25 +92,9 @@ return {
                     miniclue.gen_clues.marks(),
                     miniclue.gen_clues.registers(),
                     mark_clues,
-                    macro_clues,
                 },
                 window = {
                     delay = 200,
-                    scroll_down = "<C-f>",
-                    scroll_up = "<C-b>",
-                    config = function(bufnr)
-                        local max_width = 0
-                        for _, line in ipairs(vim.api.nvim_buf_get_lines(bufnr, 0, -1, false)) do
-                            max_width = math.max(max_width, vim.fn.strchars(line))
-                        end
-
-                        max_width = max_width + 2
-
-                        return {
-                            border = "rounded",
-                            width = max_width,
-                        }
-                    end,
                 },
             }
         end,
