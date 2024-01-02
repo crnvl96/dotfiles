@@ -15,7 +15,7 @@ return {
                 StatusLineNC = { fg = "subtle", bg = "surface" },
                 CursorLine = { bg = "overlay", blend = 50 },
                 Visual = { bg = "#26233a", blend = 50 },
-                MatchParen = { fg = "#000000", bg = "gold" },
+                MatchParen = { fg = "gold", bg = "#151515" },
                 LspReferenceText = { bg = "pine", blend = 50 },
                 LspReferenceRead = { bg = "pine", blend = 50 },
                 LspReferenceWrite = { bg = "pine", blend = 50 },
