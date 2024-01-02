@@ -38,9 +38,6 @@ return {
                 "gofumpt",
                 "goimports",
                 "prettierd",
-
-                "js-debug-adapter",
-                "delve",
             }
 
             local mr = require("mason-registry")
@@ -68,45 +65,22 @@ return {
                 install()
             end
 
-            local show_handler = vim.diagnostic.handlers.virtual_text.show
-            local hide_handler = vim.diagnostic.handlers.virtual_text.hide
-
-            vim.diagnostic.handlers.virtual_text = {
-                show = function(ns, bufnr, diagnostics, options)
-                    table.sort(diagnostics, function(diag1, diag2)
-                        return diag1.severity > diag2.severity
-                    end)
-                    return show_handler(ns, bufnr, diagnostics, options)
-                end,
-                hide = hide_handler,
-            }
-
             vim.diagnostic.config({
-                virtual_text = {
-                    prefix = "",
-                    format = function(diagnostic)
-                        return vim.split(diagnostic.message, "\n")[1]
-                    end,
-                },
                 float = {
-                    source = "always",
-                    style = "minimal",
-                    header = "",
-                    prefix = "",
                     border = "rounded",
                 },
-                signs = true,
             })
 
             require("lspconfig.ui.windows").default_options.border = "rounded"
 
-            local capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), {
-                workspace = {
-                    -- PERF: didChangeWatchedFiles is too slow.
-                    -- TODO: Remove this when https://github.com/neovim/neovim/issues/23291#issuecomment-1686709265 is fixed.
-                    didChangeWatchedFiles = { dynamicRegistration = false },
-                },
-            })
+            local capabilities =
+                vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), require("cmp_nvim_lsp").default_capabilities(), {
+                    workspace = {
+                        -- PERF: didChangeWatchedFiles is too slow.
+                        -- TODO: Remove this when https://github.com/neovim/neovim/issues/23291#issuecomment-1686709265 is fixed.
+                        didChangeWatchedFiles = { dynamicRegistration = false },
+                    },
+                })
 
             vim.api.nvim_create_autocmd("ModeChanged", {
                 pattern = { "n:i", "v:s" },
