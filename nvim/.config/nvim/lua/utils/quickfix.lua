@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
         -- Using <Control + j> moves the cursor to the next entry in the list that
         -- has a different filename
-        vim.keymap.set("n", "<C-n>", function()
+        vim.keymap.set("n", "J", function()
             local list = vim.fn.getqflist()
             local index = vim.api.nvim_win_get_cursor(0)[1]
 
@@ -39,7 +39,7 @@ vim.api.nvim_create_autocmd("FileType", {
 
         -- Using <Control + k> moves the cursor to first entry that has a different
         -- filename and appears before the entry the cursor is currently on
-        vim.keymap.set("n", "<C-p>", function()
+        vim.keymap.set("n", "K", function()
             local list = vim.fn.getqflist({ id = vim.fn.getqflist({ id = 0 }).id, items = 0 }).items
 
             if #list == 0 then
