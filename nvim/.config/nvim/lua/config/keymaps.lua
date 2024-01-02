@@ -4,19 +4,23 @@ end, { expr = true })
 
 vim.keymap.set("n", "<C-p>", '<cmd>let @+ = expand("%:p")<CR>')
 
+vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
+vim.keymap.set("i", "jk", "<esc>", { remap = true })
+vim.keymap.set("i", "kj", "<esc>", { remap = true })
+
+vim.keymap.set({ "n", "x" }, "J", "6j", { remap = true })
+vim.keymap.set({ "n", "x" }, "K", "6k", { remap = true })
+
+vim.keymap.set({ "n", "x", "o" }, "H", "_", { remap = true })
+vim.keymap.set({ "n", "x", "o" }, "L", "$", { remap = true })
+
+vim.keymap.set("", "Y", "y$")
+
 vim.keymap.set("v", "p", '"_dp')
 vim.keymap.set("v", "P", '"_dP')
 
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
-
-vim.keymap.set({ "n", "x" }, "J", "6j", { remap = true })
-vim.keymap.set({ "n", "x" }, "K", "6k", { remap = true })
-
-vim.keymap.set("", "Y", "y$")
-
-vim.keymap.set({ "n", "x", "o" }, "H", "_", { remap = true })
-vim.keymap.set({ "n", "x", "o" }, "L", "$", { remap = true })
 
 vim.keymap.set("", "<CR>", "")
 vim.keymap.set("", "<BS>", "")
@@ -24,10 +28,6 @@ vim.keymap.set("", "<Space>", "")
 
 vim.keymap.set("n", "j", [[(v:count > 1 ? 'm`' . v:count : 'g') . 'j']], { expr = true })
 vim.keymap.set("n", "k", [[(v:count > 1 ? 'm`' . v:count : 'g') . 'k']], { expr = true })
-
-vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
-vim.keymap.set("i", "jk", "<esc>", { remap = true })
-vim.keymap.set("i", "kj", "<esc>", { remap = true })
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
