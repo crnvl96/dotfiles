@@ -1,13 +1,48 @@
-vim.keymap.set("", "<CR>", "")
-vim.keymap.set("", "<BS>", "")
-vim.keymap.set("", "<Space>", "")
+vim.keymap.set("n", "<M-q>", function()
+    local windows = vim.fn.getwininfo()
+    local quickfixopen = false
+
+    for _, win in pairs(windows) do
+        if win.quickfix == 1 then
+            quickfixopen = true
+        end
+    end
+
+    if quickfixopen then
+        -- Close the preview window if it is open
+        vim.cmd("pclose")
+        vim.cmd("cclose")
+    else
+        vim.cmd("copen")
+    end
+end)
 
 vim.keymap.set("x", "@", function()
     return ":norm @" .. vim.fn.getcharstr() .. "<cr>"
 end, { expr = true })
 
+vim.keymap.set("n", "<M-b>", "<cmd>e #<CR>", { desc = "Go to Last Buffer" })
+
 vim.keymap.set("n", "<C-p>", '<cmd>let @+ = expand("%:p")<CR>')
 vim.keymap.set("n", "<M-o>", "<cmd>Explore<CR>")
+
+vim.keymap.set("v", "p", '"_dp')
+vim.keymap.set("v", "P", '"_dP')
+
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
+
+vim.keymap.set({ "n", "x" }, "J", "6j", { remap = true })
+vim.keymap.set({ "n", "x" }, "K", "6k", { remap = true })
+
+vim.keymap.set("", "Y", "y$")
+
+vim.keymap.set({ "n", "x", "o" }, "H", "_", { remap = true })
+vim.keymap.set({ "n", "x", "o" }, "L", "$", { remap = true })
+
+vim.keymap.set("", "<CR>", "")
+vim.keymap.set("", "<BS>", "")
+vim.keymap.set("", "<Space>", "")
 
 vim.keymap.set("n", "j", [[(v:count > 1 ? 'm`' . v:count : 'g') . 'j']], { expr = true })
 vim.keymap.set("n", "k", [[(v:count > 1 ? 'm`' . v:count : 'g') . 'k']], { expr = true })
@@ -30,44 +65,6 @@ vim.keymap.set("n", "<M-k>", "<cmd>resize +2<cr>")
 vim.keymap.set("n", "<M-j>", "<cmd>resize -2<cr>")
 vim.keymap.set("n", "<M-h>", "<cmd>vertical resize -2<cr>")
 vim.keymap.set("n", "<M-l>", "<cmd>vertical resize +2<cr>")
-
-vim.keymap.set("v", "p", '"_dp')
-vim.keymap.set("v", "P", '"_dP')
-
-vim.keymap.set("v", "<", "<gv")
-vim.keymap.set("v", ">", ">gv")
-
-vim.keymap.set({ "n", "x" }, "J", "6j", { remap = true })
-vim.keymap.set({ "n", "x" }, "K", "6k", { remap = true })
-
-vim.keymap.set("", "Y", "y$")
-
-vim.keymap.set({ "n", "x", "o" }, "H", "_", { remap = true })
-vim.keymap.set({ "n", "x", "o" }, "L", "$", { remap = true })
-
-vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Close Window" })
-vim.keymap.set("n", "<leader>wx", "<cmd>only<CR>", { desc = "Close Other Windows" })
-vim.keymap.set("n", "<leader>bb", "<cmd>e #<CR>", { desc = "Go to Last Buffer" })
-vim.keymap.set("n", "<leader>bx", "<cmd>%bd|edit#|bd#<CR>", { desc = "Close Other Buffers" })
-
-vim.keymap.set("n", "<C-u>", function()
-    local windows = vim.fn.getwininfo()
-    local quickfixopen = false
-
-    for _, win in pairs(windows) do
-        if win.quickfix == 1 then
-            quickfixopen = true
-        end
-    end
-
-    if quickfixopen then
-        -- Close the preview window if it is open
-        vim.cmd("pclose")
-        vim.cmd("cclose")
-    else
-        vim.cmd("copen")
-    end
-end)
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 vim.keymap.set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true })

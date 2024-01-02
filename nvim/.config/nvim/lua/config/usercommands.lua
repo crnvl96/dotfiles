@@ -10,6 +10,11 @@ vim.api.nvim_create_user_command("Messages", function()
     vim.api.nvim_win_set_buf(winnr, bufnr)
 end, { desc = "Render last messages in a scratch buffer", nargs = 0 })
 
+vim.api.nvim_create_user_command("BufferOnly", function()
+    vim.cmd("%bd|edit#|bd#")
+end, { desc = "Close all other buffers", nargs = 0 })
+
+
 vim.api.nvim_create_user_command("Grep", function(search_args)
     local cmdline = { "rg", "--vimgrep", "--smart-case", search_args.args }
     local rg_result = vim.fn.system(cmdline)
