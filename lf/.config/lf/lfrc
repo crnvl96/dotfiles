@@ -45,7 +45,7 @@ cmd fzf_jump ${{
         lf -remote "send $id $cmd \"$res\""
     fi
 }}
-map sf :fzf_jump
+map <c-f> :fzf_jump
 
 cmd z %{{
     result="$(zoxide query --exclude $PWD $@ | sed 's/\\/\\\\/g;s/"/\\"/g')"
