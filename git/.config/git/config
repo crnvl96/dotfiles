@@ -22,7 +22,6 @@
   light = false
   true-color = always
   line-numbers = false
-  side-by-side = true
   whitespace-error-style = 22 reverse
 [commit]
   verbose = true
