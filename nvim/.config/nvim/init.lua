@@ -1,7 +1,7 @@
 vim.cmd.colorscheme("default")
 
 require("config")
-require("utils.quickfix")
+require("utils")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then

@@ -60,13 +60,13 @@ return {
                 return res
             end
 
-            vim.api.nvim_set_hl(0, "MiniClueTitle", { link = "Normal" })
-            vim.api.nvim_set_hl(0, "MiniClueBorder", { link = "Normal" })
-            vim.api.nvim_set_hl(0, "MiniClueDescGroup", { link = "Normal" })
-            vim.api.nvim_set_hl(0, "MiniClueDescSingle", { link = "Normal" })
-            vim.api.nvim_set_hl(0, "MiniClueNextKey", { link = "Normal" })
-            vim.api.nvim_set_hl(0, "MiniClueNextKeyWithPostKeys", { link = "Normal" })
-            vim.api.nvim_set_hl(0, "MiniClueSeparator", { link = "Normal" })
+            vim.api.nvim_set_hl(0, "MiniClueTitle", { bg = "#151515" })
+            vim.api.nvim_set_hl(0, "MiniClueBorder", { bg = "#151515" })
+            vim.api.nvim_set_hl(0, "MiniClueDescGroup", { bg = "#151515" })
+            vim.api.nvim_set_hl(0, "MiniClueDescSingle", { bg = "#151515" })
+            vim.api.nvim_set_hl(0, "MiniClueNextKey", { bg = "#151515" })
+            vim.api.nvim_set_hl(0, "MiniClueNextKeyWithPostKeys", { bg = "#151515" })
+            vim.api.nvim_set_hl(0, "MiniClueSeparator", { bg = "#151515" })
 
             return {
                 triggers = {
