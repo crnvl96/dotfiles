@@ -15,12 +15,13 @@ vim.opt.updatetime = 200
 vim.opt.laststatus = 0
 vim.opt.showtabline = 0
 
-vim.opt.cursorline = false
+vim.opt.cursorline = true
+
 vim.opt.signcolumn = "yes:2"
 vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.cmdheight = 0
+vim.opt.cmdheight = 1
 vim.opt.showcmd = false
 
 vim.opt.virtualedit = "block"
