@@ -26,8 +26,7 @@ vim.keymap.set("n", "j", [[(v:count > 1 ? 'm`' . v:count : 'g') . 'j']], { expr 
 vim.keymap.set("n", "k", [[(v:count > 1 ? 'm`' . v:count : 'g') . 'k']], { expr = true })
 
 vim.keymap.set({ "i", "n" }, "<esc>", "<cmd>noh<cr><esc>", { desc = "Escape and clear hlsearch" })
-vim.keymap.set("i", "kj", "<esc>", { remap = true })
-vim.keymap.set("i", "jk", "<esc>", { remap = true })
+vim.keymap.set("i", "<M-j>", "<esc>", { remap = true })
 
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")

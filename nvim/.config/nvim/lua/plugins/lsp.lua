@@ -8,7 +8,6 @@ return {
             { "williamboman/mason.nvim", build = ":MasonUpdate" },
             { "williamboman/mason-lspconfig.nvim" },
             { "pmizio/typescript-tools.nvim" },
-            { "dmmulroy/tsc.nvim" },
             { "hrsh7th/cmp-nvim-lsp" },
         },
         config = function()
@@ -195,7 +194,6 @@ return {
                         })
                     end,
                     tsserver = function()
-                        require("tsc").setup()
                         require("typescript-tools").setup({
                             capabilities = capabilities,
                             settings = {

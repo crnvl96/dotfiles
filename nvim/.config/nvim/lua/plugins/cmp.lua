@@ -3,7 +3,6 @@ return {
         "hrsh7th/nvim-cmp",
         event = "InsertEnter",
         dependencies = {
-            { "onsails/lspkind.nvim" },
             { "hrsh7th/cmp-nvim-lsp" },
             { "hrsh7th/cmp-buffer" },
             { "L3MON4D3/LuaSnip" },
@@ -12,35 +11,12 @@ return {
             { "hrsh7th/cmp-nvim-lsp-signature-help" },
         },
         config = function()
-            vim.api.nvim_set_hl(0, "CmpGhostText", { link = "Comment", default = true })
             local cmp = require("cmp")
-            local lspkind = require("lspkind")
             local luasnip = require("luasnip")
-
-            local has_words_before = function()
-                unpack = unpack or table.unpack
-                local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-                return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
-            end
 
             cmp.setup({
                 preselect = cmp.PreselectMode.None,
                 sorting = require("cmp.config.default")().sorting,
-                experimental = {
-                    ghost_text = {
-                        hl_group = "CmpGhostText",
-                    },
-                },
-                formatting = {
-                    format = lspkind.cmp_format({
-                        mode = "text_symbol",
-                        maxwidth = 50,
-                        ellipsis_char = "...",
-                        before = function(_, vim_item)
-                            return vim_item
-                        end,
-                    }),
-                },
                 completion = {
                     completeopt = "menu,menuone,noinsert,noselect",
                 },
@@ -77,29 +53,6 @@ return {
                         s = cmp.mapping.confirm({ select = true }),
                         c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
                     }),
-                    ["<Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_next_item()
-                        -- You could replace the expand_or_jumpable() calls with expand_or_locally_jumpable()
-                        -- that way you will only jump inside the snippet region
-                        elseif luasnip.expand_or_jumpable() then
-                            luasnip.expand_or_jump()
-                        elseif has_words_before() then
-                            cmp.complete()
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
-
-                    ["<S-Tab>"] = cmp.mapping(function(fallback)
-                        if cmp.visible() then
-                            cmp.select_prev_item()
-                        elseif luasnip.jumpable(-1) then
-                            luasnip.jump(-1)
-                        else
-                            fallback()
-                        end
-                    end, { "i", "s" }),
                 }),
                 sources = cmp.config.sources({
                     { name = "nvim_lsp_signature_help" },

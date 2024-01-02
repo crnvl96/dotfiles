@@ -1,7 +1,7 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 
-vim.opt.guicursor = ""
+-- vim.opt.guicursor = ""
 
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
@@ -10,7 +10,7 @@ vim.g.loaded_perl_provider = 0
 vim.opt.mouse = "a"
 vim.opt.clipboard = "unnamedplus"
 
-vim.opt.timeoutlen = 200
+vim.opt.timeoutlen = 1000
 vim.opt.updatetime = 200
 vim.opt.laststatus = 0
 vim.opt.showtabline = 0
