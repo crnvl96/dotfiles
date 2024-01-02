@@ -11,19 +11,12 @@ return {
                     normal_cur_line = false,
                     visual_line = false,
                     change_line = false,
-                    delete = "dz",
-                    change = "cz",
-                    visual = "Z",
-                    normal = "yz",
-                    normal_cur = "yzz",
+                    delete = "gzd",
+                    change = "gzc",
+                    visual = "gzv",
+                    normal = "gza",
+                    normal_cur = "gzz",
                 },
-            })
-
-            local clue = require("mini.clue")
-            clue.config.triggers = vim.list_extend(clue.config.triggers, {
-                { mode = "n", keys = "y" },
-                { mode = "n", keys = "d" },
-                { mode = "n", keys = "c" },
             })
         end,
     },
