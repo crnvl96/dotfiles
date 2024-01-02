@@ -43,3 +43,6 @@ vim.opt.ignorecase = true
 vim.opt.swapfile = false
 vim.opt.undodir = vim.fn.stdpath("data") .. "/vim/undo"
 vim.opt.undofile = true
+
+vim.opt.wildignore = { "*/tmp/*", "*.so", "*.swp", "*.zip", "*/node_modules/*", "*/dist/*" }
+vim.opt.path:append("**")
