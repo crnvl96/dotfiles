@@ -1,30 +1,8 @@
-vim.keymap.set("n", "<M-q>", function()
-    local windows = vim.fn.getwininfo()
-    local quickfixopen = false
-
-    for _, win in pairs(windows) do
-        if win.quickfix == 1 then
-            quickfixopen = true
-        end
-    end
-
-    if quickfixopen then
-        -- Close the preview window if it is open
-        vim.cmd("pclose")
-        vim.cmd("cclose")
-    else
-        vim.cmd("copen")
-    end
-end)
-
 vim.keymap.set("x", "@", function()
     return ":norm @" .. vim.fn.getcharstr() .. "<cr>"
 end, { expr = true })
 
-vim.keymap.set("n", "<M-b>", "<cmd>e #<CR>", { desc = "Go to Last Buffer" })
-
 vim.keymap.set("n", "<C-p>", '<cmd>let @+ = expand("%:p")<CR>')
-vim.keymap.set("n", "<M-o>", "<cmd>Explore<CR>")
 
 vim.keymap.set("v", "p", '"_dp')
 vim.keymap.set("v", "P", '"_dP')

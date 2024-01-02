@@ -17,7 +17,7 @@ vim.opt.showtabline = 0
 
 vim.opt.cursorline = true
 
-vim.opt.signcolumn = "yes:2"
+vim.opt.signcolumn = "auto:2-9"
 vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -45,8 +45,3 @@ vim.opt.ignorecase = true
 vim.opt.swapfile = false
 vim.opt.undodir = vim.fn.stdpath("data") .. "/vim/undo"
 vim.opt.undofile = true
-
-vim.opt.completeopt = { "menu", "menuone", "noselect", "noinsert" }
-vim.opt.shortmess:append("c")
-
-vim.opt.path = "."
