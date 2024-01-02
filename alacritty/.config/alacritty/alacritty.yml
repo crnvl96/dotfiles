@@ -16,13 +16,13 @@ shell:
 font:
   normal:
     family: Iosevka Fixed
-    style: Bold
+    style: Normal
   bold:
     family: Iosevka Fixed
     style: Bold
   italic:
     family: Iosevka Fixed
-    style: Bold Italic
+    style: Italic
   bold_italic:
     family: Iosevka Fixed
     style: Bold Italic
