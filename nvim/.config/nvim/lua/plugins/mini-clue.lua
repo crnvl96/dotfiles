@@ -60,14 +60,6 @@ return {
                 return res
             end
 
-            vim.api.nvim_set_hl(0, "MiniClueTitle", { bg = "#151515" })
-            vim.api.nvim_set_hl(0, "MiniClueBorder", { bg = "#151515" })
-            vim.api.nvim_set_hl(0, "MiniClueDescGroup", { bg = "#151515" })
-            vim.api.nvim_set_hl(0, "MiniClueDescSingle", { bg = "#151515" })
-            vim.api.nvim_set_hl(0, "MiniClueNextKey", { bg = "#151515" })
-            vim.api.nvim_set_hl(0, "MiniClueNextKeyWithPostKeys", { bg = "#151515" })
-            vim.api.nvim_set_hl(0, "MiniClueSeparator", { bg = "#151515" })
-
             return {
                 triggers = {
                     { mode = "n", keys = "<Leader>" },
@@ -107,10 +99,6 @@ return {
                     -- next/prev clues
                     { mode = "n", keys = "[", desc = "+prev" },
                     { mode = "n", keys = "]", desc = "+next" },
-
-                    -- leader clues
-                    { mode = "n", keys = "<leader>b", desc = "+buffers" },
-                    { mode = "n", keys = "<leader>w", desc = "+windows" },
 
                     -- Useful builtins.
                     miniclue.gen_clues.builtin_completion(),
