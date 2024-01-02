@@ -7,6 +7,7 @@ vim.keymap.set("x", "@", function()
 end, { expr = true })
 
 vim.keymap.set("n", "<C-p>", '<cmd>let @+ = expand("%:p")<CR>')
+vim.keymap.set("n", "<M-o>", "<cmd>Explore<CR>")
 
 vim.keymap.set("n", "j", [[(v:count > 1 ? 'm`' . v:count : 'g') . 'j']], { expr = true })
 vim.keymap.set("n", "k", [[(v:count > 1 ? 'm`' . v:count : 'g') . 'k']], { expr = true })
