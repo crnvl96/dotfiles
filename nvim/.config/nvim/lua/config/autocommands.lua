@@ -33,22 +33,6 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
-vim.api.nvim_create_autocmd("ModeChanged", {
-    pattern = { "n:i", "v:s" },
-    desc = "Disable diagnostics in insert and select mode",
-    callback = function(e)
-        vim.diagnostic.disable(e.buf)
-    end,
-})
-
-vim.api.nvim_create_autocmd("ModeChanged", {
-    pattern = "i:n",
-    desc = "Enable diagnostics when leaving insert mode",
-    callback = function(e)
-        vim.diagnostic.enable(e.buf)
-    end,
-})
-
 vim.api.nvim_create_autocmd("ColorScheme", {
     desc = "Clear LSP highlight groups",
     callback = function()
@@ -149,15 +133,5 @@ vim.api.nvim_create_autocmd("FileType", {
             vim.cmd("keepjumps cc " .. current_line)
             vim.cmd("wincmd p")
         end, { buffer = buffer })
-    end,
-})
-
-vim.api.nvim_create_autocmd("WinEnter", {
-    callback = function()
-        local windows = vim.api.nvim_tabpage_list_wins(0)
-
-        if #windows == 1 and vim.opt.buftype:get() == "quickfix" then
-            vim.cmd("quit")
-        end
     end,
 })

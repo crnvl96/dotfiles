@@ -3,7 +3,6 @@ vim.keymap.set("x", "@", function()
 end, { expr = true })
 
 vim.keymap.set("n", "<C-p>", '<cmd>let @+ = expand("%:p")<CR>')
-vim.keymap.set("i", "<C-space>", "<C-x><C-o>")
 
 vim.keymap.set("v", "p", '"_dp')
 vim.keymap.set("v", "P", '"_dP')

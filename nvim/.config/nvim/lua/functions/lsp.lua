@@ -118,20 +118,20 @@ function M.on_lsp_attach(client, bufnr)
         end, "Workspace symbols")
     end)
 
-    local highlights = vim.lsp.protocol.Methods.textDocument_documentHighlight
-    handle_method(highlights, function()
-        vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave", "BufEnter" }, {
-            group = vim.api.nvim_create_augroup("crnvl96_lsp_highlights", { clear = false }),
-            buffer = bufnr,
-            callback = vim.lsp.buf.document_highlight,
-        })
-
-        vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter", "BufLeave" }, {
-            group = vim.api.nvim_create_augroup("crnvl96_lsp_highlights", { clear = false }),
-            buffer = bufnr,
-            callback = vim.lsp.buf.clear_references,
-        })
-    end)
+    --    local highlights = vim.lsp.protocol.Methods.textDocument_documentHighlight
+    --    handle_method(highlights, function()
+    --        vim.api.nvim_create_autocmd({ "CursorHold", "InsertLeave", "BufEnter" }, {
+    --            group = vim.api.nvim_create_augroup("crnvl96_lsp_highlights", { clear = false }),
+    --            buffer = bufnr,
+    --            callback = vim.lsp.buf.document_highlight,
+    --        })
+    --
+    --        vim.api.nvim_create_autocmd({ "CursorMoved", "InsertEnter", "BufLeave" }, {
+    --            group = vim.api.nvim_create_augroup("crnvl96_lsp_highlights", { clear = false }),
+    --            buffer = bufnr,
+    --            callback = vim.lsp.buf.clear_references,
+    --        })
+    --    end)
 end
 
 local register_capability = vim.lsp.handlers["client/registerCapability"]
