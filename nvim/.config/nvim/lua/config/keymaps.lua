@@ -49,6 +49,25 @@ vim.keymap.set("n", "<leader>wx", "<cmd>only<CR>", { desc = "Close Other Windows
 vim.keymap.set("n", "<leader>bb", "<cmd>e #<CR>", { desc = "Go to Last Buffer" })
 vim.keymap.set("n", "<leader>bx", "<cmd>%bd|edit#|bd#<CR>", { desc = "Close Other Buffers" })
 
+vim.keymap.set("n", "<C-u>", function()
+    local windows = vim.fn.getwininfo()
+    local quickfixopen = false
+
+    for _, win in pairs(windows) do
+        if win.quickfix == 1 then
+            quickfixopen = true
+        end
+    end
+
+    if quickfixopen then
+        -- Close the preview window if it is open
+        vim.cmd("pclose")
+        vim.cmd("cclose")
+    else
+        vim.cmd("copen")
+    end
+end)
+
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 vim.keymap.set("n", "n", "'Nn'[v:searchforward].'zv'", { expr = true })
 vim.keymap.set("x", "n", "'Nn'[v:searchforward]", { expr = true })
