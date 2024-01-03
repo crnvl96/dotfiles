@@ -44,3 +44,5 @@ require("lazy").setup({
         },
     },
 })
+
+require("functions.lsp_progress")
