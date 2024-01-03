@@ -51,10 +51,11 @@ return {
                 nargs = 1,
             })
         end,
-        keymaps = {
-            { "<C-u>", "<cmd>CtrlPBuffer<CR>" },
-            { "<C-y>", "<cmd>CtrlPMRU<CR>" },
-            { "<C-n>", "<cmd>CtrlPLine<CR>" },
+        keys = {
+            { "<leader>ff", "<cmd>CtrlP<CR>" },
+            { "<leader>fb", "<cmd>CtrlPBuffer<CR>" },
+            { "<leader>fo", "<cmd>CtrlPMRU<CR>" },
+            { "<leader>sb", "<cmd>CtrlPLine<CR>" },
         },
     },
     -- {
