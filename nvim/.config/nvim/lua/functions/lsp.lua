@@ -12,9 +12,9 @@ function M.on_lsp_attach(client, bufnr)
         end
     end
 
-    local hover = vim.lsp.protocol.Methods.textDocument_formatting
-    handle_method(hover, function()
-        vim.lsp.handlers[hover] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+    local formatting = vim.lsp.protocol.Methods.textDocument_formatting
+    handle_method(formatting, function()
+        vim.lsp.handlers[formatting] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
         set("<leader><space>", vim.lsp.buf.format, "Format")
     end)
 
