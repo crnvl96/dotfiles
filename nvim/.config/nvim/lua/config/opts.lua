@@ -10,7 +10,7 @@ vim.opt.clipboard = "unnamedplus"
 
 vim.opt.timeoutlen = 200
 vim.opt.updatetime = 200
-vim.opt.laststatus = 0
+vim.opt.laststatus = 2
 vim.opt.showtabline = 0
 
 vim.opt.cursorline = true

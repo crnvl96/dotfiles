@@ -5,10 +5,10 @@ return {
             disable_when_zoomed = true,
         },
         keys = {
-            { "<C-h>", "<cmd>NvimTmuxNavigateLeft<CR>" },
-            { "<C-j>", "<cmd>NvimTmuxNavigateDown<CR>" },
-            { "<C-k>", "<cmd>NvimTmuxNavigateUp<CR>" },
-            { "<C-l>", "<cmd>NvimTmuxNavigateRight<CR>" },
+            { "<c-h>", "<cmd>NvimTmuxNavigateLeft<cr>" },
+            { "<c-j>", "<cmd>NvimTmuxNavigateDown<cr>" },
+            { "<c-k>", "<cmd>NvimTmuxNavigateUp<cr>" },
+            { "<c-l>", "<cmd>NvimTmuxNavigateRight<cr>" },
         },
     },
 }

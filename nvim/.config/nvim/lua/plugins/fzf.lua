@@ -22,7 +22,7 @@ return {
                 },
                 keymap = {
                     builtin = {
-                        ["<M-p>"] = "toggle-preview",
+                        ["<m-p>"] = "toggle-preview",
                     },
                     fzf = {
                         ["esc"] = "abort",

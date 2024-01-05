@@ -22,7 +22,7 @@ return {
             },
         },
         keys = {
-            { "<M-o>", "<cmd>Oil<CR>" },
+            { "<m-o>", "<cmd>Oil<cr>" },
         },
     },
 }

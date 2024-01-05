@@ -27,7 +27,7 @@ function M.on_lsp_attach(client, bufnr)
     local signature_help = vim.lsp.protocol.Methods.textDocument_signatureHelp
     handle_method(signature_help, function()
         vim.lsp.handlers[signature_help] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
-        set("<C-k>", vim.lsp.buf.signature_help, "Signature help", "i")
+        set("<c-k>", vim.lsp.buf.signature_help, "Signature help", "i")
     end)
 
     local rename = vim.lsp.protocol.Methods.textDocument_rename
