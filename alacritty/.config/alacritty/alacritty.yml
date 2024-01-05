@@ -15,16 +15,16 @@ shell:
   program: /usr/bin/fish
 font:
   normal:
-    family: Iosevka Fixed
-    style: Normal
-  bold:
-    family: Iosevka Fixed
+    family: IosevkaNerdFont
     style: Bold
+  bold:
+    family: IosevkaNerdFont
+    style: ExtraBold
   italic:
-    family: Iosevka Fixed
+    family: IosevkaNerdFont
     style: Italic
   bold_italic:
-    family: Iosevka Fixed
+    family: IosevkaNerdFont
     style: Bold Italic
   size: 16
   offset:

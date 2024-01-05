@@ -3,7 +3,6 @@ font pango:monospace 16px
 set $mod Mod4
 
 bindsym $mod+Return exec --no-startup-id kitty
-bindsym $mod+a exec --no-startup-id alacritty
 bindsym $mod+w exec --no-startup-id microsoft-edge-stable
 bindsym $mod+p exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+q kill
