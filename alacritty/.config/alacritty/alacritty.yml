@@ -19,13 +19,13 @@ font:
     style: Bold
   bold:
     family: IosevkaNerdFont
-    style: ExtraBold
+    style: Extra Bold
   italic:
     family: IosevkaNerdFont
-    style: Italic
+    style: Bold Italic
   bold_italic:
     family: IosevkaNerdFont
-    style: Bold Italic
+    style:  Extra Bold Italic
   size: 16
   offset:
     x: 0

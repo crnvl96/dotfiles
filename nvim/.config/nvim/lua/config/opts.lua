@@ -8,7 +8,7 @@ vim.g.loaded_perl_provider = 0
 vim.opt.mouse = "a"
 vim.opt.clipboard = "unnamedplus"
 
-vim.opt.timeoutlen = 1000
+vim.opt.timeoutlen = 200
 vim.opt.updatetime = 200
 vim.opt.laststatus = 0
 vim.opt.showtabline = 0
@@ -31,8 +31,8 @@ vim.opt.breakindent = true
 vim.opt.scrolloff = 8
 
 vim.opt.expandtab = true
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
+vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4
 vim.opt.shiftround = true
 vim.opt.splitbelow = true
 vim.opt.splitright = true

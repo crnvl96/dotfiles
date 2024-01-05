@@ -3,6 +3,13 @@ set nopreview
 set ratios 1:5
 set info size:time
 
+cmd move-parent &{{
+    dironly="setlocal '$(dirname "$PWD")' dironly"
+    lf -remote "send $id :updir; $dironly true; $1; $dironly false; open"
+}}
+map J move-parent down
+map K move-parent up
+
 # Opens files with vim
 cmd open $nvim $fx
 map <enter> :open

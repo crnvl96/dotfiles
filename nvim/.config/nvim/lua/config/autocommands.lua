@@ -21,30 +21,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     end,
 })
 
-vim.api.nvim_create_autocmd("VimEnter", {
-    callback = function()
-        local register_capability = vim.lsp.handlers["client/registercapability"]
-        vim.lsp.handlers["client/registercapability"] = function(err, res, ctx)
-            local ret = register_capability(err, res, ctx)
-            local client_id = ctx.client_id
-            local cli = vim.lsp.get_client_by_id(client_id)
-            local bufnr = vim.api.nvim_get_current_buf()
-            require("functions.lsp").on_lsp_attach(cli, bufnr)
-            return ret
-        end
-    end,
-})
-
-vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(args)
-        local client = vim.lsp.get_client_by_id(args.data.client_id)
-        if not client then
-            return
-        end
-        require("functions.lsp").on_lsp_attach(client, args.buf)
-    end,
-})
-
 vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("crnvl96_set_node_path", { clear = true }),
     pattern = { "javascript, typescript, javascriptreact, typescriptreact" },

@@ -8,16 +8,52 @@ return {
             { "williamboman/mason.nvim", build = ":MasonUpdate" },
             { "williamboman/mason-lspconfig.nvim" },
             { "hrsh7th/cmp-nvim-lsp" },
+            { "pmizio/typescript-tools.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
         },
-        config = function()
-            require("mason").setup({
-                ensure_installed = {
-                    "stylua",
-                    "gofumpt",
-                    "goimports",
-                    "prettierd",
-                },
+        init = function()
+            vim.api.nvim_create_autocmd("LspAttach", {
+                callback = function(args)
+                    local client = vim.lsp.get_client_by_id(args.data.client_id)
+                    if not client then
+                        return
+                    end
+                    require("functions.lsp").on_lsp_attach(client, args.buf)
+                end,
             })
+        end,
+        config = function()
+            require("mason").setup()
+
+            local tools = {
+                "stylua",
+                "gofumpt",
+                "goimports",
+                "prettierd",
+            }
+
+            local mr = require("mason-registry")
+            mr:on("package:install:success", function()
+                vim.defer_fn(function()
+                    -- trigger FileType event to possibly load this newly installed LSP server
+                    require("lazy.core.handler.event").trigger({
+                        event = "FileType",
+                        buf = vim.api.nvim_get_current_buf(),
+                    })
+                end, 100)
+            end)
+            local function ensure_installed()
+                for _, tool in ipairs(tools) do
+                    local p = mr.get_package(tool)
+                    if not p:is_installed() then
+                        p:install()
+                    end
+                end
+            end
+            if mr.refresh then
+                mr.refresh(ensure_installed)
+            else
+                ensure_installed()
+            end
 
             require("lspconfig.ui.windows").default_options.border = "rounded"
 
@@ -96,10 +132,6 @@ return {
                                         globals = { "vim" },
                                     },
                                     format = { enable = false },
-                                    hint = {
-                                        enable = true,
-                                        arrayIndex = "Disable",
-                                    },
                                     completion = {
                                         callSnippet = "Disable",
                                         keywordSnippet = "Disable",
@@ -135,15 +167,6 @@ return {
                                         tidy = true,
                                         upgrade_dependency = true,
                                     },
-                                    hints = {
-                                        assignVariableTypes = true,
-                                        compositeLiteralFields = true,
-                                        compositeLiteralTypes = true,
-                                        constantValues = true,
-                                        functionTypeParameters = true,
-                                        parameterNames = true,
-                                        rangeVariableTypes = true,
-                                    },
                                     analyses = {
                                         nilness = true,
                                         unusedparams = true,
@@ -162,15 +185,37 @@ return {
                         })
                     end,
                     tsserver = function()
-                        require("lspconfig").tsserver.setup({
-                            settings = {
-                                completions = {
-                                    completeFunctionCalls = false,
-                                },
-                            },
+                        require("typescript-tools").setup({
+                            capabilities = capabilities,
                         })
                         return true
                     end,
+                },
+            })
+
+            local register_capability = vim.lsp.handlers["client/registercapability"]
+            vim.lsp.handlers["client/registercapability"] = function(err, res, ctx)
+                local ret = register_capability(err, res, ctx)
+                local client_id = ctx.client_id
+                local cli = vim.lsp.get_client_by_id(client_id)
+                local bufnr = vim.api.nvim_get_current_buf()
+                require("functions.lsp").on_lsp_attach(cli, bufnr)
+                return ret
+            end
+
+            vim.diagnostic.config({
+                title = false,
+                underline = true,
+                virtual_text = true,
+                signs = true,
+                update_in_insert = false,
+                severity_sort = true,
+                float = {
+                    source = "always",
+                    style = "minimal",
+                    border = "rounded",
+                    header = "",
+                    prefix = "",
                 },
             })
         end,

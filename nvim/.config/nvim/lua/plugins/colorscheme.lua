@@ -1,13 +1,43 @@
 return {
     {
-        "rose-pine/neovim",
-        name = "rose-pine",
+        "rebelot/kanagawa.nvim",
         lazy = false,
         priority = 1000,
         enabled = true,
+        opts = {
+            compile = true,
+            transparent = true,
+            colors = {
+                theme = {
+                    all = {
+                        ui = {
+                            bg_gutter = "none",
+                            float = {
+                                bg = "none",
+                            },
+                        },
+                    },
+                },
+            },
+            overrides = function(colors)
+                local theme = colors.theme
+                return {
+                    String = { italic = true },
+
+                    Pmenu = { fg = theme.ui.shade0, bg = theme.ui.bg_p1 },
+                    PmenuSel = { fg = "NONE", bg = theme.ui.bg_p2 },
+                    PmenuSbar = { bg = theme.ui.bg_m1 },
+                    PmenuThumb = { bg = theme.ui.bg_p2 },
+
+                    NormalFloat = { bg = "none" },
+                    FloatBorder = { bg = "none" },
+                    FloatTitle = { bg = "none" },
+                }
+            end,
+        },
         init = function()
             vim.opt.background = "dark"
-            vim.cmd("colorscheme rose-pine")
+            vim.cmd("colorscheme kanagawa-dragon")
         end,
     },
 }

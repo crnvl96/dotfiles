@@ -4,17 +4,20 @@ return {
         build = ":TSUpdate",
         event = { "BufReadPost", "BufWritePost", "BufNewFile" },
         dependencies = {
-            "windwp/nvim-ts-autotag",
+            { "windwp/nvim-ts-autotag" },
+            { "andymass/vim-matchup" },
         },
         init = function(plugin)
             require("lazy.core.loader").add_to_rtp(plugin)
             require("nvim-treesitter.query_predicates")
         end,
         config = function()
+            vim.g.matchup_matchparen_offscreen = { method = "popup" }
+
             require("nvim-treesitter.configs").setup({
                 autotag = { enable = true },
-                indent = { enable = true },
                 matchup = { enable = true },
+                indent = { enable = true },
                 highlight = {
                     enable = true,
                     disable = function(_, buf)
