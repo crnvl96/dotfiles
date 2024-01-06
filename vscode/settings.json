@@ -1,162 +1,229 @@
 {
-  "files.exclude": {
-    "**/node_modules": true
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[lua]": {
-    "editor.defaultFormatter": "JohnnyMorganz.stylua"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "editor.cursorBlinking": "solid",
-  "editor.smoothScrolling": true,
-  "editor.cursorSmoothCaretAnimation": "on",
-  "editor.guides.indentation": false,
-  "editor.fontFamily": "Iosevka",
-  "editor.fontLigatures": true,
-  "editor.fontSize": 14,
-  "editor.suggestFontSize": 14,
-  "editor.lineHeight": 24,
-  "editor.fontWeight": "500",
-  "editor.formatOnSave": true,
-  "editor.minimap.enabled": false,
-  "editor.wordWrap": "on",
-  "editor.renderWhitespace": "none",
-  "editor.renderControlCharacters": false,
-  "editor.cursorSurroundingLines": 8,
-  "breadcrumbs.enabled": false,
-  "terminal.integrated.fontSize": 12,
-  "terminal.integrated.defaultProfile.linux": "fish",
-  "extensions.autoUpdate": true,
-  "extensions.experimental.affinity": {
-    "vscodevim.vim": 1
-  },
-  "git.confirmSync": false,
-  "git.autofetch": true,
-  "git.openRepositoryInParentFolders": "never",
-  "go.toolsManagement.autoUpdate": true,
-  "workbench.panel.defaultLocation": "bottom",
-  "workbench.tree.indent": 20,
-  "workbench.tree.renderIndentGuides": "always",
-  "workbench.colorTheme": "Gruvbox Dark Hard",
-  "explorer.confirmDelete": false,
-  "explorer.confirmDragAndDrop": false,
-  "window.titleBarStyle": "custom",
-  "window.zoomLevel": 2.5,
-  "window.menuBarVisibility": "compact",
-  "prettier.printWidth": 80,
-  "prettier.tabWidth": 2,
-  "prettier.useTabs": false,
-  "prettier.semi": true,
-  "prettier.singleQuote": true,
-  "prettier.trailingComma": "all",
-  "prettier.bracketSpacing": true,
-  "prettier.bracketSameLine": false,
-  "prettier.arrowParens": "avoid",
-  "prettier.endOfLine": "auto",
-  "vim.leader": "<space>",
-  "vim.handleKeys": {
-    "<C-a>": false,
-    "<C-f>": false,
-    "<C-h>": false,
-    "<C-p>": false
-  },
-  "vim.incsearch": true,
-  "vim.useSystemClipboard": true,
-  "vim.useCtrlKeys": true,
-  "vim.hlsearch": true,
-  "vim.highlightedyank.enable": true,
-  "vim.smartRelativeLine": true,
-  "vim.insertModeKeyBindings": [
-    {
-      "before": [
-        "j",
-        "k"
-      ],
-      "after": [
-        "<Esc>"
-      ]
+    "files.exclude": {
+        "**/node_modules": true
     },
-    {
-      "before": [
-        "k",
-        "j"
-      ],
-      "after": [
-        "<Esc>"
-      ]
-    }
-  ],
-  "vim.normalModeKeyBindingsNonRecursive": [
-    {
-      "before": [
-        "L"
-      ],
-      "after": [
-        "$"
-      ]
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    {
-      "before": [
-        "H"
-      ],
-      "after": [
-        "_"
-      ]
-    }
-  ],
-  "vim.normalModeKeyBindings": [
-    {
-      "before": [
-        "J"
-      ],
-      "after": [
-        "6",
-        "j"
-      ]
+    "[lua]": {
+        "editor.defaultFormatter": "JohnnyMorganz.stylua"
     },
-    {
-      "before": [
-        "K"
-      ],
-      "after": [
-        "6",
-        "k"
-      ]
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
     },
-    {
-      "before": [
-        "Y"
-      ],
-      "after": [
-        "y",
-        "$"
-      ]
-    }
-  ],
-  "vim.visualModeKeyBindings": [
-    {
-      "before": [
-        "J"
-      ],
-      "after": [
-        "6",
-        "j"
-      ]
+    "editor.cursorBlinking": "solid",
+    "editor.guides.indentation": false,
+    "editor.smoothScrolling": true,
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.fontFamily": "Iosevka",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 13,
+    "editor.suggestFontSize": 12,
+    "editor.lineHeight": 18,
+    "editor.fontWeight": "500",
+    "editor.formatOnSave": true,
+    "editor.minimap.enabled": false,
+    "editor.wordWrap": "on",
+    "editor.cursorSurroundingLines": 8,
+    "breadcrumbs.enabled": false,
+    "terminal.integrated.fontSize": 14,
+    "terminal.integrated.defaultProfile.linux": "fish",
+    "extensions.autoUpdate": true,
+    "extensions.experimental.affinity": {
+        "vscodevim.vim": 1
     },
-    {
-      "before": [
-        "K"
-      ],
-      "after": [
-        "6",
-        "k"
-      ]
-    }
-  ],
-  "diffEditor.ignoreTrimWhitespace": false,
-  "workbench.editor.showTabs": "none"
+    "git.confirmSync": false,
+    "git.autofetch": true,
+    "go.toolsManagement.autoUpdate": true,
+    "workbench.panel.defaultLocation": "bottom",
+    "workbench.tree.indent": 20,
+    "workbench.tree.renderIndentGuides": "always",
+    "workbench.colorTheme": "Min Dark",
+    "workbench.editor.showTabs": "none",
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "window.titleBarStyle": "custom",
+    "window.zoomLevel": 2,
+    "window.menuBarVisibility": "compact",
+    "prettier.printWidth": 80,
+    "prettier.tabWidth": 2,
+    "prettier.useTabs": false,
+    "prettier.semi": true,
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "all",
+    "prettier.bracketSpacing": true,
+    "prettier.bracketSameLine": false,
+    "prettier.arrowParens": "avoid",
+    "prettier.endOfLine": "auto",
+    "vim.leader": "<space>",
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false,
+        "<C-h>": false,
+        "<C-p>": false
+    },
+    "vim.incsearch": true,
+    "vim.useSystemClipboard": true,
+    "vim.useCtrlKeys": true,
+    "vim.hlsearch": true,
+    "vim.highlightedyank.enable": true,
+    "vim.smartRelativeLine": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": [
+                "j",
+                "k"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        },
+        {
+            "before": [
+                "k",
+                "j"
+            ],
+            "after": [
+                "<Esc>"
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindingsNonRecursive": [
+        {
+            "before": [
+                "-"
+            ],
+            "commands": [
+                "vsnetrw.open"
+            ],
+            "when": "editorLangId != vsnetrw"
+        },
+        {
+            "before": [
+                "L"
+            ],
+            "after": [
+                "$"
+            ]
+        },
+        {
+            "before": [
+                "H"
+            ],
+            "after": [
+                "_"
+            ]
+        },
+        {
+            "before": [
+                "leader",
+                "k"
+            ],
+            "commands": [
+                "editor.action.showHover"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "d"
+            ],
+            "commands": [
+                "editor.action.revealDefinition"
+            ]
+        },
+        {
+            "before": [
+                "g",
+                "r"
+            ],
+            "commands": [
+                "editor.action.goToReferences"
+            ]
+        }
+    ],
+    "vim.normalModeKeyBindings": [
+        {
+            "before": [
+                "J"
+            ],
+            "after": [
+                "6",
+                "j"
+            ]
+        },
+        {
+            "before": [
+                "K"
+            ],
+            "after": [
+                "6",
+                "k"
+            ]
+        },
+        {
+            "before": [
+                "Y"
+            ],
+            "after": [
+                "y",
+                "$"
+            ]
+        }
+    ],
+    "vim.visualModeKeyBindings": [
+        {
+            "before": [
+                "<"
+            ],
+            "commands": [
+                "editor.action.outdentLines"
+            ]
+        },
+        {
+            "before": [
+                ">"
+            ],
+            "commands": [
+                "editor.action.indentLines"
+            ]
+        },
+        {
+            "before": [
+                "L"
+            ],
+            "after": [
+                "$"
+            ]
+        },
+        {
+            "before": [
+                "H"
+            ],
+            "after": [
+                "_"
+            ]
+        },
+        {
+            "before": [
+                "J"
+            ],
+            "after": [
+                "6",
+                "j"
+            ]
+        },
+        {
+            "before": [
+                "K"
+            ],
+            "after": [
+                "6",
+                "k"
+            ]
+        }
+    ],
+    "git.suggestSmartCommit": false,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "workbench.iconTheme": "material-icon-theme"
 }

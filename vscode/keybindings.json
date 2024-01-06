@@ -1,43 +1,80 @@
 [
-  {
-    "key": "ctrl+enter",
-    "command": "workbench.action.showCommands"
-  },
-  {
-    "key": "ctrl+n",
-    "command": "workbench.action.quickOpenSelectNext",
-    "when": "vim.active && inQuickOpen"
-  },
-  {
-    "key": "ctrl+p",
-    "command": "workbench.action.quickOpenSelectPrevious",
-    "when": "vim.active && inQuickOpen"
-  },
-  {
-    "key": "l",
-    "command": "list.expand",
-    "when": "vim.active && listFocus && !inputFocus"
-  },
-  {
-    "key": "ctrl+n",
-    "command": "selectNextSuggestion",
-    "when": "vim.active && suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-  },
-  {
-    "key": "ctrl+p",
-    "command": "selectPrevSuggestion",
-    "when": "vim.active && suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
-  },
-  {
-    "key": "alt+m",
-    "command": "editor.action.goToMatchFindAction"
-  },
-  {
-    "key": "ctrl+shift+p",
-    "command": "-workbench.action.showCommands"
-  },
-  {
-    "key": "ctrl+n",
-    "command": "-workbench.action.files.newUntitledFile"
-  }
+    {
+        "command": "workbench.action.toggleSidebarVisibility",
+        "key": "ctrl+e"
+    },
+    {
+        "command": "workbench.files.action.focusFilesExplorer",
+        "key": "ctrl+e",
+        "when": "editorTextFocus"
+    },
+    {
+        "key": "a",
+        "command": "explorer.newFile",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "command": "renameFile",
+        "key": "r",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "shift+n",
+        "command": "explorer.newFolder",
+        "when": "explorerViewletFocus"
+    },
+    {
+        "key": "shift+n",
+        "command": "workbench.action.newWindow",
+        "when": "!explorerViewletFocus"
+    },
+    {
+        "command": "deleteFile",
+        "key": "d",
+        "when": "filesExplorerFocus && !inputFocus"
+    },
+    {
+        "key": "ctrl+j",
+        "command": "workbench.action.togglePanel"
+    },
+    {
+        "key": "ctrl+enter",
+        "command": "workbench.action.showCommands"
+    },
+    {
+        "key": "alt+enter",
+        "command": "editor.action.showContextMenu"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "workbench.action.quickOpenSelectNext",
+        "when": "vim.active && inQuickOpen"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "workbench.action.quickOpenSelectPrevious",
+        "when": "vim.active && inQuickOpen"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "selectNextSuggestion",
+        "when": "vim.active && suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+    },
+    {
+        "key": "ctrl+p",
+        "command": "selectPrevSuggestion",
+        "when": "vim.active && suggestWidgetMultipleSuggestions && suggestWidgetVisible && textInputFocus"
+    },
+    {
+        "key": "alt+m",
+        "command": "editor.action.goToMatchFindAction"
+    },
+    {
+        "key": "ctrl+shift+p",
+        "command": "-workbench.action.showCommands"
+    },
+    {
+        "key": "ctrl+n",
+        "command": "-workbench.action.files.newUntitledFile"
+    }
 ]
