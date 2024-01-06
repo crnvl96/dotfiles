@@ -6,7 +6,7 @@
   username = crnvl96
   signinkey = 28D1954DE48487B5
 [core]
-  pager = delta
+  ; pager = delta
   editor = nvim
   excludesfile = /home/crnvl96/.config/git/.gitignore_global
 [gpg]
@@ -15,14 +15,14 @@
   gpgsign = true
 [color]
   ui = true
-[interactive]
-  diffFilter = delta --color-only
-[delta]
-  navigate = true
-  light = false
-  true-color = always
-  line-numbers = false
-  whitespace-error-style = 22 reverse
+; [interactive]
+;   diffFilter = delta --color-only
+; [delta]
+;   navigate = true
+;   light = false
+;   true-color = always
+;   line-numbers = false
+;   whitespace-error-style = 22 reverse
 [commit]
   verbose = true
   gpgsign = true
