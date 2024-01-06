@@ -6,6 +6,7 @@ vim.filetype.add({
         ["*.env"] = "sh",
         ["*.envrc"] = "sh",
         ["*.conf"] = "sh",
+        ["*.theme"] = "sh",
         ["lfrc"] = "sh",
     },
 })

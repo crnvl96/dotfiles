@@ -38,9 +38,9 @@ alias gds="git ds"
 
 set -gx RIPGREP_CONFIG_PATH $HOME/.config/ripgrep/config
 set -Ux FZF_DEFAULT_OPTS '
-    --color=bg+:-1,bg:-1,spinner:#f5e0dc,gutter:-1,hl:#f38ba8
-    --color=fg:#cdd6f4,header:#f38ba8,info:#cba6f7,pointer:#f5e0dc
-    --color=marker:#f5e0dc,fg+:#cdd6f4,prompt:#cba6f7,hl+:#f38ba8
+    --color=bg+:-1,bg:-1,gutter:-1,hl:#ff9e3b
+    --color=fg:#dcd7ba,pointer:#76946a
+    --color=fg+:#dcd7ba,prompt:#957fb8
     --pointer=" " --prompt " " --marker " " --border --cycle'
 # set -Ux FZF_DEFAULT_OPTS '
 # 	--color=fg:#908caa,bg:-1,hl:#ebbcba
