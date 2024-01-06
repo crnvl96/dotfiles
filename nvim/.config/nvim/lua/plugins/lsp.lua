@@ -12,6 +12,8 @@ return {
         },
         init = function()
             vim.api.nvim_create_autocmd("LspAttach", {
+                group = vim.api.nvim_create_augroup("crnvl96_on_lsp_attach", { clear = true }),
+                desc = "Setup lsp keymaps on attach event",
                 callback = function(args)
                     local client = vim.lsp.get_client_by_id(args.data.client_id)
                     if not client then

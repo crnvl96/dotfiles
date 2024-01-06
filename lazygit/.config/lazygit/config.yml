@@ -3,10 +3,10 @@ gui:
   sidePanelWidth: 0.2
 os:
   Edit: 'nvim'
-git:
-  paging:
-    colorArg: always
-    useConfig: true
+# git:
+#   paging:
+#     colorArg: always
+#     useConfig: true
 gui:
   showBottomLine: false
   theme:

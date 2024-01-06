@@ -7,6 +7,11 @@ return {
         opts = {
             compile = true,
             transparent = true,
+            commentStyle = { italic = true },
+            functionStyle = { bold = true },
+            keywordStyle = { italic = true },
+            statementStyle = { bold = true },
+            typeStyle = {},
             colors = {
                 theme = {
                     all = {

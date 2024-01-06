@@ -2,7 +2,7 @@ return {
     "tpope/vim-fugitive",
     cmd = { "G", "Git", "Gvdiffsplit" },
     keys = {
-        { "<leader>gg", "<cmd>Git<CR>", desc = "Git" },
+        { "<leader>gg", "<cmd>Git<cr>", desc = "Git" },
         {
             "<leader>gl",
             "<cmd>Git log --decorate --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit<cr>",

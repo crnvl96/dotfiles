@@ -26,6 +26,10 @@ vim.keymap.set("x", "<c-k>", "<cmd>resize +2<cr>", { desc = "Increase window hei
 vim.keymap.set("x", "<c-j>", "<cmd>resize -2<cr>", { desc = "Decrease window height", silent = true })
 vim.keymap.set("x", "<c-h>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width", silent = true })
 vim.keymap.set("x", "<c-l>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width", silent = true })
+-- map("n", "+", ":vertical resize +5<CR>")
+-- map("n", "_", ":vertical resize -5<CR>")
+-- map("n", "=", ":resize +5<CR>")
+-- map("n", "-", ":resize -5<CR>")
 
 vim.keymap.set("", "Y", "y$", { desc = "Yank to the end of line", silent = true })
 

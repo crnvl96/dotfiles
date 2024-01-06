@@ -39,13 +39,13 @@ function M.on_lsp_attach(client, bufnr)
     handle_method(diagnostics, function()
         set("<leader>cd", vim.diagnostic.open_float, "Line diagnostics")
 
-        set("<leader>sd", "<cmd>FzfLua lsp_document_diagnostics<CR>", "Document diagnostics")
-        set("<leader>sD", "<cmd>FzfLua lsp_workspace_diagnostics<CR>", "Workspace diagnostics")
+        set("<leader>sd", "<cmd>FzfLua lsp_document_diagnostics<cr>", "Document diagnostics")
+        set("<leader>sD", "<cmd>FzfLua lsp_workspace_diagnostics<cr>", "Workspace diagnostics")
     end)
 
     local code_actions = vim.lsp.protocol.Methods.textDocument_codeAction
     handle_method(code_actions, function()
-        set("<leader>ca", "<cmd>FzfLua lsp_code_actions<CR>", "Code actions", { "n", "v" })
+        set("<leader>ca", "<cmd>FzfLua lsp_code_actions<cr>", "Code actions", { "n", "v" })
     end)
 
     local definitions = vim.lsp.protocol.Methods.textDocument_definition
@@ -57,12 +57,12 @@ function M.on_lsp_attach(client, bufnr)
 
     local declarations = vim.lsp.protocol.Methods.textDocument_declaration
     handle_method(declarations, function()
-        set("gD", "<cmd>FzfLua lsp_declarations<CR>", "Go to declarations")
+        set("gD", "<cmd>FzfLua lsp_declarations<cr>", "Go to declarations")
     end)
 
     local typedefs = vim.lsp.protocol.Methods.textDocument_typeDefinition
     handle_method(typedefs, function()
-        set("gy", "<cmd>FzfLua lsp_typedefs<CR>", "Go to type definition")
+        set("gy", "<cmd>FzfLua lsp_typedefs<cr>", "Go to type definition")
     end)
 
     local references = vim.lsp.protocol.Methods.textDocument_references
@@ -74,12 +74,12 @@ function M.on_lsp_attach(client, bufnr)
 
     local implementations = vim.lsp.protocol.Methods.textDocument_implementation
     handle_method(implementations, function()
-        set("gi", "<cmd>FzfLua lsp_implementations<CR>", "Go to implementations")
+        set("gi", "<cmd>FzfLua lsp_implementations<cr>", "Go to implementations")
     end)
 
     local symbols = vim.lsp.protocol.Methods.textDocument_documentSymbol
     handle_method(symbols, function()
-        set("<leader>ss", "<cmd>FzfLua lsp_document_symbols<CR>", "Document symbols")
+        set("<leader>ss", "<cmd>FzfLua lsp_document_symbols<cr>", "Document symbols")
         set("<leader>sS", function()
             require("fzf-lua").lsp_live_workspace_symbols({ no_header_i = true })
         end, "Workspace symbols")

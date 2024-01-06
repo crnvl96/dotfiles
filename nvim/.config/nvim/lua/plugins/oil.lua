@@ -7,9 +7,9 @@ return {
             lsp_rename_autosave = true,
             constrain_cursor = "name",
             keymaps = {
-                ["<C-h>"] = false,
-                ["<C-l>"] = false,
-                ["<C-p>"] = false,
+                ["<c-h>"] = false,
+                ["<c-l>"] = false,
+                ["<c-p>"] = false,
                 ["g;"] = "actions.toggle_trash",
             },
             view_options = {
@@ -22,7 +22,7 @@ return {
             },
         },
         keys = {
-            { "<m-o>", "<cmd>Oil<cr>" },
+            { "<m-o>", "<cmd>Oil<cr>", desc = "Oil" },
         },
     },
 }
