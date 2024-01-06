@@ -22,14 +22,10 @@ vim.keymap.set("n", "<c-j>", "<c-w>j", { desc = "Goto lower window", silent = tr
 vim.keymap.set("n", "<c-k>", "<c-w>k", { desc = "Goto upper window", silent = true })
 vim.keymap.set("n", "<c-l>", "<c-w>l", { desc = "Goto right window", silent = true })
 
-vim.keymap.set("x", "<c-k>", "<cmd>resize +2<cr>", { desc = "Increase window height", silent = true })
-vim.keymap.set("x", "<c-j>", "<cmd>resize -2<cr>", { desc = "Decrease window height", silent = true })
-vim.keymap.set("x", "<c-h>", "<cmd>vertical resize -2<cr>", { desc = "Decrease window width", silent = true })
-vim.keymap.set("x", "<c-l>", "<cmd>vertical resize +2<cr>", { desc = "Increase window width", silent = true })
--- map("n", "+", ":vertical resize +5<CR>")
--- map("n", "_", ":vertical resize -5<CR>")
--- map("n", "=", ":resize +5<CR>")
--- map("n", "-", ":resize -5<CR>")
+vim.keymap.set("n", "=", "<cmd>resize +2<cr>", { desc = "Increase window height", silent = true })
+vim.keymap.set("n", "_", "<cmd>resize -2<cr>", { desc = "Decrease window height", silent = true })
+vim.keymap.set("n", "-", "<cmd>vertical resize -10<cr>", { desc = "Decrease window width", silent = true })
+vim.keymap.set("n", "+", "<cmd>vertical resize +10<cr>", { desc = "Increase window width", silent = true })
 
 vim.keymap.set("", "Y", "y$", { desc = "Yank to the end of line", silent = true })
 
