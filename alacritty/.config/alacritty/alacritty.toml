@@ -16,7 +16,7 @@ y = 1
 
 [font.normal]
 family = "IosevkaNerdFont"
-style = "Bold"
+style = "Normal"
 
 [font.bold]
 family = "IosevkaNerdFont"
@@ -24,7 +24,7 @@ style = "Extra Bold"
 
 [font.italic]
 family = "IosevkaNerdFont"
-style = "Bold Italic"
+style = "Italic"
 
 [font.bold_italic]
 family = "IosevkaNerdFont"

@@ -9,21 +9,21 @@ return {
             { "williamboman/mason-lspconfig.nvim" },
             { "hrsh7th/cmp-nvim-lsp" },
             { "pmizio/typescript-tools.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+            { "folke/neodev.nvim" },
         },
-        init = function()
-            vim.api.nvim_create_autocmd("LspAttach", {
-                group = vim.api.nvim_create_augroup("crnvl96_on_lsp_attach", { clear = true }),
-                desc = "Setup lsp keymaps on attach event",
-                callback = function(args)
-                    local client = vim.lsp.get_client_by_id(args.data.client_id)
-                    if not client then
-                        return
-                    end
-                    require("functions.lsp").on_lsp_attach(client, args.buf)
-                end,
-            })
-        end,
         config = function()
+            require("neodev").setup({
+                library = {
+                    enabled = true,
+                    runtime = true,
+                    types = true,
+                    plugins = true,
+                },
+                setup_jsonls = true,
+                lspconfig = true,
+                pathStrict = true,
+            })
+
             require("mason").setup()
 
             local tools = {
@@ -70,6 +70,7 @@ return {
                     },
                 })
 
+            local lspconfig = require("lspconfig")
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "tsserver",
@@ -82,10 +83,10 @@ return {
                 },
                 handlers = {
                     function(server)
-                        require("lspconfig")[server].setup({ capabilities = capabilities })
+                        lspconfig[server].setup({ capabilities = capabilities })
                     end,
                     eslint = function()
-                        require("lspconfig").eslint.setup({
+                        lspconfig.eslint.setup({
                             capabilities = capabilities,
                             settings = {
                                 workingDirectory = { mode = "auto" },
@@ -95,7 +96,7 @@ return {
                         })
                     end,
                     jsonls = function()
-                        require("lspconfig").jsonls.setup({
+                        lspconfig.jsonls.setup({
                             capabilities = capabilities,
                             settings = {
                                 json = {
@@ -106,29 +107,29 @@ return {
                         })
                     end,
                     lua_ls = function()
-                        require("lspconfig").lua_ls.setup({
+                        lspconfig.lua_ls.setup({
                             capabilities = capabilities,
-                            on_init = function(client)
-                                local path = client.workspace_folders and client.workspace_folders[1] and client.workspace_folders[1].name
-                                if not path or not (vim.uv.fs_stat(path .. "/.luarc.lua") or vim.uv.fs_stat(path .. "/.luarc")) then
-                                    client.config.settings = vim.tbl_deep_extend("force", client.config.settings, {
-                                        Lua = {
-                                            runtime = {
-                                                version = "LuaJIT",
-                                            },
-                                            workspace = {
-                                                checkThirdParty = false,
-                                                library = {
-                                                    vim.env.VIMRUNTIME,
-                                                    "${3rd}/luv/library",
-                                                },
-                                            },
-                                        },
-                                    })
-                                    client.notify(vim.lsp.protocol.Methods.workspace_didChangeConfiguration, { settings = client.config.settings })
-                                end
-                                return true
-                            end,
+                            -- on_init = function(client)
+                            --     local path = client.workspace_folders and client.workspace_folders[1] and client.workspace_folders[1].name
+                            --     if not path or not (vim.uv.fs_stat(path .. "/.luarc.lua") or vim.uv.fs_stat(path .. "/.luarc")) then
+                            --         client.config.settings = vim.tbl_deep_extend("force", client.config.settings, {
+                            --             Lua = {
+                            --                 runtime = {
+                            --                     version = "LuaJIT",
+                            --                 },
+                            --                 workspace = {
+                            --                     checkThirdParty = false,
+                            --                     library = {
+                            --                         vim.env.VIMRUNTIME,
+                            --                         "${3rd}/luv/library",
+                            --                     },
+                            --                 },
+                            --             },
+                            --         })
+                            --         client.notify(vim.lsp.protocol.Methods.workspace_didChangeConfiguration, { settings = client.config.settings })
+                            --     end
+                            --     return true
+                            -- end,
                             settings = {
                                 Lua = {
                                     telemetry = { enable = false },
@@ -145,10 +146,17 @@ return {
                         })
                     end,
                     gopls = function()
-                        require("lspconfig").gopls.setup({
+                        lspconfig.gopls.setup({
                             capabilities = capabilities,
                             on_init = function(client)
                                 if client.name == "gopls" and not client.server_capabilities.semanticTokensProvider then
+                                    vim.keymap.set(
+                                        "n",
+                                        "<leader>td",
+                                        "<cmd>lua require('dap-go').debug_test()<cr>",
+                                        { silent = true, desc = "Debug Nearest (Go)" }
+                                    )
+
                                     local semanticTokens = client.config.capabilities.textDocument.semanticTokens
                                     client.server_capabilities.semanticTokensProvider = {
                                         full = true,
@@ -206,22 +214,6 @@ return {
                 require("functions.lsp").on_lsp_attach(cli, bufnr)
                 return ret
             end
-
-            vim.diagnostic.config({
-                title = false,
-                underline = true,
-                virtual_text = true,
-                signs = true,
-                update_in_insert = false,
-                severity_sort = true,
-                float = {
-                    source = "always",
-                    style = "minimal",
-                    border = "rounded",
-                    header = "",
-                    prefix = "",
-                },
-            })
         end,
     },
 }

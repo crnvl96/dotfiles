@@ -1,9 +1,9 @@
 return {
     "nvim-neotest/neotest",
     dependencies = {
-        {
-            "nvim-neotest/neotest-go",
-        },
+        { "vim-test/vim-test" },
+        { "nvim-neotest/neotest-go" },
+        { "nvim-neotest/neotest-vim-test" },
     },
     config = function()
         local neotest_ns = vim.api.nvim_create_namespace("neotest")
@@ -21,7 +21,12 @@ return {
             status = { virtual_text = true },
             output = { open_on_run = true },
             adapters = {
-                require("neotest-go"),
+                require("neotest-go")({
+                    experimental = {
+                        test_table = true,
+                    },
+                }),
+                require("neotest-vim-test")({ ignore_filetypes = { "go" } }),
             },
             quickfix = {
                 open = function()

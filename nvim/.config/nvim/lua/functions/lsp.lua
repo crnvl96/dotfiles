@@ -84,6 +84,13 @@ function M.on_lsp_attach(client, bufnr)
             require("fzf-lua").lsp_live_workspace_symbols({ no_header_i = true })
         end, "Workspace symbols")
     end)
+
+    local inlay_hints = vim.lsp.protocol.Methods.textDocument_inlayHint
+    handle_method(inlay_hints, function()
+        if vim.fn.has("nvim-0.10") then
+            vim.lsp.inlay_hint.enable(bufnr, true)
+        end
+    end)
 end
 
 return M
