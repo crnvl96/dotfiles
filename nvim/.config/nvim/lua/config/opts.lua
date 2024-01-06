@@ -8,6 +8,7 @@ vim.g.loaded_perl_provider = 0
 vim.opt.mouse = "a"
 vim.opt.clipboard = "unnamedplus"
 
+vim.o.timeout = true
 vim.opt.timeoutlen = 200
 vim.opt.updatetime = 200
 vim.opt.laststatus = 0
@@ -45,6 +46,8 @@ vim.opt.ignorecase = true
 vim.opt.swapfile = false
 vim.opt.undodir = vim.fn.stdpath("data") .. "/vim/undo"
 vim.opt.undofile = true
+
+vim.opt.grepprg = "rg --vimgrep --smart-case"
 
 vim.opt.wildignore = { "*/tmp/*", "*.so", "*.swp", "*.zip", "*/node_modules/*", "*/dist/*" }
 vim.opt.path:append("**")

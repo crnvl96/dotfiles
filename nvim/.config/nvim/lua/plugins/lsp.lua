@@ -30,6 +30,8 @@ return {
                 "stylua",
                 "gofumpt",
                 "goimports",
+                "gomodifytags",
+                "impl",
                 "prettierd",
             }
 

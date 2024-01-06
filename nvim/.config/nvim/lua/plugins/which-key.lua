@@ -21,6 +21,8 @@ return {
 
         wk.register({
             ["<leader>f"] = { name = "+file" },
+            ["<leader>o"] = { name = "+overseer" },
+            ["<leader>t"] = { name = "+tests" },
             ["<leader>s"] = { name = "+search" },
             ["<leader>c"] = { name = "+code" },
             ["<leader>g"] = { name = "+git" },
