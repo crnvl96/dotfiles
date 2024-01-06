@@ -1,0 +1,90 @@
+live_config_reload = true
+
+[cursor.style]
+blinking = "Off"
+shape = "Block"
+
+[env]
+TERM = "alacritty"
+
+[font]
+size = 16
+
+[font.offset]
+x = 0
+y = 1
+
+[font.normal]
+family = "IosevkaNerdFont"
+style = "Bold"
+
+[font.bold]
+family = "IosevkaNerdFont"
+style = "Extra Bold"
+
+[font.italic]
+family = "IosevkaNerdFont"
+style = "Bold Italic"
+
+[font.bold_italic]
+family = "IosevkaNerdFont"
+style = "Extra Bold Italic"
+
+[shell]
+program = "/usr/bin/fish"
+
+[window]
+decorations = "none"
+opacity = 1
+
+[window.padding]
+x = 0
+y = 0
+
+[colors.primary]
+background = "0x151515"
+foreground = "0xe0def4"
+
+[colors.selection]
+background = "0x403d52"
+text = "0xe0def4"
+
+[colors.normal]
+black = "0x26233a"
+blue = "0x9ccfd8"
+cyan = "0xebbcba"
+green = "0x31748f"
+magenta = "0xc4a7e7"
+red = "0xeb6f92"
+white = "0xe0def4"
+yellow = "0xf6c177"
+
+[colors.bright]
+black = "0x6e6a86"
+blue = "0x9ccfd8"
+cyan = "0xebbcba"
+green = "0x31748f"
+magenta = "0xc4a7e7"
+red = "0xeb6f92"
+white = "0xe0def4"
+yellow = "0xf6c177"
+
+[colors.cursor]
+cursor = "0xffffff"
+text = "0x000000"
+
+[colors.hints.end]
+background = "#1f1d2e"
+foreground = "#6e6a86"
+
+[colors.hints.start]
+background = "#1f1d2e"
+foreground = "#908caa"
+
+[colors.line_indicator]
+background = "None"
+foreground = "None"
+
+[colors.vi_mode_cursor]
+cursor = "0x524f67"
+text = "0xe0def4"
