@@ -12,6 +12,15 @@ return {
                 },
             },
             {
+                "ray-x/go.nvim",
+                build = ':lua require("go.install").update_all_sync()',
+                ft = { "go", "gomod" },
+                dependencies = {
+                    { "ray-x/guihua.lua" },
+                    { "neovim/nvim-lspconfig" },
+                },
+            },
+            {
                 "folke/neodev.nvim",
                 opts = {
                     library = {
@@ -173,10 +182,12 @@ return {
                         })
                     end,
                     gopls = function()
-                        lspconfig.gopls.setup({
+                        require("go").setup({
                             capabilities = opts.capabilities,
+                            lsp_on_attach = require("functions.lsp").on_lsp_attach,
                             on_init = function(client)
-                                if client.name == "gopls" and not client.server_opts.capabilities.semanticTokensProvider then
+                                print(client)
+                                if client.name == "gopls" then
                                     vim.keymap.set(
                                         "n",
                                         "<leader>td",
@@ -184,44 +195,63 @@ return {
                                         { silent = true, desc = "Debug Nearest (Go)" }
                                     )
 
-                                    local semanticTokens = client.config.opts.capabilities.textDocument.semanticTokens
-                                    client.server_opts.capabilities.semanticTokensProvider = {
-                                        full = true,
-                                        legend = {
-                                            tokenTypes = semanticTokens.tokenTypes,
-                                            tokenModifiers = semanticTokens.tokenModifiers,
-                                        },
-                                        range = true,
-                                    }
+                                    if not client.server_opts.capabilities.semanticTokensProvider then
+                                        local semanticTokens = client.config.opts.capabilities.textDocument.semanticTokens
+                                        client.server_opts.capabilities.semanticTokensProvider = {
+                                            full = true,
+                                            legend = {
+                                                tokenTypes = semanticTokens.tokenTypes,
+                                                tokenModifiers = semanticTokens.tokenModifiers,
+                                            },
+                                            range = true,
+                                        }
+                                    end
                                 end
                             end,
-                            settings = {
-                                gopls = {
-                                    gofumpt = true,
-                                    codelenses = {
-                                        gc_details = true,
-                                        generate = true,
-                                        run_govulncheck = true,
-                                        test = true,
-                                        tidy = true,
-                                        upgrade_dependency = true,
+                            lsp_cfg = {
+                                settings = {
+                                    gopls = {
+                                        gofumpt = true,
+                                        codelenses = {
+                                            gc_details = true,
+                                            generate = true,
+                                            regenerate_cgo = true,
+                                            run_govulncheck = true,
+                                            test = true,
+                                            tidy = true,
+                                            upgrade_dependency = true,
+                                            vendor = true,
+                                        },
+                                        hints = {
+                                            assignVariableTypes = false,
+                                            compositeLiteralFields = false,
+                                            compositeLiteralTypes = false,
+                                            constantValues = false,
+                                            functionTypeParameters = false,
+                                            parameterNames = false,
+                                            rangeVariableTypes = false,
+                                        },
+                                        analyses = {
+                                            fieldalignment = true,
+                                            nilness = true,
+                                            unusedparams = true,
+                                            unusedwrite = true,
+                                            useany = true,
+                                        },
+                                        usePlaceholders = true,
+                                        completeUnimported = true,
+                                        staticcheck = true,
+                                        directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+                                        semanticTokens = true,
                                     },
-                                    analyses = {
-                                        nilness = true,
-                                        unusedparams = true,
-                                        unusedvariable = true,
-                                        unusedwrite = true,
-                                        useany = true,
-                                    },
-                                    staticcheck = true,
-                                    directoryFilters = { "-.git", "-node_modules" },
-                                    semanticTokens = true,
+                                },
+                                flags = {
+                                    debounce_text_changes = 150,
                                 },
                             },
-                            flags = {
-                                debounce_text_changes = 150,
-                            },
+                            luasnip = true,
                         })
+                        return true
                     end,
                     tsserver = function()
                         require("typescript-tools").setup({
