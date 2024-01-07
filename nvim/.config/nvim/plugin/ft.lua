@@ -1,12 +1,12 @@
 -- if a file is a .env or .envrc file, set the filetype to sh
 vim.filetype.add({
     filename = {
-        [".env"] = "sh",
-        [".envrc"] = "sh",
-        ["*.env"] = "sh",
-        ["*.envrc"] = "sh",
-        ["*.conf"] = "sh",
+        [".env"] = "fish",
+        [".envrc"] = "fish",
+        ["*.env"] = "fish",
+        ["*.envrc"] = "fish",
+        ["*.conf"] = "fish",
         ["*.theme"] = "fish",
-        ["lfrc"] = "sh",
+        ["lfrc"] = "fish",
     },
 })

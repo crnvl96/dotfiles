@@ -1,8 +1,8 @@
 return {
-    "echasnovski/mini.comment",
+    "echasnovski/mini.splitjoin",
     event = "VeryLazy",
     opts = {},
     config = function(_, opts)
-        require("mini.comment").setup(opts)
+        require("mini.splitjoin").setup(opts)
     end,
 }

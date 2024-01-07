@@ -50,9 +50,8 @@ function M.on_lsp_attach(client, bufnr)
 
     local definitions = vim.lsp.protocol.Methods.textDocument_definition
     handle_method(definitions, function()
-        set("gd", function()
-            require("fzf-lua").lsp_definitions({ jump_to_single_result = true })
-        end, "Go to definition")
+        -- stylua: ignore
+        set("gd", function() require("fzf-lua").lsp_definitions({ jump_to_single_result = true }) end, "Go to definition")
     end)
 
     local declarations = vim.lsp.protocol.Methods.textDocument_declaration
@@ -67,9 +66,8 @@ function M.on_lsp_attach(client, bufnr)
 
     local references = vim.lsp.protocol.Methods.textDocument_references
     handle_method(references, function()
-        set("gr", function()
-            require("fzf-lua").lsp_references({ jump_to_single_result = true })
-        end, "Go to references")
+        -- stylua: ignore
+        set("gr", function() require("fzf-lua").lsp_references({ jump_to_single_result = true }) end, "Go to references")
     end)
 
     local implementations = vim.lsp.protocol.Methods.textDocument_implementation
@@ -80,9 +78,8 @@ function M.on_lsp_attach(client, bufnr)
     local symbols = vim.lsp.protocol.Methods.textDocument_documentSymbol
     handle_method(symbols, function()
         set("<leader>ss", "<cmd>FzfLua lsp_document_symbols<cr>", "Document symbols")
-        set("<leader>sS", function()
-            require("fzf-lua").lsp_live_workspace_symbols({ no_header_i = true })
-        end, "Workspace symbols")
+        -- stylua: ignore
+        set("<leader>sS", function() require("fzf-lua").lsp_live_workspace_symbols({ no_header_i = true }) end, "Workspace symbols")
     end)
 
     local inlay_hints = vim.lsp.protocol.Methods.textDocument_inlayHint

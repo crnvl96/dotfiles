@@ -3,6 +3,10 @@ return {
         "stevearc/oil.nvim",
         lazy = false,
         opts = {
+            buf_options = {
+                buflisted = false,
+                bufhidden = "hide",
+            },
             delete_to_trash = true,
             lsp_rename_autosave = true,
             constrain_cursor = "name",
@@ -21,6 +25,9 @@ return {
                 },
             },
         },
+        config = function(_, opts)
+            require("oil").setup(opts)
+        end,
         keys = {
             { "<m-o>", "<cmd>Oil<cr>", desc = "Oil" },
         },

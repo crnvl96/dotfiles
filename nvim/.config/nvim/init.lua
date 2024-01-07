@@ -17,7 +17,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
     ui = { border = "rounded" },
-    dev = { path = vim.g.projects_dir },
     install = {
         missing = true,
     },
@@ -35,7 +34,7 @@ require("lazy").setup({
                 "gzip",
                 --"matchit",
                 --"matchparen",
-                "netrwPlugin",
+                -- "netrwPlugin",
                 "tarPlugin",
                 "tohtml",
                 "tutor",

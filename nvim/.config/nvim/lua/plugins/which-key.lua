@@ -1,33 +1,27 @@
 return {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    init = function()
-        vim.o.timeout = true
-        vim.o.timeoutlen = 200
-    end,
-    opts = {
-        icons = {
-            separator = "-",
-            group = "",
+    {
+        "folke/which-key.nvim",
+        event = "VeryLazy",
+        init = function()
+            vim.o.timeout = true
+            vim.o.timeoutlen = 200
+        end,
+        opts = {
+            icons = { separator = "-", group = "" },
+            layout = { align = "center" },
         },
-        layout = {
-            align = "center",
-        },
+        config = function(_, opts)
+            require("which-key").setup(opts)
+            require("which-key").register({
+                ["<leader>b"] = { name = "+buffers" },
+                ["<leader>c"] = { name = "+code" },
+                ["<leader>f"] = { name = "+file" },
+                ["<leader>g"] = { name = "+git" },
+                ["<leader>o"] = { name = "+overseer" },
+                ["<leader>s"] = { name = "+search" },
+                ["<leader>t"] = { name = "+tests" },
+                ["<leader>w"] = { name = "+windows" },
+            })
+        end,
     },
-    config = function(_, opts)
-        local wk = require("which-key")
-
-        wk.setup(opts)
-
-        wk.register({
-            ["<leader>f"] = { name = "+file" },
-            ["<leader>o"] = { name = "+overseer" },
-            ["<leader>t"] = { name = "+tests" },
-            ["<leader>s"] = { name = "+search" },
-            ["<leader>c"] = { name = "+code" },
-            ["<leader>g"] = { name = "+git" },
-            ["<leader>b"] = { name = "+buffers" },
-            ["<leader>w"] = { name = "+windows" },
-        })
-    end,
 }

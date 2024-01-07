@@ -2,9 +2,9 @@ return {
     {
         "ibhagwan/fzf-lua",
         cmd = "FzfLua",
-        config = function()
+        opts = function()
             local actions = require("fzf-lua.actions")
-            require("fzf-lua").setup({
+            return {
                 file_ignore_patterns = { "%.svg$", "node_modules$", "%-lock.json$" },
                 fzf_opts = {
                     ["--info"] = "default",
@@ -63,7 +63,10 @@ return {
                         ["ctrl-d"] = { fn = actions.buf_del, reload = true },
                     },
                 },
-            })
+            }
+        end,
+        config = function(_, opts)
+            require("fzf-lua").setup(opts)
         end,
         keys = {
             { "<leader>sg", "<cmd>FzfLua live_grep_glob<cr>", desc = "Grep" },

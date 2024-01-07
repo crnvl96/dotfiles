@@ -2,25 +2,21 @@ return {
     {
         "stevearc/overseer.nvim",
         init = function()
-            local overseer = require("overseer")
-
+            vim.opt.grepprg = "rg --vimgrep --smart-case"
             vim.api.nvim_create_user_command("OverseerRestartLast", function()
-                local tasks = overseer.list_tasks({ recent_first = true })
+                local tasks = require("overseer").list_tasks({ recent_first = true })
                 if vim.tbl_isempty(tasks) then
                     vim.notify("No tasks found", vim.log.levels.WARN)
                 else
-                    overseer.run_action(tasks[1], "restart")
+                    require("overseer").run_action(tasks[1], "restart")
                 end
             end, {})
-
-            vim.opt.grepprg = "rg --vimgrep --smart-case"
-
             vim.api.nvim_create_user_command("Grep", function(params)
                 local cmd, num_subs = vim.o.grepprg:gsub("%$%*", params.args)
                 if num_subs == 0 then
                     cmd = cmd .. " " .. params.args
                 end
-                local task = overseer.new_task({
+                local task = require("overseer").new_task({
                     cmd = vim.fn.expandcmd(cmd),
                     components = {
                         {
@@ -69,14 +65,17 @@ return {
                 win_opts = { winblend = 5 },
             },
         },
+        config = function(_, opts)
+            require("overseer").setup(opts)
+        end,
         keys = {
             { "<leader>ot", "<cmd>OverseerToggle<cr>", desc = "Overseer toggle" },
             { "<leader>or", "<cmd>OverseerRun<cr>", desc = "Run a task from a template" },
             { "<leader>ob", "<cmd>OverseerBuild<cr>", desc = "Task builder" },
             { "<leader>oL", "<cmd>OverseerRestartLast<cr>", desc = "Rerun last task" },
-            { "<leader>os", "<cmd>OverseerSaveBundle <cr>", desc = "Save Bundle" },
-            { "<leader>ol", "<cmd>OverseerLoadBundle <cr>", desc = "Load Bundle" },
-            { "<leader>od", "<cmd>OverseerDeleteBundle <cr>", desc = "Delete Bundle" },
+            { "<leader>os", "<cmd>OverseerSaveBundle <cr>", desc = "Save bundle" },
+            { "<leader>ol", "<cmd>OverseerLoadBundle <cr>", desc = "Load bundle" },
+            { "<leader>od", "<cmd>OverseerDeleteBundle <cr>", desc = "Delete bundle" },
         },
     },
 }

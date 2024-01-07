@@ -18,5 +18,8 @@ return {
                 typescriptreact = { "prettierd" },
             },
         },
+        config = function(_, opts)
+            require("conform").setup(opts)
+        end,
     },
 }
