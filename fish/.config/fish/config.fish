@@ -41,13 +41,10 @@ set -Ux FZF_DEFAULT_OPTS '
     --color=bg+:-1,bg:-1,gutter:-1,hl:#FF9E3B,hl+:#FF9E3B
     --color=fg+:#957FB8,fg:#dcd7ba,pointer:#76946a
     --pointer=" " --prompt " " --marker " " --border --cycle'
-# set -Ux FZF_DEFAULT_OPTS '
-# 	--color=fg:#908caa,bg:-1,hl:#ebbcba
-# 	--color=fg+:#e0def4,bg+:-1,hl+:#ebbcba
-# 	--color=border:#403d52,header:#31748f,gutter:-1
-# 	--color=spinner:#f6c177,info:#9ccfd8,separator:#403d52
-# 	--color=pointer:#c4a7e7,marker:#eb6f92,prompt:#908caa --pointer=" " --prompt " " --marker " " --border --cycle'
 set -gx FZF_DEFAULT_COMMAND 'fd --type f --strip-cwd-prefix --hidden --follow'
 
 zoxide init fish | source
 starship init fish | source
+
+# opam configuration
+source /home/crnvl96/.opam/opam-init/init.fish >/dev/null 2>/dev/null; or true

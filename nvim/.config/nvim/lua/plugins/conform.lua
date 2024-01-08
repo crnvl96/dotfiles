@@ -16,6 +16,7 @@ return {
                 javascriptreact = { "prettierd" },
                 typescript = { "prettierd" },
                 typescriptreact = { "prettierd" },
+                ocaml = { "ocamlformat" },
             },
         },
         config = function(_, opts)
