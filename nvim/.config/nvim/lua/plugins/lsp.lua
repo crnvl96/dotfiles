@@ -113,21 +113,21 @@ return {
             end
         end,
         opts = {
-            capabilities = vim.tbl_deep_extend(
-                "force",
-                vim.lsp.protocol.make_client_capabilities(),
-                require("cmp_nvim_lsp").default_capabilities(),
-                {
-                    workspace = {
-                        -- PERF: didChangeWatchedFiles is too slow.
-                        -- TODO: Remove this when https://github.com/neovim/neovim/issues/23291#issuecomment-1686709265 is fixed.
-                        didChangeWatchedFiles = { dynamicRegistration = false },
-                    },
-                }
-            ),
+            capabilities = function()
+                local cap =
+                    vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), require("cmp_nvim_lsp").default_capabilities(), {
+                        workspace = {
+                            -- PERF: didChangeWatchedFiles is too slow.
+                            -- TODO: Remove this when https://github.com/neovim/neovim/issues/23291#issuecomment-1686709265 is fixed.
+                            didChangeWatchedFiles = { dynamicRegistration = false },
+                        },
+                    })
+                return cap
+            end,
         },
         config = function(_, opts)
             local lspconfig = require("lspconfig")
+            local capabilities = opts.capabilities()
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "tsserver",
@@ -140,11 +140,11 @@ return {
                 },
                 handlers = {
                     function(server)
-                        lspconfig[server].setup({ capabilities = opts.capabilities })
+                        lspconfig[server].setup({ capabilities = capabilities })
                     end,
                     eslint = function()
                         lspconfig.eslint.setup({
-                            capabilities = opts.capabilities,
+                            capabilities = capabilities,
                             settings = {
                                 workingDirectory = { mode = "auto" },
                                 format = { enable = false },
@@ -154,7 +154,7 @@ return {
                     end,
                     jsonls = function()
                         lspconfig.jsonls.setup({
-                            capabilities = opts.capabilities,
+                            capabilities = capabilities,
                             settings = {
                                 json = {
                                     validate = { enable = true },
@@ -165,7 +165,7 @@ return {
                     end,
                     lua_ls = function()
                         lspconfig.lua_ls.setup({
-                            capabilities = opts.capabilities,
+                            capabilities = capabilities,
                             settings = {
                                 Lua = {
                                     telemetry = { enable = false },
@@ -182,22 +182,23 @@ return {
                         })
                     end,
                     gopls = function()
-                        require("go").setup({
-                            capabilities = opts.capabilities,
-                            lsp_on_attach = require("functions.lsp").on_lsp_attach,
+                        require("go").setup()
+                        lspconfig.gopls.setup({
+                            capabilities = capabilities,
                             on_init = function(client)
-                                print(client)
                                 if client.name == "gopls" then
                                     vim.keymap.set(
                                         "n",
                                         "<leader>td",
                                         "<cmd>lua require('dap-go').debug_test()<cr>",
-                                        { silent = true, desc = "Debug Nearest (Go)" }
+                                        { silent = true, desc = "Debug nearest (Go)" }
                                     )
 
-                                    if not client.server_opts.capabilities.semanticTokensProvider then
-                                        local semanticTokens = client.config.opts.capabilities.textDocument.semanticTokens
-                                        client.server_opts.capabilities.semanticTokensProvider = {
+                                    vim.keymap.set("n", "<leader>tb", "<cmd>GoTestFunc<cr>", { silent = true, desc = "Bench nearest (Go)" })
+
+                                    if not client.server_capabilities.semanticTokensProvider then
+                                        local semanticTokens = client.config.capabilities.textDocument.semanticTokens
+                                        client.server_capabilities.semanticTokensProvider = {
                                             full = true,
                                             legend = {
                                                 tokenTypes = semanticTokens.tokenTypes,
@@ -208,54 +209,50 @@ return {
                                     end
                                 end
                             end,
-                            lsp_cfg = {
-                                settings = {
-                                    gopls = {
-                                        gofumpt = true,
-                                        codelenses = {
-                                            gc_details = true,
-                                            generate = true,
-                                            regenerate_cgo = true,
-                                            run_govulncheck = true,
-                                            test = true,
-                                            tidy = true,
-                                            upgrade_dependency = true,
-                                            vendor = true,
-                                        },
-                                        hints = {
-                                            assignVariableTypes = false,
-                                            compositeLiteralFields = false,
-                                            compositeLiteralTypes = false,
-                                            constantValues = false,
-                                            functionTypeParameters = false,
-                                            parameterNames = false,
-                                            rangeVariableTypes = false,
-                                        },
-                                        analyses = {
-                                            fieldalignment = true,
-                                            nilness = true,
-                                            unusedparams = true,
-                                            unusedwrite = true,
-                                            useany = true,
-                                        },
-                                        usePlaceholders = true,
-                                        completeUnimported = true,
-                                        staticcheck = true,
-                                        directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
-                                        semanticTokens = true,
+                            settings = {
+                                gopls = {
+                                    gofumpt = true,
+                                    codelenses = {
+                                        gc_details = true,
+                                        generate = true,
+                                        regenerate_cgo = true,
+                                        run_govulncheck = true,
+                                        test = true,
+                                        tidy = true,
+                                        upgrade_dependency = true,
+                                        vendor = true,
                                     },
-                                },
-                                flags = {
-                                    debounce_text_changes = 150,
+                                    hints = {
+                                        assignVariableTypes = false,
+                                        compositeLiteralFields = false,
+                                        compositeLiteralTypes = false,
+                                        constantValues = false,
+                                        functionTypeParameters = false,
+                                        parameterNames = false,
+                                        rangeVariableTypes = false,
+                                    },
+                                    analyses = {
+                                        fieldalignment = true,
+                                        nilness = true,
+                                        unusedparams = true,
+                                        unusedwrite = true,
+                                        useany = true,
+                                    },
+                                    usePlaceholders = true,
+                                    completeUnimported = true,
+                                    staticcheck = true,
+                                    directoryFilters = { "-.git", "-.vscode", "-.idea", "-.vscode-test", "-node_modules" },
+                                    semanticTokens = true,
                                 },
                             },
-                            luasnip = true,
+                            flags = {
+                                debounce_text_changes = 150,
+                            },
                         })
-                        return true
                     end,
                     tsserver = function()
                         require("typescript-tools").setup({
-                            capabilities = opts.capabilities,
+                            capabilities = capabilities,
                         })
                         return true
                     end,

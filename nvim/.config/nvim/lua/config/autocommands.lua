@@ -24,6 +24,30 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup("close_with_q", { clear = true }),
+    desc = "Close some extra filetypes using `q`",
+    pattern = {
+        "PlenaryTestPopup",
+        "help",
+        "lspinfo",
+        "man",
+        "notify",
+        "qf",
+        "spectre_panel",
+        "startuptime",
+        "tsplayground",
+        "neotest-output",
+        "checkhealth",
+        "neotest-summary",
+        "neotest-output-panel",
+    },
+    callback = function(event)
+        vim.bo[event.buf].buflisted = false
+        vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
+    end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
     group = vim.api.nvim_create_augroup("crnvl96_set_node_path", { clear = true }),
     desc = "Sets the default node version that nvim will use, so that all features work even on old nodejs projects (npm < 14)",
     pattern = { "javascript, typescript, javascriptreact, typescriptreact" },
@@ -37,7 +61,9 @@ vim.api.nvim_create_autocmd("FileType", {
 })
 
 vim.api.nvim_create_autocmd("VimEnter", {
+    group = vim.api.nvim_create_augroup("crnvl_set_project_root", { clear = true }),
     desc = "Set Working Directory when vim is first opened with a path",
+    once = true,
     callback = function(event)
         local dir = event.file
         if vim.fn.isdirectory(dir) == 0 then
@@ -50,7 +76,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
 
         vim.cmd.tcd(strip(dir))
     end,
-    once = true,
 })
 
 vim.api.nvim_create_autocmd("FileType", {
