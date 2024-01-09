@@ -130,26 +130,19 @@ return {
                 },
                 {
                     type = "pwa-node",
+                    name = "run start:dev",
                     request = "launch",
-                    name = "Debug Nest Framework (Nvim)",
-                    program = "${workspaceFolder}/src/main.ts",
-                    outFiles = {
-                        "${workspaceFolder}/dist/**/*.js",
+                    runtimeExecutable = "npm",
+                    cwd = "${workspaceFolder}",
+                    console = "integratedTerminal",
+                    runtimeArgs = {
+                        "run",
+                        "start:dev",
                     },
                     skipFiles = {
-                        "${workspaceFolder}/node_modules/**/*.js",
-                        "<node_internals>/**/*.js",
+                        "${workspaceFolder}/node_modules/*",
+                        "<node_internals>/*",
                     },
-                    runtimeArgs = {
-                        "--nolazy",
-                        "-r",
-                        "ts-node/register",
-                        "-r",
-                        "tsconfig-paths/register",
-                    },
-                    console = "integratedTerminal",
-                    sourceMaps = true,
-                    cwd = "${workspaceFolder}",
                 },
             }
         end
