@@ -35,6 +35,7 @@ alias gA="git add ."
 alias gap="git ap"
 alias gd="git df"
 alias gds="git ds"
+alias tp="trash-put "
 
 set -gx RIPGREP_CONFIG_PATH $HOME/.config/ripgrep/config
 set -Ux FZF_DEFAULT_OPTS '
