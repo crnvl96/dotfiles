@@ -24,7 +24,6 @@ vim.keymap.set("n", "<c-l>", "<c-w>l", { desc = "Goto right window", silent = tr
 
 vim.keymap.set("x", "<c-l>", "<cmd>resize +2<cr>", { desc = "Increase window height", silent = true })
 vim.keymap.set("x", "<c-h>", "<cmd>resize -2<cr>", { desc = "Decrease window height", silent = true })
-
 vim.keymap.set("x", "<c-j>", "<cmd>vertical resize -10<cr>", { desc = "Decrease window width", silent = true })
 vim.keymap.set("x", "<c-k>", "<cmd>vertical resize +10<cr>", { desc = "Increase window width", silent = true })
 

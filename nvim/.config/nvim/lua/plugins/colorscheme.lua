@@ -4,6 +4,10 @@ return {
         lazy = false,
         priority = 1000,
         enabled = true,
+        init = function()
+            vim.opt.background = "dark"
+            vim.cmd("colorscheme kanagawa-dragon")
+        end,
         opts = {
             compile = true,
             transparent = true,
@@ -40,9 +44,8 @@ return {
                 }
             end,
         },
-        init = function()
-            vim.opt.background = "dark"
-            vim.cmd("colorscheme kanagawa-dragon")
+        config = function(_, opts)
+            require("kanagawa").setup(opts)
         end,
     },
 }
