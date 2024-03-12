@@ -1,0 +1,15 @@
+[manager]
+ratio = [1, 3, 4]
+sort_by        = "natural"
+sort_sensitive = true
+sort_dir_first = true
+linemode       = "size"
+show_hidden    = true
+
+[plugin]
+prepend_previewers = [
+  { name = "*.md", exec = "glow" },
+  { mime = "text/csv", exec = "miller_csv"},
+  # { mime = "*", exec = "hexyl"},
+  { mime = "audio/*", exec = "exifaudio"},
+]

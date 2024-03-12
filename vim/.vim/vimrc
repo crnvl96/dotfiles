@@ -1,0 +1,126 @@
+" sudo apt install make libncurses-dev libxt-dev
+" git clone git@github.com:vim/vim.git --depth 1
+" cd vim/src
+" ./configure --with-features=huge --enable-cscope --with-x  --with-compiledby="Your Name your@email.com" 
+"  make
+" sudo make install
+
+if !has('vim9script') ||  v:version < 900
+    " Needs Vim version 9.0 and above
+    finish
+endif
+
+vim9script
+
+g:mapleader = "\<Space>"
+g:maplocalleader = "\<Space>"
+
+# https://github.com/vim/vim/issues/11766
+&t_BE = ""
+&t_BD = "\e[?2004l"
+exec "set t_PS=\e[200~"
+exec "set t_PE=\e[201~"
+
+# Cursor shape changes to show which mode you are in (:h t_SI)
+# 6=beam, 4=underline, 2=block
+&t_SI = "\e[6 q" #SI = INSERT mode
+&t_SR = "\e[4 q" #SR = REPLACE mode
+&t_EI = "\e[2 q" #EI = NORMAL mode (ALL ELSE)
+# reset the cursor on start
+autocmd VimEnter,VimResume * silent execute '!echo -ne "\e[2 q"' | redraw!
+
+source $VIMRUNTIME/defaults.vim
+
+syntax on
+
+if has('syntax')
+    packadd! matchit
+endif
+
+g:loaded_netrwPlugin = 1
+g:loaded_netrw = 1
+
+set grepprg=rg\ --vimgrep
+
+set diffopt+=context:99
+set path+=**
+set shortmess+=I
+set wildignore+=*/node_modules/*,*/dist/*,*/.cache/*
+
+set autoindent
+set background=dark
+set breakindent
+set clipboard=unnamedplus
+set cmdheight=1
+set complete-=i
+set cursorline
+set expandtab
+set fillchars=vert:│,fold:۰,diff:·,stl:─,stlnc:═
+set nofoldenable
+set foldmethod=indent
+set formatoptions=qjl
+set grepprg=rg\ --vimgrep
+set grepformat=%f:%l:%c:%m
+set hidden
+set hls
+set ignorecase
+set infercase
+set nojoinspaces
+set laststatus=2
+set linebreak
+set list
+set listchars=tab:\ \ ,trail:~,eol:↵
+set mouse=a
+set number
+set relativenumber
+set scrolloff=8
+set shiftround
+set shiftwidth=4
+set shortmess+=I
+set noshowcmd
+set pumheight=7
+set report=0
+set showmatch
+set signcolumn=yes
+set sidescrolloff=16
+set smartcase
+set smartindent
+set spellsuggest=best,10
+set splitbelow
+set splitright
+set noswapfile
+set switchbuf=useopen,uselast
+set tabstop=4
+set tags=./tags,./../tags,./*/tags
+set termguicolors
+set timeoutlen=1000
+set undofile
+set undodir=~/.vim/undo
+set updatetime=200
+set virtualedit=block
+set whichwrap+=<,>,h,l
+set wildmode=longest:full
+set wildoptions=pum
+set nowrap
+
+if empty(glob('~/.vim/autoload/plug.vim'))
+    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+                \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
+plug#begin()
+
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'justinmk/vim-dirvish'
+Plug 'girishji/vimcomplete'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'yegappan/lsp'
+Plug 'cocopon/iceberg.vim'
+Plug 'sheerun/vim-polyglot'
+
+plug#end()
+
+if &background == 'dark'
+    silent! colorscheme iceberg
+endif

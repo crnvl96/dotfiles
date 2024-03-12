@@ -1,0 +1,75 @@
+set hidden
+set preview
+set ratios 1:2:3
+set info size
+set dircounts
+set tabstop 4
+set previewer ~/.config/lf/preview.sh
+
+# Open files inside neovim
+cmd open $nvim $fx
+map <enter> :open
+
+# File creation.
+map a push %touch<space>
+cmd mkdir %mkdir -p "$@"
+map A push %mkdir<space>
+
+# Better navigation
+cmd big_move_up %{{
+    lf -remote "send $id :up;up;up;up;up;up"
+}}
+map K big_move_up
+cmd big_move_down %{{
+    lf -remote "send $id :down;down;down;down;down;down"
+}}
+map J big_move_down
+
+# Preview files
+cmd toggle_preview %{{
+    if [ "$lf_preview" = "true" ]; then
+        lf -remote "send $id :set preview false; set ratios 1:5"
+    else
+        lf -remote "send $id :set preview true; set ratios 1:2:3"
+    fi
+}}
+map <a-p> toggle_preview
+
+
+# Ripgrep search
+cmd rg_search ${{
+    RG_PREFIX="rg --column --line-number --no-heading --color=always --smart-case "
+    res="$(
+        FZF_DEFAULT_COMMAND="$RG_PREFIX ''" \
+            fzf --bind "change:reload:$RG_PREFIX {q} || true" \
+            --ansi --layout=reverse --header 'Search in files' \
+            | cut -d':' -f1 | sed 's/\\/\\\\/g;s/"/\\"/g'
+    )"
+    [ -n "$res" ] && lf -remote "send $id select \"$res\""
+}}
+map <c-g> rg_search
+
+# Goto projext root dir
+cmd goto_root_dir ${{
+  lf -remote "send $id cd \"$OLDPWD\""
+}}
+map _ goto_root_dir
+
+# FZF search
+cmd fzf_jump ${{
+    res="$(fzf)"
+    if [ -n "$res" ]; then
+        if [ -d "$res" ]; then
+            cmd="cd"
+        else
+            cmd="select"
+        fi
+        res="$(printf '%s' "$res" | sed 's/\\/\\\\/g;s/"/\\"/g')"
+        lf -remote "send $id $cmd \"$res\""
+    fi
+}}
+map <c-f> fzf_jump
+
+# Get filepath
+cmd yank-path $printf '%s' "$fx" | xclip -i -selection clipboard
+map Y yank-path

@@ -1,0 +1,31 @@
+# Node
+npm-debug.log
+
+# Mac
+.DS_Store
+
+# Windows
+Thumbs.db
+
+.eclipse/
+
+# vi
+*~
+
+# Vim sessisons
+Session.vim
+
+tags
+*.class
+
+# ignore IDE specific files
+.idea/
+.vscode/
+*.sw*
+
+# General
+log/
+*.log
+
+# asdf files
+.tool-versions

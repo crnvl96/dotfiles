@@ -1,0 +1,48 @@
+# This file contains fish universal variable definitions.
+# VERSION: 3.0
+SETUVAR --export FZF_DEFAULT_COMMAND:\x0a\x20\x20fd\x20\x2d\x2dhidden\x20\x2d\x2dfollow\x20\x2d\x2dtype\x20file\x20\x2d\x2dtype\x20symlink\x0a
+SETUVAR --export FZF_DEFAULT_OPTS:\x0a\x20\x20\x2d\x2dcolor\x3dfg\x3a\x2d1\x2cfg\x2b\x3a\x23c6c8d1\x2cbg\x3a\x2d1\x2cbg\x2b\x3a\x23161821\x0a\x20\x20\x2d\x2dcolor\x3dhl\x3a\x23d2d4de\x2chl\x2b\x3a\x23d2d4de\x2cinfo\x3a\x23afaf87\x2cmarker\x3a\x23b4be8c\x0a\x20\x20\x2d\x2dcolor\x3dprompt\x3a\x23e27878\x2cspinner\x3a\x2384a0c6\x2cpointer\x3a\x2384a0c6\x2cheader\x3a\x2387afaf\x0a\x20\x20\x2d\x2dcolor\x3dborder\x3a\x23262626\x2cquery\x3a\x23d9d9d9\x0a\x20\x20\x2d\x2dborder\x3d\x22sharp\x22\x20\x2d\x2dpreview\x2dwindow\x3d\x22border\x2dsharp\x22\x0a\x20\x20\x2d\x2dpadding\x3d\x222\x22\x20\x2d\x2dmargin\x3d\x222\x22\x20\x2d\x2dprompt\x3d\x22\x3e\x20\x22\x20\x2d\x2dmarker\x3d\x22\x3e\x22\x0a\x20\x20\x2d\x2dpointer\x3d\x22\x3e\x22\x20\x2d\x2dlayout\x3d\x22reverse\x2dlist\x22\x0a\x20\x20\x2d\x2dinfo\x3d\x22inline\x22
+SETUVAR --export _ZO_ECHO:1
+SETUVAR --export _ZO_RESOLVE_SYMLINKS:1
+SETUVAR __fish_initialized:3400
+SETUVAR fish_color_autosuggestion:brblack
+SETUVAR fish_color_cancel:\x1d
+SETUVAR fish_color_command:\x1d
+SETUVAR fish_color_comment:\x1d
+SETUVAR fish_color_cwd:normal
+SETUVAR fish_color_cwd_root:normal
+SETUVAR fish_color_end:\x1d
+SETUVAR fish_color_error:\x1d
+SETUVAR fish_color_escape:\x1d
+SETUVAR fish_color_gray:6c7086
+SETUVAR fish_color_history_current:\x1d
+SETUVAR fish_color_host:normal
+SETUVAR fish_color_host_remote:yellow
+SETUVAR fish_color_keyword:\x1d
+SETUVAR fish_color_match:\x1d
+SETUVAR fish_color_normal:normal
+SETUVAR fish_color_operator:\x1d
+SETUVAR fish_color_option:\x1d
+SETUVAR fish_color_param:\x1d
+SETUVAR fish_color_quote:\x1d
+SETUVAR fish_color_redirection:\x1d
+SETUVAR fish_color_search_match:\x2dr
+SETUVAR fish_color_selection:\x2dr
+SETUVAR fish_color_status:normal
+SETUVAR fish_color_user:normal
+SETUVAR fish_color_valid_path:\x1d
+SETUVAR fish_key_bindings:fish_default_key_bindings
+SETUVAR fish_pager_color_background:\x1d
+SETUVAR fish_pager_color_completion:normal
+SETUVAR fish_pager_color_description:brblack
+SETUVAR fish_pager_color_prefix:\x2d\x2dunderline
+SETUVAR fish_pager_color_progress:brblack
+SETUVAR fish_pager_color_secondary_background:\x1d
+SETUVAR fish_pager_color_secondary_completion:\x1d
+SETUVAR fish_pager_color_secondary_description:\x1d
+SETUVAR fish_pager_color_secondary_prefix:\x1d
+SETUVAR fish_pager_color_selected_background:\x2dr
+SETUVAR fish_pager_color_selected_completion:\x1d
+SETUVAR fish_pager_color_selected_description:\x1d
+SETUVAR fish_pager_color_selected_prefix:\x1d
+SETUVAR fish_user_paths:/home/crnvl96/\x2easdf/shims\x1e/home/crnvl96/\x2easdf/bin\x1e/home/crnvl96/Developer/personal/fzf/bin\x1e/home/crnvl96/Developer/personal/dotfiles/nvim/\x2econfig/nvim/pack/packager/start/fzf/bin\x1e/tmp/fzf/bin

@@ -1,0 +1,22 @@
+notARepository: "quit"
+gui:
+  sidePanelWidth: 0.2
+os:
+  Edit: 'nvim'
+# git:
+#   paging:
+#     colorArg: always
+#     useConfig: true
+gui:
+  showBottomLine: false
+  theme:
+    activeBorderColor:
+      - white
+      - bold
+    selectedLineBgColor:
+      - "#383838"
+    selectedRangeBgColor:
+      - "#383838"
+      - bold
+  border: rounded
+  nerdFontsVersion: "3"

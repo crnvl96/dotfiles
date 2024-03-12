@@ -1,0 +1,89 @@
+theme = "kanagawa"
+
+[editor]
+line-number = "relative"
+color-modes = true
+scrolloff = 8
+
+[editor.file-picker]
+hidden = false
+
+[editor.lsp]
+display-messages = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[keys.insert]
+esc = ["collapse_selection", "normal_mode"]
+
+[keys.normal]
+esc = ["collapse_selection", "keep_primary_selection"]
+C-o = ":open ~/.config/helix/config.toml"
+C-r = ":config-reload"
+j = "move_line_down"
+k = "move_line_up"
+J = [
+    "move_line_down",
+    "move_line_down",
+    "move_line_down",
+    "move_line_down",
+    "move_line_down",
+    "move_line_down",
+]
+K = [
+    "move_line_up",
+    "move_line_up",
+    "move_line_up",
+    "move_line_up",
+    "move_line_up",
+    "move_line_up",
+]
+0 = "goto_line_start"
+L = "goto_line_end"
+H = "goto_first_nonwhitespace"
+G = "goto_file_end"
+V = ["select_mode", "extend_to_line_bounds"]
+i = ["insert_mode", "collapse_selection"]
+a = ["append_mode", "collapse_selection"]
+
+
+[keys.select]
+esc = ["collapse_selection", "keep_primary_selection", "normal_mode"]
+J = [
+    "extend_line_down",
+    "extend_to_line_bounds",
+    "extend_line_down",
+    "extend_to_line_bounds",
+    "extend_line_down",
+    "extend_to_line_bounds",
+    "extend_line_down",
+    "extend_to_line_bounds",
+    "extend_line_down",
+    "extend_to_line_bounds",
+    "extend_line_down",
+    "extend_to_line_bounds",
+]
+K = [
+    "extend_line_up",
+    "extend_to_line_bounds",
+    "extend_line_up",
+    "extend_to_line_bounds",
+    "extend_line_up",
+    "extend_to_line_bounds",
+    "extend_line_up",
+    "extend_to_line_bounds",
+    "extend_line_up",
+    "extend_to_line_bounds",
+    "extend_line_up",
+    "extend_to_line_bounds",
+]
+0 = "goto_line_start"
+L = "goto_line_end"
+H = "goto_first_nonwhitespace"
+G = "goto_file_end"
+V = ["select_mode", "extend_to_line_bounds"]
+i = ["insert_mode", "collapse_selection"]
+a = ["append_mode", "collapse_selection"]

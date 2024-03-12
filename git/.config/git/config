@@ -1,0 +1,70 @@
+[include]
+    path = ~/.config/git/delta-themes.gitconfig
+[init]
+    defaultBranch = main
+[column]
+    ui = auto
+[branch]
+    sort = -committerdate
+[user]
+    name = "Ádran Farias Carnavale"
+    email = adran.carnavale@gmail.com
+    username = crnvl96
+    signinkey = 28D1954DE48487B5
+[core]
+    pager = delta
+    editor = nvim
+    excludesfile = /home/crnvl96/.config/git/.gitignore_global
+[gpg]
+    program = gpg
+[tag]
+    gpgsign = true
+[color]
+    ui = true
+[interactive]
+    diffFilter = delta --color-only --features=interactive --navigate 
+[delta]
+    light = false
+    line-numbers = true
+    true-color = always
+    whitespace-error-style = 22 reverse
+    side-by-side = false
+    features = decorations arctic-fox
+    navigate = true
+    theme = "arctic-fox"
+    hyperlinks = true
+    hyperlinks-file-link-format = "vscode://file/{path}:{line}"
+[delta "interactive"]
+    keep-plus-minus-markers = false
+[delta "decorations"]
+    commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = omit
+    hunk-header-decoration-style = blue box
+    hunk-header-file-style = red
+    hunk-header-line-number-style = "#067a00"
+    hunk-header-style = file line-number syntax
+[commit]
+    verbose = true
+    gpgsign = true
+[pull]
+    rebase = false
+[alias]
+    st = status
+    ap = add --patch
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    df = diff
+    ds = diff --staged
+    cm = commit
+[diff]
+    algorithm = patience
+    compactionHeuristic = true
+    prompt = false
+    colorMoved = default
+[merge]
+    conflictstyle = diff3
+[maintenance]
+    auto = false
+    strategy = incremental
+    repo = /home/crnvl96/Developer/personal/dotfiles
+    repo = /home/crnvl96/Developer/serena/distribuited-generation-service

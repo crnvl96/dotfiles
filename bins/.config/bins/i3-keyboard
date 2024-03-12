@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+
+setxkbmap -model pc-105 -layout br,us -variant abnt2,intl -option grp:win_space_toggle -option ctrl:swapcaps
