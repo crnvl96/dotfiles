@@ -1,7 +1,7 @@
 " sudo apt install make libncurses-dev libxt-dev
 " git clone git@github.com:vim/vim.git --depth 1
 " cd vim/src
-" ./configure --with-features=huge --enable-cscope --with-x  --with-compiledby="Your Name your@email.com" 
+" ./configure --with-features=huge --enable-cscope --with-x  --with-compiledby="Your Name your@email.com"
 "  make
 " sudo make install
 
@@ -37,15 +37,13 @@ if has('syntax')
     packadd! matchit
 endif
 
-g:loaded_netrwPlugin = 1
-g:loaded_netrw = 1
-
 set grepprg=rg\ --vimgrep
 
 set diffopt+=context:99
 set path+=**
 set shortmess+=I
-set wildignore+=*/node_modules/*,*/dist/*,*/.cache/*
+set wildignore+=*/node_modules/*,*/dist/*,*/.cache/*,*/undo/*,*/plugged/*
+set re=0
 
 set autoindent
 set background=dark
@@ -80,7 +78,6 @@ set shortmess+=I
 set noshowcmd
 set pumheight=7
 set report=0
-set showmatch
 set signcolumn=yes
 set sidescrolloff=16
 set smartcase
@@ -94,33 +91,54 @@ set tabstop=4
 set tags=./tags,./../tags,./*/tags
 set termguicolors
 set timeoutlen=1000
+set undodir=$HOME/.vim/undo
 set undofile
-set undodir=~/.vim/undo
-set updatetime=200
 set virtualedit=block
 set whichwrap+=<,>,h,l
-set wildmode=longest:full
 set wildoptions=pum
 set nowrap
+set encoding=utf-8
+set nobackup
+set nowritebackup
+set updatetime=300
 
 if empty(glob('~/.vim/autoload/plug.vim'))
     silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
                 \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 endif
 
+g:edge_better_performance = 1
+g:edge_enable_italic = 1
+g:edge_style = 'aura'
+
 plug#begin()
 
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'justinmk/vim-dirvish'
-Plug 'girishji/vimcomplete'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'yegappan/lsp'
-Plug 'cocopon/iceberg.vim'
-Plug 'sheerun/vim-polyglot'
+
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-sleuth'
+
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+
+Plug 'girishji/fFtT.vim'
+Plug 'girishji/bufline.vim'
+
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'npm ci'}
+
+Plug 'habamax/vim-shout'
+
+Plug 'machakann/vim-highlightedyank'
+Plug 'justinmk/vim-dirvish'
+
+Plug 'airblade/vim-gitgutter'
+
+Plug 'sainnhe/edge'
 
 plug#end()
 
 if &background == 'dark'
-    silent! colorscheme iceberg
+    colorscheme edge
 endif

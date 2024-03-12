@@ -21,6 +21,6 @@ emacs/**/recentf
 emacs/**/transient/
 
 vim/**/plugged/
-vim/**/autoload/
+vim/**/autoload/plug.vim
 vim/**/undo/
 vim/**/.netrwhist

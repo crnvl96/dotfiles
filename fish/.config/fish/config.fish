@@ -1,35 +1,37 @@
 set -g fish_greeting
 source ~/.asdf/asdf.fish
 
+set -gx DENO_INSTALL $HOME/.deno
 set -gx PROJECTS $HOME/Developer
 set -gx EDITOR nvim
 set -gx VISUAL nvim
 set -gx BROWSER firefox
-set -gx PATH $HOME/.asdf/shims $HOME/.local/bin $PATH
+
+set -gx PATH $HOME/.asdf/shims $HOME/.local/bin $DENO_INSTALL/bin $PATH
 set -gx GPG_TTY (tty) # This is for signing git commits with gpg
 set -gx PGCLUSTER 15/main
 
 set -gx RIPGREP_CONFIG_PATH $HOME/.config/ripgrep/config
 
 set -gx FZF_DEFAULT_OPTS '
-  --height=100%
-  --color=fg:-1,fg+:#c6c8d1,bg:-1,bg+:#161821
-  --color=hl:#e2a478,hl+:#e2a478,info:#afaf87,marker:#b4be8c
-  --color=prompt:#e27878,spinner:#84a0c6,pointer:#84a0c6,header:#87afaf
-  --color=border:#262626,query:#d9d9d9
+  --color=fg:-1,fg+:-1,bg:-1,bg+:-1
   --border=sharp --preview-window=border-sharp
-  --padding=2 --margin=2 --prompt="> " --marker=">"
+  --prompt="> " --marker=">"
   --pointer=">" --layout=reverse-list
-  --info=inline
 '
 
-set -Ux FZF_DEFAULT_COMMAND '
-  fd --hidden --follow --type file --type symlink
-'
+set -Ux FZF_DEFAULT_COMMAND 'fd --hidden --follow --type file --type symlink'
 
 set -Ux _ZO_ECHO 1
 set -Ux _ZO_RESOLVE_SYMLINKS 1
 
+abbr --erase x &>/dev/null
+alias x=__zoxide_z
+abbr --erase xi &>/dev/null
+alias xi=__zoxide_zi
+
+abbr --erase xi &>/dev/null
+alias xi=__zoxide_zi
 alias fortivpn="/opt/forticlient/fortivpn "
 alias lzg="$HOME/.config/lazygit/symlink_workaround.sh"
 alias lzd="lazydocker"

@@ -1,0 +1,34 @@
+{
+    "colors.enable": true,
+    "diagnostic.virtualText": false,
+    "diagnostic.virtualTextCurrentLineOnly": true,
+    "diagnostic.checkCurrentLine": true,
+    "diagnostic.errorSign": "●",
+    "diagnostic.hintSign": "●",
+    "diagnostic.infoSign": "●",
+    "diagnostic.warningSign": "●",
+    "coc.preferences.formatOnSave": true,
+    "typescript.format.enable": false,
+    "eslint.autoFixOnSave": true,
+    "eslint.format.enable": true,
+    "eslint.workingDirectories": [
+        {
+            "mode": "auto"
+        }
+    ],
+    "list.insertMappings": {
+        "<C-space>": "do:previewtoggle",
+        "<C-f>": "feedkeys:\\<C-f>",
+        "<C-b>": "feedkeys:\\<C-b>",
+        "<C-n>": "normal:j",
+        "<C-p>": "normal:k",
+        "<C-v>": "eval:@@"
+    },
+    "floatFactory.floatConfig": {
+        "border": true,
+        "rounded": false
+    },
+    "go.goplsOptions": {
+        "gofumpt": true
+    }
+}

@@ -1,6 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
-SETUVAR --export FZF_DEFAULT_COMMAND:\x0a\x20\x20fd\x20\x2d\x2dhidden\x20\x2d\x2dfollow\x20\x2d\x2dtype\x20file\x20\x2d\x2dtype\x20symlink\x0a
+SETUVAR --export FZF_DEFAULT_COMMAND:fd\x20\x2d\x2dhidden\x20\x2d\x2dfollow\x20\x2d\x2dtype\x20file\x20\x2d\x2dtype\x20symlink
 SETUVAR --export FZF_DEFAULT_OPTS:\x0a\x20\x20\x2d\x2dcolor\x3dfg\x3a\x2d1\x2cfg\x2b\x3a\x23c6c8d1\x2cbg\x3a\x2d1\x2cbg\x2b\x3a\x23161821\x0a\x20\x20\x2d\x2dcolor\x3dhl\x3a\x23d2d4de\x2chl\x2b\x3a\x23d2d4de\x2cinfo\x3a\x23afaf87\x2cmarker\x3a\x23b4be8c\x0a\x20\x20\x2d\x2dcolor\x3dprompt\x3a\x23e27878\x2cspinner\x3a\x2384a0c6\x2cpointer\x3a\x2384a0c6\x2cheader\x3a\x2387afaf\x0a\x20\x20\x2d\x2dcolor\x3dborder\x3a\x23262626\x2cquery\x3a\x23d9d9d9\x0a\x20\x20\x2d\x2dborder\x3d\x22sharp\x22\x20\x2d\x2dpreview\x2dwindow\x3d\x22border\x2dsharp\x22\x0a\x20\x20\x2d\x2dpadding\x3d\x222\x22\x20\x2d\x2dmargin\x3d\x222\x22\x20\x2d\x2dprompt\x3d\x22\x3e\x20\x22\x20\x2d\x2dmarker\x3d\x22\x3e\x22\x0a\x20\x20\x2d\x2dpointer\x3d\x22\x3e\x22\x20\x2d\x2dlayout\x3d\x22reverse\x2dlist\x22\x0a\x20\x20\x2d\x2dinfo\x3d\x22inline\x22
 SETUVAR --export _ZO_ECHO:1
 SETUVAR --export _ZO_RESOLVE_SYMLINKS:1
@@ -45,4 +45,4 @@ SETUVAR fish_pager_color_selected_background:\x2dr
 SETUVAR fish_pager_color_selected_completion:\x1d
 SETUVAR fish_pager_color_selected_description:\x1d
 SETUVAR fish_pager_color_selected_prefix:\x1d
-SETUVAR fish_user_paths:/home/crnvl96/\x2easdf/shims\x1e/home/crnvl96/\x2easdf/bin\x1e/home/crnvl96/Developer/personal/fzf/bin\x1e/home/crnvl96/Developer/personal/dotfiles/nvim/\x2econfig/nvim/pack/packager/start/fzf/bin\x1e/tmp/fzf/bin
+SETUVAR fish_user_paths:/home/crnvl96/\x2easdf/shims\x1e/home/crnvl96/\x2easdf/bin\x1e/home/crnvl96/Developer/personal/fzf/bin\x1e/home/crnvl96/Developer/personal/dotfiles/nvim/\x2econfig/nvim/pack/packager/start/fzf/bin\x1e/tmp/fzf/bin\x1e/home/crnvl96/fzf/bin
