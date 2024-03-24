@@ -9,22 +9,22 @@ def VSetSearch(cmdtype: string)
     setreg('s', temp)
 enddef
 
-map <silent> <BS> <Nop>
-map <silent> <CR> <Nop>
-map <silent> <Space> <Nop>
+map <BS> <Nop>
+map <CR> <Nop>
+map <Space> <Nop>
 
-map <silent> Y y$
-map <silent> V _v$
-map <silent> - :Ex<CR>
+map Y y$
+map V _v$
+map - :Ex<CR>
 
-xnoremap <silent> p "_dp
-xnoremap <silent> P "_dP
-xnoremap <silent> > >gv
-xnoremap <silent> < <gv
-nnoremap <silent> n nzzzv
-nnoremap <silent> N Nzzzv
-nnoremap <silent> <C-d> <C-d>zz
-nnoremap <silent> <C-u> <C-u>zz
+xnoremap p "_dp
+xnoremap P "_dP
+xnoremap > >gv
+xnoremap < <gv
+nnoremap n nzzzv
+nnoremap N Nzzzv
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
 
 nnoremap <silent> <expr> j v:count == 0 ? 'gj' : 'j'
 nnoremap <silent> <expr> k v:count == 0 ? 'gk' : 'k'
