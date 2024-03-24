@@ -12,4 +12,5 @@ if exists('g:loaded_fzf_vim')
     nnoremap <silent> <Leader>fl :BLines<CR>
     nnoremap <silent> <Leader>fm :Marks<CR>
     nnoremap <silent> <Leader>fc :Commands<CR>
+    nnoremap <silent> <Leader>fk :Maps<CR>
 endif
