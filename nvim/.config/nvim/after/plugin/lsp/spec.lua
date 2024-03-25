@@ -8,9 +8,9 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 
 local ok
 
-ok = pcall(require, "cmp_nvim_lsp")
+ok = pcall(require, "ddc_source_lsp")
 if ok then
-	capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
+	capabilities = vim.tbl_deep_extend("force", capabilities, require("ddc_source_lsp").make_client_capabilities())
 end
 
 ok = pcall(require, "mason")
@@ -18,11 +18,7 @@ if ok then
 	require("mason").setup({
 		ensure_installed = {
 			"prettier", -- javascript
-			"prettier_d",
-			"eslint_d",
 			"gofumpt",
-			"goimports",
-			"golines",
 			"stylua",
 		},
 	})
@@ -42,6 +38,7 @@ if mlsp and lsp then
 			"tsserver",
 			"gopls",
 			"denols",
+			"eslint",
 		},
 	})
 
@@ -52,6 +49,30 @@ if mlsp and lsp then
 			})
 		end,
 		["denols"] = function() end,
+		["gopls"] = function()
+			require("lspconfig").gopls.setup({
+				capabilities = capabilities,
+				settings = {
+					gopls = {
+						analyses = {
+							unusedparams = true,
+						},
+						staticcheck = true,
+						gofumpt = true,
+					},
+				},
+			})
+		end,
+		["eslint"] = function()
+			require("lspconfig").eslint.setup({
+				capabilities = capabilities,
+				settings = {
+					workingDirectories = { mode = "auto" },
+					format = { enable = true },
+					lint = { enable = true },
+				},
+			})
+		end,
 		["lua_ls"] = function()
 			local runtime_path = vim.split(package.path, ";")
 			table.insert(runtime_path, "lua/?.lua")

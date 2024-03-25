@@ -35,9 +35,10 @@ end
 vim.keymap.set("", "<BS>", "<Leader>", { silent = true })
 vim.keymap.set("", "<CR>", "<Nop>", { silent = true })
 vim.keymap.set("", "<Space>", "<Nop>", { silent = true })
+vim.keymap.set("", "<C-f>", "<Leader>", { silent = true })
+vim.keymap.set("", "<C-b>", "", { silent = true })
 
 vim.keymap.set("n", "Y", "y$", { silent = true })
-vim.keymap.set("n", "V", "_v$", { silent = true })
 vim.keymap.set("x", "p", '"_dp', { silent = true })
 vim.keymap.set("x", "P", '"_dP', { silent = true })
 vim.keymap.set("x", "<", "<gv", { silent = true })

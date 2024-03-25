@@ -17,39 +17,37 @@ if exists('g:did_coc_loaded')
         autocmd CursorHold * silent call CocActionAsync('highlight')
         autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
     augroup end
-
-    inoremap <silent><expr> <c-@> coc#refresh()
-    nmap <silent> [d <Plug>(coc-diagnostic-prev)
-    nmap <silent> ]d <Plug>(coc-diagnostic-next)
-    nmap <silent> [e <Plug>(coc-diagnostic-prev-error)
-    nmap <silent> ]e <Plug>(coc-diagnostic-next-error)
-    nmap <silent> gd <Plug>(coc-definition)
-    nmap <silent> gy <Plug>(coc-type-definition)
-    nmap <silent> gi <Plug>(coc-implementation)
-    nmap <silent> gr <Plug>(coc-references)
+    # Use <c-space> to trigger completion
+    inoremap <expr> <c-@> coc#refresh()
+    nmap [d <Plug>(coc-diagnostic-prev)
+    nmap ]d <Plug>(coc-diagnostic-next)
+    nmap [e <Plug>(coc-diagnostic-prev-error)
+    nmap ]e <Plug>(coc-diagnostic-next-error)
+    nmap gd <Plug>(coc-definition)
+    nmap gy <Plug>(coc-type-definition)
+    nmap gi <Plug>(coc-implementation)
+    nmap gr <Plug>(coc-references)
     nmap <leader>cn <Plug>(coc-rename)
-    nmap <leader>ca  <Plug>(coc-codeaction-cursor)
-    nmap <leader>cA  <Plug>(coc-codeaction-source)
-    nmap <silent> <leader>cR <Plug>(coc-codeaction-refactor)
-    nmap <silent> <leader>cr  <Plug>(coc-codeaction-refactor-selected)
-    xmap <silent> <leader>cr  <Plug>(coc-codeaction-refactor-selected)
+    nmap <leader>ca <Plug>(coc-codeaction-cursor)
+    nmap <leader>cA <Plug>(coc-codeaction-source)
+    nmap <leader>cR <Plug>(coc-codeaction-refactor)
+    nmap <leader>cr  <Plug>(coc-codeaction-refactor-selected)
+    xmap <leader>cr  <Plug>(coc-codeaction-refactor-selected)
     nmap <leader><space>  <Plug>(coc-format-selected)
     xmap <leader><space>  <Plug>(coc-format-selected)
     nmap <leader>cl  <Plug>(coc-codelens-action)
-    nnoremap <silent><nowait> <leader>fd  :<C-u>CocList diagnostics<cr>
-    nnoremap <silent><nowait> <leader>fs  :<C-u>CocList outline<cr>
-    nnoremap <silent><nowait> <leader>fS  :<C-u>CocList -I symbols<cr>
-    nnoremap <silent><nowait> <leader>fr  :<C-u>CocListResume<CR>
+    nnoremap <nowait> <leader>fd  :<C-u>CocList diagnostics<cr>
+    nnoremap <nowait> <leader>fs  :<C-u>CocList outline<cr>
+    nnoremap <nowait> <leader>fS  :<C-u>CocList -I symbols<cr>
+    nnoremap <nowait> <leader>fr  :<C-u>CocListResume<CR>
+    nnoremap <leader>k :call ShowDocumentation()<CR>
+    nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+    nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+    inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+    vnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+    vnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
 
-    nnoremap <silent> <leader>k :call ShowDocumentation()<CR>
-
-    nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-    nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-    inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-    inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-    vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-    vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-
-    nnoremap <silent><nowait> <leader>Ce  :<C-u>CocList extensions<cr>
-    nnoremap <silent><nowait> <leader>Cc  :<C-u>CocList commands<cr>
+    nnoremap <nowait> <leader>Ce  :<C-u>CocList extensions<cr>
+    nnoremap <nowait> <leader>Cc  :<C-u>CocList commands<cr>
 endif

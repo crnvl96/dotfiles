@@ -33,7 +33,7 @@ vim.opt.hls = true
 vim.opt.ignorecase = true
 vim.opt.infercase = true
 vim.opt.joinspaces = false
-vim.opt.laststatus = 2
+vim.opt.laststatus = 0
 vim.opt.linebreak = true
 vim.opt.list = true
 vim.opt.listchars = "tab:  ,trail:~,eol:↵"
@@ -88,16 +88,35 @@ Plug("tpope/vim-fugitive")
 Plug("justinmk/vim-dirvish")
 
 Plug("lewis6991/gitsigns.nvim")
-Plug("stevearc/conform.nvim")
-Plug("mfussenegger/nvim-lint")
 Plug("echasnovski/mini.nvim")
 
-Plug("hrsh7th/cmp-nvim-lsp")
-Plug("hrsh7th/cmp-buffer")
-Plug("hrsh7th/cmp-path")
-Plug("hrsh7th/nvim-cmp")
+Plug("tani/ddc-fuzzy")
+Plug("Shougo/pum.vim")
+Plug("Shougo/ddc.vim")
+Plug("matsui54/denops-signature_help")
+Plug("Shougo/ddc-source-lsp")
+Plug("Shougo/ddc-source-around")
+Plug("Shougo/ddc-source-cmdline")
+Plug("Shougo/ddc-ui-pum")
+Plug("LumaKernel/ddc-source-file")
+Plug("Shougo/ddc-source-line")
+Plug("Shougo/ddc-source-cmdline-history")
+
+Plug("Shougo/ddu.vim")
+Plug("Shougo/ddu-ui-ff")
+Plug("matsui54/ddu-source-file_external")
+Plug("yuki-yano/ddu-filter-fzf")
+Plug("uga-rosa/ddu-filter-converter_devicon")
+Plug("Shougo/ddu-kind-file")
+Plug("shun/ddu-source-rg")
+Plug("shun/ddu-source-buffer")
+Plug("Shougo/ddu-source-action")
+Plug("Shougo/ddu-source-line")
+Plug("uga-rosa/ddu-source-lsp")
+Plug("matsui54/ddu-vim-ui-select")
 
 Plug("ibhagwan/fzf-lua")
+
 Plug("williamboman/mason-lspconfig.nvim")
 Plug("neovim/nvim-lspconfig")
 Plug("sainnhe/edge")

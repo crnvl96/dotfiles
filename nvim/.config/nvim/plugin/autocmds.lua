@@ -5,6 +5,7 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		vim.api.nvim_set_hl(0, "StatusLineNC", { link = "Normal" })
 		vim.api.nvim_set_hl(0, "PMenuSbar", { link = "Normal" })
 		vim.api.nvim_set_hl(0, "PMenu", { link = "Normal" })
+		vim.api.nvim_set_hl(0, "PMenuSel", { bg = "#484848" })
 		vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
 		vim.api.nvim_set_hl(0, "LspInfoBorder", { link = "Normal" })
 		vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
@@ -14,6 +15,21 @@ vim.api.nvim_create_autocmd("BufEnter", {
 			local hl = "DiagnosticSign" .. type
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
+	end,
+})
+
+vim.api.nvim_create_autocmd("FileType", {
+	group = vim.api.nvim_create_augroup(vim.g.whoami .. "/ft-qf", { clear = true }),
+	pattern = { "qf" },
+	callback = function()
+		local choose_item_under_cursor = function()
+			local current_line = vim.api.nvim_win_get_cursor(0)[1]
+			vim.cmd("keepjumps cc " .. current_line)
+			vim.cmd("wincmd j")
+		end
+
+		vim.keymap.set("n", "<CR>", choose_item_under_cursor, { buffer = vim.api.nvim_get_current_buf() })
+		vim.cmd("packadd cfilter")
 	end,
 })
 
