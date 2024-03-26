@@ -1,5 +1,7 @@
 vim9script
 
+finish
+
 def Gitstr(): string
     var [a, m, r] = exists('*g:GitGutterGetHunkSummary') ? g:GitGutterGetHunkSummary() : [0, 0, 0]
     return (a + m + r) > 0 ? $' (git: +{a} ~{m} -{r})' : ' (git: +0 ~0 -0)'

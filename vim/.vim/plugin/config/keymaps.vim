@@ -1,20 +1,12 @@
 vim9script
 
-autocmd VimEnter * nnoremap <silent> <expr> <esc> exists('g:loaded_fFtTplus') ? ':nohls<cr><Plug>(fFtTplus-esc)' : ':nohls<cr><esc>'
-
-def VSetSearch(cmdtype: string)
-    var temp = getreg('d')
-    norm! gv"sy
-    setreg('/', '\V' .. substitute(escape(@s, cmdtype .. '\'), '\n', '\\n', 'g'))
-    setreg('s', temp)
-enddef
+nnoremap <silent> <expr> <esc> ':nohls<cr><esc>'
 
 map <BS> <Nop>
 map <CR> <Nop>
 map <Space> <Nop>
 
 map Y y$
-map V _v$
 map - :Ex<CR>
 
 xnoremap p "_dp
@@ -46,6 +38,30 @@ nnoremap <silent> gO `[
 cnoremap <expr> %% getcmdtype() == ':' ? expand('%:h') .. '/' : '%%'
 xnoremap <silent> <expr> @ ':norm @' .. getcharstr() .. '<CR>'
 
+def VSetSearch(cmdtype: string)
+    var temp = getreg('d')
+    norm! gv"sy
+    setreg('/', '\V' .. substitute(escape(@s, cmdtype .. '\'), '\n', '\\n', 'g'))
+    setreg('s', temp)
+enddef
 xnoremap <silent> * :<c-u> call <SID>VSetSearch('/')<CR>/<C-R>=@/<CR><CR>
 xnoremap <silent> # :<c-u> call <SID>VSetSearch('?')<CR>?<C-R>=@/<CR><CR>
 xnoremap <C-_> <Esc>/\%V
+
+def MarksDel()
+    delm! | delm A-Z0-9a-z
+enddef
+command MarksDel MarksDel()
+nnoremap <leader>md :MarksDel<CR>
+
+def TmuxSplit()
+    system('tmux split-window -h -c "' .. expand("%:p:h") .. '"')
+enddef
+command TmuxSplit TmuxSplit()
+nnoremap <leader>T :TmuxSplit<CR>
+
+def FileCopyPath()
+    setreg('+', expand('%:p'))
+enddef
+command FileCopyPath FileCopyPath()
+nnoremap <leader>cf :FileCopyPath<CR>

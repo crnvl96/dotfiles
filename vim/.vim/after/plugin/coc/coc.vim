@@ -41,12 +41,12 @@ if exists('g:did_coc_loaded')
     nnoremap <nowait> <leader>fS  :<C-u>CocList -I symbols<cr>
     nnoremap <nowait> <leader>fr  :<C-u>CocListResume<CR>
     nnoremap <leader>k :call ShowDocumentation()<CR>
-    nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-    nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-    inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-    inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-    vnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-    vnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+    nnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : ""
+    nnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : ""
+    inoremap <nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : ""
+    inoremap <nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : ""
+    vnoremap <nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : ""
+    vnoremap <nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : ""
 
     nnoremap <nowait> <leader>Ce  :<C-u>CocList extensions<cr>
     nnoremap <nowait> <leader>Cc  :<C-u>CocList commands<cr>

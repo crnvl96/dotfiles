@@ -6,11 +6,24 @@ if exists('g:loaded_fzf_vim')
 
     g:fzf_layout = { 'down': '60%' }
 
-    nnoremap <Leader>ff :Files<CR>
-    nnoremap <Leader>fg :Rg<CR>
-    nnoremap <Leader>fb :Buffers<CR>
-    nnoremap <Leader>fl :BLines<CR>
-    nnoremap <Leader>fm :Marks<CR>
-    nnoremap <Leader>fc :Commands<CR>
-    nnoremap <Leader>fk :Maps<CR>
+    command FzfFiles Files
+    nnoremap <Leader>ff :FzfFiles<CR>
+
+    command FzfRg Rg
+    nnoremap <Leader>fg :FzfRg<CR>
+
+    command FzfBuffers Buffers
+    nnoremap <Leader>fb :FzfBuffers<CR>
+
+    command FzfLines BLines
+    nnoremap <Leader>fl :FzfLines<CR>
+
+    command FzfMarks Marks
+    nnoremap <Leader>fm :FzfMarks<CR>
+
+    command FzfCommands Commands
+    nnoremap <Leader>fc :FzfCommands<CR>
+
+    command FzfMaps Maps
+    nnoremap <Leader>fk :FzfMaps<CR>
 endif

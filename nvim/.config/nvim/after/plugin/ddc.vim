@@ -17,9 +17,9 @@ call ddc#custom#patch_global(#{
             \    'InsertEnter', 'TextChangedI', 'TextChangedP', 'CmdlineChanged', 'CmdlineEnter',
             \  ],
             \  cmdlineSources: {
-            \    ':': ['cmdline-history', 'cmdline', 'around'],
-            \    '/': ['around', 'line'],
-            \    '?': ['around', 'line'],
+            \    ':': ['cmdline-history', 'cmdline', 'around', 'file'],
+            \    '/': ['around', 'line', 'file'],
+            \    '?': ['around', 'line', 'file'],
             \  },
             \  backspaceCompletion: v:true,
             \  sourceOptions: #{

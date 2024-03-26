@@ -32,6 +32,10 @@ local function render_last_messages()
 	end)
 end
 
+vim.cmd([[
+	xnoremap <C-_> <Esc>/\%V
+]])
+
 vim.keymap.set("", "<BS>", "<Leader>", { silent = true })
 vim.keymap.set("", "<CR>", "<Nop>", { silent = true })
 vim.keymap.set("", "<Space>", "<Nop>", { silent = true })
@@ -76,7 +80,3 @@ vim.keymap.set("n", "<leader>wx", "<cmd>only<CR>", { desc = "close other windows
 vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "delete window", remap = true })
 vim.keymap.set("n", "<leader>wv", "<C-W>v", { desc = "split window below", remap = true })
 vim.keymap.set("n", "<leader>wh", "<C-W>h", { desc = "split window right", remap = true })
-
-vim.cmd([[
-	xnoremap <C-_> <Esc>/\%V
-]])

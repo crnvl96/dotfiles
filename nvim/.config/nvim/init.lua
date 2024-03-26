@@ -87,6 +87,8 @@ Plug("christoomey/vim-tmux-navigator")
 Plug("tpope/vim-fugitive")
 Plug("justinmk/vim-dirvish")
 
+Plug("karb94/neoscroll.nvim")
+
 Plug("lewis6991/gitsigns.nvim")
 Plug("echasnovski/mini.nvim")
 
@@ -115,15 +117,9 @@ Plug("Shougo/ddu-source-line")
 Plug("uga-rosa/ddu-source-lsp")
 Plug("matsui54/ddu-vim-ui-select")
 
-Plug("ibhagwan/fzf-lua")
-
 Plug("williamboman/mason-lspconfig.nvim")
 Plug("neovim/nvim-lspconfig")
-Plug("sainnhe/edge")
 
 vim.call("plug#end")
 
-vim.g.edge_better_performance = 1
-vim.g.edge_enable_italic = 1
-vim.g.edge_style = "aura"
-vim.cmd("colorscheme edge")
+vim.cmd("colorscheme candy")

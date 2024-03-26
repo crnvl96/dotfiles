@@ -2,18 +2,14 @@ call ddu#custom#patch_global(#{
       \  ui: 'ff',
       \  uiParams: #{
       \    ff: #{
+      \      split: 'horizontal',
+      \      autoAction: #{
+      \        name: "preview",
+      \      },
+      \      startAutoAction: v:false,
       \      ignoreEmpty: v:false,
-      \      preview: v:true,
-      \      previewSplit: 'vertical',
-      \      previewWidth: 120,
-      \      onPreview: denops#callback#register(
-      \         { args -> execute('normal! zt') }
-      \       ),
-      \       autoAction: #{
-      \         name: 'preview',
-      \       },
-      \       startAutoAction: v:false,
-      \     }
+      \      previewSplit: 'no',
+      \    },
       \  },
       \  sourceOptions: #{
       \    _: #{
@@ -30,6 +26,12 @@ call ddu#custom#patch_global(#{
       \    },
       \    ui_select: #{
       \      defaultAction: 'select',
+      \    },
+      \    lsp: #{
+      \      defaultAction: 'open',
+      \    },
+      \    lsp_codeaction: #{
+      \      defaultAction: 'apply',
       \    },
       \  },
       \  filterParams: #{
@@ -53,51 +55,8 @@ endfunction
 
 autocmd FileType ddu-ff-filter call s:ddu_filter_my_settings()
 function! s:ddu_filter_my_settings() abort
-  inoremap <buffer> <CR> <Esc><Cmd>call ddu#ui#do_action('leaveFilterWindow')<CR>
-  nnoremap <buffer> <CR> <Cmd>call ddu#ui#do_action('leaveFilterWindow')<CR>
+  inoremap <buffer> <CR> <Esc><Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
+  nnoremap <buffer> <CR> <Cmd>call ddu#ui#do_action('closeFilterWindow')<CR>
   nnoremap <buffer><silent> <C-c> <Cmd>call ddu#ui#do_action('quit')<CR>
   inoremap <buffer><silent> <C-c> <Cmd>call ddu#ui#do_action('quit')<CR>
 endfunction
-
-nnoremap <leader>ff <cmd>call ddu#start(#{
-      \  sources: [
-      \    #{
-      \        name: "file_external",
-      \        options: #{
-      \          converters: [ "converter_devicon" ],
-      \        },
-      \        params: #{
-      \          cmd: split("fd -t f -t l -H -L --color never", " "),
-      \        },
-      \    }
-      \ ]
-      \})<CR>
-
-nnoremap <leader>fg <cmd>call ddu#start(#{
-      \  sources: [
-      \    #{
-      \        name: "rg",
-      \        options: #{
-      \          matchers: [],
-      \          volatile: v:true,
-      \          converters: [ "converter_devicon" ],
-      \          path: getcwd(),
-      \        },
-      \        params: #{
-      \          args: ["--json"],
-      \        },
-      \     }
-      \  ]
-      \})<CR>
-
-nnoremap <leader>fb <cmd>call ddu#start(#{
-      \  sources: [
-      \    #{ name: "buffer" }
-      \ ]
-      \})<CR>
-
-nnoremap <leader>fl <cmd>call ddu#start(#{
-      \  sources: [
-      \    #{ name: "line" }
-      \ ]
-      \})<CR>
