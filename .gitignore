@@ -1,0 +1,4 @@
+ emacs/.config/emacs/
+ !emacs/**/init.el
+ !emacs/**/early-init.el
+ !emacs/**/crnvl96

@@ -1,0 +1,17 @@
+.git/
+dist/
+.npm/
+.build/
+.git/
+.idea/
+.vscode/
+.cache/
+
+node_modules/
+log/
+
+*.log
+*.sw*
+
+.tool-versions
+Session.vim
