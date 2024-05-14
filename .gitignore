@@ -1,0 +1,9 @@
+fish/**/completions/
+fish/**/conf.d/
+fish/**/functions/
+fish/**/themes/
+fish_variables
+
+leftwm/**/theme/**/*
+
+tmux/**/plugins/**/*
