@@ -3,13 +3,16 @@
   email = adran.carnavale@gmail.com
   signingkey = /home/crnvl96/.ssh/id_ed25519.pub
 [core]
-  editor = vim
+  editor = nvim
   excludesfile = /home/crnvl96/.config/git/.gitignore_global
+[commit]
+  verbose = true
 [init]
   defaultBranch = main
-[merge]
-  conflictstyle = diff3
 [gpg]
   format = ssh
 [commit]
   gpgsign = true
+[diff]
+  algorithm = patience
+  compactionHeuristic = true

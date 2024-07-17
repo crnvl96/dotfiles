@@ -15,15 +15,10 @@ set $ws10 "10"
 
 font pango:BerkeleyMono Nerd Font 10
 
-exec --no-startup-id dex --autostart --environment i3
-
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id nm-applet
-
 floating_modifier $mod
 tiling_drag modifier titlebar
 
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec kitty
 
 bindsym $mod+Shift+c kill
 
@@ -94,13 +89,21 @@ mode "resize" {
 }
 
 title_align center
+# for_window [class="^.*"] border normal 0
+for_window [class="^.*"] border pixel 2
+for_window [class=".*"] title_window_icon no
+hide_edge_borders smart_no_gaps
 
-# set colors             border  bg      text    indictr chldborder
-# client.focused           #242D3E #1360A5 #ffffff #2e9ef4 #242D3E
-# client.focused_inactive  #242D3E #313F56 #ffffff #2e9ef4 #242D3E
-# client.unfocused         #333333 #212A39 #888888 #292d2e #222222
+# class                 border  backgr. text    indicator child_border
+client.focused          #151515 #212121 #c5c9c5 #c5c9c5   #54546d
+client.focused_inactive #151515 #151515 #c5c9c5 #c5c9c5   #151515
+client.unfocused        #151515 #151515 #c5c9c5 #c5c9c5   #151515
+client.urgent           #151515 #151515 #c5c9c5 #c5c9c5   #151515
+client.placeholder      #151515 #151515 #c5c9c5 #c5c9c5   #151515
 
-# bar
-# bar {
-#     tray_output none
-# }
+client.background       #c5c9c5
+
+exec --no-startup-id ~/.config/feh/fehbg
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet

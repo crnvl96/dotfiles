@@ -1,44 +1,84 @@
 {
-    "theme": "Solarized Dark",
-    "ui_font_family": "BerkeleyMono Nerd Font",
-    "buffer_font_family": "BerkeleyMono Nerd Font",
-    "ui_font_size": 16,
-    "relative_line_numbers": true,
-    "buffer_font_size": 14,
-    "tab_size": 4,
-    "restore_on_startup": "none",
-    "current_line_highlight": "none",
-    "cursor_blink": false,
-    "toolbar": {
-        "breadcrumbs": false,
-        "quick_actions": false,
-        "selections_menu": false
-    },
-    "preview_tabs": {
-        "enabled": false
-    },
-    "vim_mode": true,
-    "vim": {
-        "use_system_clipboard": "always",
-        "use_multiline_find": true,
-        "use_smartcase_find": true
-    },
-    "terminal": {
-        "copy_on_select": true
-    },
-    "git": {
-        "inline_blame": {
-            "enabled": false
-        }
-    },
-    "lsp": {
-        "gopls": {
-            "initialization_options": {
-                "gofumpt": true,
-                "usePlaceholders": false,
-                "staticcheck": true,
-                "completeUnimported": true
-            }
-        }
+  "features": {
+    "inline_completion_provider": "none"
+  },
+  "experimental.theme_overrides": {
+    "title_bar.inactive_background": "#151515"
+  },
+  "assistant": {
+    "version": "2",
+    "default_model": {
+      "provider": "ollama",
+      "model": "codellama:latest"
     }
+  },
+  "unstable.ui_density": "comfortable",
+  "theme": "Everforest Dark",
+  "active_pane_magnification": 1.5,
+  "ui_font_family": "BerkeleyMono Nerd Font",
+  "show_wrap_guides": true,
+  "show_whitespaces": "all",
+  "show_call_status_icon": true,
+  "buffer_font_family": "BerkeleyMono Nerd Font",
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "relative_line_numbers": true,
+  "cursor_blink": false,
+  "auto_signature_help": false,
+  "current_line_highlight": "none",
+  "vim_mode": true,
+  "vertical_scroll_margin": 8,
+  "tab_bar": {
+    "show_nav_history_buttons": false
+  },
+  "project_panel": {
+    "file_icons": false,
+    "indent_size": 4,
+    "folder_icons": false,
+    "default_width": 400,
+    "scrollbar": {
+      "show": "never"
+    }
+  },
+  "tabs": {
+    "file_icons": false,
+    "git_status": true,
+    "close_position": "right"
+  },
+  "vim": {
+    "use_system_clipboard": "always"
+  },
+  "preferred_line_length": 120,
+  "git": {
+    "inline_blame": {
+      "enabled": false
+    }
+  },
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false,
+    "selections_menu": false
+  },
+  "indent_guides": {
+    "enabled": false
+  },
+  "terminal": {
+    "dock": "bottom",
+    "env": {
+      "GIT_EDITOR": "zed --wait",
+      "CURRENT_EDITOR": "zed" // disables tmux on zed integrated terminal
+    }
+  },
+  "lsp": {
+    "gopls": {
+      "initialization_options": {
+        "gofumpt": true,
+        "buildFlags": ["-tags=debug"],
+        "experimentalPostfixCompletions": true,
+        "usePlaceholders": false,
+        "staticcheck": true,
+        "completeUnimported": true
+      }
+    }
+  }
 }
