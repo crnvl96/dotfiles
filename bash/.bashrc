@@ -15,8 +15,8 @@ FZF_OPTS="--height 50% --cycle \
 LOCAL_BIN="$HOME/.local/bin"
 
 export BROWSER="firefox"
-export EDITOR="nvim"
-export VISUAL="nvim"
+export EDITOR="vim"
+export VISUAL="vim"
 
 export BUN_INSTALL="$HOME/.bun"
 export BUN_BIN="$BUN_INSTALL/bin"
@@ -41,15 +41,17 @@ alias la="eza -lA"
 alias cat="bat "
 alias cl="clear"
 alias ex="exit"
-alias gs="git status"
-alias gd="git diff"
 alias lzd="lazydocker"
 alias lzg="lazygit"
+alias nv="nvim"
+
 alias gl="git log --oneline"
 alias gb="git branch"
-alias nv="nvim"
-alias us="setxkbmap -layout us"
-alias usi="setxkbmap -layout us -variant intl"
+alias gs="git status"
+alias gd="git diff"
+alias ga="git add "
+alias gap="git add -p "
+alias gc="git commit -m "
 
 if test -n "$KITTY_INSTALLATION_DIR"; then
     export KITTY_SHELL_INTEGRATION="enabled"

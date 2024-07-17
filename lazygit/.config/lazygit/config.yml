@@ -1,5 +1,0 @@
-notARepository: "quit"
-os:
-    editPreset: nvim
-gui:
-    nerdFontsVersion: "3"
