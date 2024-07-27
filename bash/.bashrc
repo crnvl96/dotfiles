@@ -42,6 +42,7 @@ alias lzg="lazygit"
 alias nv="nvim"
 
 alias g="git"
+alias gb="git branch"
 alias gs="git status"
 alias gl="git log --oneline"
 alias gd="git diff"
