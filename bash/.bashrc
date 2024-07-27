@@ -15,8 +15,8 @@ FZF_OPTS="--height 50% --cycle \
 LOCAL_BIN="$HOME/.local/bin"
 
 export BROWSER="firefox"
-export EDITOR="vim"
-export VISUAL="vim"
+export EDITOR="nvim"
+export VISUAL="nvim"
 
 export BUN_INSTALL="$HOME/.bun"
 export BUN_BIN="$BUN_INSTALL/bin"
