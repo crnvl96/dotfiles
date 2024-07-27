@@ -1,10 +1,20 @@
 require('mini.extra').setup()
 require('mini.visits').setup()
 
+local win_config = function()
+  local height = math.floor(0.618 * vim.o.lines)
+  local width = math.floor(0.962 * vim.o.columns)
+  return {
+    height = height,
+    width = width,
+  }
+end
+
 require('mini.pick').setup({
   options = {
     use_cache = true,
   },
+  window = { config = win_config },
 })
 
 vim.keymap.set('n', '<leader>ff', '<cmd>Pick files<cr>', { desc = 'Files' })
