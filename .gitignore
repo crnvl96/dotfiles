@@ -1,9 +1,4 @@
-fish/**/completions/
-fish/**/conf.d/
-fish/**/functions/
-fish/**/themes/
-fish_variables
-
-leftwm/**/theme/**/*
-
-tmux/**/plugins/**/*
+ emacs/.config/emacs/
+ !emacs/**/init.el
+ !emacs/**/early-init.el
+ !emacs/**/crnvl96

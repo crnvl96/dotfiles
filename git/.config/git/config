@@ -16,3 +16,10 @@
 [diff]
   algorithm = patience
   compactionHeuristic = true
+[fetch]
+	prune = true
+	all = true
+[pull]
+	rebase = true
+[push]
+	autoSetupRemote = true

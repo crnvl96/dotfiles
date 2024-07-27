@@ -3,45 +3,58 @@
     "inline_completion_provider": "none"
   },
   "experimental.theme_overrides": {
-    "title_bar.inactive_background": "#151515"
+    "title_bar.inactive_background": "#1E2326"
+  },
+  "buffer_line_height": {
+    "custom": 1.3
+  },
+  "scrollbar": {
+    "show": "never"
+  },
+  "unstable.ui_density": "comfortable",
+  "theme": "Nord",
+  "ui_font_family": "BerkeleyMono Nerd Font",
+  "show_wrap_guides": true,
+  "show_whitespaces": "none",
+  "show_call_status_icon": true,
+  "buffer_font_family": "BerkeleyMono Nerd Font",
+  "ui_font_size": 18,
+  "buffer_font_size": 16,
+  "relative_line_numbers": true,
+  "cursor_blink": false,
+  "auto_signature_help": false,
+  "current_line_highlight": "all",
+  "vertical_scroll_margin": 8,
+  "tab_bar": {
+    "show_nav_history_buttons": false
+  },
+  "vim_mode": false,
+  "outline_panel": {
+    "button": false
+  },
+  "chat_panel": {
+    "button": false
   },
   "assistant": {
+    "button": false,
     "version": "2",
     "default_model": {
       "provider": "ollama",
       "model": "codellama:latest"
     }
   },
-  "unstable.ui_density": "comfortable",
-  "theme": "Everforest Dark",
-  "active_pane_magnification": 1.5,
-  "ui_font_family": "BerkeleyMono Nerd Font",
-  "show_wrap_guides": true,
-  "show_whitespaces": "all",
-  "show_call_status_icon": true,
-  "buffer_font_family": "BerkeleyMono Nerd Font",
-  "ui_font_size": 16,
-  "buffer_font_size": 16,
-  "relative_line_numbers": true,
-  "cursor_blink": false,
-  "auto_signature_help": false,
-  "current_line_highlight": "none",
-  "vim_mode": true,
-  "vertical_scroll_margin": 8,
-  "tab_bar": {
-    "show_nav_history_buttons": false
-  },
   "project_panel": {
-    "file_icons": false,
-    "indent_size": 4,
-    "folder_icons": false,
+    "button": false,
+    "file_icons": true,
+    "indent_size": 20,
+    "folder_icons": true,
     "default_width": 400,
     "scrollbar": {
       "show": "never"
     }
   },
   "tabs": {
-    "file_icons": false,
+    "file_icons": true,
     "git_status": true,
     "close_position": "right"
   },
@@ -50,6 +63,7 @@
   },
   "preferred_line_length": 120,
   "git": {
+    "git_gutter": "tracked_files",
     "inline_blame": {
       "enabled": false
     }
@@ -62,11 +76,18 @@
   "indent_guides": {
     "enabled": false
   },
+  "notification_panel": {
+    "button": false
+  },
+  "collaboration_panel": {
+    "button": false
+  },
   "terminal": {
     "dock": "bottom",
+    "button": false,
     "env": {
       "GIT_EDITOR": "zed --wait",
-      "CURRENT_EDITOR": "zed" // disables tmux on zed integrated terminal
+      "CURRENT_EDITOR": "zed"
     }
   },
   "lsp": {
