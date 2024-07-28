@@ -1,8 +1,6 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
-vim.o.autowrite = true
-
 vim.o.splitbelow = true
 vim.o.splitright = true
 
@@ -20,13 +18,6 @@ vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
 vim.o.swapfile = false
-vim.o.showmatch = false
-
-vim.o.jumpoptions = 'view'
-
-vim.o.grepformat = '%f:%l:%c:%m'
-
-vim.o.inccommand = 'split'
 
 vim.o.virtualedit = 'block' -- Allow going past the end of line in visual block mode
 vim.o.splitkeep = 'screen' -- Reduce scroll during window split
@@ -41,8 +32,10 @@ vim.o.sidescrolloff = 4
 
 vim.o.breakindent = true
 vim.o.smartindent = true
+
 vim.o.smartcase = true
 vim.o.ignorecase = true
+vim.o.infercase = true
 
 vim.o.mouse = 'a'
 

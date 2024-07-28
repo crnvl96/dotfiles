@@ -25,15 +25,14 @@ now(function() require('config.opts') end)
 now(function() require('config.autocmds') end)
 now(function() require('config.keymaps') end)
 
+now(function() require('colorscheme') end)
 later(function() require('requirements') end)
 
 later(function() require('plugins.fugitive') end)
 later(function() require('plugins.grug-far') end)
 
-later(function() require('plugins.colorscheme') end)
 later(function() require('plugins.cmp') end)
 later(function() require('plugins.conform') end)
 later(function() require('plugins.mini-pick') end)
 later(function() require('plugins.lsp') end)
 later(function() require('plugins.treesitter') end)
-later(function() require('plugins.vim-tmux-navigator') end)

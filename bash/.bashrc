@@ -2,6 +2,8 @@
 
 HISTSIZE=10000
 
+export FZF_DEFAULT_COMMAND='rg --files'
+
 FZF_OPTS="--height 50% --cycle \
   --preview 'bat --style=numbers --color=always {}' \
   --preview-window=hidden \
@@ -12,24 +14,18 @@ FZF_OPTS="--height 50% --cycle \
   --prompt '> ' \
   --delimiter '│'"
 
-LOCAL_BIN="$HOME/.local/bin"
-
-export BROWSER="firefox"
+export BROWSER="brave-browser"
 export EDITOR="nvim"
-export VISUAL="nvim"
 
-export BUN_INSTALL="$HOME/.bun"
-export BUN_BIN="$BUN_INSTALL/bin"
+export PATH=$HOME/.local/bin:$PATH
 
-export PATH=$LOCAL_BIN:$BUN_BIN:$PATH
-
-export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 export FZF_DEFAULT_OPTS="$FZF_OPTS"
 
 export _ZO_FZF_OPTS="$FZF_OPTS"
 export _ZO_RESOLVE_SYMLINKS=1
 
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/ripgreprc"
+export STARSHIP_CONFIG="$HOME/.config/starship/starship.toml"
 
 alias ls="eza -l"
 alias la="eza -lA"
@@ -38,9 +34,7 @@ alias cl="clear"
 alias ex="exit"
 alias lzd="lazydocker"
 alias lzg="lazygit"
-
 alias nv="nvim"
-
 alias g="git"
 alias gb="git branch"
 alias gs="git status"
@@ -52,14 +46,8 @@ alias gc="git commit"
 alias gcn="git commit --no-verify"
 alias gpu="git push origin HEAD"
 alias gpun="git push origin HEAD --no-verify"
-
 alias pvc="pavucontrol"
 alias display="$HOME/.local/scripts/display"
-
-if test -n "$KITTY_INSTALLATION_DIR"; then
-    export KITTY_SHELL_INTEGRATION="no-cursor"
-    source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"
-fi
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
@@ -67,13 +55,4 @@ fi
 . "$HOME/.asdf/completions/asdf.bash"
 
 eval "$(zoxide init --cmd x bash)"
-
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ] && [ "$CURRENT_EDITOR" != "zed" ]; then
-  tmux a -t base || tmux new -s base;
-  exit;
-fi
-
-# if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-#   tmux a -t base || tmux new -s base;
-#   exit;
-# fi
+eval "$(starship init bash)"

@@ -40,3 +40,13 @@ vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('crnvl96/qf', {}),
   callback = function() vim.keymap.set('n', '<leader>cc', ':Cfilter', { buffer = true }) end,
 })
+
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('crnvl96/formatopts', {}),
+  callback = function()
+    -- Don't auto-wrap comments and don't insert comment leader after hitting 'o'
+    -- If don't do this on `FileType`, this keeps reappearing due to being set in
+    -- filetype plugins.
+    vim.cmd('setlocal formatoptions-=c formatoptions-=o')
+  end,
+})

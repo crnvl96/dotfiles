@@ -3,10 +3,10 @@
     "inline_completion_provider": "none"
   },
   "experimental.theme_overrides": {
-    "title_bar.inactive_background": "#151515"
+    "title_bar.inactive_background": "#1E2326"
   },
   "assistant": {
-    "version": "2",
+    "version": "1",
     "default_model": {
       "provider": "ollama",
       "model": "codellama:latest"
