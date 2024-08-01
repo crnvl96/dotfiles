@@ -6,28 +6,31 @@
     "title_bar.inactive_background": "#1E2326"
   },
   "assistant": {
-    "version": "1",
+    "version": "2",
     "default_model": {
       "provider": "ollama",
       "model": "codellama:latest"
     }
   },
+  "buffer_line_height": {
+    "custom": 1.3
+  },
   "unstable.ui_density": "comfortable",
-  "theme": "Everforest Dark",
-  "active_pane_magnification": 1.5,
+  "theme": "Nordfox",
+  "active_pane_magnification": 1,
   "ui_font_family": "BerkeleyMono Nerd Font",
   "show_wrap_guides": true,
-  "show_whitespaces": "all",
+  "show_whitespaces": "none",
   "show_call_status_icon": true,
   "buffer_font_family": "BerkeleyMono Nerd Font",
-  "ui_font_size": 16,
-  "buffer_font_size": 16,
+  "ui_font_size": 14,
+  "buffer_font_size": 14,
   "relative_line_numbers": true,
   "cursor_blink": false,
   "auto_signature_help": false,
-  "current_line_highlight": "none",
+  "current_line_highlight": "all",
   "vim_mode": true,
-  "vertical_scroll_margin": 8,
+  "vertical_scroll_margin": 0,
   "tab_bar": {
     "show_nav_history_buttons": false
   },

@@ -1,2 +1,0 @@
-#!/bin/sh
-feh --no-fehbg --bg-fill '/home/crnvl96/Developer/personal/dotfiles/local/.local/share/wallpapers/wall.png' 

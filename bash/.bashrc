@@ -1,5 +1,10 @@
 [[ $- != *i* ]] && return
 
+source $HOME/.config/bash/git-prompt.sh
+source $HOME/.config/bash/git-completion.sh
+
+# PS1='[\u@\h \W$(__git_ps1 " (%s)")][\j]\n\$ '
+PS1='[\j][\W$(__git_ps1 " (%s)")]\n\$ '
 HISTSIZE=10000
 
 export FZF_DEFAULT_COMMAND='rg --files'
@@ -35,17 +40,20 @@ alias ex="exit"
 alias lzd="lazydocker"
 alias lzg="lazygit"
 alias nv="nvim"
+
 alias g="git"
 alias gb="git branch"
 alias gs="git status"
-alias gl="git log --oneline"
+alias gl="git log --all --oneline --graph --decorate"
 alias gd="git diff"
+alias gb="git branch"
 alias gp="git pull --rebase"
-alias gf="git fetch --all --prune"
+alias gfp="git fetch --all && git fetch --prune && git pull --rebase"
 alias gc="git commit"
 alias gcn="git commit --no-verify"
 alias gpu="git push origin HEAD"
 alias gpun="git push origin HEAD --no-verify"
+
 alias pvc="pavucontrol"
 alias display="$HOME/.local/scripts/display"
 
@@ -55,4 +63,3 @@ alias display="$HOME/.local/scripts/display"
 . "$HOME/.asdf/completions/asdf.bash"
 
 eval "$(zoxide init --cmd x bash)"
-eval "$(starship init bash)"
