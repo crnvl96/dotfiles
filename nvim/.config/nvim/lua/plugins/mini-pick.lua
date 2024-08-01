@@ -1,4 +1,3 @@
-require('mini.extra').setup()
 require('mini.visits').setup()
 
 local win_config = function()
@@ -14,7 +13,11 @@ require('mini.pick').setup({
   options = {
     use_cache = true,
   },
-  window = { config = win_config },
+  window = {
+    config = win_config,
+    prompt_cursor = '█',
+    prompt_prefix = '',
+  },
 })
 
 vim.keymap.set('n', '<leader>ff', '<cmd>Pick files<cr>', { desc = 'Files' })

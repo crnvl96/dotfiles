@@ -17,22 +17,18 @@ end
 local deps = require('mini.deps')
 deps.setup({ path = { package = path_package } })
 
-local now, later = deps.now, deps.later
+local now, ltr = deps.now, deps.later
 
-now(function() require('plugin.qf') end)
-
+now(function() require('plugins.mini-misc') end)
 now(function() require('config.opts') end)
 now(function() require('config.autocmds') end)
 now(function() require('config.keymaps') end)
 
-now(function() require('colorscheme') end)
-later(function() require('requirements') end)
+vim.cmd('colorscheme minicyan')
 
-later(function() require('plugins.fugitive') end)
-later(function() require('plugins.grug-far') end)
-
-later(function() require('plugins.cmp') end)
-later(function() require('plugins.conform') end)
-later(function() require('plugins.mini-pick') end)
-later(function() require('plugins.lsp') end)
-later(function() require('plugins.treesitter') end)
+now(function() require('plugins.mini-icons') end)
+now(function() require('plugins.lsp') end)
+ltr(function() require('plugins.grug-far') end)
+ltr(function() require('plugins.mini-completion') end)
+ltr(function() require('plugins.conform') end)
+ltr(function() require('plugins.mini-pick') end)

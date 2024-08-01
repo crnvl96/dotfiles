@@ -1,8 +1,6 @@
 vim.keymap.set('x', 'p', 'P', { noremap = true })
 vim.keymap.set('n', 'Y', 'v$<left>y', { desc = 'Copy till end of line' })
 
-vim.keymap.set('x', '<leader>/', '<esc>/\\%V', { silent = false, desc = 'Search inside visual selection' })
-
 vim.keymap.set({ 'n', 'x', 'i' }, '<c-s>', '<esc><cmd>w<cr><esc>')
 vim.keymap.set({ 'i', 'x', 'n' }, '<esc>', '<esc><cmd>noh<cr><esc>')
 

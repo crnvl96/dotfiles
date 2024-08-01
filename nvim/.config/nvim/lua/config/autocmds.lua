@@ -37,11 +37,6 @@ vim.api.nvim_create_autocmd('ColorScheme', {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('crnvl96/qf', {}),
-  callback = function() vim.keymap.set('n', '<leader>cc', ':Cfilter', { buffer = true }) end,
-})
-
-vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('crnvl96/formatopts', {}),
   callback = function()
     -- Don't auto-wrap comments and don't insert comment leader after hitting 'o'

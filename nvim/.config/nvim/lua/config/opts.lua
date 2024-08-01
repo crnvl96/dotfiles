@@ -19,8 +19,8 @@ vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 
 vim.o.swapfile = false
 
-vim.o.virtualedit = 'block' -- Allow going past the end of line in visual block mode
-vim.o.splitkeep = 'screen' -- Reduce scroll during window split
+vim.o.virtualedit = 'block'
+vim.o.splitkeep = 'screen'
 
 vim.o.shiftround = true
 vim.o.shiftwidth = 2
@@ -59,7 +59,7 @@ vim.o.wrap = false
 vim.o.wildignorecase = true
 
 vim.opt.formatoptions:append('l1')
-vim.opt.shortmess:append('WcC') -- Reduce command line messages
+vim.opt.shortmess:append('WcC')
 vim.opt.diffopt:append('linematch:60')
 vim.opt.wildoptions:append('fuzzy')
 vim.opt.path:append('**')
@@ -67,8 +67,7 @@ vim.opt.wildignore:append('*/node_modules/*,*/dist/*')
 vim.opt.completeopt:append('menuone,noinsert,noselect,popup,fuzzy')
 
 if vim.fn.executable('rg') ~= 0 then vim.o.grepprg = 'rg --vimgrep' end
+if vim.fn.exists('syntax_on') ~= 1 then vim.cmd('syntax enable') end
 
 vim.cmd('filetype plugin indent on')
 vim.cmd('packadd cfilter')
-
-if vim.fn.exists('syntax_on') ~= 1 then vim.cmd([[syntax enable]]) end
