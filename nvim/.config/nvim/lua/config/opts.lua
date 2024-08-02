@@ -58,6 +58,8 @@ vim.o.wrap = false
 
 vim.o.wildignorecase = true
 
+vim.o.background = 'dark'
+
 vim.opt.formatoptions:append('l1')
 vim.opt.shortmess:append('WcC')
 vim.opt.diffopt:append('linematch:60')
