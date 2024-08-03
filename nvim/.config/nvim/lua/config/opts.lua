@@ -4,6 +4,8 @@ vim.g.maplocalleader = ' '
 vim.o.splitbelow = true
 vim.o.splitright = true
 
+vim.o.guicursor = ''
+
 vim.o.cursorline = false
 vim.o.showcmd = false
 vim.o.showmode = false

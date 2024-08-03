@@ -35,7 +35,7 @@ mti.setup({
 local mlsp = require('mason-lspconfig')
 local lsp = require('lspconfig')
 
-local capabilities = require('capabilities')
+local capabilities = require('lspcapabilities')
 
 mlsp.setup({
   handlers = {

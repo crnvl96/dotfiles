@@ -1,7 +1,7 @@
 MiniDeps.add('stevearc/oil.nvim')
 
 require('oil').setup({
-  columns = { 'icon' },
+  columns = {},
   watch_for_changes = true,
   keymaps = {
     ['g?'] = 'actions.show_help',
@@ -22,8 +22,7 @@ require('oil').setup({
     ['gs'] = 'actions.change_sort',
     ['gx'] = 'actions.open_external',
     ['g.'] = 'actions.toggle_hidden',
-    ['g\\'] = false,
-    ['<g/>'] = 'actions.toggle_trash',
+    ['g\\'] = 'actions.toggle_trash',
   },
   view_options = { show_hidden = true },
   float = { border = 'none' },
