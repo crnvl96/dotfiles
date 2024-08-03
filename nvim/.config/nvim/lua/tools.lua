@@ -42,4 +42,8 @@ M.formatters = {
   'golines',
 }
 
+M.debuggers = {
+  'delve',
+}
+
 return M

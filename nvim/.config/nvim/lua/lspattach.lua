@@ -1,40 +1,39 @@
-local function on_attach(client, buf)
+local handlers = vim.lsp.handlers
+local buf = vim.lsp.buf
+local reg_cap = vim.lsp.protocol.Methods.client_registerCapability
+local au = vim.api.nvim_create_autocmd
+
+-- stylua: ignore
+local function on_attach(client, bufnr)
+  local function set(lhs, rhs, desc)
+    local s = vim.keymap.set
+    s('n', lhs, rhs, { desc = desc, buffer = bufnr })
+  end
+
   client.server_capabilities.documentFormattingProvider = false
-  vim.bo[buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-  vim.keymap.set('n', 'grr', vim.lsp.buf.references, { desc = 'vim.lsp.buf.references()', buffer = buf })
-  vim.keymap.set('n', 'grd', vim.lsp.buf.definition, { desc = 'vim.lsp.buf.definition()', buffer = buf })
-  vim.keymap.set('n', 'gri', vim.lsp.buf.implementation, { desc = 'vim.lsp.buf.implementation()', buffer = buf })
-  vim.keymap.set('n', 'gry', vim.lsp.buf.type_definition, { desc = 'vim.lsp.buf.typedefs()', buffer = buf })
-  vim.keymap.set('n', 'gra', vim.lsp.buf.code_action, { desc = 'vim.lsp.buf.code_action()', buffer = buf })
-  vim.keymap.set('n', 'grs', vim.lsp.buf.document_symbol, { desc = 'vim.lsp.buf.document_symbol()', buffer = buf })
-  vim.keymap.set('n', 'grx', vim.diagnostic.setqflist, { desc = 'vim.diagnistic.setqflist()', buffer = buf })
-  vim.keymap.set('n', 'grS', vim.lsp.buf.workspace_symbol, { desc = 'vim.lsp.buf.workspace_symbol()', buffer = buf })
-  vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, { desc = 'vim.lsp.buf.signature_help()', buffer = buf })
+
+  vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
+  set('grr',   buf.references,           'vim.lsp.buf.references()')
+  set('grd',   buf.definition,           'vim.lsp.buf.definition()')
+  set('gri',   buf.implementation,       'vim.lsp.buf.implementation()')
+  set('gry',   buf.type_definition,      'vim.lsp.buf.typedefs()')
+  set('gra',   buf.code_action,          'vim.lsp.buf.code_action()')
+  set('grs',   buf.document_symbol,      'vim.lsp.buf.document_symbol()')
+  set('grx',   vim.diagnostic.setqflist, 'vim.diagnistic.setqflist()')
+  set('grS',   buf.workspace_symbol,     'vim.lsp.buf.workspace_symbol()')
+  set('<C-k>', buf.signature_help,       'vim.lsp.buf.signature_help()')
 end
 
-vim.diagnostic.config({
-  float = {
-    focusable = false,
-    style = 'minimal',
-    border = 'none',
-    source = true,
-    header = '',
-    prefix = '',
-  },
-})
-
-local methods = vim.lsp.protocol.Methods
-local register_capability = vim.lsp.handlers[methods.client_registerCapability]
-vim.lsp.handlers[methods.client_registerCapability] = function(err, res, ctx)
+handlers[reg_cap] = function(err, res, ctx)
   local client = vim.lsp.get_client_by_id(ctx.client_id)
   if not client then return end
-
-  on_attach(client, vim.api.nvim_get_current_buf())
-
-  return register_capability(err, res, ctx)
+  local bufnr = vim.api.nvim_get_current_buf()
+  on_attach(client, bufnr)
+  return handlers[reg_cap](err, res, ctx)
 end
 
-vim.api.nvim_create_autocmd('LspAttach', {
+au('LspAttach', {
   callback = function(e)
     local client = vim.lsp.get_client_by_id(e.data.client_id)
     if not client then return end

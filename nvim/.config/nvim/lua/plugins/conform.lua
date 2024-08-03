@@ -1,23 +1,24 @@
-MiniDeps.add('stevearc/conform.nvim')
+local add = MiniDeps.add
 
-vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+add({
+  source = 'stevearc/conform.nvim',
+  depends = {
+    'williamboman/mason.nvim',
+  },
+})
 
-local first = function(bufnr, ...)
+local function first(buf, ...)
   local conform = require('conform')
+
   for i = 1, select('#', ...) do
     local formatter = select(i, ...)
-    if conform.get_formatter_info(formatter, bufnr).available then return formatter end
+    if conform.get_formatter_info(formatter, buf).available then return formatter end
   end
+
   return select(1, ...)
 end
 
-local conform = require('conform')
-
-local slow_format_filetypes = {}
-
-vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-
-conform.setup({
+require('conform').setup({
   notify_on_error = false,
   formatters_by_ft = {
     lua = { 'stylua' },
@@ -40,18 +41,8 @@ conform.setup({
       },
     },
   },
-  format_on_save = function(bufnr)
-    if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then return end
-
-    if slow_format_filetypes[vim.bo[bufnr].filetype] then return end
-    local function on_format(err)
-      if err and err:match('timeout$') then slow_format_filetypes[vim.bo[bufnr].filetype] = true end
-    end
-
-    return { timeout_ms = 1000, lsp_format = 'fallback' }, on_format
-  end,
-  format_after_save = function(bufnr)
-    if not slow_format_filetypes[vim.bo[bufnr].filetype] then return end
-    return { lsp_format = 'fallback' }
-  end,
+  format_on_save = {
+    timeout_ms = 1000,
+    lsp_format = 'fallback',
+  },
 })

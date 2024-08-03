@@ -20,24 +20,30 @@ deps.setup({ path = { package = path_package } })
 local now = deps.now
 local later = deps.later
 
-now(function()
-  local misc = require('mini.misc')
-  misc.setup_auto_root()
-  misc.setup_restore_cursor({ center = true })
-  misc.setup_termbg_sync()
-end)
-
 now(function() require('config.opts') end)
 now(function() require('config.autocmds') end)
 now(function() require('config.keymaps') end)
 
 now(function() require('plugins.colorscheme') end)
+now(function() require('plugins.misc') end)
+
+now(function() require('plugins.dap') end)
 now(function() require('plugins.cmp') end)
+now(function() require('plugins.mason') end)
 now(function() require('lspattach') end)
-now(function() require('plugins.lsp') end)
 
 later(function() require('plugins.conform') end)
 later(function() require('plugins.fzf') end)
 later(function() require('plugins.oil') end)
 later(function() require('plugins.fugitive') end)
 later(function() require('plugins.treesitter') end)
+
+later(function() require('plugins.clue') end)
+
+later(function()
+  for _, lhs in ipairs({ '[%', ']%', 'g%' }) do
+    vim.keymap.del('n', lhs)
+  end
+end)
+
+later(function() require('mini.align').setup() end)

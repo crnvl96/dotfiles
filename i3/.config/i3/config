@@ -38,6 +38,7 @@ bindsym $mod+Return exec kitty
 bindsym $mod+w exec brave-browser
 bindsym $mod+Shift+c kill
 bindsym $mod+p exec --no-startup-id dmenu_run
+
 bindsym $mod+Shift+d exec --no-startup-id ~/.local/scripts/display.sh
 bindsym $mod+Shift+s exec --no-startup-id pavucontrol
 

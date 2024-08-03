@@ -17,7 +17,9 @@ vim.o.foldenable = true
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
 vim.o.foldmethod = 'expr'
+
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 vim.o.swapfile = false
 
