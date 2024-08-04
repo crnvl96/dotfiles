@@ -1,4 +1,6 @@
-MiniDeps.add({
+local add = MiniDeps.add
+
+add({
   source = 'mfussenegger/nvim-dap',
   depends = {
     'rcarriga/nvim-dap-ui',
@@ -15,24 +17,27 @@ local dapui = require('dapui')
 local vscode = require('dap.ext.vscode')
 local json = require('plenary.json')
 local set = vim.keymap.set
+local hl = vim.api.nvim_set_hl
 
-local function conditionalbp() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end
+local function toggle_cond_breakpoint() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end
 
-vim.api.nvim_set_hl(0, 'DapStoppedLine', { default = true, link = 'Visual' })
+hl(0, 'DapStoppedLine', { default = true, link = 'Visual' })
 
 dapui.setup()
 
-set('n', '<leader>dc', dap.continue, { desc = 'Debug: Start/Continue' })
-set('n', '<leader>di', dap.step_into, { desc = 'Debug: Step Into' })
-set('n', '<leader>dO', dap.step_over, { desc = 'Debug: Step Over' })
-set('n', '<leader>do', dap.step_out, { desc = 'Debug: Step Out' })
-set('n', '<leader>db', dap.toggle_breakpoint, { desc = 'Debug: Toggle Breakpoint' })
-set('n', '<leader>dB', conditionalbp, { desc = 'Debug: Set Breakpoint' })
-set('n', '<leader>du', dapui.toggle, { desc = 'Debug: See last session result.' })
+-- stylua: ignore start
+set('n', '<leader>dc', dap.continue,           { desc = 'Debug: Start/Continue' })
+set('n', '<leader>di', dap.step_into,          { desc = 'Debug: Step Into' })
+set('n', '<leader>dO', dap.step_over,          { desc = 'Debug: Step Over' })
+set('n', '<leader>do', dap.step_out,           { desc = 'Debug: Step Out' })
+set('n', '<leader>db', dap.toggle_breakpoint,  { desc = 'Debug: Toggle Breakpoint' })
+set('n', '<leader>dB', toggle_cond_breakpoint, { desc = 'Debug: Set Breakpoint' })
+set('n', '<leader>du', dapui.toggle,           { desc = 'Debug: See last session result.' })
 
 dap.listeners.after.event_initialized['dapui_config'] = dapui.open
 dap.listeners.before.event_terminated['dapui_config'] = dapui.close
-dap.listeners.before.event_exited['dapui_config'] = dapui.close
+dap.listeners.before.event_exited['dapui_config']     = dapui.close
+-- stylua: ignore end
 
 require('dap-go').setup({
   delve = {

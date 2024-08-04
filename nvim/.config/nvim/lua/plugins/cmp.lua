@@ -7,6 +7,8 @@ add('hrsh7th/cmp-nvim-lua')
 add('hrsh7th/nvim-cmp')
 
 local cmp = require('cmp')
+local bh_insert = { behavior = cmp.SelectBehavior.Insert }
+local bh_replace = { behavior = cmp.ConfirmBehavior.Replace, select = false }
 
 cmp.setup({
   snippet = {
@@ -14,14 +16,14 @@ cmp.setup({
   },
   preselect = cmp.PreselectMode.None,
   mapping = cmp.mapping.preset.insert({
-    ['<C-p>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
-    ['<C-n>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+    ['<C-p>'] = cmp.mapping.select_prev_item(bh_insert),
+    ['<C-n>'] = cmp.mapping.select_next_item(bh_insert),
     ['<C-y>'] = cmp.mapping.confirm({ select = true }),
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<CR>'] = cmp.mapping({
       i = function(fallback)
         if cmp.visible() and cmp.get_active_entry() then
-          cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+          cmp.confirm(bh_replace)
         else
           fallback()
         end

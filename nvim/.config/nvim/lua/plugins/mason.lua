@@ -8,16 +8,13 @@ add({
 })
 
 add('jay-babu/mason-nvim-dap.nvim')
-
 add({
   source = 'WhoIsSethDaniel/mason-tool-installer.nvim',
   depends = {
     'mfussenegger/nvim-dap',
   },
 })
-
 add('williamboman/mason-lspconfig.nvim')
-
 add('neovim/nvim-lspconfig')
 
 local servers = vim.tbl_keys(require('tools').servers) or {}
