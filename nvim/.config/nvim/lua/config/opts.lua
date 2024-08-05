@@ -6,7 +6,7 @@ local opt = vim.opt
 
 -- stylua: ignore start
 g.mapleader      = ' '
-g.maplocalleader = ' '
+g.maplocalleader = ','
 
 o.splitbelow     = true
 o.splitright     = true

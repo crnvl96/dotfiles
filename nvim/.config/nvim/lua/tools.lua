@@ -2,6 +2,7 @@ local M = {}
 
 M.servers = {
   vtsls = {},
+  clojure_lsp = {},
   lua_ls = {
     settings = {
       Lua = {
@@ -40,6 +41,7 @@ M.formatters = {
   'gofumpt',
   'goimports',
   'golines',
+  'joker',
 }
 
 M.debuggers = {

@@ -12,6 +12,7 @@ require('nvim-treesitter.configs').setup({
     'c',
     'lua',
     'query',
+    'fennel', 'clojure',
     'vim', 'vimdoc',
     'markdown', 'markdown_inline',
     'typescript', 'javascript',

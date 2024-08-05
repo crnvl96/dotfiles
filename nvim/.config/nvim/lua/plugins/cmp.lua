@@ -5,6 +5,7 @@ add('hrsh7th/cmp-buffer')
 add('hrsh7th/cmp-path')
 add('hrsh7th/cmp-nvim-lua')
 add('hrsh7th/nvim-cmp')
+add('PaterJason/cmp-conjure')
 
 local cmp = require('cmp')
 local bh_insert = { behavior = cmp.SelectBehavior.Insert }
@@ -40,6 +41,7 @@ cmp.setup({
     },
     { name = 'path' },
     { name = 'nvim_lua' },
+    { name = 'conjure' },
   }, {
     { name = 'buffer' },
   }),

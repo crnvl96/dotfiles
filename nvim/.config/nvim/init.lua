@@ -27,10 +27,11 @@ now(function() require('config.keymaps') end)
 now(function() require('plugins.colorscheme') end)
 now(function() require('plugins.misc') end)
 
+now(function() require('plugins.clj') end)
+
 now(function() require('plugins.mason') end)
 now(function() require('plugins.mason-tool-installer') end)
 now(function() require('plugins.cmp') end)
-now(function() require('lspattach') end)
 now(function() require('plugins.lsp') end)
 now(function() require('plugins.dap') end)
 
