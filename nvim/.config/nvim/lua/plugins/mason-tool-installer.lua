@@ -1,19 +1,25 @@
-MiniDeps.add({
+local add = MiniDeps.add
+local tools = require('tools')
+
+add({
   source = 'WhoIsSethDaniel/mason-tool-installer.nvim',
-  hooks = {
-    post_checkout = function() vim.cmd('MasonToolsInstall') end,
-  },
   depends = {
-    'williamboman/mason.nvim',
-    'williamboman/mason-lspconfig.nvim',
-    'jay-babu/mason-nvim-dap.nvim',
+    { source = 'williamboman/mason.nvim' },
+    { source = 'williamboman/mason-lspconfig.nvim' },
+    { source = 'jay-babu/mason-nvim-dap.nvim' },
   },
 })
 
-local servers = vim.tbl_keys(require('tools').servers) or {}
-local fmt = require('tools').formatters or {}
-local dbg = require('tools').debuggers or {}
-local ensure_installed = vim.list_extend(servers, fmt)
-ensure_installed = vim.list_extend(ensure_installed, dbg)
+local servers = vim.tbl_keys(tools.servers)
+local formatters = tools.formatters
+local debuggers = tools.debuggers
 
-require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
+local ensure_installed = {}
+
+vim.list_extend(ensure_installed, servers)
+vim.list_extend(ensure_installed, formatters)
+vim.list_extend(ensure_installed, debuggers)
+
+local masontoolinstaller = require('mason-tool-installer')
+
+masontoolinstaller.setup({ ensure_installed = ensure_installed, delay = 1000 })

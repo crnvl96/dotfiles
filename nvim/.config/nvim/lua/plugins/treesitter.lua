@@ -6,7 +6,17 @@ add({
 })
 
 require('nvim-treesitter.configs').setup({
-  ensure_installed = { 'c', 'lua', 'vim', 'vimdoc', 'query', 'markdown', 'markdown_inline', 'bash' },
+  -- stylua: ignore
+  ensure_installed = {
+    'bash',
+    'c',
+    'lua',
+    'query',
+    'vim', 'vimdoc',
+    'markdown', 'markdown_inline',
+    'typescript', 'javascript',
+    'go', 'gomod', 'gosum', 'gowork', 'gotmpl'
+  },
   sync_install = false,
   auto_install = true,
   indent = {

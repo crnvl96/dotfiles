@@ -11,7 +11,7 @@ add({
   },
 })
 
-MiniDeps.add({
+add({
   source = 'jay-babu/mason-nvim-dap.nvim',
   depends = {
     'mfussenegger/nvim-dap',

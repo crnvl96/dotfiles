@@ -12,7 +12,7 @@ MiniDeps.add({
 
 vim.g.fzf_vim = {}
 vim.g.fzf_vim.preview_window = { 'hidden,right,50%,<70(up,40%)', 'f4' }
-vim.g.fzf_layout = { window = { width = 0.9, height = 0.6 } }
+vim.g.fzf_layout = { window = { width = 0.6, height = 0.9 } }
 
 vim.g.fzf_colors = {
   ['fg'] = { 'fg', 'Normal' },
