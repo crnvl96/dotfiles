@@ -6,11 +6,20 @@ add({
     'rcarriga/nvim-dap-ui',
     'nvim-neotest/nvim-nio',
     'williamboman/mason.nvim',
-    'jay-babu/mason-nvim-dap.nvim',
     'leoluz/nvim-dap-go',
     'nvim-lua/plenary.nvim',
   },
 })
+
+MiniDeps.add({
+  source = 'jay-babu/mason-nvim-dap.nvim',
+  depends = {
+    'mfussenegger/nvim-dap',
+    'williamboman/mason.nvim',
+  },
+})
+
+require('mason-nvim-dap').setup()
 
 local dap = require('dap')
 local dapui = require('dapui')

@@ -7,34 +7,4 @@ add({
   },
 })
 
-add({
-  source = 'neovim/nvim-lspconfig',
-  depends = {
-    'williamboman/mason-lspconfig.nvim',
-    'WhoIsSethDaniel/mason-tool-installer.nvim',
-    'jay-babu/mason-nvim-dap.nvim',
-    'williamboman/mason.nvim',
-  },
-})
-
-local servers = vim.tbl_keys(require('tools').servers) or {}
-local fmt = require('tools').formatters or {}
-local dbg = require('tools').debuggers or {}
-local ensure_installed = vim.list_extend(servers, fmt)
-ensure_installed = vim.list_extend(ensure_installed, dbg)
-
 require('mason').setup()
-require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
-require('mason-nvim-dap').setup()
-
-local capabilities = require('lspcapabilities')
-
-require('mason-lspconfig').setup({
-  handlers = {
-    function(server_name)
-      local server = require('tools').servers[server_name] or {}
-      server.capabilities = capabilities
-      require('lspconfig')[server_name].setup(server)
-    end,
-  },
-})
