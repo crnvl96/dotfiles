@@ -7,15 +7,15 @@ add({
   },
 })
 
-add('jay-babu/mason-nvim-dap.nvim')
 add({
-  source = 'WhoIsSethDaniel/mason-tool-installer.nvim',
+  source = 'neovim/nvim-lspconfig',
   depends = {
-    'mfussenegger/nvim-dap',
+    'williamboman/mason-lspconfig.nvim',
+    'WhoIsSethDaniel/mason-tool-installer.nvim',
+    'jay-babu/mason-nvim-dap.nvim',
+    'williamboman/mason.nvim',
   },
 })
-add('williamboman/mason-lspconfig.nvim')
-add('neovim/nvim-lspconfig')
 
 local servers = vim.tbl_keys(require('tools').servers) or {}
 local fmt = require('tools').formatters or {}

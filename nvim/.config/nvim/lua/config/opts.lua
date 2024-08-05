@@ -1,79 +1,68 @@
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+local fn = vim.fn
 
-vim.o.splitbelow = true
-vim.o.splitright = true
+local g = vim.g
+local o = vim.o
+local opt = vim.opt
 
-vim.o.guicursor = ''
+-- stylua: ignore start
+g.mapleader      = ' '
+g.maplocalleader = ' '
 
-vim.o.cursorline = false
-vim.o.showcmd = false
-vim.o.showmode = false
-vim.o.ruler = false
-vim.o.laststatus = 0
+o.splitbelow     = true
+o.splitright     = true
+o.guicursor      = ''
+o.cursorline     = false
+o.showcmd        = false
+o.showmode       = false
+o.ruler          = false
+o.laststatus     = 0
+o.foldcolumn     = '0'
+o.foldenable     = true
+o.foldlevel      = 99
+o.foldlevelstart = 99
+o.foldmethod     = 'expr'
+o.foldexpr       = 'v:lua.vim.treesitter.foldexpr()'
+o.formatexpr     = "v:lua.require'conform'.formatexpr()"
+o.swapfile       = false
+o.virtualedit    = 'block'
+o.splitkeep      = 'screen'
+o.shiftround     = true
+o.shiftwidth     = 2
+o.tabstop        = 2
+o.expandtab      = true
+o.scrolloff      = 8
+o.sidescrolloff  = 4
+o.breakindent    = true
+o.smartindent    = true
+o.smartcase      = true
+o.ignorecase     = true
+o.infercase      = true
+o.mouse          = 'a'
+o.number         = true
+o.relativenumber = true
+o.clipboard      = 'unnamedplus'
+o.signcolumn     = 'yes'
+o.fillchars      = 'eob: '
+o.termguicolors  = true
+o.undofile       = true
+o.updatetime     = 300
+o.timeoutlen     = 1000
+o.backup         = false
+o.writebackup    = false
+o.wrap           = false
+o.wildignorecase = true
+o.background     = 'dark'
 
-vim.o.foldcolumn = '0'
-vim.o.foldenable = true
-vim.o.foldlevel = 99
-vim.o.foldlevelstart = 99
-vim.o.foldmethod = 'expr'
+opt.formatoptions:append('l1')
+opt.shortmess    :append('WcC')
+opt.diffopt      :append('linematch:60')
+opt.wildoptions  :append('fuzzy')
+opt.path         :append('**')
+opt.wildignore   :append('*/node_modules/*,*/dist/*')
+opt.completeopt  :append('menuone,noinsert,noselect,popup,fuzzy')
 
-vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-
-vim.o.swapfile = false
-
-vim.o.virtualedit = 'block'
-vim.o.splitkeep = 'screen'
-
-vim.o.shiftround = true
-vim.o.shiftwidth = 2
-vim.o.tabstop = 2
-vim.o.expandtab = true
-
-vim.o.scrolloff = 8
-vim.o.sidescrolloff = 4
-
-vim.o.breakindent = true
-vim.o.smartindent = true
-
-vim.o.smartcase = true
-vim.o.ignorecase = true
-vim.o.infercase = true
-
-vim.o.mouse = 'a'
-
-vim.o.number = true
-vim.o.relativenumber = true
-
-vim.o.clipboard = 'unnamedplus'
-
-vim.o.signcolumn = 'yes'
-vim.o.fillchars = 'eob: '
-vim.o.termguicolors = true
-vim.o.undofile = true
-vim.o.updatetime = 300
-vim.o.timeoutlen = 1000
-
-vim.o.backup = false
-vim.o.writebackup = false
-
-vim.o.wrap = false
-
-vim.o.wildignorecase = true
-
-vim.o.background = 'dark'
-
-vim.opt.formatoptions:append('l1')
-vim.opt.shortmess:append('WcC')
-vim.opt.diffopt:append('linematch:60')
-vim.opt.wildoptions:append('fuzzy')
-vim.opt.path:append('**')
-vim.opt.wildignore:append('*/node_modules/*,*/dist/*')
-vim.opt.completeopt:append('menuone,noinsert,noselect,popup,fuzzy')
-
-if vim.fn.executable('rg') ~= 0 then vim.o.grepprg = 'rg --vimgrep' end
-if vim.fn.exists('syntax_on') ~= 1 then vim.cmd('syntax enable') end
+if fn.executable('rg')    ~= 0 then o.grepprg = 'rg --vimgrep' end
+if fn.exists('syntax_on') ~= 1 then vim.cmd('syntax enable') end
 
 vim.cmd('filetype plugin indent on')
 vim.cmd('packadd cfilter')
