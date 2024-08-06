@@ -32,3 +32,9 @@ vim.g.fzf_colors = {
 
 vim.keymap.set('n', '<leader>ff', '<cmd>Files<CR>', { desc = 'Files' })
 vim.keymap.set('n', '<leader>fg', '<cmd>Rg<CR>', { desc = 'Grep' })
+
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = { 'fzf' },
+  group = vim.api.nvim_create_augroup('crnvl96/fzf', {}),
+  callback = function() vim.keymap.set('t', '<esc><esc>', '<cmd>close<cr>', { buffer = true }) end,
+})

@@ -2,10 +2,6 @@
 
 font pango:BerkeleyMono Nerd Font 8
 
-exec --no-startup-id dex --autostart --environment i3
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id nm-applet
-
 for_window [class="^.*"] border pixel 2
 for_window [class="^.*"] client.focused #77dd77 #285577 #ffffff #2e9ef4 #285577
 
@@ -87,3 +83,6 @@ mode "resize" {
 }
 
 exec --no-startup-id ~/.fehbg
+exec --no-startup-id dex --autostart --environment i3
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+# exec --no-startup-id nm-applet

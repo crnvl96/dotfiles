@@ -14,8 +14,10 @@ au('ColorScheme', {
   end,
 })
 
-add('rose-pine/neovim')
+add('NTBBloodbath/doom-one.nvim')
 
-require('rose-pine').setup()
+vim.cmd('colorscheme doom-one')
 
-vim.cmd('colorscheme rose-pine')
+-- require('rose-pine').setup()
+--
+-- vim.cmd('colorscheme rose-pine')

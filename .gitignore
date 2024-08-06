@@ -7,3 +7,7 @@ fish_variables
 leftwm/**/theme/**/*
 
 tmux/**/plugins/**/*
+
+emacs/
+!emacs/**/init.el
+!emacs/**/elisp/

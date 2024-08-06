@@ -21,7 +21,6 @@ FZF_OPTS="--height 50% --cycle \
 
 export BROWSER="brave-browser"
 export EDITOR="nvim"
-export EDITOR="kitty"
 
 export PATH=$HOME/.local/bin:$PATH
 
