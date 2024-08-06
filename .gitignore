@@ -8,6 +8,6 @@ leftwm/**/theme/**/*
 
 tmux/**/plugins/**/*
 
-emacs/
-!emacs/**/init.el
-!emacs/**/elisp/
+# emacs/
+# !init.el
+# !elisp/
