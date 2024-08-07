@@ -46,6 +46,7 @@ M.formatters = {
 
 M.debuggers = {
     'delve',
+    'js-debug-adapter',
 }
 
 M.ts_parsers = {

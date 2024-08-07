@@ -30,7 +30,26 @@ local later = deps.later
 now(function() require('config.opts') end)
 now(function() require('config.autocmds') end)
 now(function() require('config.keymaps') end)
-now(function() require('plugins.colorscheme') end)
+
+now(function()
+    add('0xstepit/flow.nvim')
+    add('Aliqyan-21/darkvoid.nvim')
+
+    require('flow').setup({
+        transparent = true,
+        fluo_color = 'pink',
+        mode = 'normal',
+        aggressive_spell = false,
+    })
+
+    require('darkvoid').setup({
+        transparent = true,
+        glow = true,
+    })
+
+    -- vim.cmd('colorscheme flow')
+    vim.cmd('colorscheme darkvoid')
+end)
 
 now(function()
     add({

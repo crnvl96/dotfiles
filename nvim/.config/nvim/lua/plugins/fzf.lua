@@ -1,13 +1,13 @@
 MiniDeps.add({
-  source = 'junegunn/fzf.vim',
-  depends = {
-    {
-      source = 'junegunn/fzf',
-      hooks = {
-        post_checkout = function() vim.fn['fzf#install']() end,
-      },
+    source = 'junegunn/fzf.vim',
+    depends = {
+        {
+            source = 'junegunn/fzf',
+            hooks = {
+                post_checkout = function() vim.fn['fzf#install']() end,
+            },
+        },
     },
-  },
 })
 
 vim.g.fzf_vim = {}
@@ -15,26 +15,28 @@ vim.g.fzf_vim.preview_window = { 'hidden,right,50%,<70(up,40%)', 'f4' }
 vim.g.fzf_layout = { window = { width = 0.6, height = 0.9 } }
 
 vim.g.fzf_colors = {
-  ['fg'] = { 'fg', 'Normal' },
-  ['bg'] = { 'bg', 'Normal' },
-  ['hl'] = { 'fg', 'Comment' },
-  ['fg+'] = { 'fg', 'CursorLine', 'CursorColumn', 'Normal' },
-  ['bg+'] = { 'bg', 'CursorLine', 'CursorColumn' },
-  ['hl+'] = { 'fg', 'Statement' },
-  ['info'] = { 'fg', 'PreProc' },
-  ['border'] = { 'fg', 'Ignore' },
-  ['prompt'] = { 'fg', 'Conditional' },
-  ['pointer'] = { 'fg', 'Exception' },
-  ['marker'] = { 'fg', 'Keyword' },
-  ['spinner'] = { 'fg', 'Label' },
-  ['header'] = { 'fg', 'Comment' },
+    ['fg'] = { 'fg', 'Normal' },
+    ['bg'] = { 'bg', 'Normal' },
+    ['hl'] = { 'fg', 'Comment' },
+    ['fg+'] = { 'fg', 'CursorLine', 'CursorColumn', 'Normal' },
+    ['bg+'] = { 'bg', 'CursorLine', 'CursorColumn' },
+    ['hl+'] = { 'fg', 'Statement' },
+    ['info'] = { 'fg', 'PreProc' },
+    ['border'] = { 'fg', 'Ignore' },
+    ['prompt'] = { 'fg', 'Conditional' },
+    ['pointer'] = { 'fg', 'Exception' },
+    ['marker'] = { 'fg', 'Keyword' },
+    ['spinner'] = { 'fg', 'Label' },
+    ['header'] = { 'fg', 'Comment' },
 }
 
 vim.keymap.set('n', '<leader>ff', '<cmd>Files<CR>', { desc = 'Files' })
 vim.keymap.set('n', '<leader>fg', '<cmd>Rg<CR>', { desc = 'Grep' })
 
 vim.api.nvim_create_autocmd('FileType', {
-  pattern = { 'fzf' },
-  group = vim.api.nvim_create_augroup('crnvl96/fzf', {}),
-  callback = function() vim.keymap.set('t', '<esc><esc>', '<cmd>close<cr>', { buffer = true }) end,
+    pattern = { 'fzf' },
+    group = vim.api.nvim_create_augroup('crnvl96/fzf', {}),
+    callback = function() vim.keymap.set('t', '<esc><esc>', '<cmd>close<cr>', { buffer = true }) end,
 })
+
+vim.ui.select = require('mini.pick').ui_select
