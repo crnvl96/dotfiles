@@ -1,5 +1,9 @@
+-- Place where the package manager will be installed
 local path_package = vim.fn.stdpath('data') .. '/site/'
+-- Place where the mini framework will be installed
 local mini_path = path_package .. 'pack/deps/start/mini.nvim'
+
+-- If the package manager is not present on the system, install is now
 if not vim.loop.fs_stat(mini_path) then
     vim.cmd('echo "Installing `mini.nvim`" | redraw')
     local clone_cmd = {
@@ -14,9 +18,11 @@ if not vim.loop.fs_stat(mini_path) then
     vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
 
+-- Setup the package manager
 local deps = require('mini.deps')
 deps.setup({ path = { package = path_package } })
 
+-- Package manager aliases
 local add = MiniDeps.add
 local now = deps.now
 local later = deps.later
@@ -65,7 +71,13 @@ now(function()
     masontoolinstaller.setup({ ensure_installed = ensure_installed, delay = 1000 })
 end)
 
-now(function() require('plugins.clj') end)
+now(function()
+    add('Olical/conjure')
+    add('tpope/vim-dispatch')
+    add('clojure-vim/vim-jack-in')
+    add('radenling/vim-dispatch-neovim')
+end)
+
 now(function() require('plugins.cmp') end)
 now(function() require('plugins.lsp') end)
 now(function() require('plugins.dap') end)
