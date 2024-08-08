@@ -1,9 +1,10 @@
-local add = MiniDeps.add
-local tools = require('tools')
-local ensure_installed = {}
-
 return function()
-    add({
+    local tools = require('tools')
+    local ensure_installed = {}
+    local f = require('functions')
+    local map = f.map()
+
+    MiniDeps.add({
         source = 'WhoIsSethDaniel/mason-tool-installer.nvim',
         depends = {
             { source = 'williamboman/mason-lspconfig.nvim' },
@@ -17,9 +18,14 @@ return function()
         },
     })
 
-    require('mini.misc').setup_restore_cursor({ center = true })
+    require('mini.icons').setup()
+    require('mini.icons').mock_nvim_web_devicons()
 
+    require('mini.misc').setup_restore_cursor({ center = true })
     require('mini.misc').setup_termbg_sync()
+
+    require('mini.bufremove').setup()
+    map.ln('bd', function() require('mini.bufremove').delete(0, false) end, 'delete buffer')
 
     require('mason').setup()
 

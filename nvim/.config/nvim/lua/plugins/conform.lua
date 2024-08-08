@@ -1,25 +1,23 @@
-local add = MiniDeps.add
-
-local function first(buf, ...)
-    local conform = require('conform')
-
-    for i = 1, select('#', ...) do
-        local formatter = select(i, ...)
-        if conform.get_formatter_info(formatter, buf).available then return formatter end
-    end
-
-    return select(1, ...)
-end
-
 return function()
-    add({
+    MiniDeps.add({
         source = 'stevearc/conform.nvim',
         depends = {
             { source = 'williamboman/mason.nvim' },
         },
     })
 
-    require('conform').setup({
+    local conform = require('conform')
+
+    local function first(buf, ...)
+        for i = 1, select('#', ...) do
+            local formatter = select(i, ...)
+            if conform.get_formatter_info(formatter, buf).available then return formatter end
+        end
+
+        return select(1, ...)
+    end
+
+    conform.setup({
         notify_on_error = false,
         formatters_by_ft = {
             lua = { 'stylua' },

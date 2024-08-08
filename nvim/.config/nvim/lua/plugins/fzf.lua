@@ -1,17 +1,13 @@
-local add = MiniDeps.add
-
-local function l_nmap(lhs, rhs, desc)
-    local set = vim.keymap.set
-    set('n', '<leader>' .. lhs, rhs, { desc = desc })
-end
-
-local function l_vmap(lhs, rhs, desc)
-    local set = vim.keymap.set
-    set('v', '<leader>' .. lhs, rhs, { desc = desc })
-end
-
 return function()
-    add('ibhagwan/fzf-lua')
+    local f = require('functions')
+    local map = f.map()
+
+    MiniDeps.add({
+        source = 'ibhagwan/fzf-lua',
+        depends = {
+            { source = 'echasnovski/mini.icons' },
+        },
+    })
 
     local fzf = require('fzf-lua')
 
@@ -45,15 +41,15 @@ return function()
 
     vim.ui.select = fzf.register_ui_select
 
-    l_nmap('fb', fzf.buffers, 'Buffers')
-    l_nmap('ff', fzf.files, 'Files')
-    l_nmap('fo', fzf.oldfiles, 'Oldfiles')
-    l_nmap('fq', fzf.quickfix, 'Qf')
-    l_nmap('fl', fzf.blines, 'Lines')
-    l_nmap('ft', fzf.tabs, 'Tabs')
-    l_nmap('sg', fzf.live_grep, 'Lgrep')
-    l_nmap('sG', fzf.live_grep_resume, 'Lgrep resume')
-    l_nmap('sq', fzf.lgrep_quickfix, 'Lgrep qf')
-    l_nmap('sl', fzf.lgrep_curbuf, 'Lgrep lines')
-    l_vmap('sg', fzf.grep_visual, 'Lgrep visual')
+    map.ln('fb', fzf.buffers, 'Buffers')
+    map.ln('ff', fzf.files, 'Files')
+    map.ln('fo', fzf.oldfiles, 'Oldfiles')
+    map.ln('fq', fzf.quickfix, 'Qf')
+    map.ln('fl', fzf.blines, 'Lines')
+    map.ln('ft', fzf.tabs, 'Tabs')
+    map.ln('sg', fzf.live_grep, 'Lgrep')
+    map.ln('sG', fzf.live_grep_resume, 'Lgrep resume')
+    map.ln('sq', fzf.lgrep_quickfix, 'Lgrep qf')
+    map.ln('sl', fzf.lgrep_curbuf, 'Lgrep lines')
+    map.lv('sg', fzf.grep_visual, 'Lgrep visual')
 end

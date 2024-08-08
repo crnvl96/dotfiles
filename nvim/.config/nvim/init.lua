@@ -25,10 +25,9 @@ now(require('config.autocmds'))
 now(require('config.keymaps'))
 
 now(require('plugins.colorscheme'))
-now(require('plugins.mason'))
+now(require('plugins.requirerements'))
 
-now(require('plugins.clojure'))
-now(require('plugins.cmp'))
+now(require('plugins.lang'))
 now(require('plugins.lsp'))
 now(require('plugins.fzf'))
 now(require('plugins.dap'))
@@ -39,11 +38,5 @@ later(require('plugins.grug-far'))
 later(require('plugins.fugitive'))
 later(require('plugins.quickfix'))
 
-later(function() require('plugins.treesitter') end)
-later(function() require('plugins.clue') end)
-
-later(function()
-    for _, lhs in ipairs({ '[%', ']%', 'g%' }) do
-        vim.keymap.del('n', lhs)
-    end
-end)
+later(require('plugins.treesitter'))
+later(require('plugins.clue'))

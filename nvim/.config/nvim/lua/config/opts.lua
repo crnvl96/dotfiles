@@ -6,6 +6,7 @@ local opt = vim.opt
 return function()
     g.mapleader = ' '
     g.maplocalleader = ','
+    g.whoami = 'crnvl96'
 
     o.splitbelow = true
     o.splitright = true

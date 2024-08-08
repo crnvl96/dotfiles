@@ -1,19 +1,18 @@
-local function au(events, group, callback, pattern)
-    return vim.api.nvim_create_autocmd(events, {
-        pattern = pattern or '*',
-        group = vim.api.nvim_create_augroup('crnvl96' .. group, {}),
-        callback = callback,
-    })
-end
-
 return function()
-    au('TextYankPost', 'highlight_on_yank', function() vim.highlight.on_yank() end)
+    local f = require('functions')
+    local au, g = f.au, f.g
 
-    au('FileType', 'format_opts', function() vim.cmd('setlocal formatoptions-=c formatoptions-=o') end)
+    au('TextYankPost', g('highlight_on_yank', true), function()
+        local on_yank = vim.highlight.on_yank
+        on_yank()
+    end)
 
-    au('FileType', 'format_opts', function() vim.cmd('setlocal shiftwidth=4 tabstop=4') end, 'go')
+    au('FileType', g('format_opts', true), function()
+        local cmd = vim.cmd
+        cmd('setlocal formatoptions-=c formatoptions-=o')
+    end)
 
-    au('VimResized', 'auto_resize_vim', function()
+    au('VimResized', g('auto_resize_vim', true), function()
         vim.cmd('tabdo wincmd =')
         vim.cmd('tabnext ' .. vim.fn.tabpagenr())
     end)

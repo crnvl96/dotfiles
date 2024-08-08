@@ -1,3 +1,8 @@
-local add = MiniDeps.add
-
-return function() add('tpope/vim-fugitive') end
+return function()
+    MiniDeps.add({
+        source = 'tpope/vim-rhubarb',
+        depends = {
+            source = { 'tpope/vim-fugitive' },
+        },
+    })
+end

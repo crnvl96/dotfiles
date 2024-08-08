@@ -1,70 +1,73 @@
-local add = MiniDeps.add
-
-local function l_map(lhs, rhs, opts, mode)
-    opts = type(opts) == 'string' and { desc = opts } or opts
-    mode = mode or 'n'
-
-    return vim.keymap.set(mode, '<leader>' .. lhs, rhs, opts)
-end
-
 return function()
-    add({
-        source = 'mfussenegger/nvim-dap',
-        depends = {
-            { source = 'rcarriga/nvim-dap-ui' },
-            { source = 'nvim-neotest/nvim-nio' },
-            { source = 'williamboman/mason.nvim' },
-            { source = 'leoluz/nvim-dap-go' },
-            { source = 'nvim-lua/plenary.nvim' },
-        },
-    })
+    local f = require('functions')
+    local map = f.map()
 
-    add({
+    MiniDeps.add({
         source = 'jay-babu/mason-nvim-dap.nvim',
         depends = {
-            { source = 'mfussenegger/nvim-dap' },
             { source = 'williamboman/mason.nvim' },
+            {
+                source = 'mfussenegger/nvim-dap',
+                depends = {
+                    { source = 'rcarriga/nvim-dap-ui' },
+                    { source = 'nvim-neotest/nvim-nio' },
+                    { source = 'williamboman/mason.nvim' },
+                    { source = 'leoluz/nvim-dap-go' },
+                    { source = 'nvim-lua/plenary.nvim' },
+                    { source = 'theHamsta/nvim-dap-virtual-text' },
+                },
+            },
         },
     })
 
-    local hl = vim.api.nvim_set_hl
-    hl(0, 'DapStoppedLine', { default = true, link = 'Visual' })
+    vim.api.nvim_set_hl(0, 'DapStoppedLine', { default = true, link = 'Visual' })
 
-    require('mason-nvim-dap').setup()
-
-    local dapui = require('dapui')
-    dapui.setup()
-
-    l_map('du', dapui.toggle, 'toggle dapui')
+    require('nvim-dap-virtual-text').setup({ virt_text_pos = 'eol' })
 
     local dap = require('dap')
     local fzf = require('fzf-lua')
+    local dapui = require('dapui')
+    local mason_dap = require('mason-nvim-dap')
+    local vscode = require('dap.ext.vscode')
+    local json = require('plenary.json')
 
-    l_map('dc', dap.continue, 'start/continue')
-    l_map('db', dap.toggle_breakpoint, 'toggle breakpoint')
-    l_map('dB', function() dap.set_breakpoint(vim.fn.input('Condition: ')) end, 'conditional breakpoint')
-    l_map('dd', fzf.dap_commands, 'commands')
-    l_map('do', fzf.dap_configurations, 'configs')
-    l_map('dl', fzf.dap_breakpoints, 'breakpoints')
-    l_map('di', fzf.dap_variables, 'variables')
-    l_map('df', fzf.dap_frames, 'frames')
+    mason_dap.setup()
+
+    dapui.setup()
+
+    map.ln('du', dapui.toggle, 'toggle dapui')
+    map.ln('dc', dap.continue, 'start/continue')
+    map.ln('db', dap.toggle_breakpoint, 'toggle breakpoint')
+    map.ln('dB', function() dap.set_breakpoint(vim.fn.input('Condition: ')) end, 'conditional breakpoint')
+    map.ln('dd', fzf.dap_commands, 'commands')
+    map.ln('do', fzf.dap_configurations, 'configs')
+    map.ln('dl', fzf.dap_breakpoints, 'breakpoints')
+    map.ln('di', fzf.dap_variables, 'variables')
+    map.ln('df', fzf.dap_frames, 'frames')
+    map.ln('de', function()
+        require('dapui').eval()
+        require('dapui').eval()
+    end, 'eval')
 
     dap.listeners.after.event_initialized['dapui_config'] = dapui.open
     dap.listeners.before.event_terminated['dapui_config'] = dapui.close
     dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-    local vscode = require('dap.ext.vscode')
-    local json = require('plenary.json')
-
     vscode.json_decode = function(str) return vim.json.decode(json.json_strip_comments(str)) end
-
     if vim.fn.filereadable('.vscode/launch.json') then vscode.load_launchjs() end
 
+    -- go
     require('dap-go').setup({
         delve = {
             detached = vim.fn.has('win32') == 0,
         },
     })
+
+    -- js/ts
+    local js_filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact' }
+
+    vscode.type_to_filetypes['node'] = js_filetypes
+    vscode.type_to_filetypes['pwa-node'] = js_filetypes
 
     if not dap.adapters['pwa-node'] then
         require('dap').adapters['pwa-node'] = {
@@ -92,11 +95,6 @@ return function()
             end
         end
     end
-
-    local js_filetypes = { 'typescript', 'javascript', 'typescriptreact', 'javascriptreact' }
-
-    vscode.type_to_filetypes['node'] = js_filetypes
-    vscode.type_to_filetypes['pwa-node'] = js_filetypes
 
     for _, language in ipairs(js_filetypes) do
         if not dap.configurations[language] then
