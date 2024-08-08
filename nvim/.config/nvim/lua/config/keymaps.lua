@@ -1,39 +1,71 @@
-local set = vim.keymap.set
+local function map(lhs, rhs, opts, mode)
+    opts = type(opts) == 'string' and { desc = opts } or opts
+    return vim.keymap.set(mode, lhs, rhs, opts)
+end
 
--- stylua: ignore start
-set({ 'n', 'x', 'i' }, '<c-s>', '<esc><cmd>w<cr><esc>')
-set({ 'i', 'x', 'n' }, '<esc>', '<esc><cmd>noh<cr><esc>')
-set({ 'n', 'x'      }, 'j',     [[v:count == 0 ? 'gj' : 'j']], { expr = true })
-set({ 'n', 'x'      }, 'k',     [[v:count == 0 ? 'gk' : 'k']], { expr = true })
+local function nmap(lhs, rhs, opts) return map(lhs, rhs, opts, 'n') end
+local function vmap(lhs, rhs, opts) return map(lhs, rhs, opts, 'v') end
+local function xmap(lhs, rhs, opts) return map(lhs, rhs, opts, 'x') end
+local function imap(lhs, rhs, opts) return map(lhs, rhs, opts, 'i') end
+local function tmap(lhs, rhs, opts) return map(lhs, rhs, opts, 't') end
+local function lnmap(lhs, rhs, opts, mode) return map('<leader>' .. lhs, rhs, opts, 'n') end
 
-set('x', 'p',          'P',                 { noremap = true })
-set('n', 'Y',          'v$<left>y',         { desc = 'Copy till end of line' })
-set('n', '<c-d>',      '<c-d>zz',           { desc = 'Scroll downwards' })
-set('n', '<c-u>',      '<c-u>zz',           { desc = 'Scroll upwards' })
-set('n', 'n',          'nzzzv',             { desc = 'Next result' })
-set('n', 'N',          'Nzzzv',             { desc = 'Previous result' })
-set('n', '*',          '*zzzv',             { desc = 'Previous result' })
-set('n', '#',          '#zzzv',             { desc = 'Previous result' })
-set("t", "<esc><esc>", "<c-\\><c-n>",       { desc = "Enter Normal Mode" })
-set("t", "<C-h>",      "<cmd>wincmd h<cr>", { desc = "Go to Left Window" })
-set("t", "<C-j>",      "<cmd>wincmd j<cr>", { desc = "Go to Lower Window" })
-set("t", "<C-k>",      "<cmd>wincmd k<cr>", { desc = "Go to Upper Window" })
-set("t", "<C-l>",      "<cmd>wincmd l<cr>", { desc = "Go to Right Window" })
-set("t", "<C-/>",      "<cmd>close<cr>")
-set("t", "<c-_>",      "<cmd>close<cr>")
+return function()
+    nmap('<c-s>', '<esc><cmd>w<cr><esc>')
+    xmap('<c-s>', '<esc><cmd>w<cr><esc>')
+    imap('<c-s>', '<esc><cmd>w<cr><esc>')
 
-set('v', '<',         '<gv')
-set('v', '>',         '>gv')
-set('n', '<c-h>',     '<c-w>h')
-set('n', '<c-j>',     '<c-w>j')
-set('n', '<c-k>',     '<c-w>k')
-set('n', '<c-l>',     '<c-w>l')
-set('n', '<c-up>',    '<cmd>resize +5<cr>')
-set('n', '<c-down>',  '<cmd>resize -5<cr>')
-set('n', '<c-left>',  '<cmd>vertical resize -20<cr>')
-set('n', '<c-right>', '<cmd>vertical resize +20<cr>')
-set('n', '<c-w>+',    '<cmd>resize +5<cr>')
-set('n', '<c-w>-',    '<cmd>resize -5<cr>')
-set('n', '<c-w><',    '<cmd>vertical resize -20<cr>')
-set('n', '<c-w>>',    '<cmd>vertical resize +20<cr>')
-set('n', '-',         '<cmd>Ex<cr>')
+    nmap('<esc>', '<esc><cmd>noh<cr><esc>')
+    xmap('<esc>', '<esc><cmd>noh<cr><esc>')
+    imap('<esc>', '<esc><cmd>noh<cr><esc>')
+
+    nmap('j', [[v:count == 0 ? 'gj' : 'j']], { expr = true })
+    xmap('j', [[v:count == 0 ? 'gj' : 'j']], { expr = true })
+
+    nmap('k', [[v:count == 0 ? 'gk' : 'k']], { expr = true })
+    xmap('k', [[v:count == 0 ? 'gk' : 'k']], { expr = true })
+
+    xmap('p', 'P')
+
+    nmap('Y', 'v$<left>y')
+    nmap('<c-d>', '<c-d>zz')
+    nmap('<c-u>', '<c-u>zz')
+    nmap('n', 'nzzzv')
+    nmap('N', 'Nzzzv')
+    nmap('*', '*zzzv')
+    nmap('#', '#zzzv')
+
+    tmap('<esc><esc>', '<c-\\><c-n>')
+    tmap('<C-h>', '<cmd>wincmd h<cr>')
+    tmap('<C-j>', '<cmd>wincmd j<cr>')
+    tmap('<C-k>', '<cmd>wincmd k<cr>')
+    tmap('<C-l>', '<cmd>wincmd l<cr>')
+    tmap('<C-/>', '<cmd>close<cr>')
+    tmap('<c-_>', '<cmd>close<cr>')
+
+    vmap('<', '<gv')
+    vmap('>', '>gv')
+
+    nmap('<c-h>', '<c-w>h')
+    nmap('<c-j>', '<c-w>j')
+    nmap('<c-k>', '<c-w>k')
+    nmap('<c-l>', '<c-w>l')
+    nmap('<c-up>', '<cmd>resize +5<cr>')
+    nmap('<c-down>', '<cmd>resize -5<cr>')
+    nmap('<c-left>', '<cmd>vertical resize -20<cr>')
+    nmap('<c-right>', '<cmd>vertical resize +20<cr>')
+    nmap('<c-w>+', '<cmd>resize +5<cr>')
+    nmap('<c-w>-', '<cmd>resize -5<cr>')
+    nmap('<c-w><', '<cmd>vertical resize -20<cr>')
+    nmap('<c-w>>', '<cmd>vertical resize +20<cr>')
+    nmap('-', '<cmd>Ex<cr>')
+
+    nmap(']t', '<cmd>tabnext<cr>', 'next tab')
+    nmap('[t', '<cmd>tabprevious<cr>', 'previous tab')
+    nmap('[T', '<cmd>tabfirst<cr>', 'first tab')
+    nmap(']T', '<cmd>tablast<cr>', 'last tab')
+
+    lnmap('<tab>o', '<cmd>tabonly<cr>', 'close other tabs')
+    lnmap('<tab><tab>', '<cmd>tabnew<cr>', 'new tab')
+    lnmap('<tab>d', '<cmd>tabclose<cr>', 'close tab')
+end

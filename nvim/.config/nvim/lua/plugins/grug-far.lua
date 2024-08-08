@@ -1,5 +1,9 @@
 local add = MiniDeps.add
 
-add('MagicDuck/grug-far.nvim')
+return function()
+    add('MagicDuck/grug-far.nvim')
 
-require('grug-far').setup()
+    require('grug-far').setup({ headerMaxWidth = 80 })
+
+    vim.keymap.set('n', '<leader>sr', '<cmd>GrugFar<cr>', { desc = 'replace' })
+end

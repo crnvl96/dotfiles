@@ -1,9 +1,5 @@
--- Place where the package manager will be installed
 local path_package = vim.fn.stdpath('data') .. '/site/'
--- Place where the mini framework will be installed
 local mini_path = path_package .. 'pack/deps/start/mini.nvim'
-
--- If the package manager is not present on the system, install is now
 if not vim.loop.fs_stat(mini_path) then
     vim.cmd('echo "Installing `mini.nvim`" | redraw')
     local clone_cmd = {
@@ -18,123 +14,32 @@ if not vim.loop.fs_stat(mini_path) then
     vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
 
--- Setup the package manager
 local deps = require('mini.deps')
 deps.setup({ path = { package = path_package } })
 
--- Package manager aliases
-local add = MiniDeps.add
 local now = deps.now
 local later = deps.later
 
-now(function() require('config.opts') end)
-now(function() require('config.autocmds') end)
-now(function() require('config.keymaps') end)
+now(require('config.opts'))
+now(require('config.autocmds'))
+now(require('config.keymaps'))
 
-now(function()
-    add('0xstepit/flow.nvim')
-    add('Aliqyan-21/darkvoid.nvim')
+now(require('plugins.colorscheme'))
+now(require('plugins.mason'))
 
-    require('flow').setup({
-        transparent = true,
-        fluo_color = 'pink',
-        mode = 'normal',
-        aggressive_spell = false,
-    })
+now(require('plugins.clojure'))
+now(require('plugins.cmp'))
+now(require('plugins.lsp'))
+now(require('plugins.fzf'))
+now(require('plugins.dap'))
 
-    require('darkvoid').setup({
-        transparent = true,
-        glow = true,
-    })
+later(require('plugins.conform'))
+later(require('plugins.oil'))
+later(require('plugins.grug-far'))
+later(require('plugins.fugitive'))
+later(require('plugins.quickfix'))
 
-    -- vim.cmd('colorscheme flow')
-    vim.cmd('colorscheme darkvoid')
-end)
-
-now(function()
-    add({
-        source = 'williamboman/mason.nvim',
-        hooks = {
-            post_checkout = function() vim.cmd('MasonUpdate') end,
-        },
-    })
-
-    add({
-        source = 'WhoIsSethDaniel/mason-tool-installer.nvim',
-        depends = {
-            { source = 'williamboman/mason.nvim' },
-            { source = 'williamboman/mason-lspconfig.nvim' },
-            { source = 'jay-babu/mason-nvim-dap.nvim' },
-        },
-    })
-
-    local misc = require('mini.misc')
-    local tools = require('tools')
-    local mason = require('mason')
-    local masontoolinstaller = require('mason-tool-installer')
-
-    local servers = vim.tbl_keys(tools.servers)
-    local formatters = tools.formatters
-    local debuggers = tools.debuggers
-
-    local ensure_installed = {}
-
-    vim.list_extend(ensure_installed, servers)
-    vim.list_extend(ensure_installed, formatters)
-    vim.list_extend(ensure_installed, debuggers)
-
-    misc.setup_restore_cursor({ center = true })
-    misc.setup_termbg_sync()
-
-    mason.setup()
-    masontoolinstaller.setup({ ensure_installed = ensure_installed, delay = 1000 })
-end)
-
-now(function()
-    add('Olical/conjure')
-    add('tpope/vim-dispatch')
-    add('clojure-vim/vim-jack-in')
-    add('radenling/vim-dispatch-neovim')
-end)
-
-now(function() require('plugins.cmp') end)
-now(function() require('plugins.lsp') end)
-now(function() require('plugins.dap') end)
-
-later(function() require('plugins.conform') end)
-later(function() require('plugins.fzf') end)
-later(function() require('plugins.oil') end)
-later(function() require('plugins.grug-far') end)
-later(function() require('plugins.fugitive') end)
-
-later(function()
-    add({
-        source = 'nvim-treesitter/nvim-treesitter',
-        hooks = { post_update = function() vim.cmd('TSUpdate') end },
-    })
-
-    add({
-        source = 'maxandron/goplements.nvim',
-    })
-
-    local treesitter = require('nvim-treesitter.configs')
-    local goplements = require('goplements')
-    local tools = require('tools')
-
-    goplements.setup({ display_package = true })
-
-    treesitter.setup({
-        ensure_installed = tools.ts_parsers,
-        sync_install = false,
-        auto_install = true,
-        indent = { enable = true },
-        highlight = {
-            enable = true,
-            additional_vim_regex_highlighting = { 'markdown' },
-        },
-    })
-end)
-
+later(function() require('plugins.treesitter') end)
 later(function() require('plugins.clue') end)
 
 later(function()

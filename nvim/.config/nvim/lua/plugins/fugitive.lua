@@ -1,3 +1,3 @@
 local add = MiniDeps.add
 
-add('tpope/vim-fugitive')
+return function() add('tpope/vim-fugitive') end
