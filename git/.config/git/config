@@ -1,9 +1,11 @@
+[github]
+	user = crnvl96
 [user]
   name = "Ádran Farias Carnavale"
   email = adran.carnavale@gmail.com
   signingkey = /home/crnvl96/.ssh/id_ed25519.pub
 [core]
-  editor = nvim
+  editor = emacs
   excludesfile = /home/crnvl96/.config/git/.gitignore_global
 [commit]
   verbose = true
