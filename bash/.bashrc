@@ -29,8 +29,8 @@ if [ -n "$NVIM" ]; then
     export EDITOR="nvim --server $NVIM --remote"
     alias nvim="$EDITOR"
 else
-    export EDITOR="emacs"
-    # export EDITOR="nvim"
+    # export EDITOR="emacs"
+    export EDITOR="nvim"
 fi
 export VISUAL="$EDITOR"
 
