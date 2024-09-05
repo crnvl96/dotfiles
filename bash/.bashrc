@@ -5,6 +5,7 @@
 
 source $HOME/.config/bash/git-prompt.sh
 source $HOME/.config/bash/git-completion.sh
+source $HOME/.config/bash/tmux-completion
 
 PS1='[\j][\W$(__git_ps1 " (%s)")]\n\$ '
 HISTSIZE=10000
@@ -70,3 +71,7 @@ alias display="$HOME/.local/scripts/display"
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 eval "$(zoxide init --cmd x bash)"
+
+if command -v tmux &> /dev/null && [[ $- == *i* ]] && [[ ! "$TERM" =~ screen|tmux ]] && [ -z "$TMUX" ]; then
+  tmux attach-session -t main || exec tmux new-session -s main
+fi
