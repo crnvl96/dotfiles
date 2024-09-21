@@ -30,9 +30,9 @@ if [ -n "$NVIM" ]; then
     export EDITOR="nvim --server $NVIM --remote"
     alias nvim="$EDITOR"
 else
-    # export EDITOR="emacs"
     export EDITOR="nvim"
 fi
+
 export VISUAL="$EDITOR"
 
 export FZF_DEFAULT_OPTS="$FZF_OPTS"

@@ -5,8 +5,7 @@
   email = adran.carnavale@gmail.com
   signingkey = /home/adran_carnavale/.ssh/id_ed25519.pub
 [core]
-  ; editor = emacs
-  editor = nvim
+  editor = $EDITOR
   excludesfile = /home/adran_carnavale/.config/git/.gitignore_global
 [commit]
   verbose = true
