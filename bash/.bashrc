@@ -75,3 +75,7 @@ eval "$(zoxide init --cmd x bash)"
 # if command -v tmux &> /dev/null && [[ $- == *i* ]] && [[ ! "$TERM" =~ screen|tmux ]] && [ -z "$TMUX" ]; then
 #   tmux attach-session -t main || exec tmux new-session -s main
 # fi
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH=$BUN_INSTALL/bin:$PATH
