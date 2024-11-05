@@ -1,0 +1,15 @@
+os:
+  editPreset: 'nvim'
+customCommands:
+  - key: '<C-c>'
+    context: 'global'
+    command: "git commit --no-verify"
+    description: 'Commit without hooks'
+    subprocess: true
+  - key: '<C-p>'
+    context: 'global'
+    command: "git push --no-verify --force-with-lease"
+    description: 'Push without hooks'
+    subprocess: true
+git:
+  branchLogCmd: "git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium --oneline {{branchName}} --"
