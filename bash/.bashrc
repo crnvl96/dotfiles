@@ -50,3 +50,5 @@ export PATH="$HOME/.local/bin:$PATH"
 # Zoxide
 export _ZO_RESOLVE_SYMLINKS=1
 eval "$(zoxide init --cmd x bash)"
+
+[ -f "/home/crnvl96/.ghcup/env" ] && . "/home/crnvl96/.ghcup/env" # ghcup-env
