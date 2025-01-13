@@ -10,7 +10,6 @@ config.font_size = 13
 config.font = wezterm.font('HasklugNerdFont', { weight = 'Medium' })
 config.max_fps = 120
 config.disable_default_key_bindings = true
-config.inactive_pane_hsb = { saturation = 0.5, brightness = 0.5 }
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
 config.cursor_thickness = 2
 config.hide_tab_bar_if_only_one_tab = true
