@@ -15,18 +15,17 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-bindsym Print exec --no-startup-id flameshot gui
-
 bindsym $mod+c kill
 bindsym $mod+p exec --no-startup-id i3-dmenu-desktop
 bindsym $mod+w exec --no-startup-id google-chrome-stable
 bindsym $mod+f fullscreen toggle
 bindsym $mod+a focus parent
 
-bindsym $mod+Return exec wezterm
+bindsym $mod+Return exec --no-startup-id ~/.local/bin/ghostty
 bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+p exec --no-startup-id flameshot gui
 bindsym $mod+Shift+d exec ~/.screenlayout/default.sh
 bindsym $mod+Shift+f exec ~/.screenlayout/hdmi.sh
 bindsym $mod+m bar mode toggle
