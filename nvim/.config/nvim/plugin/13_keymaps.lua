@@ -61,6 +61,18 @@ Utils.Keymap('Better Esc', {
   end,
 })
 
+Utils.Keymap('Start of the file', {
+  mode = 'n',
+  lhs = 'gh',
+  rhs = function() vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('_', true, true, true), 'm', false) end,
+})
+
+Utils.Keymap('End of the file', {
+  mode = 'n',
+  lhs = 'gl',
+  rhs = function() vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('$', true, true, true), 'm', false) end,
+})
+
 Utils.Keymap('Window left', {
   lhs = '<C-h>',
   rhs = '<C-w>h',
