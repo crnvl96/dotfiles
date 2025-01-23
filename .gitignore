@@ -1,0 +1,16 @@
+emacs/.config/emacs/*
+!emacs/.config/emacs/init.el
+!emacs/.config/emacs/early-init.el
+!emacs/.config/emacs/crnvl96/
+
+xmonad/.config/xmonad/*
+!xmonad/.config/xmonad/xmonad.hs
+!xmonad/.config/xmonad/build
+
+xmobar/.config/xmobar/*
+.aider*
+
+anthropic
+huggingface
+.env
+.aider*

@@ -1,0 +1,43 @@
+[language-server.ruff]
+command = "ruff"
+args = ["server"]
+
+
+[language-server.ruff.cmd_env]
+RUFF_TRACE = 'messages'
+
+[language-server.ruff.config.settings]
+logLevel = "debug"
+
+
+[language-server.basedpyright]
+[language-server.basedpyright.config.settings.basedpyright]
+disableOrganizeImports = true
+
+[language-server.basedpyright.config.settings.basedpyright.analysis]
+typeCheckingMode = 'strict'
+
+
+[language-server.efm-lsp-prettier]
+command = "efm-langserver"
+
+[language-server.efm-lsp-prettier.config]
+documentFormatting = true
+
+[language-server.efm-lsp-prettier.config.languages]
+json = [{ formatCommand = "prettierd ${INPUT}", formatStdin = true }]
+jsonc = [{ formatCommand = "prettierd ${INPUT}", formatStdin = true }]
+
+
+# Languages
+
+[[language]]
+name = "python"
+language-servers = ["ruff", "basedpyright"]
+auto-format = true
+
+
+[[language]]
+name = "toml"
+auto-format = true
+formatter = { command = "taplo", args = ["fmt", "-"] }
