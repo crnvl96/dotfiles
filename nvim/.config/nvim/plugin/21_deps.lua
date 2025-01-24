@@ -37,6 +37,7 @@ Add('igorlfs/nvim-dap-view')
 
 Add('tpope/vim-fugitive')
 Add('andymass/vim-matchup')
+Add('danymat/neogen')
 
 Add('saghen/blink.compat')
 Add({ source = 'Saghen/blink.cmp', hooks = { post_install = cargo, post_checkout = cargo } })

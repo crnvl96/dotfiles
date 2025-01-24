@@ -170,7 +170,7 @@ Utils.Keymap('Files', {
   mode = 'n',
   rhs = function()
     local picker = Snacks.picker
-    picker.files()
+    picker.files({ hidden = true })
   end,
 })
 

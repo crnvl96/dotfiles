@@ -9,6 +9,14 @@ require('dap-view').setup()
 require('nvim-dap-virtual-text').setup({ virt_text_pos = 'eol' })
 require('dap-python').setup('uv')
 
+require('neogen').setup({
+  -- snippet_engine = 'mini',
+  languages = {
+    lua = { template = { annotation_convention = 'emmylua' } },
+    python = { template = { annotation_convention = 'numpydoc' } },
+  },
+})
+
 require('snacks').setup({
   input = { enabled = true },
   notifier = { enabled = true },
@@ -138,7 +146,7 @@ local adapters = {
   [3] = 'deepseek',
 }
 
-local adapter = adapters[3]
+local adapter = adapters[1]
 
 require('codecompanion').setup({
   strategies = {

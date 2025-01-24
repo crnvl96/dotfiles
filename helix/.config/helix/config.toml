@@ -1,8 +1,8 @@
-theme = "onedark"
+theme = "base16_transparent"
 
 [editor]
 line-number = "relative"
-mouse = false
+mouse = true
 
 [editor.cursor-shape]
 insert = "bar"
@@ -11,3 +11,13 @@ select = "underline"
 
 [editor.file-picker]
 hidden = false
+
+[keys.normal]
+C-s = ":w"
+g = { a = "code_action" }
+"ret" = ["open_below", "normal_mode"]
+
+[keys.insert]
+j = { k = "normal_mode" }
+k = { j = "normal_mode" }
+C-s = ["normal_mode", ":w"]
