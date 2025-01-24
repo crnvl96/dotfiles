@@ -133,12 +133,12 @@ require('conform').setup({
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 local adapters = {
-  'anthropic',
-  'huggingface',
-  'deepseek',
+  [1] = 'anthropic',
+  [2] = 'huggingface',
+  [3] = 'deepseek',
 }
 
-local adapter = adapters[1]
+local adapter = adapters[3]
 
 require('codecompanion').setup({
   strategies = {
