@@ -12,5 +12,6 @@ xmobar/.config/xmobar/*
 
 anthropic
 huggingface
+deepseek
 .env
 .aider*

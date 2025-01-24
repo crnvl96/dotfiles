@@ -1,7 +1,9 @@
 require('mini.icons').setup()
+
 require('mini.align').setup()
 require('mini.operators').setup()
 require('csvview').setup()
+
 require('blink.compat').setup()
 require('dap-view').setup()
 require('nvim-dap-virtual-text').setup({ virt_text_pos = 'eol' })
@@ -128,10 +130,20 @@ require('conform').setup({
   end,
 })
 
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
+local adapters = {
+  'anthropic',
+  'huggingface',
+  'deepseek',
+}
+
+local adapter = adapters[1]
+
 require('codecompanion').setup({
   strategies = {
     chat = {
-      adapter = 'huggingface',
+      adapter = adapter,
       keymaps = {
         completion = {
           modes = {
@@ -140,8 +152,8 @@ require('codecompanion').setup({
         },
       },
     },
-    inline = { adapter = 'huggingface' },
-    cmd = { adapter = 'huggingface' },
+    inline = { adapter = adapter },
+    cmd = { adapter = adapter },
   },
   adapters = {
     huggingface = require('codecompanion.adapters').extend('huggingface', {
@@ -150,6 +162,17 @@ require('codecompanion').setup({
         model = {
           -- available models can be found at https://huggingface.co/models?inference=warm&pipeline_tag=text-generation
           default = 'Qwen/Qwen2.5-Coder-32B-Instruct',
+        },
+      },
+    }),
+    deepseek = require('codecompanion.adapters').extend('deepseek', {
+      env = { api_key = Utils.ReadFromFile('deepseek') },
+    }),
+    anthropic = require('codecompanion.adapters').extend('anthropic', {
+      env = { api_key = Utils.ReadFromFile('anthropic') },
+      schema = {
+        model = {
+          default = 'claude-3-5-haiku-20241022',
         },
       },
     }),
@@ -163,21 +186,33 @@ require('dap.ext.vscode').json_decode = function(data)
   return decode(data)
 end
 
-require('mini.files').setup({
-  mappings = {
-    show_help = '?',
-    go_in = '',
-    go_out = '',
-    go_in_plus = 'L',
-    go_out_plus = 'H',
-  },
-  windows = {
-    preview = true,
-    width_preview = 80,
+require('oil').setup({
+  watch_for_changes = true,
+  use_default_keymaps = false,
+  keymaps = {
+    ['g?'] = { 'actions.show_help', mode = 'n' },
+    ['<CR>'] = 'actions.select',
+    ['<C-w>v'] = { 'actions.select', opts = { vertical = true } },
+    ['<C-w>h'] = { 'actions.select', opts = { horizontal = true } },
+    ['<C-w>t'] = { 'actions.select', opts = { tab = true } },
+    ['<C-w>p'] = 'actions.preview',
+    ['<C-c>'] = { 'actions.close', mode = 'n' },
+    ['<C-w>r'] = 'actions.refresh',
+    ['<M-o>'] = { 'actions.parent', mode = 'n' },
+    ['@'] = { 'actions.open_cwd', mode = 'n' },
+    ['`'] = { 'actions.cd', mode = 'n' },
+    ['~'] = { 'actions.cd', opts = { scope = 'tab' }, mode = 'n' },
+    ['gs'] = { 'actions.change_sort', mode = 'n' },
+    ['gx'] = 'actions.open_external',
+    ['g.'] = { 'actions.toggle_hidden', mode = 'n' },
+    ['g\\'] = { 'actions.toggle_trash', mode = 'n' },
   },
 })
 
-require('mini.clue').setup({
+local miniclue = require('mini.clue')
+
+miniclue.setup({
+
   triggers = {
     -- Leader
     { mode = 'n', keys = '<Leader>' },
@@ -210,12 +245,12 @@ require('mini.clue').setup({
     { mode = 'x', keys = 'z' },
   },
   clues = {
-    require('mini.clue').gen_clues.builtin_completion(),
-    require('mini.clue').gen_clues.g(),
-    require('mini.clue').gen_clues.marks(),
-    require('mini.clue').gen_clues.registers(),
-    require('mini.clue').gen_clues.windows(),
-    require('mini.clue').gen_clues.z(),
+    miniclue.gen_clues.builtin_completion(),
+    miniclue.gen_clues.g(),
+    miniclue.gen_clues.marks(),
+    miniclue.gen_clues.registers(),
+    miniclue.gen_clues.windows(),
+    miniclue.gen_clues.z(),
 
     -- Buffers
     { mode = 'n', keys = '<Leader>b', desc = 'Buffers' },

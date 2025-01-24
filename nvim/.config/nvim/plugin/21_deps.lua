@@ -25,6 +25,7 @@ Add('folke/snacks.nvim')
 
 Add('mfussenegger/nvim-lint')
 Add('stevearc/conform.nvim')
+Add('stevearc/oil.nvim')
 
 Add('hat0uma/csvview.nvim')
 Add('olimorris/codecompanion.nvim')

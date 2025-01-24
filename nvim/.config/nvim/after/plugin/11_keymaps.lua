@@ -1,12 +1,3 @@
-Utils.Keymap('Explorer', {
-  lhs = '<Leader>e',
-  rhs = function()
-    local bufname = vim.api.nvim_buf_get_name(0)
-    local path = vim.fn.fnamemodify(bufname, ':p')
-    if path and vim.uv.fs_stat(path) then require('mini.files').open(bufname, false) end
-  end,
-})
-
 ---
 --- Toggling features
 ---
@@ -28,6 +19,12 @@ Snacks.toggle({
     end
   end,
 }):map('<Leader>ua', { desc = 'Autoformat' })
+
+Utils.Keymap('Oil', {
+  lhs = '<M-o>',
+  mode = 'n',
+  rhs = '<Cmd>Oil<CR>',
+})
 
 ---
 --- [B]uffers keymaps

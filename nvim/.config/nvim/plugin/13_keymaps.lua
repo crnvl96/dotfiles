@@ -61,6 +61,20 @@ Utils.Keymap('Better Esc', {
   end,
 })
 
+Utils.Keymap('Better Up', {
+  mode = { 'n', 'v' },
+  lhs = 'gk',
+  rhs = '6k',
+  remap = true,
+})
+
+Utils.Keymap('Better Down', {
+  mode = { 'n', 'v' },
+  lhs = 'gj',
+  rhs = '6j',
+  remap = true,
+})
+
 Utils.Keymap('Start of the file', {
   mode = 'n',
   lhs = 'gh',
