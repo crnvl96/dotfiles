@@ -1,5 +1,3 @@
-require('mini.icons').setup()
-
 require('mini.align').setup()
 require('mini.operators').setup()
 require('csvview').setup()
@@ -13,6 +11,11 @@ require('snacks').setup({
   input = { enabled = true },
   notifier = { enabled = true },
   picker = {
+    icons = {
+      files = {
+        enabled = false,
+      },
+    },
     formatters = {
       file = {
         filename_first = true,

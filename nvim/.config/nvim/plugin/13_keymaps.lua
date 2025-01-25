@@ -1,29 +1,35 @@
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 
-Utils.Keymap('Search forward', {
-  expr = true,
-  lhs = 'n',
-  rhs = "'Nn'[v:searchforward].'zv'",
+Utils.Keymap('Scroll down', {
+  lhs = '<C-d>',
+  rhs = '<C-d>zz',
+})
+
+Utils.Keymap('Scroll up', {
+  lhs = '<C-u>',
+  rhs = '<C-u>zz',
+})
+
+Utils.Keymap('Search current word forward', {
+  lhs = '*',
+  rhs = '*zzzv',
+})
+
+Utils.Keymap('Search current word backward', {
+  lhs = '#',
+  rhs = '#zzzv',
 })
 
 Utils.Keymap('Search forward', {
   expr = true,
-  mode = { 'x', 'o' },
   lhs = 'n',
-  rhs = "'Nn'[v:searchforward]",
+  rhs = "'Nn'[v:searchforward].'zzzv'",
 })
 
 Utils.Keymap('Search backward', {
   expr = true,
   lhs = 'N',
-  rhs = "'nN'[v:searchforward].'zv'",
-})
-
-Utils.Keymap('Search backward', {
-  expr = true,
-  mode = { 'x', 'o' },
-  lhs = 'N',
-  rhs = "'nN'[v:searchforward]",
+  rhs = "'nN'[v:searchforward].'zzzv'",
 })
 
 Utils.Keymap('Better paste', {
@@ -54,7 +60,7 @@ Utils.Keymap('Clear highlight', {
 
 Utils.Keymap('Better Esc', {
   mode = { 'n', 'i', 'x', 'o', 't', 'c' },
-  lhs = '<C-e>',
+  lhs = '<M-x>',
   rhs = function()
     local code_esc = vim.api.nvim_replace_termcodes('<Esc>', true, true, true)
     vim.api.nvim_feedkeys(code_esc, 'm', false)

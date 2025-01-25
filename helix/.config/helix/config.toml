@@ -3,6 +3,19 @@ theme = "base16_transparent"
 [editor]
 line-number = "relative"
 mouse = true
+scrolloff = 8
+end-of-line-diagnostics = "disable"
+
+[editor.lsp]
+auto-signature-help = false
+display-signature-help-docs = false
+
+[editor.indent-guides]
+render = true
+
+[editor.inline-diagnostics]
+cursor-line = "hint"
+other-lines = "hint"
 
 [editor.cursor-shape]
 insert = "bar"
@@ -15,7 +28,45 @@ hidden = false
 [keys.normal]
 C-s = ":w"
 g = { a = "code_action" }
-"ret" = ["open_below", "normal_mode"]
+S-j = [
+  "move_visual_line_down",
+  "move_visual_line_down",
+  "move_visual_line_down",
+  "move_visual_line_down",
+  "move_visual_line_down",
+  "move_visual_line_down",
+]
+S-k = [
+  "move_visual_line_up",
+  "move_visual_line_up",
+  "move_visual_line_up",
+  "move_visual_line_up",
+  "move_visual_line_up",
+  "move_visual_line_up",
+]
+S-v = ["normal_mode", "goto_line_start", "select_mode", "goto_line_end"]
+S-h = "goto_line_start"
+S-l = "goto_line_end"
+
+[keys.select]
+S-j = [
+  "move_visual_line_down",
+  "move_visual_line_down",
+  "move_visual_line_down",
+  "move_visual_line_down",
+  "move_visual_line_down",
+  "move_visual_line_down",
+]
+S-k = [
+  "move_visual_line_up",
+  "move_visual_line_up",
+  "move_visual_line_up",
+  "move_visual_line_up",
+  "move_visual_line_up",
+  "move_visual_line_up",
+]
+S-h = "goto_line_start"
+S-l = "goto_line_end"
 
 [keys.insert]
 j = { k = "normal_mode" }
