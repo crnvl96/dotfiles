@@ -13,21 +13,23 @@ args = ["--stdio"]
 
 [language-server.basedpyright.config]
 basedpyright.analysis.diagnosticMode = "openFilesOnly"
+basedpyright.autoSearchPaths = true
+basedpyright.useLibraryCodeForTypes = true
 basedpyright.disableOrganizeImports = true
 
-
-[language-server.efm-lsp-prettier]
-command = "efm-langserver"
-
-[language-server.efm-lsp-prettier.config]
-documentFormatting = true
-
-[language-server.efm-lsp-prettier.config.languages]
-json = [{ formatCommand = "prettierd ${INPUT}", formatStdin = true }]
-jsonc = [{ formatCommand = "prettierd ${INPUT}", formatStdin = true }]
+[language-server.vtsls]
+command = "vtsls"
+args = ["--stdio"]
 
 
 # Languages
+
+
+[[language]]
+name = "typescript"
+language-servers = ['vtsls', "vscode-eslint-language-server"]
+formatter = { command = 'prettierd', args = [".ts"] }
+auto-format = true
 
 [[language]]
 name = "python"
