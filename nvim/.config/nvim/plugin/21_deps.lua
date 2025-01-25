@@ -28,7 +28,6 @@ Add('stevearc/conform.nvim')
 Add('stevearc/oil.nvim')
 
 Add('hat0uma/csvview.nvim')
-Add('olimorris/codecompanion.nvim')
 
 Add('theHamsta/nvim-dap-virtual-text')
 Add('mfussenegger/nvim-dap-python')
@@ -37,7 +36,6 @@ Add('igorlfs/nvim-dap-view')
 
 Add('tpope/vim-fugitive')
 Add('andymass/vim-matchup')
-Add('danymat/neogen')
 
 Add('saghen/blink.compat')
 Add({ source = 'Saghen/blink.cmp', hooks = { post_install = cargo, post_checkout = cargo } })
