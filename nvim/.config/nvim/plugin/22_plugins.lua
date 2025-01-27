@@ -57,12 +57,8 @@ require('nvim-treesitter.configs').setup({
   },
 })
 
-local gen_loader = require('mini.snippets').gen_loader
 require('mini.snippets').setup({
-  snippets = {
-    gen_loader.from_file('~/.config/nvim/snippets/global.json'),
-    gen_loader.from_lang(),
-  },
+  snippets = { require('mini.snippets').gen_loader.from_lang() },
 })
 
 require('blink.cmp').setup({
@@ -175,27 +171,20 @@ require('oil').setup({
 local miniclue = require('mini.clue')
 miniclue.setup({
   triggers = {
-    -- Leader
     { mode = 'n', keys = '<Leader>' },
     { mode = 'x', keys = '<Leader>' },
-    -- Builtin completion
     { mode = 'i', keys = '<C-x>' },
-    -- `g` key
     { mode = 'n', keys = 'g' },
     { mode = 'x', keys = 'g' },
-    -- Marks
     { mode = 'n', keys = "'" },
     { mode = 'x', keys = "'" },
     { mode = 'n', keys = '`' },
     { mode = 'x', keys = '`' },
-    -- Registers
     { mode = 'n', keys = '"' },
     { mode = 'x', keys = '"' },
     { mode = 'i', keys = '<C-r>' },
     { mode = 'c', keys = '<C-r>' },
-    -- Windows
     { mode = 'n', keys = '<C-w>' },
-    -- `z` key
     { mode = 'n', keys = 'z' },
     { mode = 'x', keys = 'z' },
   },
@@ -206,25 +195,17 @@ miniclue.setup({
     miniclue.gen_clues.registers(),
     miniclue.gen_clues.windows(),
     miniclue.gen_clues.z(),
-    -- Buffers
     { mode = 'n', keys = '<Leader>b', desc = 'Buffers' },
-    -- Ai assistant
     { mode = 'n', keys = '<Leader>c', desc = 'Code (AI)' },
     { mode = 'x', keys = '<Leader>c', desc = 'Code (AI)' },
-    -- Debug
     { mode = 'n', keys = '<Leader>d', desc = 'Dap' },
     { mode = 'x', keys = '<Leader>d', desc = 'Dap' },
-    -- Find
     { mode = 'n', keys = '<Leader>f', desc = 'Find' },
-    -- Git
     { mode = 'n', keys = '<Leader>g', desc = 'Git' },
     { mode = 'x', keys = '<Leader>g', desc = 'Git' },
     { mode = 'n', keys = '<Leader>gl', desc = 'Log' },
-    -- LSP
     { mode = 'n', keys = '<Leader>l', desc = 'LSP' },
-    -- Notifications
     { mode = 'n', keys = '<Leader>n', desc = 'Notifications' },
-    -- Toggling features
     { mode = 'n', keys = '<Leader>u', desc = 'Toggle' },
   },
   window = {
