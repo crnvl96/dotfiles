@@ -104,8 +104,6 @@ require('blink.cmp').setup({
   },
 })
 
-vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-
 require('conform').setup({
   notify_on_error = true,
   formatters = { injected = { ignore_errors = true } },
@@ -168,6 +166,63 @@ require('oil').setup({
   },
 })
 
+require('codecompanion').setup({
+  strategies = {
+    chat = {
+      adapter = vim.g.ai_strategy,
+      keymaps = {
+        completion = {
+          modes = {
+            i = '<C-n>',
+          },
+        },
+      },
+    },
+    inline = { adapter = vim.g.ai_strategy },
+    cmd = { adapter = vim.g.ai_strategy },
+  },
+  display = {
+    chat = {
+      window = {
+        layout = 'buffer',
+        opts = {
+          wrap = false,
+        },
+      },
+    },
+  },
+  adapters = {
+    huggingface = require('codecompanion.adapters').extend('huggingface', {
+      env = { api_key = Utils.ReadFromFile('huggingface') },
+      schema = {
+        model = {
+          -- available models can be found at https://huggingface.co/models?inference=warm&pipeline_tag=text-generation
+          -- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/huggingface.lua
+          default = 'Qwen/Qwen2.5-Coder-32B-Instruct',
+        },
+      },
+    }),
+    anthropic = require('codecompanion.adapters').extend('anthropic', {
+      env = { api_key = Utils.ReadFromFile('anthropic') },
+      schema = {
+        model = {
+          -- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/anthropic.lua
+          default = 'claude-3-5-haiku-20241022',
+        },
+      },
+    }),
+    deepseek = require('codecompanion.adapters').extend('deepseek', {
+      env = { api_key = Utils.ReadFromFile('deepseek') },
+      schema = {
+        model = {
+          -- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/deepseek.lua
+          default = 'deepseek-chat',
+        },
+      },
+    }),
+  },
+})
+
 local miniclue = require('mini.clue')
 miniclue.setup({
   triggers = {
@@ -227,8 +282,8 @@ for server, config in pairs({
     workingDirectories = { mode = 'auto' },
   },
   ruff = {
-    on_attach = function(client) client.server_capabilities.hoverProvider = false end,
-    cmd_env = { RUFF_TRACE = 'messages' },
+    -- on_attach = function(client) client.server_capabilities.hoverProvider = false end,
+    -- cmd_env = { RUFF_TRACE = 'messages' },
     init_options = {
       settings = {
         logLevel = 'debug',
@@ -240,6 +295,7 @@ for server, config in pairs({
       basedpyright = {
         disableOrganizeImports = true,
         analysis = {
+          typeCheckingMode = 'standard',
           autoSearchPaths = true,
           diagnosticMode = 'openFilesOnly',
           useLibraryCodeForTypes = true,
