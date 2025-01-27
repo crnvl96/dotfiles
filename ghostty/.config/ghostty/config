@@ -24,7 +24,7 @@ keybind = alt+four=goto_tab:4
 keybind = alt+five=goto_tab:5
 
 keybind = alt+t=new_tab
-keybind = alt+c=close_surface
+keybind = alt+q=close_surface
 keybind = alt+equal=increase_font_size:1
 keybind = alt+minus=decrease_font_size:1
 keybind = alt+zero=reset_font_size

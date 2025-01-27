@@ -58,45 +58,6 @@ Utils.Keymap('Clear highlight', {
   rhs = '<Esc><Cmd>nohl<CR><Esc>',
 })
 
-Utils.Keymap('Better Esc', {
-  mode = { 'n', 'i', 'x', 'o', 't', 'c' },
-  lhs = '<M-x>',
-  rhs = function()
-    local code_esc = vim.api.nvim_replace_termcodes('<Esc>', true, true, true)
-    vim.api.nvim_feedkeys(code_esc, 'm', false)
-  end,
-})
-
-Utils.Keymap('Better Up', {
-  mode = { 'n', 'v' },
-  lhs = 'K',
-  rhs = '6k',
-})
-
-Utils.Keymap('Better Down', {
-  mode = { 'n', 'v' },
-  lhs = 'J',
-  rhs = '6j',
-})
-
-Utils.Keymap('Start of the file', {
-  mode = 'n',
-  lhs = 'H',
-  rhs = function() vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('_', true, true, true), 'm', false) end,
-})
-
-Utils.Keymap('End of the file', {
-  mode = 'n',
-  lhs = 'L',
-  rhs = function() vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('$', true, true, true), 'm', false) end,
-})
-
-Utils.Keymap('Join lines', {
-  mode = 'n',
-  lhs = 'S',
-  rhs = function() vim.cmd('join') end,
-})
-
 Utils.Keymap('Window left', {
   lhs = '<C-h>',
   rhs = '<C-w>h',

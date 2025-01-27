@@ -57,6 +57,14 @@ require('nvim-treesitter.configs').setup({
   },
 })
 
+local gen_loader = require('mini.snippets').gen_loader
+require('mini.snippets').setup({
+  snippets = {
+    gen_loader.from_file('~/.config/nvim/snippets/global.json'),
+    gen_loader.from_lang(),
+  },
+})
+
 require('blink.cmp').setup({
   enabled = function()
     return not vim.tbl_contains({ 'minifiles' }, vim.bo.filetype)
@@ -66,6 +74,10 @@ require('blink.cmp').setup({
   appearance = {
     use_nvim_cmp_as_default = false,
     nerd_font_variant = 'mono',
+  },
+  snippets = { preset = 'mini_snippets' },
+  sources = {
+    default = { 'lsp', 'path', 'snippets', 'buffer' },
   },
   completion = {
     ghost_text = {
@@ -90,14 +102,6 @@ require('blink.cmp').setup({
       },
     },
   },
-  sources = {
-    transform_items = function(_, items)
-      return vim.tbl_filter(
-        function(item) return item.kind ~= require('blink.cmp.types').CompletionItemKind.Snippet end,
-        items
-      )
-    end,
-  },
   signature = {
     enabled = true,
     window = { border = 'rounded' },
@@ -114,6 +118,7 @@ require('conform').setup({
     lua = { 'stylua' },
     javascript = { 'prettierd' },
     css = { 'prettierd' },
+    html = { 'prettierd' },
     scss = { 'prettierd' },
     javascriptreact = { 'prettierd' },
     typescript = { 'prettierd' },
@@ -294,22 +299,13 @@ for server, config in pairs({
           arrayIndex = 'Disable',
         },
         completion = {
-          callSnippet = 'Disable',
-          keywordSnippet = 'Disable',
+          callSnippet = 'Replace',
         },
       },
     },
   },
 }) do
   config = config or {}
-  config.capabilities = require('blink.cmp').get_lsp_capabilities({
-    textDocument = {
-      completion = {
-        completionItem = {
-          snippetSupport = false,
-        },
-      },
-    },
-  })
+  config.capabilities = require('blink.cmp').get_lsp_capabilities()
   require('lspconfig')[server].setup(config)
 end

@@ -25,17 +25,13 @@ alias ls="eza -l"
 alias la="eza -lA"
 alias lzd="lazydocker"
 alias lzg="lazygit"
-
 alias ai="aider --no-gui"
 alias sv="source .venv/bin/activate"
-
 alias pvc="pavucontrol"
 alias bc="sudo brightnessctl"
 alias ar="arandr"
-
 alias cl="clear"
 alias ex="exit"
-
 alias nv="nvim"
 alias gl="git log --all --oneline --graph --decorate"
 alias gs="git status"
@@ -45,9 +41,10 @@ alias gp="git fetch --all --prune && git pull --rebase"
 # Wezterm
 export WEZTERM_CONFIG_FILE="$HOME/.config/wezterm/wezterm.lua"
 
-# Install Ruby Gems to ~/gems
+# Ruby
 export GEM_HOME="$HOME/gems"
 
+# Haskell
 [ -f "/home/crnvl96/.ghcup/env" ] && . "/home/crnvl96/.ghcup/env"
 
 # Path
@@ -55,6 +52,15 @@ export PATH="$HOME/.local/bin:$HOME/gems/bin:$PATH"
 
 # asdf
 . "$HOME/.asdf/asdf.sh"
+
+# fzf
+
+# Use ripgrep (rg) as the default finder source
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="rg --files --hidden --follow --glob "!.git/*" --null | xargs -0 dirname | sort | uniq"
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # MUST BE AT THE END!!!
 # Zoxide

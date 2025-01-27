@@ -15,7 +15,7 @@ render = true
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
-select = "underline"
+select = "block"
 
 [editor.file-picker]
 hidden = false
@@ -23,47 +23,7 @@ hidden = false
 [keys.normal]
 C-s = ":w"
 g = { a = "code_action" }
-S-j = [
-  "move_visual_line_down",
-  "move_visual_line_down",
-  "move_visual_line_down",
-  "move_visual_line_down",
-  "move_visual_line_down",
-  "move_visual_line_down",
-]
-S-k = [
-  "move_visual_line_up",
-  "move_visual_line_up",
-  "move_visual_line_up",
-  "move_visual_line_up",
-  "move_visual_line_up",
-  "move_visual_line_up",
-]
 S-v = ["normal_mode", "goto_line_start", "select_mode", "goto_line_end"]
-S-h = "goto_line_start"
-S-l = "goto_line_end"
-
-[keys.select]
-S-j = [
-  "move_visual_line_down",
-  "move_visual_line_down",
-  "move_visual_line_down",
-  "move_visual_line_down",
-  "move_visual_line_down",
-  "move_visual_line_down",
-]
-S-k = [
-  "move_visual_line_up",
-  "move_visual_line_up",
-  "move_visual_line_up",
-  "move_visual_line_up",
-  "move_visual_line_up",
-  "move_visual_line_up",
-]
-S-h = "goto_line_start"
-S-l = "goto_line_end"
 
 [keys.insert]
-j = { k = "normal_mode" }
-k = { j = "normal_mode" }
 C-s = ["normal_mode", ":w"]
