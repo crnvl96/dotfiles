@@ -256,6 +256,8 @@ miniclue.setup({
     { mode = 'n', keys = '<Leader>d', desc = 'Dap' },
     { mode = 'x', keys = '<Leader>d', desc = 'Dap' },
     { mode = 'n', keys = '<Leader>f', desc = 'Find' },
+    { mode = 'n', keys = '<Leader>s', desc = 'Search' },
+    { mode = 'x', keys = '<Leader>s', desc = 'Search' },
     { mode = 'n', keys = '<Leader>g', desc = 'Git' },
     { mode = 'x', keys = '<Leader>g', desc = 'Git' },
     { mode = 'n', keys = '<Leader>gl', desc = 'Log' },
@@ -282,23 +284,25 @@ for server, config in pairs({
     workingDirectories = { mode = 'auto' },
   },
   ruff = {
-    -- on_attach = function(client) client.server_capabilities.hoverProvider = false end,
-    -- cmd_env = { RUFF_TRACE = 'messages' },
+    on_attach = function(client) client.server_capabilities.hoverProvider = false end,
+    cmd_env = { RUFF_TRACE = 'messages' },
     init_options = {
       settings = {
         logLevel = 'debug',
       },
     },
   },
+  -- jedi_language_server = {},
+
   basedpyright = {
     settings = {
       basedpyright = {
         disableOrganizeImports = true,
         analysis = {
-          typeCheckingMode = 'standard',
-          autoSearchPaths = true,
+          typeCheckingMode = 'strict',
+          autoSearchPaths = false,
           diagnosticMode = 'openFilesOnly',
-          useLibraryCodeForTypes = true,
+          useLibraryCodeForTypes = false,
         },
       },
     },

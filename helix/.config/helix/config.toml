@@ -1,4 +1,4 @@
-theme = "base16_default_dark"
+theme = "base16_transparent"
 
 [editor]
 line-number = "relative"
@@ -23,9 +23,8 @@ hidden = false
 [keys.normal]
 C-s = ":w"
 g = { a = "code_action" }
-S-v = ["normal_mode", "goto_line_start", "select_mode", "goto_line_end"]
 A-x = "switch_to_lowercase"
-'A-S-x' = "switch_to_uppercase"
+A-S-x = "switch_to_uppercase"
 
 [keys.select]
 A-x = "switch_to_lowercase"

@@ -25,8 +25,6 @@ alias ls="eza -l"
 alias la="eza -lA"
 alias lzd="lazydocker"
 alias lzg="lazygit"
-alias ai="aider --no-gui"
-alias sv="source .venv/bin/activate"
 alias pvc="pavucontrol"
 alias bc="sudo brightnessctl"
 alias ar="arandr"
@@ -61,6 +59,10 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="rg --files --hidden --follow --glob "!.git/*" --null | xargs -0 dirname | sort | uniq"
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  tmux a -t default || exec tmux new -s default && exit;
+fi
 
 # MUST BE AT THE END!!!
 # Zoxide

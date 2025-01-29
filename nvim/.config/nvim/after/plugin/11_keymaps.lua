@@ -26,6 +26,26 @@ Utils.Keymap('Oil', {
   rhs = '<Cmd>Oil<CR>',
 })
 
+Utils.Keymap('Window left', {
+  lhs = '<C-h>',
+  rhs = '<Cmd>TmuxNavigateLeft<CR>',
+})
+
+Utils.Keymap('Window down', {
+  lhs = '<C-j>',
+  rhs = '<Cmd>TmuxNavigateDown<CR>',
+})
+
+Utils.Keymap('Window up', {
+  lhs = '<C-k>',
+  rhs = '<Cmd>TmuxNavigateUp<CR>',
+})
+
+Utils.Keymap('Window right', {
+  lhs = '<C-l>',
+  rhs = '<Cmd>TmuxNavigateRight<CR>',
+})
+
 ---
 --- [B]uffers keymaps
 ---
@@ -183,6 +203,15 @@ Utils.Keymap('Grep', {
   end,
 })
 
+Utils.Keymap('Grep', {
+  lhs = '<Leader>sg',
+  mode = { 'n', 'x' },
+  rhs = function()
+    local picker = Snacks.picker
+    picker.grep_word()
+  end,
+})
+
 Utils.Keymap('Help', {
   lhs = '<Leader>fh',
   mode = 'n',
@@ -309,7 +338,7 @@ Utils.Keymap('Actions', {
 })
 
 Utils.Keymap('Eval', {
-  lhs = '<Leader>le',
+  lhs = 'K',
   mode = 'n',
   rhs = function()
     local lsp = vim.lsp.buf
@@ -327,7 +356,7 @@ Utils.Keymap('Help', {
 })
 
 Utils.Keymap('Eval Error', {
-  lhs = '<Leader>lE',
+  lhs = 'E',
   mode = 'n',
   rhs = function()
     local diagnostic = vim.diagnostic

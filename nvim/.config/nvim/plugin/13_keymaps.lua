@@ -58,26 +58,6 @@ Utils.Keymap('Clear highlight', {
   rhs = '<Esc><Cmd>nohl<CR><Esc>',
 })
 
-Utils.Keymap('Window left', {
-  lhs = '<C-h>',
-  rhs = '<C-w>h',
-})
-
-Utils.Keymap('Window down', {
-  lhs = '<C-j>',
-  rhs = '<C-w>j',
-})
-
-Utils.Keymap('Window up', {
-  lhs = '<C-k>',
-  rhs = '<C-w>k',
-})
-
-Utils.Keymap('Window right', {
-  lhs = '<C-l>',
-  rhs = '<C-w>l',
-})
-
 Utils.Keymap('Resize height +', {
   remap = true,
   lhs = '<C-w>+',

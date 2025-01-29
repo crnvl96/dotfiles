@@ -23,9 +23,9 @@ Add({ source = 'nvim-treesitter/nvim-treesitter', hooks = { post_checkout = func
 
 Add('folke/snacks.nvim')
 
-Add('mfussenegger/nvim-lint')
 Add('stevearc/conform.nvim')
 Add('stevearc/oil.nvim')
+Add('christoomey/vim-tmux-navigator')
 
 Add('hat0uma/csvview.nvim')
 
