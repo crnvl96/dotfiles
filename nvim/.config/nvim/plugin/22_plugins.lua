@@ -1,13 +1,25 @@
 require('mini.align').setup()
 require('mini.operators').setup()
 require('csvview').setup()
-
 require('blink.compat').setup()
 require('dap-view').setup()
 require('nvim-dap-virtual-text').setup({ virt_text_pos = 'eol' })
 require('dap-python').setup('uv')
 
+require('mini.snippets').setup({
+  snippets = { require('mini.snippets').gen_loader.from_lang() },
+})
+
+require('dap.ext.vscode').json_decode = function(data)
+  local decode = vim.json.decode
+  local strip_comments = require('plenary.json').json_strip_comments
+  data = strip_comments(data)
+  return decode(data)
+end
+
 require('snacks').setup({
+  bigfile = { enabled = true },
+  indent = { enabled = true },
   input = { enabled = true },
   notifier = { enabled = true },
   picker = {
@@ -57,10 +69,6 @@ require('nvim-treesitter.configs').setup({
   },
 })
 
-require('mini.snippets').setup({
-  snippets = { require('mini.snippets').gen_loader.from_lang() },
-})
-
 require('blink.cmp').setup({
   enabled = function()
     return not vim.tbl_contains({ 'minifiles' }, vim.bo.filetype)
@@ -104,6 +112,8 @@ require('blink.cmp').setup({
   },
 })
 
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+
 require('conform').setup({
   notify_on_error = true,
   formatters = { injected = { ignore_errors = true } },
@@ -136,13 +146,6 @@ require('conform').setup({
   end,
 })
 
-require('dap.ext.vscode').json_decode = function(data)
-  local decode = vim.json.decode
-  local strip_comments = require('plenary.json').json_strip_comments
-  data = strip_comments(data)
-  return decode(data)
-end
-
 require('oil').setup({
   watch_for_changes = true,
   use_default_keymaps = false,
@@ -166,10 +169,13 @@ require('oil').setup({
   },
 })
 
+-- https://github.com/olimorris/codecompanion.nvim/tree/main/lua/codecompanion/adapters
+vim.g.codecompanion_adapter = 'huggingface'
+
 require('codecompanion').setup({
   strategies = {
     chat = {
-      adapter = vim.g.ai_strategy,
+      adapter = vim.g.codecompanion_adapter,
       keymaps = {
         completion = {
           modes = {
@@ -178,8 +184,8 @@ require('codecompanion').setup({
         },
       },
     },
-    inline = { adapter = vim.g.ai_strategy },
-    cmd = { adapter = vim.g.ai_strategy },
+    inline = { adapter = vim.g.codecompanion_adapter },
+    cmd = { adapter = vim.g.codecompanion_adapter },
   },
   display = {
     chat = {
@@ -260,7 +266,8 @@ miniclue.setup({
     { mode = 'x', keys = '<Leader>s', desc = 'Search' },
     { mode = 'n', keys = '<Leader>g', desc = 'Git' },
     { mode = 'x', keys = '<Leader>g', desc = 'Git' },
-    { mode = 'n', keys = '<Leader>gl', desc = 'Log' },
+    { mode = 'n', keys = '<Leader>h', desc = 'Hunks' },
+    { mode = 'x', keys = '<Leader>h', desc = 'Hunks' },
     { mode = 'n', keys = '<Leader>l', desc = 'LSP' },
     { mode = 'n', keys = '<Leader>n', desc = 'Notifications' },
     { mode = 'n', keys = '<Leader>u', desc = 'Toggle' },
@@ -292,8 +299,6 @@ for server, config in pairs({
       },
     },
   },
-  -- jedi_language_server = {},
-
   basedpyright = {
     settings = {
       basedpyright = {

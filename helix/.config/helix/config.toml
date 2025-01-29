@@ -22,13 +22,13 @@ hidden = false
 
 [keys.normal]
 C-s = ":w"
-g = { a = "code_action" }
-A-x = "switch_to_lowercase"
-A-S-x = "switch_to_uppercase"
+
+[keys.normal.g]
+a = "code_action"
 
 [keys.select]
-A-x = "switch_to_lowercase"
-'A-S-x' = "switch_to_uppercase"
+A-u = "switch_to_lowercase"
+A-S-u = "switch_to_uppercase"
 
 [keys.insert]
 C-s = ["normal_mode", ":w"]

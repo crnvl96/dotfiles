@@ -21,4 +21,3 @@ Add, Now, Later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 Add({ name = 'mini.nvim' })
 
 vim.cmd.colorscheme('minigrey')
--- vim.cmd.colorscheme('minibase16_default_dark')

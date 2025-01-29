@@ -18,17 +18,20 @@ basedpyright.useLibraryCodeForTypes = false
 basedpyright.disableOrganizeImports = true
 
 [language-server.vtsls]
-command = "vtsls"
+command = "/home/crnvl96/.asdf/installs/nodejs/20.17.0/bin/vtsls"
 args = ["--stdio"]
 
+[language-server.vscode-eslint-language-server]
+command = "/home/crnvl96/.asdf/installs/nodejs/20.17.0/bin/vscode-eslint-language-server"
 
 # Languages
-
 
 [[language]]
 name = "typescript"
 language-servers = ['vtsls', "vscode-eslint-language-server"]
-formatter = { command = 'prettierd', args = [".ts"] }
+formatter = { command = '/home/crnvl96/.asdf/installs/nodejs/20.17.0/bin/prettierd', args = [
+  ".ts",
+] }
 auto-format = true
 
 [[language]]

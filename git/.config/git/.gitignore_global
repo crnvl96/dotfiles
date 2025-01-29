@@ -18,3 +18,5 @@ log/
 .tool-versions
 .prototools
 Session.vim
+
+annotations.md

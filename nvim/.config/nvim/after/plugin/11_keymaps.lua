@@ -2,7 +2,6 @@
 --- Toggling features
 ---
 
-Snacks.toggle.indent():map('<Leader>ui', { desc = 'Indentation' })
 Snacks.toggle.option('wrap'):map('<leader>uw', { desc = 'Wrap' })
 Snacks.toggle.option('relativenumber'):map('<leader>ur', { desc = 'Relnum' })
 
@@ -279,49 +278,58 @@ Utils.Keymap('Browse', {
   end,
 })
 
+Utils.Keymap('Next hunk', {
+  lhs = ']h',
+  mode = 'n',
+  rhs = function() require('vgit').hunk_down() end,
+})
+
+Utils.Keymap('Prev hunk', {
+  lhs = '[h',
+  mode = 'n',
+  rhs = function() require('vgit').hunk_up() end,
+})
+
+Utils.Keymap('Stage hunk', {
+  lhs = '<Leader>hs',
+  mode = 'n',
+  rhs = function() require('vgit').buffer_hunk_stage() end,
+})
+
+Utils.Keymap('Reset hunk', {
+  lhs = '<Leader>hr',
+  mode = 'n',
+  rhs = function() require('vgit').buffer_hunk_reset() end,
+})
+
+Utils.Keymap('Preview hunk', {
+  lhs = '<Leader>hd',
+  mode = 'n',
+  rhs = function() require('vgit').buffer_hunk_preview() end,
+})
+
+Utils.Keymap('Blame', {
+  lhs = '<Leader>hb',
+  mode = 'n',
+  rhs = function() require('vgit').buffer_blame_preview() end,
+})
+
 Utils.Keymap('Diff', {
   lhs = '<Leader>gd',
   mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.git_diff()
-  end,
+  rhs = function() require('vgit').buffer_diff_preview() end,
 })
 
-Utils.Keymap('File', {
-  lhs = '<Leader>glf',
+Utils.Keymap('Diff', {
+  lhs = '<Leader>gD',
   mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.git_log_file()
-  end,
+  rhs = function() require('vgit').project_diff_preview() end,
 })
 
-Utils.Keymap('Line', {
-  lhs = '<Leader>gll',
+Utils.Keymap('History', {
+  lhs = '<Leader>gh',
   mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.git_log_line()
-  end,
-})
-
-Utils.Keymap('Repo', {
-  lhs = '<Leader>glr',
-  mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.git_log()
-  end,
-})
-
-Utils.Keymap('Status', {
-  lhs = '<Leader>gs',
-  mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.git_status()
-  end,
+  rhs = function() require('vgit').buffer_history_preview() end,
 })
 
 ---

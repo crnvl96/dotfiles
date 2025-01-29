@@ -60,9 +60,9 @@ export FZF_ALT_C_COMMAND="rg --files --hidden --follow --glob "!.git/*" --null |
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-  tmux a -t default || exec tmux new -s default && exit;
-fi
+# if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+#   tmux a -t default || exec tmux new -s default && exit;
+# fi
 
 # MUST BE AT THE END!!!
 # Zoxide
