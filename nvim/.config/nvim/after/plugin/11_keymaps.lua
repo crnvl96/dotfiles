@@ -2,163 +2,73 @@
 --- Toggling features
 ---
 
-Snacks.toggle.option('wrap'):map('<leader>uw', { desc = 'Wrap' })
-Snacks.toggle.option('relativenumber'):map('<leader>ur', { desc = 'Relnum' })
-
+local T = Snacks.toggle
 vim.g.autoformat = true
 
-Snacks.toggle({
-  name = 'Auto format',
-  get = function() return vim.g.autoformat end,
-  set = function(e)
-    if e then
-      vim.g.autoformat = true
-    else
-      vim.g.autoformat = false
-    end
-  end,
-}):map('<Leader>ua', { desc = 'Autoformat' })
+local function set_autoformat(e)
+  if e then
+    vim.g.autoformat = true
+  else
+    vim.g.autoformat = false
+  end
+end
 
-Utils.Keymap('Oil', {
-  lhs = '<M-o>',
-  mode = 'n',
-  rhs = '<Cmd>Oil<CR>',
-})
+local wrap = T.option('wrap')
+local relnum = T.option('relativenumber')
+local autofmt = T({ name = 'Auto format', get = function() return vim.g.autoformat end, set = set_autoformat })
 
-Utils.Keymap('Window left', {
-  lhs = '<C-h>',
-  rhs = '<Cmd>TmuxNavigateLeft<CR>',
-})
-
-Utils.Keymap('Window down', {
-  lhs = '<C-j>',
-  rhs = '<Cmd>TmuxNavigateDown<CR>',
-})
-
-Utils.Keymap('Window up', {
-  lhs = '<C-k>',
-  rhs = '<Cmd>TmuxNavigateUp<CR>',
-})
-
-Utils.Keymap('Window right', {
-  lhs = '<C-l>',
-  rhs = '<Cmd>TmuxNavigateRight<CR>',
-})
+wrap:map('<leader>uw', { desc = 'Wrap' })
+relnum:map('<leader>ur', { desc = 'Relnum' })
+autofmt:map('<Leader>ua', { desc = 'Autoformat' })
 
 ---
 --- [B]uffers keymaps
 ---
 
-Utils.Keymap('Last', {
-  lhs = '<Leader>bl',
-  mode = 'n',
-  rhs = '<Cmd>b#<CR>',
-})
+local K = Utils.Keymap
 
-Utils.Keymap('Delete', {
-  lhs = '<Leader>bd',
-  mode = 'n',
-  rhs = function()
-    local bufdelete = Snacks.bufdelete
-    bufdelete()
-  end,
-})
-
-Utils.Keymap('Others', {
-  lhs = '<Leader>bo',
-  mode = 'n',
-  rhs = function()
-    local bufdelete = Snacks.bufdelete.other
-    bufdelete()
-  end,
-})
+K('Last', { lhs = '<Leader>bl', mode = 'n', rhs = '<Cmd>b#<CR>' })
+K('Delete', { lhs = '<Leader>bd', mode = 'n', rhs = function() Snacks.bufdelete.bufdelete() end })
+K('Others', { lhs = '<Leader>bo', mode = 'n', rhs = function() Snacks.bufdelete.other() end })
 
 ---
 --- AI [C]oding keymaps
 ---
 
-Utils.Keymap('Actions', {
-  lhs = '<Leader>ca',
-  mode = { 'n', 'v' },
-  rhs = '<Cmd>CodeCompanionActions<CR>',
-})
-
-Utils.Keymap('Toggle', {
-  lhs = '<Leader>ct',
-  mode = { 'n', 'v' },
-  rhs = '<Cmd>CodeCompanionChat Toggle<CR>',
-})
-
-Utils.Keymap('Chat', {
-  lhs = '<Leader>cc',
-  mode = 'v',
-  rhs = ':CodeCompanionChat Add<CR>',
-})
+K('Actions', { lhs = '<Leader>ca', mode = { 'n', 'v' }, rhs = '<Cmd>CodeCompanionActions<CR>' })
+K('Toggle', { lhs = '<Leader>ct', mode = { 'n', 'v' }, rhs = '<Cmd>CodeCompanionChat Toggle<CR>' })
+K('Chat', { lhs = '<Leader>cc', mode = 'v', rhs = ':CodeCompanionChat Add<CR>' })
 
 ---
 --- [D]AP Keymaps
 ---
 
-Utils.Keymap('REPL', {
-  lhs = '<Leader>dR',
+local function dap_open_scopes()
+  local widgets = require('dap.ui.widgets')
+  widgets.sidebar(widgets.scopes, {}, 'vsplit').toggle()
+end
+
+K('REPL', { lhs = '<Leader>dR', mode = 'n', rhs = function() require('dap.repl').toggle({}, 'belowright split') end })
+K('Breakpoint', { lhs = '<Leader>db', mode = 'n', rhs = function() require('dap').toggle_breakpoint() end })
+K('Clear breakpoints', { lhs = '<Leader>dc', mode = 'n', rhs = function() require('dap').clear_breakpoints() end })
+K('Eval', { lhs = '<Leader>de', mode = { 'n', 'x' }, rhs = function() require('dap.ui.widgets').hover() end })
+K('Run', { lhs = '<Leader>dr', mode = 'n', rhs = function() require('dap').continue() end })
+K('Quit', { lhs = '<Leader>dq', mode = 'n', rhs = function() require('dap').terminate() end })
+K('Scopes', { lhs = '<Leader>ds', mode = 'n', rhs = dap_open_scopes })
+
+---
+--- [E]xplorer keymaps
+---
+
+K('Explorer', {
+  lhs = '<Leader>e',
   mode = 'n',
   rhs = function()
-    local dap = require('dap.repl')
-    dap.toggle({}, 'belowright split')
-  end,
-})
-
-Utils.Keymap('Breakpoint', {
-  lhs = '<Leader>db',
-  mode = 'n',
-  rhs = function()
-    local dap = require('dap')
-    dap.toggle_breakpoint()
-  end,
-})
-
-Utils.Keymap('Clear breakpoints', {
-  lhs = '<Leader>dc',
-  mode = 'n',
-  rhs = function()
-    local dap = require('dap')
-    dap.clear_breakpoints()
-  end,
-})
-
-Utils.Keymap('Eval', {
-  lhs = '<Leader>de',
-  mode = { 'n', 'x' },
-  rhs = function()
-    local dap_widgets = require('dap.ui.widgets')
-    dap_widgets.hover()
-  end,
-})
-
-Utils.Keymap('Run', {
-  lhs = '<Leader>dr',
-  mode = 'n',
-  rhs = function()
-    local dap = require('dap')
-    dap.continue()
-  end,
-})
-
-Utils.Keymap('Scopes', {
-  lhs = '<Leader>ds',
-  mode = 'n',
-  rhs = function()
-    local dap_widgets = require('dap.ui.widgets')
-    dap_widgets.sidebar(dap_widgets.scopes, {}, 'vsplit').toggle()
-  end,
-})
-
-Utils.Keymap('Quit', {
-  lhs = '<Leader>dq',
-  mode = 'n',
-  rhs = function()
-    local dap = require('dap')
-    dap.terminate()
+    Snacks.picker.explorer({
+      git_status_open = true,
+      auto_close = true,
+      jump = { close = true },
+    })
   end,
 })
 
@@ -166,320 +76,48 @@ Utils.Keymap('Quit', {
 --- [F]ind keymaps
 ---
 
-Utils.Keymap('Keymaps', {
-  lhs = '<Leader>fk',
-  mode = { 'n', 'v' },
-  rhs = function()
-    local keymaps = Snacks.picker
-    keymaps()
-  end,
-})
-
-Utils.Keymap('Buffers', {
-  lhs = '<Leader>fb',
-  mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.buffers()
-  end,
-})
-
-Utils.Keymap('Files', {
-  lhs = '<Leader>ff',
-  mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.files({ hidden = true })
-  end,
-})
-
-Utils.Keymap('Grep', {
-  lhs = '<Leader>fg',
-  mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.grep({ hidden = true })
-  end,
-})
-
-Utils.Keymap('Grep', {
-  lhs = '<Leader>sg',
-  mode = { 'n', 'x' },
-  rhs = function()
-    local picker = Snacks.picker
-    picker.grep_word()
-  end,
-})
-
-Utils.Keymap('Help', {
-  lhs = '<Leader>fh',
-  mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.help()
-  end,
-})
-
-Utils.Keymap('Lines', {
-  lhs = '<Leader>fl',
-  mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.lines()
-  end,
-})
-
-Utils.Keymap('Oldfiles', {
-  lhs = '<Leader>fo',
-  mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.recent()
-  end,
-})
-
-Utils.Keymap('Resume', {
-  lhs = '<Leader>fr',
-  mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.resume()
-  end,
-})
-
-Utils.Keymap('Pickers', {
-  lhs = '<Leader>fp',
-  mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.pickers()
-  end,
-})
+K('Buffers', { lhs = '<Leader>fb', mode = 'n', rhs = function() Snacks.picker.buffers() end })
+K('Files', { lhs = '<Leader>ff', mode = 'n', rhs = function() Snacks.picker.files({ hidden = true }) end })
+K('Grep', { lhs = '<Leader>fg', mode = 'n', rhs = function() Snacks.picker.grep({ hidden = true }) end })
+K('Grep', { lhs = '<Leader>sg', mode = { 'n', 'x' }, rhs = function() Snacks.picker.grep_word() end })
+K('Help', { lhs = '<Leader>fh', mode = 'n', rhs = function() Snacks.picker.help() end })
+K('Lines', { lhs = '<Leader>fl', mode = 'n', rhs = function() Snacks.picker.lines() end })
+K('Oldfiles', { lhs = '<Leader>fo', mode = 'n', rhs = function() Snacks.picker.recent() end })
+K('Resume', { lhs = '<Leader>fr', mode = 'n', rhs = function() Snacks.picker.resume() end })
+K('Pickers', { lhs = '<Leader>fp', mode = 'n', rhs = function() Snacks.picker.pickers() end })
 
 ---
 --- [G]it keymaps
 ---
 
-Utils.Keymap('Blame', {
-  lhs = '<Leader>gb',
-  mode = 'n',
-  rhs = function()
-    local git = Snacks.git
-    git.blame_line()
-  end,
-})
-
-Utils.Keymap('Browse', {
-  lhs = '<Leader>gB',
-  mode = { 'n', 'v' },
-  rhs = function()
-    local git = Snacks.gitbrowse
-    git()
-  end,
-})
-
-Utils.Keymap('Next hunk', {
-  lhs = ']h',
-  mode = 'n',
-  rhs = function() require('vgit').hunk_down() end,
-})
-
-Utils.Keymap('Prev hunk', {
-  lhs = '[h',
-  mode = 'n',
-  rhs = function() require('vgit').hunk_up() end,
-})
-
-Utils.Keymap('Stage hunk', {
-  lhs = '<Leader>hs',
-  mode = 'n',
-  rhs = function() require('vgit').buffer_hunk_stage() end,
-})
-
-Utils.Keymap('Reset hunk', {
-  lhs = '<Leader>hr',
-  mode = 'n',
-  rhs = function() require('vgit').buffer_hunk_reset() end,
-})
-
-Utils.Keymap('Preview hunk', {
-  lhs = '<Leader>hd',
-  mode = 'n',
-  rhs = function() require('vgit').buffer_hunk_preview() end,
-})
-
-Utils.Keymap('Blame', {
-  lhs = '<Leader>hb',
-  mode = 'n',
-  rhs = function() require('vgit').buffer_blame_preview() end,
-})
-
-Utils.Keymap('Diff', {
-  lhs = '<Leader>gd',
-  mode = 'n',
-  rhs = function() require('vgit').buffer_diff_preview() end,
-})
-
-Utils.Keymap('Diff', {
-  lhs = '<Leader>gD',
-  mode = 'n',
-  rhs = function() require('vgit').project_diff_preview() end,
-})
-
-Utils.Keymap('History', {
-  lhs = '<Leader>gh',
-  mode = 'n',
-  rhs = function() require('vgit').buffer_history_preview() end,
-})
+K('Blame', { lhs = '<Leader>gb', mode = 'n', rhs = function() Snacks.git.blame_line() end })
+K('Browse', { lhs = '<Leader>gB', mode = { 'n', 'v' }, rhs = function() Snacks.gitbrowse() end })
 
 ---
 --- [L]sp keymaps
 ---
+local lsp_opts = {
+  include_current = true,
+  auto_confirm = false,
+  jump = { reuse_win = false },
+}
 
-Utils.Keymap('Actions', {
-  lhs = '<Leader>la',
-  mode = 'n',
-  rhs = function()
-    local lsp = vim.lsp.buf
-    lsp.code_action()
-  end,
-})
-
-Utils.Keymap('Eval', {
-  lhs = 'K',
-  mode = 'n',
-  rhs = function()
-    local lsp = vim.lsp.buf
-    lsp.hover({ border = 'rounded' })
-  end,
-})
-
-Utils.Keymap('Help', {
-  lhs = '<Leader>lh',
-  mode = 'n',
-  rhs = function()
-    local lsp = vim.lsp.buf
-    lsp.signature_help({ border = 'rounded' })
-  end,
-})
-
-Utils.Keymap('Eval Error', {
-  lhs = 'E',
-  mode = 'n',
-  rhs = function()
-    local diagnostic = vim.diagnostic
-    diagnostic.open_float({ border = 'rounded' })
-  end,
-})
-
-Utils.Keymap('Rename', {
-  lhs = '<Leader>lR',
-  mode = 'n',
-  rhs = function()
-    local lsp = vim.lsp.buf
-    lsp.rename()
-  end,
-})
-
-Utils.Keymap('Definition', {
-  lhs = '<Leader>ld',
-  mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.lsp_definitions({
-      include_current = true,
-      auto_confirm = false,
-      jump = { reuse_win = false },
-    })
-  end,
-})
-
-Utils.Keymap('Implementation', {
-  lhs = '<Leader>li',
-  mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.lsp_implementations({
-      include_current = true,
-      auto_confirm = false,
-      jump = { reuse_win = false },
-    })
-  end,
-})
-
-Utils.Keymap('References', {
-  lhs = '<Leader>lr',
-  mode = 'n',
-  nowait = true,
-  rhs = function()
-    local picker = Snacks.picker
-    picker.lsp_references({
-      include_declaration = true,
-      include_current = true,
-      auto_confirm = false,
-      jump = { reuse_win = false },
-    })
-  end,
-})
-
-Utils.Keymap('Symbols', {
-  lhs = '<Leader>ls',
-  mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.lsp_symbols()
-  end,
-})
-
-Utils.Keymap('Symbols (Project)', {
-  lhs = '<Leader>lS',
-  mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.lsp_workspace_symbols()
-  end,
-})
-
-Utils.Keymap('Diagnostics', {
-  lhs = '<Leader>lD',
-  mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.diagnostics()
-  end,
-})
-
-Utils.Keymap('Type definition', {
-  lhs = '<Leader>lt',
-  mode = 'n',
-  rhs = function()
-    local picker = Snacks.picker
-    picker.lsp_type_definitions({
-      include_current = true,
-      auto_confirm = false,
-      jump = { reuse_win = false },
-    })
-  end,
-})
+K('Actions', { lhs = '<Leader>la', mode = 'n', rhs = function() vim.lsp.buf.code_action() end })
+K('Eval', { lhs = 'K', mode = 'n', rhs = function() vim.lsp.buf.hover({ border = 'rounded' }) end })
+K('Help', { lhs = '<Leader>lh', mode = 'n', rhs = function() vim.lsp.buf.signature_help({ border = 'rounded' }) end })
+K('Eval Error', { lhs = 'E', mode = 'n', rhs = function() vim.diagnostic.open_float({ border = 'rounded' }) end })
+K('Rename', { lhs = '<Leader>lR', mode = 'n', rhs = function() vim.lsp.buf.rename() end })
+K('Definition', { lhs = '<Leader>ld', mode = 'n', rhs = function() Snacks.picker.lsp_definitions(lsp_opts) end })
+K('Impl', { lhs = '<Leader>li', mode = 'n', rhs = function() Snacks.picker.lsp_implementations(lsp_opts) end })
+K('References', { lhs = '<Leader>lr', mode = 'n', rhs = function() Snacks.picker.lsp_references(lsp_opts) end })
+K('Symbols', { lhs = '<Leader>ls', mode = 'n', rhs = function() Snacks.picker.lsp_symbols() end })
+K('Symbols (Project)', { lhs = '<Leader>lS', mode = 'n', rhs = function() Snacks.picker.lsp_workspace_symbols() end })
+K('Diagnostics', { lhs = '<Leader>lD', mode = 'n', rhs = function() Snacks.picker.diagnostics() end })
+K('Typedefs', { lhs = '<Leader>lt', mode = 'n', rhs = function() Snacks.picker.lsp_type_definitions(lsp_opts) end })
 
 ---
 --- [N]otifications keymaps
 ---
 
-Utils.Keymap('History', {
-  lhs = '<Leader>nh',
-  mode = 'n',
-  rhs = function()
-    local notifier = Snacks.notifier
-    notifier.show_history()
-  end,
-})
-
-Utils.Keymap('Clear', {
-  lhs = '<Leader>nc',
-  mode = 'n',
-  rhs = function()
-    local notifier = Snacks.notifier
-    notifier.hide()
-  end,
-})
+K('History', { lhs = '<Leader>nh', mode = 'n', rhs = function() Snacks.notifier.show_history() end })
+K('Clear', { lhs = '<Leader>nc', mode = 'n', rhs = function() Snacks.notifier.hide() end })

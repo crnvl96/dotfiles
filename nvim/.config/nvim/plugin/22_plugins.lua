@@ -1,14 +1,15 @@
 require('mini.align').setup()
+require('mini.ai').setup()
 require('mini.operators').setup()
+require('mini.splitjoin').setup()
+require('mini.pick').setup()
+require('mini.diff').setup({ view = { style = 'sign' } })
 require('csvview').setup()
 require('blink.compat').setup()
 require('dap-view').setup()
 require('nvim-dap-virtual-text').setup({ virt_text_pos = 'eol' })
 require('dap-python').setup('uv')
-
-require('mini.snippets').setup({
-  snippets = { require('mini.snippets').gen_loader.from_lang() },
-})
+require('mini.snippets').setup({ snippets = { require('mini.snippets').gen_loader.from_lang() } })
 
 require('dap.ext.vscode').json_decode = function(data)
   local decode = vim.json.decode
@@ -22,6 +23,13 @@ require('snacks').setup({
   indent = { enabled = true },
   input = { enabled = true },
   notifier = { enabled = true },
+  explorer = {
+    replace_netrw = true,
+  },
+  gitbrowse = {
+    notify = false,
+    open = function(url) vim.fn.setreg('+', url) end,
+  },
   picker = {
     icons = {
       files = {
@@ -146,29 +154,6 @@ require('conform').setup({
   end,
 })
 
-require('oil').setup({
-  watch_for_changes = true,
-  use_default_keymaps = false,
-  keymaps = {
-    ['g?'] = { 'actions.show_help', mode = 'n' },
-    ['<CR>'] = 'actions.select',
-    ['<C-w>v'] = { 'actions.select', opts = { vertical = true } },
-    ['<C-w>h'] = { 'actions.select', opts = { horizontal = true } },
-    ['<C-w>t'] = { 'actions.select', opts = { tab = true } },
-    ['<C-w>p'] = 'actions.preview',
-    ['<C-c>'] = { 'actions.close', mode = 'n' },
-    ['<C-w>r'] = 'actions.refresh',
-    ['<M-o>'] = { 'actions.parent', mode = 'n' },
-    ['@'] = { 'actions.open_cwd', mode = 'n' },
-    ['`'] = { 'actions.cd', mode = 'n' },
-    ['~'] = { 'actions.cd', opts = { scope = 'tab' }, mode = 'n' },
-    ['gs'] = { 'actions.change_sort', mode = 'n' },
-    ['gx'] = 'actions.open_external',
-    ['g.'] = { 'actions.toggle_hidden', mode = 'n' },
-    ['g\\'] = { 'actions.toggle_trash', mode = 'n' },
-  },
-})
-
 -- https://github.com/olimorris/codecompanion.nvim/tree/main/lua/codecompanion/adapters
 vim.g.codecompanion_adapter = 'huggingface'
 
@@ -204,7 +189,7 @@ require('codecompanion').setup({
         model = {
           -- available models can be found at https://huggingface.co/models?inference=warm&pipeline_tag=text-generation
           -- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/huggingface.lua
-          default = 'Qwen/Qwen2.5-Coder-32B-Instruct',
+          default = 'deepseek-ai/DeepSeek-R1-Distill-Qwen-32B',
         },
       },
     }),

@@ -57,6 +57,7 @@ vim.opt.fillchars:append('eob: ')
 
 vim.diagnostic.config({
   float = { border = 'rounded', source = true },
+  virtual_lines = { current_line = true },
 })
 
 if vim.fn.exists('syntax_on') ~= 1 then vim.cmd('syntax enable') end

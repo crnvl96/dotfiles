@@ -6,3 +6,7 @@ deepseek
 
 .env
 .aider*
+
+tmux-*
+
+__pycache__
