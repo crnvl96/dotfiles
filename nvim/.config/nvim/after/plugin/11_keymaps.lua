@@ -19,11 +19,9 @@ Snacks.toggle({
   end,
 }):map('<Leader>ua', { desc = 'Autoformat' })
 
-Utils.Keymap('Oil', {
-  lhs = '<M-o>',
-  mode = 'n',
-  rhs = '<Cmd>Oil<CR>',
-})
+---
+--- Window features
+---
 
 Utils.Keymap('Window left', {
   lhs = '<C-h>',
@@ -160,6 +158,16 @@ Utils.Keymap('Quit', {
     local dap = require('dap')
     dap.terminate()
   end,
+})
+
+---
+--- [E]xplorer keymaps
+---
+
+Utils.Keymap('Oil', {
+  lhs = '<Leader>e',
+  mode = 'n',
+  rhs = '<Cmd>Oil<CR>',
 })
 
 ---

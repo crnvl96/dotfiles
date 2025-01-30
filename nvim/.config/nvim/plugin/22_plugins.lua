@@ -1,10 +1,12 @@
 require('mini.align').setup()
-require('mini.operators').setup()
+require('mini.ai').setup()
 require('csvview').setup()
 require('blink.compat').setup()
 require('dap-view').setup()
 require('nvim-dap-virtual-text').setup({ virt_text_pos = 'eol' })
 require('dap-python').setup('uv')
+
+require('mini.operators').setup()
 
 require('mini.snippets').setup({
   snippets = { require('mini.snippets').gen_loader.from_lang() },
