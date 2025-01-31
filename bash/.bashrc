@@ -1,25 +1,3 @@
-[[ $- != *i* ]] && return
-
-# git
-source $HOME/.config/bash/git-prompt.sh
-source $HOME/.config/bash/git-completion.sh
-
-# prompt
-PS1='[\j][\W$(__git_ps1 " (%s)")]\n\$ '
-
-# nvim
-if [ -n "$NVIM" ]; then
-    export EDITOR="nvim --server $NVIM --remote"
-		export VISUAL="$EDITOR"
-    alias nvim="$EDITOR"
-else
-    export EDITOR="nvim"
-		export VISUAL="$EDITOR"
-fi
-
-# rg
-export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/ripgreprc"
-
 # aliases
 alias ls="eza -l"
 alias la="eza -lA"
@@ -36,23 +14,37 @@ alias gs="git status"
 alias gb="git branch"
 alias gp="git fetch --all --prune && git pull --rebase"
 
+# git
+source $HOME/.config/bash/git-prompt.sh
+source $HOME/.config/bash/git-completion.sh
+
+
+# prompt
+PS1='[\j][\W$(__git_ps1 " (%s)")]\n\$ '
+
+
+# nvim
+if [ -n "$NVIM" ]; then
+    export EDITOR="nvim --server $NVIM --remote"
+		export VISUAL="$EDITOR"
+    alias nvim="$EDITOR"
+else
+    export EDITOR="nvim"
+		export VISUAL="$EDITOR"
+fi
+
+
+# rg
+export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/ripgreprc"
+
 # Wezterm
 export WEZTERM_CONFIG_FILE="$HOME/.config/wezterm/wezterm.lua"
 
 # Ruby
 export GEM_HOME="$HOME/gems"
-
-# Haskell
-[ -f "/home/crnvl96/.ghcup/env" ] && . "/home/crnvl96/.ghcup/env"
-
-# Path
-export PATH="$HOME/.local/bin:$HOME/gems/bin:$PATH"
-
-# asdf
-. "$HOME/.asdf/asdf.sh"
+PATH=$HOME/gems/bin:$PATH
 
 # fzf
-
 # Use ripgrep (rg) as the default finder source
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
@@ -60,9 +52,12 @@ export FZF_ALT_C_COMMAND="rg --files --hidden --follow --glob "!.git/*" --null |
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-# if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
-#   tmux a -t default || exec tmux new -s default && exit;
-# fi
+# Path
+export PATH=$HOME/.local/bin:$PATH
+
+# asdf
+. <(asdf completion bash)
+PATH=${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH
 
 # MUST BE AT THE END!!!
 # Zoxide

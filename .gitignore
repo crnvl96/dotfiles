@@ -6,3 +6,5 @@ deepseek
 
 .env
 .aider*
+
+tmux-*

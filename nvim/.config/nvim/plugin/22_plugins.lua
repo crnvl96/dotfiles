@@ -1,16 +1,15 @@
 require('mini.align').setup()
 require('mini.ai').setup()
+require('mini.operators').setup()
+require('mini.splitjoin').setup()
+require('mini.pick').setup()
+require('mini.diff').setup({ view = { style = 'sign' } })
 require('csvview').setup()
 require('blink.compat').setup()
 require('dap-view').setup()
 require('nvim-dap-virtual-text').setup({ virt_text_pos = 'eol' })
 require('dap-python').setup('uv')
-
-require('mini.operators').setup()
-
-require('mini.snippets').setup({
-  snippets = { require('mini.snippets').gen_loader.from_lang() },
-})
+require('mini.snippets').setup({ snippets = { require('mini.snippets').gen_loader.from_lang() } })
 
 require('dap.ext.vscode').json_decode = function(data)
   local decode = vim.json.decode
@@ -25,6 +24,9 @@ require('snacks').setup({
   input = { enabled = true },
   notifier = { enabled = true },
   picker = {
+    layout = {
+      preset = 'ivy_split',
+    },
     icons = {
       files = {
         enabled = false,
@@ -172,7 +174,7 @@ require('oil').setup({
 })
 
 -- https://github.com/olimorris/codecompanion.nvim/tree/main/lua/codecompanion/adapters
-vim.g.codecompanion_adapter = 'huggingface'
+vim.g.codecompanion_adapter = 'deepseek'
 
 require('codecompanion').setup({
   strategies = {
