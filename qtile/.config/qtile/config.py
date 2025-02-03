@@ -34,6 +34,7 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     Key([mod, "shift"], "d", lazy.spawn("/home/crnvl96/.screenlayout/default.sh"), desc="Default screen layout"),
     Key([mod, "shift"], "f", lazy.spawn("/home/crnvl96/.screenlayout/hdmi.sh"), desc="Hdmi screen layout"),
+    Key([mod, "shift"], "p", lazy.spawn("flameshot gui"), desc="Print"),
     Key(
         [mod],
         "p",

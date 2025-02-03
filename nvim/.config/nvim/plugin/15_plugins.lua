@@ -11,7 +11,6 @@ local K = Utils.Keymap
 ---
 
 Add('nvim-lua/plenary.nvim')
-Add('tpope/vim-fugitive') -- Git integration
 
 require('mini.align').setup()
 require('mini.ai').setup()
@@ -19,6 +18,14 @@ require('mini.operators').setup()
 require('mini.splitjoin').setup()
 require('mini.pick').setup()
 require('mini.diff').setup({ view = { style = 'sign' } })
+
+Add('tpope/vim-fugitive') -- Git integration
+K('Open', { lhs = '<Leader>gg', mode = 'n', rhs = '<Cmd>Git<CR>' })
+K('Diff', { lhs = '<Leader>gd', mode = 'n', rhs = '<Cmd>Gvdiffsplit!<CR>' })
+K('Commit', { lhs = '<Leader>gc', mode = 'n', rhs = '<Cmd>Git commit<CR>' })
+K('Amend', { lhs = '<Leader>gC', mode = 'n', rhs = '<Cmd>Git commit --amend<CR>' })
+K('Push', { lhs = '<Leader>gp', mode = 'n', rhs = '<Cmd>Git push<CR>' })
+K('Force push', { lhs = '<Leader>gP', mode = 'n', rhs = '<Cmd>Git push --force-with-lease<CR>' })
 
 ---
 --- Treesitter
@@ -98,6 +105,9 @@ require('snacks').setup({
         filename_first = true,
       },
     },
+    sources = {
+      explorer = {},
+    },
     win = {
       input = {
         keys = {
@@ -135,17 +145,7 @@ K('Last', { lhs = '<Leader>bl', mode = 'n', rhs = '<Cmd>b#<CR>' })
 K('Delete', { lhs = '<Leader>bd', mode = 'n', rhs = function() Snacks.bufdelete.bufdelete() end })
 K('Others', { lhs = '<Leader>bo', mode = 'n', rhs = function() Snacks.bufdelete.other() end })
 
-K('Explorer', {
-  lhs = '<Leader>e',
-  mode = 'n',
-  rhs = function()
-    Snacks.picker.explorer({
-      git_status_open = true,
-      auto_close = true,
-      jump = { close = true },
-    })
-  end,
-})
+K('Explorer', { lhs = '<Leader>e', mode = 'n', rhs = function() Snacks.picker.explorer() end })
 
 K('Buffers', { lhs = '<Leader>fb', mode = 'n', rhs = function() Snacks.picker.buffers() end })
 K('Files', { lhs = '<Leader>ff', mode = 'n', rhs = function() Snacks.picker.files({ hidden = true }) end })
