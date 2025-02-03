@@ -68,28 +68,6 @@ Utils.SetNodePath = function(node_path)
   end
 end
 
-Utils.Req = function(tools)
-  if type(tools) ~= 'table' then tools = { tools } end
-  local len = #tools
-
-  local missing_tools = {}
-  for _, tool in ipairs(tools) do
-    if vim.fn.executable(tool) ~= 1 then table.insert(missing_tools, tool) end
-  end
-
-  if #missing_tools > 0 then
-    local msg = 'The following tools are required to be installed:\n'
-    for k, tool in ipairs(missing_tools) do
-      if k == #missing_tools then
-        msg = msg .. '\t- ' .. tool
-      else
-        msg = msg .. '\t- ' .. tool .. '\n'
-      end
-    end
-    Utils.Log(msg, 3)
-  end
-end
-
 Utils.Build = function(params, cmd)
   local pref = 'Building ' .. params.name
   Utils.Log(pref, 1)

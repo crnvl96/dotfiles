@@ -1,17 +1,19 @@
 return {
-  ["blink.cmp"] = "326723ce55a2abbf11e2dd74a5e44596b9e80b25",
+  ["blink.cmp"] = "85d0ca07184d783f6646d19c1af2c4ba970d98b2",
   ["blink.compat"] = "1176525a78319a208300a1910b6fd9e0cfabff25",
-  ["codecompanion.nvim"] = "8870a114009d15ee75958eb1f026277c18ce542b",
+  ["codecompanion.nvim"] = "fb106c2facea2849e3f2027f924c4969cfa46a69",
   ["conform.nvim"] = "363243c03102a531a8203311d4f2ae704c620d9b",
-  ["csvview.nvim"] = "092fada3e43b61fe7573bf439e1bc92f1e304f2b",
-  ["mini.nvim"] = "034698a100e91fd5798b27c2927378eb5b06615a",
+  ["csvview.nvim"] = "22eb36a8d17b15bdb0d934381198089bad1e4b7d",
+  ["fidget.nvim"] = "a0abbf18084b77d28bc70e24752e4f4fd54aea17",
+  ["mini.nvim"] = "509e086e13a1aa7105e427bb1b122a7174716b77",
   ["nvim-dap"] = "b4f27d451c187de912fa8d3229025a952917eb9e",
   ["nvim-dap-python"] = "34282820bb713b9a5fdb120ae8dd85c2b3f49b51",
   ["nvim-dap-view"] = "b13b86f077326a4e79ef9d60419df27ff12d05a6",
   ["nvim-dap-virtual-text"] = "df66808cd78b5a97576bbaeee95ed5ca385a9750",
-  ["nvim-lspconfig"] = "ead2fbc4893fdd062e1dd0842679a48bfb7bac5c",
-  ["nvim-treesitter"] = "bcd0b26607c1a4336c392285a9f13e31f514ccf2",
+  ["nvim-lspconfig"] = "f98fa715acc975c2dd5fb5ba7ceddeb1cc725ad2",
+  ["nvim-treesitter"] = "73b68cb943cd6718bdee318a70874620070255d4",
   ["plenary.nvim"] = "3707cdb1e43f5cea73afb6037e6494e7ce847a66",
-  ["snacks.nvim"] = "18cdf766efcfa557d333afae1b02706948e31db6",
-  ["vim-fugitive"] = "d74a7cff4cfcf84f83cc7eccfa365488f3bbabc2"
+  ["snacks.nvim"] = "00905642eb42a9aaa9ac2d55623882fd31815102",
+  ["vim-fugitive"] = "d74a7cff4cfcf84f83cc7eccfa365488f3bbabc2",
+  ["which-key.nvim"] = "0e76a87ac51772569aec678dc74baa8e2a86100c"
 }
