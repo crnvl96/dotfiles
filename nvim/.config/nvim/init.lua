@@ -19,5 +19,3 @@ require('mini.deps').setup()
 Add, Now, Later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 
 Add({ name = 'mini.nvim' })
-
-vim.cmd.colorscheme('minigrey')

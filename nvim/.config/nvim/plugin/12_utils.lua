@@ -1,6 +1,7 @@
 _G.Utils = {}
 
 Utils.Autocmd = vim.api.nvim_create_autocmd
+Utils.User = vim.api.nvim_create_user_command
 
 Utils.Keymap = function(desc, opts)
   opts = opts or {}

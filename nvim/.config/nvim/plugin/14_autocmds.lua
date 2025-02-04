@@ -125,3 +125,27 @@ Utils.Group('crnvl96-handle-yank', function(g)
     end,
   })
 end)
+
+Utils.Group('crnvl96-lsp-on-attach', function(g)
+  Utils.Autocmd('LspAttach', {
+    group = g,
+    callback = function(e)
+      local client = vim.lsp.get_client_by_id(e.data.client_id)
+      if not client then return end
+
+      client.server_capabilities.documentFormattingProvider = false
+      client.server_capabilities.documentRangeFormattingProvider = false
+
+      if vim.bo[e.buf] == 'markdown' then
+        vim.lsp.start({
+          name = 'iwes',
+          cmd = { 'iwes' },
+          root_dir = vim.fs.root(e.buf, { '.iwe' }),
+          flags = {
+            debounce_text_changes = 500,
+          },
+        })
+      end
+    end,
+  })
+end)
