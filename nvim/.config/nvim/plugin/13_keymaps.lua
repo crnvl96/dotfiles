@@ -2,6 +2,11 @@
 
 local K = Utils.Keymap
 
+K('Copy to clipboard', { mode = { 'n', 'v' }, lhs = '<Leader>y', rhs = '"+y' })
+K('Paste from clipboard', { mode = { 'n', 'v' }, lhs = '<Leader>p', rhs = '"+p' })
+K('Paste from clipboard', { mode = { 'n', 'v' }, lhs = '<Leader>P', rhs = '"+P' })
+K('Better paste', { mode = 'x', lhs = 'p', rhs = 'P' })
+
 K('Window left', { lhs = '<C-h>', rhs = '<C-w>h' })
 K('Window down', { lhs = '<C-j>', rhs = '<C-w>j' })
 K('Window up', { lhs = '<C-k>', rhs = '<C-w>k' })
@@ -12,7 +17,6 @@ K('Search current word forward', { lhs = '*', rhs = '*zzzv' })
 K('Search current word backward', { lhs = '#', rhs = '#zzzv' })
 K('Search forward', { expr = true, lhs = 'n', rhs = "'Nn'[v:searchforward].'zzzv'" })
 K('Search backward', { expr = true, lhs = 'N', rhs = "'nN'[v:searchforward].'zzzv'" })
-K('Better paste', { mode = 'x', lhs = 'p', rhs = 'P' })
 K('Move down', { mode = { 'n', 'x' }, expr = true, lhs = 'j', rhs = [[v:count == 0 ? 'gj' : 'j']] })
 K('Move up', { mode = { 'n', 'x' }, expr = true, lhs = 'k', rhs = [[v:count == 0 ? 'gk' : 'k']] })
 K('Resize height +', { remap = true, lhs = '<C-w>+', rhs = '<Cmd>resize +5<CR>' })
