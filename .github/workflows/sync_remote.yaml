@@ -27,4 +27,4 @@ jobs:
 
       - name: Push to Codeberg
         run: |
-          git push codeberg --tags 'refs/remotes/origin/*:refs/heads/*'
+          git push codeberg --tags 'refs/remotes/origin/*:refs/heads/*' 'refs/heads/*:refs/heads/*'
