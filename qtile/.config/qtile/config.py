@@ -1,10 +1,11 @@
 # pyright: reportUnknownMemberType=false,reportUnknownLambdaType=false,reportUnknownArgumentType=false
 
 import os
+import re
 import subprocess
 
 from libqtile import bar, extension, hook, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Screen
+from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 
 mod = "mod4"
@@ -35,6 +36,7 @@ keys = [
     Key([mod, "shift"], "d", lazy.spawn("/home/crnvl96/.screenlayout/default.sh"), desc="Default screen layout"),
     Key([mod, "shift"], "f", lazy.spawn("/home/crnvl96/.screenlayout/hdmi.sh"), desc="Hdmi screen layout"),
     Key([mod, "shift"], "p", lazy.spawn("flameshot gui"), desc="Print"),
+    Key([mod, "shift"], "b", lazy.spawn("bitwarden"), desc="Bitwarden"),
     Key(
         [mod],
         "p",
@@ -50,7 +52,9 @@ keys = [
 ]
 
 
-groups = [Group(i) for i in "123456789"]
+groups = [Group(i) for i in "12345678"]
+groups.append(Group("9", matches=[Match(wm_class=re.compile(r"bitwarden"))]))
+
 for i in groups:
     keys.extend(
         [
@@ -68,6 +72,7 @@ for i in groups:
             ),
         ]
     )
+
 
 layouts = [
     layout.Columns(border_focus="#666666", border_normal="#333333", border_width=2, margin=4),
@@ -137,6 +142,7 @@ focus_on_window_activation = "smart"
 reconfigure_screens = True
 auto_minimize = True
 wmname = "LG3D"
+
 
 floating_layout = layout.Floating(
     float_rules=[

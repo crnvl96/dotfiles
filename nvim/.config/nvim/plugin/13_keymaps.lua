@@ -37,7 +37,7 @@ K('Resize height +', { remap = true, lhs = '<C-Up>', rhs = '<Cmd>resize +5<CR>' 
 K('Resize height -', { remap = true, lhs = '<C-Down>', rhs = '<Cmd>resize -5<CR>' })
 K('Resize width -', { remap = true, lhs = '<C-Left>', rhs = '<Cmd>vertical resize -20<CR>' })
 K('Resize width +', { remap = true, lhs = '<C-Right>', rhs = '<Cmd>vertical resize +20<CR>' })
-K('Save', { mode = { 'n', 'i', 'x' }, lhs = '<C-s>', rhs = '<Esc><Cmd>w<CR><Esc>' })
+K('Save', { mode = { 'n', 'i', 'x' }, lhs = '<C-s>', rhs = '<Esc><Cmd>noh<CR><Cmd>w<CR><Esc>' })
 K('Indent right', { mode = 'x', lhs = '>', rhs = '>gv' })
 K('Indent left', { mode = 'x', lhs = '<', rhs = '<gv' })
 

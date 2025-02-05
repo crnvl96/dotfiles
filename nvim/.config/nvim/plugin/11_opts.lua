@@ -2,8 +2,8 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
 -- https://github.com/olimorris/codecompanion.nvim/tree/main/lua/codecompanion/adapters
-vim.g.codecompanion_adapter = 'huggingface'
-vim.g.autoformat = false
+vim.g.codecompanion_adapter = 'anthropic'
+vim.g.autoformat = true
 
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
