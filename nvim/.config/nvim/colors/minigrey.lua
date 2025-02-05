@@ -30,9 +30,6 @@ hl(0, 'MiniIconsBlue', { fg = less_palette.azure })
 hl(0, 'MiniIconsOrange', { fg = less_palette.yellow })
 hl(0, '@keyword.return', { fg = less_palette.accent, bold = true })
 hl(0, 'Delimiter', { fg = less_palette.fg_edge2 })
-
--- Plugins related hl groups
-
 hl(0, 'DapStoppedLine', { default = true, link = 'Visual' })
 
 colors

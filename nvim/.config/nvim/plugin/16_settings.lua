@@ -158,7 +158,7 @@ _G.Codecompanion = function()
         schema = {
           model = {
             -- https://github.com/olimorris/codecompanion.nvim/blob/main/lua/codecompanion/adapters/deepseek.lua
-            default = 'deepseek-chat',
+            default = 'deepseek-reasoner',
           },
         },
       }),
@@ -301,12 +301,7 @@ _G.WK_Clues = function()
   return {
     {
       mode = { 'n' },
-      { '<leader>d', group = 'Dap' },
       { '<leader>u', group = 'Toggle' },
-    },
-    {
-      mode = { 'n', 'v' },
-      { '<leader>d', group = 'Dap' },
     },
   }
 end

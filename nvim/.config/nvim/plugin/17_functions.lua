@@ -31,8 +31,3 @@ _G.Explorer = function()
     layout = { preset = 'default', preview = true },
   })
 end
-
-_G.Scopes = function()
-  local widgets = require('dap.ui.widgets')
-  widgets.sidebar(widgets.scopes, {}, 'vsplit').toggle()
-end

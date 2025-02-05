@@ -2,7 +2,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
 -- https://github.com/olimorris/codecompanion.nvim/tree/main/lua/codecompanion/adapters
-vim.g.codecompanion_adapter = 'anthropic'
+vim.g.codecompanion_adapter = 'deepseek'
 vim.g.autoformat = true
 
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
