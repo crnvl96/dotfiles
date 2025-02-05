@@ -1,11 +1,10 @@
 # pyright: reportUnknownMemberType=false,reportUnknownLambdaType=false,reportUnknownArgumentType=false
 
 import os
-import re
 import subprocess
 
 from libqtile import bar, extension, hook, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, Key, Screen
 from libqtile.lazy import lazy
 
 mod = "mod4"
@@ -52,8 +51,7 @@ keys = [
 ]
 
 
-groups = [Group(i) for i in "12345678"]
-groups.append(Group("9", matches=[Match(wm_class=re.compile(r"bitwarden"))]))
+groups = [Group(i) for i in "123456789"]
 
 for i in groups:
     keys.extend(
