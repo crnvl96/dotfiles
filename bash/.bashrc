@@ -39,6 +39,9 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/ripgreprc"
 # Wezterm
 export WEZTERM_CONFIG_FILE="$HOME/.config/wezterm/wezterm.lua"
 
+# Bitwarden
+export SSH_AUTH_SOCK="/home/crnvl96/.bitwarden-ssh-agent.sock"
+
 # Ruby
 export GEM_HOME="$HOME/gems"
 PATH=$HOME/gems/bin:$PATH
