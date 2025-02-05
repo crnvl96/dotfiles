@@ -1,4 +1,4 @@
-name: sync-remotes
+name: mirror-sync
 on: [push, delete]
 
 jobs:
@@ -12,7 +12,7 @@ jobs:
       - name: Sync remote repositories
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.SYNC_KEY }}" > ~/.ssh/id_rsa
+          echo "${{ secrets.MIRROR_SYNC }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           git config --global core.sshCommand 'ssh -i ~/.ssh/id_rsa -o IdentitiesOnly=yes -o UserKnownHostsFile=/dev/null -o StrictHostKeyChecking=no'
           git remote add codeberg ssh://git@codeberg.org/crnvl96/dotfiles.git
