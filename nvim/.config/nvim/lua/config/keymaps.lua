@@ -4,17 +4,19 @@ local K = Utils.Keymap
 
 for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
   K('Window ' .. string.upper(key), {
-    mode = { 'n', 'v' },
+    mode = { 'n', 'v', 'i' },
     lhs = '<C-' .. key .. '>',
     rhs = function()
       local mode = vim.api.nvim_get_mode().mode
+      local c_w = vim.api.nvim_replace_termcodes('<C-w>', true, false, true)
+      local keycode = vim.api.nvim_replace_termcodes(key, true, false, true)
+      local esc = vim.api.nvim_replace_termcodes('<Esc>', true, false, true)
 
-      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<C-w>', true, false, true), 't', true)
-      vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, false, true), 't', true)
+      if vim.startswith(string.lower(mode), 'i') then vim.api.nvim_feedkeys(esc, 'n', true) end
+      if vim.startswith(string.lower(mode), 'v') then vim.api.nvim_feedkeys(esc, 'n', true) end
 
-      if vim.startswith(string.lower(mode), 'v') then
-        vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Esc>', true, false, true), 'n', true)
-      end
+      vim.api.nvim_feedkeys(c_w, 't', true)
+      vim.api.nvim_feedkeys(keycode, 't', true)
     end,
     expr = true,
   })
@@ -40,13 +42,4 @@ K('Resize width +', { remap = true, lhs = '<C-Right>', rhs = '<Cmd>vertical resi
 K('Save', { mode = { 'n', 'i', 'x' }, lhs = '<C-s>', rhs = '<Esc><Cmd>noh<CR><Cmd>w<CR><Esc>' })
 K('Indent right', { mode = 'x', lhs = '>', rhs = '>gv' })
 K('Indent left', { mode = 'x', lhs = '<', rhs = '<gv' })
-
-K('Clear highlight', {
-  mode = { 'n', 'x', 'i', 's' },
-  expr = true,
-  lhs = '<Esc>',
-  rhs = function()
-    vim.cmd('noh')
-    return '<esc>'
-  end,
-})
+K('Clear highlight', { mode = { 'n', 'x', 'i', 's' }, lhs = '<Esc>', rhs = '<Cmd>noh<CR><Esc>' })

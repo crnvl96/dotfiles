@@ -1,11 +1,7 @@
+Utils.SetNodePath(os.getenv('HOME') .. '/.asdf/installs/nodejs/20.17.0')
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
-
--- https://github.com/olimorris/codecompanion.nvim/tree/main/lua/codecompanion/adapters
-vim.g.codecompanion_adapter = 'deepseek'
-vim.g.autoformat = true
-
-vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 
 vim.o.autoindent = true
 vim.o.autoread = true
@@ -48,7 +44,7 @@ vim.o.swapfile = false
 vim.o.switchbuf = 'usetab'
 vim.o.tabstop = 2
 vim.o.termguicolors = true
-vim.o.timeoutlen = 100
+vim.o.timeoutlen = 1000
 vim.o.undofile = true
 vim.o.virtualedit = 'block'
 vim.o.wildignorecase = true
@@ -59,6 +55,8 @@ vim.opt.fillchars:append('eob: ')
 
 vim.diagnostic.config({
   float = { border = 'rounded', source = true },
+  virtual_text = true,
+  signs = false,
   virtual_lines = { current_line = true },
 })
 

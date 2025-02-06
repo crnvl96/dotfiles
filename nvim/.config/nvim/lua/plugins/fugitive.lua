@@ -1,0 +1,1 @@
+Add('tpope/vim-fugitive')

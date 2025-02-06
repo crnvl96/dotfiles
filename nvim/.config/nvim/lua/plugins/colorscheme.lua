@@ -19,4 +19,8 @@ require('mini.base16').setup({
   },
 })
 
+local hl = vim.api.nvim_set_hl
+
+hl(0, 'DapStoppedLine', { default = true, link = 'Visual' })
+
 vim.g.colors_name = 'minibase16_default_dark'

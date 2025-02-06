@@ -1,10 +1,10 @@
-# pyright: reportUnknownMemberType=false,reportUnknownLambdaType=false,reportUnknownArgumentType=false
+# pyright: reportUnknownMemberType=false,reportUnknownLambdaType=false,reportUnknownArgumentType=false,reportUnknownParameterType=false,reportMissingParameterType=false
 
 import os
 import subprocess
 
 from libqtile import bar, extension, hook, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Screen
+from libqtile.config import Click, Drag, Group, Key, Screen, Match
 from libqtile.lazy import lazy
 
 mod = "mod4"
@@ -145,6 +145,7 @@ wmname = "LG3D"
 floating_layout = layout.Floating(
     float_rules=[
         *layout.Floating.default_float_rules,
+        Match(wm_class="bitwarden"),
     ],
     border_focus="#666666",
     border_normal="#333333",

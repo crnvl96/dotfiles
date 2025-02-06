@@ -45,46 +45,6 @@ Utils.Group('crnvl96-auto-open-ll-list', function(g)
   })
 end)
 
-Utils.Group('crnvl96-handle-term-maps', function(g)
-  Utils.Autocmd('TermOpen', {
-    group = g,
-    callback = function(event)
-      local code_term_esc = vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, true, true)
-
-      for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
-        Utils.Keymap('Navigate to/from terminals', {
-          noremap = true,
-          lhs = '<C-' .. key .. '>',
-          rhs = function()
-            local code_dir = vim.api.nvim_replace_termcodes('<C-' .. key .. '>', true, true, true)
-            vim.api.nvim_feedkeys(code_term_esc .. code_dir, 't', false)
-          end,
-          mode = 't',
-        })
-      end
-
-      Utils.Keymap('Enter normal mode in terminal', {
-        noremap = true,
-        lhs = '<C-r>',
-        rhs = function() vim.api.nvim_feedkeys(code_term_esc, 't', false) end,
-        mode = 't',
-      })
-
-      if vim.bo.filetype == '' then
-        vim.api.nvim_set_option_value('filetype', 'terminal', { buf = event.buf })
-        vim.cmd.startinsert()
-      end
-    end,
-  })
-
-  Utils.Autocmd('WinEnter', {
-    group = g,
-    callback = function()
-      if vim.bo.filetype == 'terminal' then vim.cmd.startinsert() end
-    end,
-  })
-end)
-
 Utils.Group('crnvl96-handle-hlsearch', function(g)
   Utils.Autocmd('InsertEnter', {
     group = g,
@@ -122,30 +82,6 @@ Utils.Group('crnvl96-handle-yank', function(g)
     callback = function()
       (vim.hl or vim.highlight).on_yank()
       if vim.v.event.operator == 'y' and cursorPreYank then vim.api.nvim_win_set_cursor(0, cursorPreYank) end
-    end,
-  })
-end)
-
-Utils.Group('crnvl96-lsp-on-attach', function(g)
-  Utils.Autocmd('LspAttach', {
-    group = g,
-    callback = function(e)
-      local client = vim.lsp.get_client_by_id(e.data.client_id)
-      if not client then return end
-
-      client.server_capabilities.documentFormattingProvider = false
-      client.server_capabilities.documentRangeFormattingProvider = false
-
-      if vim.bo[e.buf] == 'markdown' then
-        vim.lsp.start({
-          name = 'iwes',
-          cmd = { 'iwes' },
-          root_dir = vim.fs.root(e.buf, { '.iwe' }),
-          flags = {
-            debounce_text_changes = 500,
-          },
-        })
-      end
     end,
   })
 end)

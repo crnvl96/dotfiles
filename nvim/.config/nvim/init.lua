@@ -21,3 +21,31 @@ Add, Now, Later = MiniDeps.add, MiniDeps.now, MiniDeps.later
 Add({ name = 'mini.nvim' })
 
 vim.cmd.colorscheme('minibase16_default_dark')
+
+require('config.utils')
+
+require('config.opts')
+require('config.keymaps')
+require('config.autocmds')
+
+require('plugins.colorscheme')
+
+require('plugins.plenary')
+require('plugins.fugitive')
+require('plugins.treesitter')
+
+require('plugins.miniai')
+require('plugins.minialign')
+require('plugins.miniicons')
+require('plugins.minioperators')
+require('plugins.minisnippets')
+require('plugins.minisplitjoin')
+
+require('plugins.snacks')
+
+require('plugins.conform')
+require('plugins.codecompanion')
+
+require('plugins.blink')
+require('plugins.lspconfig')
+require('plugins.whichkey')

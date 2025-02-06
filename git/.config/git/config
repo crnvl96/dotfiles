@@ -2,13 +2,13 @@
 	user = crnvl96
 [gpg]
   format = ssh
+[user]
+  name = "Adran Carnavale"
+  email = contact@adrancarnavale.com
+  signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC9s7FLEtw+l5t7oVDwHMi9IRLH9n0yff2cLLxNmpRQ/"
 [commit]
   verbose = true
   gpgsign = true
-[user]
-  name = "Adran Carnavale"
-  email = adran.carnavale@gmail.com
-  signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC9s7FLEtw+l5t7oVDwHMi9IRLH9n0yff2cLLxNmpRQ/"
 [core]
   editor = $EDITOR
   excludesfile = ~/.config/git/.gitignore_global
