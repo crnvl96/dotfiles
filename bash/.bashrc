@@ -39,9 +39,6 @@ export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/ripgreprc"
 # Wezterm
 export WEZTERM_CONFIG_FILE="$HOME/.config/wezterm/wezterm.lua"
 
-# Bitwarden
-export SSH_AUTH_SOCK="/home/crnvl96/.bitwarden-ssh-agent.sock"
-
 # Ruby
 export GEM_HOME="$HOME/gems"
 PATH=$HOME/gems/bin:$PATH
@@ -61,10 +58,12 @@ PATH=${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH
 export PATH=$HOME/.local/bin:$PATH
 . <(asdf completion bash)
 
+
+eval "$(ssh-agent -s)" > /dev/null
+ssh-add "$HOME/.ssh/auth" >/dev/null 2>&1
+ssh-add "$HOME/.ssh/sign" >/dev/null 2>&1
+
 # MUST BE AT THE END!!!
 # Zoxide
 export _ZO_RESOLVE_SYMLINKS=1
 eval "$(zoxide init --cmd x bash)"
-
-. "$HOME/.local/bin/env"
-

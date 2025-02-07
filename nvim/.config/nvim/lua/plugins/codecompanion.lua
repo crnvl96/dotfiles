@@ -51,4 +51,4 @@ local K = Utils.Keymap
 
 K('Actions', { mode = { 'n', 'v' }, lhs = '<C-a>', rhs = '<Cmd>CodeCompanionActions<CR>' })
 K('Toggle', { mode = { 'n', 'v' }, lhs = '<Leader>a', rhs = '<Cmd>CodeCompanionChat Toggle<CR>' })
-K('Add to chat', { mode = 'v', lhs = 'ga', rhs = '<Cmd>CodeCompanionChat Add<CR>' })
+K('Add to chat', { mode = 'v', lhs = 'ga', rhs = ':CodeCompanionChat Add<CR>' })
