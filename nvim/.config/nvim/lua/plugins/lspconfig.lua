@@ -18,24 +18,33 @@ for server, config in pairs({
         on_attach = function(client) client.server_capabilities.hoverProvider = false end,
         cmd_env = { RUFF_TRACE = 'messages' },
         init_options = {
-            settings = {
-                logLevel = 'debug',
-                lineLength = 120,
-                lint = {
-                    extendSelect = { 'ALL' },
-                    ignore = { 'D' },
-                },
-            },
+            settings = { logLevel = 'debug' },
         },
     },
     basedpyright = {
         settings = {
             basedpyright = {
-                analysis = { typeCheckingMode = 'all' },
                 disableOrganizeImports = true,
             },
         },
     },
+
+    -- [tool.pyright]
+    -- include = ["src"]
+    -- exclude = ["**/node_modules", "**/__pycache__", "**/.venv"]
+    -- pythonVersion = "3.12"
+    -- pythonPlatform = "Linux"
+    -- allowedUntypedLibraries = true
+    --
+    -- [tool.ruff]
+    -- line-length = 120
+    -- indent-width = 4
+    -- target-version = "py312"
+    --
+    -- [tool.ruff.lint]
+    -- select = ["ALL"]
+    -- ignore = ["D"]
+
     lua_ls = {
         on_init = function(client)
             if client.workspace_folders then
@@ -69,7 +78,7 @@ for server, config in pairs({
                     arrayIndex = 'Disable',
                 },
                 completion = {
-                    callSnippet = 'Replace',
+                    callSnippet = 'Disable',
                 },
             },
         },
