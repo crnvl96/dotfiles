@@ -23,12 +23,6 @@ require('snacks').setup({
       },
       list = { keys = { ['yy'] = 'copy' } },
     },
-    sources = {
-      explorer = {
-        diagnostics_open = true,
-        git_status_open = true,
-      },
-    },
   },
 })
 
@@ -36,7 +30,6 @@ Utils.User('Browse', function() Snacks.gitbrowse() end, {})
 
 local K = Utils.Keymap
 
-K('Explorer', { lhs = '<leader>e', rhs = function() Snacks.picker.explorer() end })
 K('Buffers', { lhs = '<Leader>b', mode = 'n', rhs = function() Snacks.picker.buffers() end })
 K('Files', { lhs = '<Leader>f', mode = 'n', rhs = function() Snacks.picker.files({ hidden = true }) end })
 K('Grep', { lhs = '<Leader>g', mode = 'n', rhs = function() Snacks.picker.grep({ hidden = true }) end })
