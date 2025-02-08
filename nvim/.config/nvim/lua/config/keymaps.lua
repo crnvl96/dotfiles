@@ -1,45 +1,38 @@
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 
-local K = Utils.Keymap
-
 for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
-  K('Window ' .. string.upper(key), {
-    mode = { 'n', 'v', 'i' },
-    lhs = '<C-' .. key .. '>',
-    rhs = function()
-      local mode = vim.api.nvim_get_mode().mode
-      local c_w = vim.api.nvim_replace_termcodes('<C-w>', true, false, true)
-      local keycode = vim.api.nvim_replace_termcodes(key, true, false, true)
-      local esc = vim.api.nvim_replace_termcodes('<Esc>', true, false, true)
+  vim.keymap.set({ 'n', 'v', 'i' }, '<C-' .. key, function()
+    local mode = vim.api.nvim_get_mode().mode
+    local c_w = vim.api.nvim_replace_termcodes('<C-w>', true, false, true)
+    local keycode = vim.api.nvim_replace_termcodes(key, true, false, true)
+    local esc = vim.api.nvim_replace_termcodes('<Esc>', true, false, true)
 
-      if vim.startswith(string.lower(mode), 'i') then vim.api.nvim_feedkeys(esc, 'n', true) end
-      if vim.startswith(string.lower(mode), 'v') then vim.api.nvim_feedkeys(esc, 'n', true) end
+    if vim.startswith(string.lower(mode), 'i') then vim.api.nvim_feedkeys(esc, 'n', true) end
+    if vim.startswith(string.lower(mode), 'v') then vim.api.nvim_feedkeys(esc, 'n', true) end
 
-      vim.api.nvim_feedkeys(c_w, 't', true)
-      vim.api.nvim_feedkeys(keycode, 't', true)
-    end,
-    expr = true,
-  })
+    vim.api.nvim_feedkeys(c_w, 't', true)
+    vim.api.nvim_feedkeys(keycode, 't', true)
+  end, { desc = 'Window ' .. string.upper(key), expr = true })
 end
 
-K('Better paste', { mode = 'x', lhs = 'p', rhs = 'P' })
-K('Scroll down', { lhs = '<C-d>', rhs = '<C-d>zz' })
-K('Scroll up', { lhs = '<C-u>', rhs = '<C-u>zz' })
-K('Search current word forward', { lhs = '*', rhs = '*zzzv' })
-K('Search current word backward', { lhs = '#', rhs = '#zzzv' })
-K('Search forward', { expr = true, lhs = 'n', rhs = "'Nn'[v:searchforward].'zzzv'" })
-K('Search backward', { expr = true, lhs = 'N', rhs = "'nN'[v:searchforward].'zzzv'" })
-K('Move down', { mode = { 'n', 'x' }, expr = true, lhs = 'j', rhs = [[v:count == 0 ? 'gj' : 'j']] })
-K('Move up', { mode = { 'n', 'x' }, expr = true, lhs = 'k', rhs = [[v:count == 0 ? 'gk' : 'k']] })
-K('Resize height +', { remap = true, lhs = '<C-w>+', rhs = '<Cmd>resize +5<CR>' })
-K('Resize height -', { remap = true, lhs = '<C-w>-', rhs = '<Cmd>resize -5<CR>' })
-K('Resize width -', { remap = true, lhs = '<C-w><', rhs = '<Cmd>vertical resize -20<CR>' })
-K('Resize width +', { remap = true, lhs = '<C-w>>', rhs = '<Cmd>vertical resize +20<CR>' })
-K('Resize height +', { remap = true, lhs = '<C-Up>', rhs = '<Cmd>resize +5<CR>' })
-K('Resize height -', { remap = true, lhs = '<C-Down>', rhs = '<Cmd>resize -5<CR>' })
-K('Resize width -', { remap = true, lhs = '<C-Left>', rhs = '<Cmd>vertical resize -20<CR>' })
-K('Resize width +', { remap = true, lhs = '<C-Right>', rhs = '<Cmd>vertical resize +20<CR>' })
-K('Save', { mode = { 'n', 'i', 'x' }, lhs = '<C-s>', rhs = '<Esc><Cmd>noh<CR><Cmd>w<CR><Esc>' })
-K('Indent right', { mode = 'x', lhs = '>', rhs = '>gv' })
-K('Indent left', { mode = 'x', lhs = '<', rhs = '<gv' })
-K('Clear highlight', { mode = { 'n', 'x', 'i', 's' }, lhs = '<Esc>', rhs = '<Cmd>noh<CR><Esc>' })
+vim.keymap.set('x', 'p', 'P', { desc = 'Better paste' })
+vim.keymap.set('n', '<C-d>', '<C-d>zz', { desc = 'Scroll down' })
+vim.keymap.set('n', '<C-u>', '<C-u>zz', { desc = 'Scroll up' })
+vim.keymap.set('n', '*', '*zzzv', { desc = 'Search current word forward' })
+vim.keymap.set('n', '#', '#zzzv', { desc = 'Search current word backward' })
+vim.keymap.set('n', 'n', "'Nn'[v:searchforward].'zzzv'", { expr = true, desc = 'Search forward' })
+vim.keymap.set('n', 'N', "'nN'[v:searchforward].'zzzv'", { expr = true, desc = 'Search backward' })
+vim.keymap.set({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, desc = 'Move down' })
+vim.keymap.set({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, desc = 'Move up' })
+vim.keymap.set('n', '<C-w>+', '<Cmd>resize +5<CR>', { remap = true, desc = 'Resize height +' })
+vim.keymap.set('n', '<C-w>-', '<Cmd>resize -5<CR>', { remap = true, desc = 'Resize height -' })
+vim.keymap.set('n', '<C-w><', '<Cmd>vertical resize -20<CR>', { remap = true, desc = 'Resize width -' })
+vim.keymap.set('n', '<C-w>>', '<Cmd>vertical resize +20<CR>', { remap = true, desc = 'Resize width +' })
+vim.keymap.set('n', '<C-Up>', '<Cmd>resize +5<CR>', { remap = true, desc = 'Resize height +' })
+vim.keymap.set('n', '<C-Down>', '<Cmd>resize -5<CR>', { remap = true, desc = 'Resize height -' })
+vim.keymap.set('n', '<C-Left>', '<Cmd>vertical resize -20<CR>', { remap = true, desc = 'Resize width -' })
+vim.keymap.set('n', '<C-Right>', '<Cmd>vertical resize +20<CR>', { remap = true, desc = 'Resize width +' })
+vim.keymap.set({ 'n', 'i', 'x' }, '<C-s>', '<Esc><Cmd>noh<CR><Cmd>w<CR><Esc>', { desc = 'Save' })
+vim.keymap.set('x', '>', '>gv', { desc = 'Indent right' })
+vim.keymap.set('x', '<', '<gv', { desc = 'Indent left' })
+vim.keymap.set({ 'n', 'x', 'i', 's' }, '<Esc>', '<Cmd>noh<CR><Esc>', { desc = 'Clear highlight' })
