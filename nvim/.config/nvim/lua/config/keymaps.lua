@@ -1,18 +1,18 @@
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 
 for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
-  vim.keymap.set({ 'n', 'v', 'i' }, '<C-' .. key, function()
-    local mode = vim.api.nvim_get_mode().mode
-    local c_w = vim.api.nvim_replace_termcodes('<C-w>', true, false, true)
-    local keycode = vim.api.nvim_replace_termcodes(key, true, false, true)
-    local esc = vim.api.nvim_replace_termcodes('<Esc>', true, false, true)
+    vim.keymap.set({ 'n', 'v', 'i' }, '<C-' .. key .. '>', function()
+        local mode = vim.api.nvim_get_mode().mode
+        local c_w = vim.api.nvim_replace_termcodes('<C-w>', true, false, true)
+        local keycode = vim.api.nvim_replace_termcodes(key, true, false, true)
+        local esc = vim.api.nvim_replace_termcodes('<Esc>', true, false, true)
 
-    if vim.startswith(string.lower(mode), 'i') then vim.api.nvim_feedkeys(esc, 'n', true) end
-    if vim.startswith(string.lower(mode), 'v') then vim.api.nvim_feedkeys(esc, 'n', true) end
+        if vim.startswith(string.lower(mode), 'i') then vim.api.nvim_feedkeys(esc, 'n', true) end
+        if vim.startswith(string.lower(mode), 'v') then vim.api.nvim_feedkeys(esc, 'n', true) end
 
-    vim.api.nvim_feedkeys(c_w, 't', true)
-    vim.api.nvim_feedkeys(keycode, 't', true)
-  end, { desc = 'Window ' .. string.upper(key), expr = true })
+        vim.api.nvim_feedkeys(c_w, 't', true)
+        vim.api.nvim_feedkeys(keycode, 't', true)
+    end, { desc = 'Window ' .. string.upper(key), expr = true })
 end
 
 vim.keymap.set('x', 'p', 'P', { desc = 'Better paste' })

@@ -1,29 +1,30 @@
 Add('folke/snacks.nvim')
 
 require('snacks').setup({
-  bigfile = { enabled = true },
-  indent = {
-    indent = { enabled = false },
-    scope = { enabled = false },
-    chunk = { enabled = true },
-  },
-  input = { enabled = true },
-  notifier = { enabled = true },
-  gitbrowse = {
-    notify = true,
-    open = function(url) vim.fn.setreg('+', url) end,
-  },
-  picker = {
-    win = {
-      input = {
-        keys = {
-          ['yy'] = 'copy',
-          ['<m-y>'] = { 'copy', mode = { 'n', 'i' } },
-        },
-      },
-      list = { keys = { ['yy'] = 'copy' } },
+    bigfile = { enabled = true },
+    indent = {
+        indent = { enabled = false },
+        scope = { enabled = false },
+        chunk = { enabled = true },
     },
-  },
+    signcolumn = { enabled = true },
+    input = { enabled = true },
+    notifier = { enabled = true },
+    gitbrowse = {
+        notify = true,
+        open = function(url) vim.fn.setreg('+', url) end,
+    },
+    picker = {
+        win = {
+            input = {
+                keys = {
+                    ['yy'] = 'copy',
+                    ['<m-y>'] = { 'copy', mode = { 'n', 'i' } },
+                },
+            },
+            list = { keys = { ['yy'] = 'copy' } },
+        },
+    },
 })
 
 vim.api.nvim_create_user_command('Browse', function() Snacks.gitbrowse() end, {})
