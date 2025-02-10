@@ -50,7 +50,6 @@ PATH=$HOME/gems/bin:$PATH
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="rg --files --hidden --follow --glob "!.git/*" --null | xargs -0 dirname | sort | uniq"
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 # asdf
@@ -59,11 +58,6 @@ PATH=${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH
 # path
 export PATH=$HOME/.local/bin:$PATH
 . <(asdf completion bash)
-
-
-eval "$(ssh-agent -s)" > /dev/null
-ssh-add "$HOME/.ssh/auth" >/dev/null 2>&1
-ssh-add "$HOME/.ssh/sign" >/dev/null 2>&1
 
 # MUST BE AT THE END!!!
 # Zoxide

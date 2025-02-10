@@ -28,49 +28,12 @@ end
 config.keys = {
   { mods = 'CTRL', key = 'C', action = act.CopyTo('Clipboard') },
   { mods = 'CTRL', key = 'V', action = act.PasteFrom('Clipboard') },
-
   { mods = 'CTRL', key = '0', action = act.ResetFontSize },
 
-  { mods = 'ALT', key = 'x', action = act.ActivateCopyMode },
-
-  { mods = 'ALT', key = 'd', action = act.ShowDebugOverlay },
-
-  { mods = 'ALT', key = 'v', action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }) },
-  { mods = 'ALT', key = 's', action = act.SplitVertical({ domain = 'CurrentPaneDomain' }) },
-
-  { mods = 'ALT', key = 'h', action = pane_navigation_action('Left', 'Prev') },
-  { mods = 'ALT', key = 'l', action = pane_navigation_action('Right', 'Next') },
-  { mods = 'ALT', key = 'k', action = pane_navigation_action('Up', 'Prev') },
-  { mods = 'ALT', key = 'j', action = pane_navigation_action('Down', 'Next') },
-
-  { mods = 'ALT', key = 'H', action = act.AdjustPaneSize({ 'Left', 20 }) },
-  { mods = 'ALT', key = 'J', action = act.AdjustPaneSize({ 'Down', 5 }) },
-  { mods = 'ALT', key = 'K', action = act.AdjustPaneSize({ 'Up', 5 }) },
-  { mods = 'ALT', key = 'L', action = act.AdjustPaneSize({ 'Right', 20 }) },
-
-  { mods = 'ALT', key = 't', action = act.SpawnTab('CurrentPaneDomain') },
-  { mods = 'ALT', key = 'c', action = act.CloseCurrentPane({ confirm = false }) },
-
+  { mods = 'ALT', key = ',', action = act.MoveTabRelative(-1) },
+  { mods = 'ALT', key = '.', action = act.MoveTabRelative(1) },
   { mods = 'ALT', key = '-', action = act.DecreaseFontSize },
   { mods = 'ALT', key = '=', action = act.IncreaseFontSize },
-
-  {
-    mods = 'ALT',
-    key = 'r',
-    action = act.PromptInputLine({
-      description = 'Enter new name for tab',
-      action = wezterm.action_callback(function(window, _, line)
-        -- line will be `nil` if they hit escape without entering anything
-        -- An empty string if they just hit enter
-        -- Or the actual line of text they wrote
-        if line and line ~= '' then window:active_tab():set_title(line) end
-      end),
-    }),
-  },
-
-  { mods = 'ALT', key = 'o', action = act.PaneSelect },
-  { mods = 'ALT', key = 'w', action = act.PaneSelect({ mode = 'SwapWithActive' }) },
-  { mods = 'ALT', key = 'm', action = act.PaneSelect({ mode = 'MoveToNewTab' }) },
 
   { mods = 'ALT', key = '1', action = act.ActivateTab(0) },
   { mods = 'ALT', key = '2', action = act.ActivateTab(1) },
@@ -83,19 +46,32 @@ config.keys = {
   { mods = 'ALT', key = '9', action = act.ActivateTab(8) },
   { mods = 'ALT', key = '0', action = act.ActivateTab(9) },
 
-  { mods = 'ALT', key = ',', action = act.MoveTabRelative(-1) },
-  { mods = 'ALT', key = '.', action = act.MoveTabRelative(1) },
-
-  { mods = 'ALT|SHIFT', key = '!', action = wezterm.action.MoveTab(0) },
-  { mods = 'ALT|SHIFT', key = '@', action = wezterm.action.MoveTab(1) },
-  { mods = 'ALT|SHIFT', key = '#', action = wezterm.action.MoveTab(2) },
-  { mods = 'ALT|SHIFT', key = '$', action = wezterm.action.MoveTab(3) },
-  { mods = 'ALT|SHIFT', key = '%', action = wezterm.action.MoveTab(4) },
-  { mods = 'ALT|SHIFT', key = '^', action = wezterm.action.MoveTab(5) },
-  { mods = 'ALT|SHIFT', key = '&', action = wezterm.action.MoveTab(6) },
-  { mods = 'ALT|SHIFT', key = '*', action = wezterm.action.MoveTab(7) },
-  { mods = 'ALT|SHIFT', key = '(', action = wezterm.action.MoveTab(8) },
-  { mods = 'ALT|SHIFT', key = ')', action = wezterm.action.MoveTab(9) },
+  { mods = 'ALT|SHIFT', key = 'x', action = act.ActivateCopyMode },
+  { mods = 'ALT|SHIFT', key = 'd', action = act.ShowDebugOverlay },
+  { mods = 'ALT|SHIFT', key = 'v', action = act.SplitHorizontal({ domain = 'CurrentPaneDomain' }) },
+  { mods = 'ALT|SHIFT', key = 's', action = act.SplitVertical({ domain = 'CurrentPaneDomain' }) },
+  { mods = 'ALT|SHIFT', key = 'h', action = pane_navigation_action('Left', 'Prev') },
+  { mods = 'ALT|SHIFT', key = 'l', action = pane_navigation_action('Right', 'Next') },
+  { mods = 'ALT|SHIFT', key = 'k', action = pane_navigation_action('Up', 'Prev') },
+  { mods = 'ALT|SHIFT', key = 'j', action = pane_navigation_action('Down', 'Next') },
+  { mods = 'ALT|SHIFT', key = 't', action = act.SpawnTab('CurrentPaneDomain') },
+  { mods = 'ALT|SHIFT', key = 'c', action = act.CloseCurrentPane({ confirm = false }) },
+  { mods = 'ALT|SHIFT', key = 'o', action = act.PaneSelect },
+  { mods = 'ALT|SHIFT', key = 'w', action = act.PaneSelect({ mode = 'SwapWithActive' }) },
+  { mods = 'ALT|SHIFT', key = 'm', action = act.PaneSelect({ mode = 'MoveToNewTab' }) },
+  {
+    mods = 'ALT|SHIFT',
+    key = 'r',
+    action = act.PromptInputLine({
+      description = 'Enter new name for tab',
+      action = wezterm.action_callback(function(window, _, line)
+        -- line will be `nil` if they hit escape without entering anything
+        -- An empty string if they just hit enter
+        -- Or the actual line of text they wrote
+        if line and line ~= '' then window:active_tab():set_title(line) end
+      end),
+    }),
+  },
 }
 
 return config

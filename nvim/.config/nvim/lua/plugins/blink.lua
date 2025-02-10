@@ -28,19 +28,13 @@ require('blink.cmp').setup({
     sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
     },
-    keymap = {
-        preset = 'enter',
-        cmdline = {
-            preset = 'enter',
-        },
-    },
     completion = {
         keyword = { range = 'full' },
         ghost_text = { enabled = false },
         list = {
             selection = {
-                preselect = false,
-                auto_insert = false,
+                preselect = function(ctx) return ctx.mode ~= 'cmdline' end,
+                auto_insert = function(ctx) return ctx.mode == 'cmdline' end,
             },
         },
         menu = {

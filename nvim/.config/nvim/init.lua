@@ -37,10 +37,11 @@ require('plugins.minifiles')
 
 require('plugins.snacks')
 
+require('plugins.blink')
+require('plugins.lspconfig')
+
 require('plugins.conform')
 require('plugins.grug_far')
 require('plugins.codecompanion')
-
-require('plugins.blink')
-require('plugins.lspconfig')
 require('plugins.whichkey')
+require('plugins.neogen')

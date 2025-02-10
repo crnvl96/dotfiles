@@ -20,6 +20,7 @@ vim.o.cmdheight = 1
 vim.o.conceallevel = 0
 vim.o.cursorline = true
 vim.o.expandtab = true
+-- vim.o.fillchars = 'eob: '
 vim.o.foldcolumn = '0'
 vim.o.foldenable = true
 vim.o.foldlevel = 99
@@ -61,7 +62,6 @@ vim.o.wildignorecase = true
 vim.o.wrap = false
 vim.o.writebackup = false
 vim.opt.diffopt = 'filler,internal,closeoff,algorithm:histogram,context:5,linematch:60'
-vim.opt.fillchars:append('eob: ')
 
 vim.diagnostic.config({
     float = { border = 'rounded', source = true },

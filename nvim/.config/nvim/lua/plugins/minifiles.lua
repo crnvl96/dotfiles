@@ -27,7 +27,7 @@ require('mini.files').setup({
     mappings = {
         show_help = '?',
     },
-    windows = { width_nofocus = 25 },
+    windows = { width_nofocus = 25, preview = true, width_preview = 80 },
 })
 
 vim.api.nvim_create_autocmd('User', {
