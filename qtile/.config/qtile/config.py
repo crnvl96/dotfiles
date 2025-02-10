@@ -4,11 +4,11 @@ import os
 import subprocess
 
 from libqtile import bar, extension, hook, layout, widget
-from libqtile.config import Click, Drag, Group, Key, Screen, Match
+from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 
 mod = "mod4"
-terminal = "wezterm"
+terminal = "ghostty"
 
 keys = [
     Key([mod], "h", lazy.layout.left(), desc="Move focus to left"),

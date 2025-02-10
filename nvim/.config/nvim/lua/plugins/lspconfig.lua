@@ -28,23 +28,6 @@ for server, config in pairs({
             },
         },
     },
-
-    -- [tool.pyright]
-    -- include = ["src"]
-    -- exclude = ["**/node_modules", "**/__pycache__", "**/.venv"]
-    -- pythonVersion = "3.12"
-    -- pythonPlatform = "Linux"
-    -- allowedUntypedLibraries = true
-    --
-    -- [tool.ruff]
-    -- line-length = 120
-    -- indent-width = 4
-    -- target-version = "py312"
-    --
-    -- [tool.ruff.lint]
-    -- select = ["ALL"]
-    -- ignore = ["D"]
-
     lua_ls = {
         on_init = function(client)
             if client.workspace_folders then

@@ -1,6 +1,6 @@
 -- https://github.com/olimorris/codecompanion.nvim/tree/main/lua/codecompanion/adapters
 -- available huggingface models can be found at https://huggingface.co/models?inference=warm&pipeline_tag=text-generation
-vim.g.codecompanion_adapter = 'anthropic'
+vim.g.codecompanion_adapter = 'deepseek'
 
 Add('olimorris/codecompanion.nvim')
 
@@ -59,7 +59,7 @@ require('codecompanion').setup({
             env = { api_key = load_key('deepseek') },
             schema = {
                 model = {
-                    default = 'deepseek-reasoner',
+                    default = 'deepseek-chat',
                 },
             },
         }),

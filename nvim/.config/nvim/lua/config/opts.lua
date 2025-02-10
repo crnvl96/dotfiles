@@ -20,7 +20,6 @@ vim.o.cmdheight = 1
 vim.o.conceallevel = 0
 vim.o.cursorline = true
 vim.o.expandtab = true
--- vim.o.fillchars = 'eob: '
 vim.o.foldcolumn = '0'
 vim.o.foldenable = true
 vim.o.foldlevel = 99

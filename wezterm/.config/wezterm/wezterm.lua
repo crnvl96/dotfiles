@@ -2,6 +2,7 @@ local wezterm = require('wezterm')
 local act = wezterm.action
 local config = wezterm.config_builder()
 
+config.term = 'wezterm'
 config.tab_bar_at_bottom = true
 config.use_fancy_tab_bar = false
 config.window_decorations = 'RESIZE'

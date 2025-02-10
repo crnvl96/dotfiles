@@ -16,7 +16,7 @@ require('blink.compat').setup()
 
 require('blink.cmp').setup({
     enabled = function()
-        return not vim.tbl_contains({ 'minifiles' }, vim.bo.filetype)
+        return not vim.tbl_contains({ 'minifiles', 'deck' }, vim.bo.filetype)
             and vim.bo.buftype ~= 'prompt'
             and vim.b.completion ~= false
     end,

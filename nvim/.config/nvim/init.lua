@@ -22,6 +22,8 @@ Add({ name = 'mini.nvim' })
 
 require('config.utils')
 
+require('plugins.snacks')
+
 require('config.opts')
 require('config.keymaps')
 require('config.autocmds')
@@ -33,9 +35,6 @@ require('plugins.fugitive')
 require('plugins.treesitter')
 
 require('plugins.mini')
-require('plugins.minifiles')
-
-require('plugins.snacks')
 
 require('plugins.blink')
 require('plugins.lspconfig')
