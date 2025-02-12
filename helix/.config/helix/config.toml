@@ -1,0 +1,28 @@
+theme = "onedark"
+
+[editor]
+line-number = "relative"
+mouse = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[keys.normal]
+C-s = ":w"
+"ret" = ["open_below", "normal_mode"]
+"A-x" = "@x<A-d>"
+
+[keys.normal.g]
+a = "code_action"
+
+[keys.insert]
+C-s = [":w", "normal_mode"]
+"A-x" = "normal_mode"
+
+[keys.select]
+C-s = [":w", "normal_mode"]

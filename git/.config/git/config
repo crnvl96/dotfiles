@@ -29,6 +29,7 @@
 	autoSetupRemote = true
 [merge]
 	conflictstyle = zdiff3
+	; conflictstyle = merge
 [delta]
 	navigate = true
 	dark = true

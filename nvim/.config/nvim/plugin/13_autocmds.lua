@@ -9,17 +9,6 @@ Utils.Group('crnvl96-resize-splits', function(g)
     })
 end)
 
-Utils.Group('crnvl96-auto-create-dirs', function(g)
-    vim.api.nvim_create_autocmd('BufWritePre', {
-        group = g,
-        callback = function(e)
-            if e.match:match('^%w%w+:[\\/][\\/]') then return end
-            local file = vim.uv.fs_realpath(e.match) or e.match
-            vim.fn.mkdir(vim.fn.fnamemodify(file, ':p:h'), 'p')
-        end,
-    })
-end)
-
 Utils.Group('crnvl96-checktime', function(g)
     vim.api.nvim_create_autocmd({ 'FocusGained', 'TermClose', 'TermLeave' }, {
         group = g,
@@ -73,44 +62,6 @@ Utils.Group('crnvl96-yank', function(g)
             (vim.hl or vim.highlight).on_yank()
             if vim.v.event.operator == 'y' and cursorPreYank then vim.api.nvim_win_set_cursor(0, cursorPreYank) end
         end,
-    })
-end)
-
-Utils.Group('crnvl96-scrolloff', function(g)
-    vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI', 'WinScrolled' }, {
-        group = g,
-        callback = function()
-            if vim.api.nvim_win_get_config(0).relative ~= '' then
-                return -- Ignore floating windows
-            end
-
-            local win_height = vim.fn.winheight(0)
-            local scrolloff = math.min(vim.o.scrolloff, math.floor(win_height / 2))
-            local visual_distance_to_eof = win_height - vim.fn.winline()
-
-            if visual_distance_to_eof < scrolloff then
-                local win_view = vim.fn.winsaveview()
-                vim.fn.winrestview({ topline = win_view.topline + scrolloff - visual_distance_to_eof })
-            end
-        end,
-    })
-end)
-
-Utils.Group('crnvl96-cmdline', function(g)
-    vim.api.nvim_create_autocmd('CmdlineEnter', {
-        group = g,
-        command = ':set cmdheight=1',
-    })
-
-    vim.api.nvim_create_autocmd('CmdlineLeave', {
-        group = g,
-        command = ':set cmdheight=0',
-    })
-
-    vim.api.nvim_create_autocmd('BufWritePost', {
-        group = g,
-        pattern = { '*' },
-        command = 'redrawstatus',
     })
 end)
 
@@ -180,6 +131,19 @@ Utils.Group('crnvl96-term', function(g)
                 vim.api.nvim_set_option_value('filetype', 'terminal', { buf = event.buf })
                 vim.cmd.startinsert()
             end
+        end,
+    })
+end)
+
+Utils.Group('crnvl96-on-lsp-attach', function(g)
+    vim.api.nvim_create_autocmd('LspAttach', {
+        group = g,
+        callback = function(args)
+            local client = vim.lsp.get_client_by_id(args.data.client_id)
+
+            if not client then return end
+
+            Utils.OnAttach(client, args.buf)
         end,
     })
 end)

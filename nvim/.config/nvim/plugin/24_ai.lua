@@ -1,7 +1,4 @@
--- https://github.com/olimorris/codecompanion.nvim/tree/main/lua/codecompanion/adapters
--- available huggingface models can be found at https://huggingface.co/models?inference=warm&pipeline_tag=text-generation
-vim.g.codecompanion_adapter = 'deepseek'
-
+Add('j-hui/fidget.nvim')
 Add('olimorris/codecompanion.nvim')
 
 local load_key = function(f)
@@ -23,7 +20,18 @@ local load_key = function(f)
     return nil
 end
 
+vim.g.codecompanion_adapter = 'deepseek'
+
 require('codecompanion').setup({
+    display = {
+        diff = {
+            enabled = true,
+            close_chat_at = 240,
+            layout = 'vertical',
+            opts = { 'filler', 'internal', 'closeoff', 'algorithm:histogram', 'context:5', 'linematch:60' },
+            provider = 'mini_diff',
+        },
+    },
     strategies = {
         chat = {
             adapter = vim.g.codecompanion_adapter,
@@ -65,7 +73,3 @@ require('codecompanion').setup({
         }),
     },
 })
-
-vim.keymap.set({ 'n', 'v' }, '<C-a>', '<Cmd>CodeCompanionActions<CR>', { desc = 'Actions' })
-vim.keymap.set({ 'n', 'v' }, '<Leader>a', '<Cmd>CodeCompanionChat Toggle<CR>', { desc = 'Toggle' })
-vim.keymap.set('v', 'ga', ':CodeCompanionChat Add<CR>', { desc = 'Add to chat' })

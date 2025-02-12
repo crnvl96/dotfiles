@@ -3,6 +3,8 @@ font-family = Berkeley Mono
 font-size = 13
 
 window-decoration = false
+cursor-style = block_hollow
+cursor-style-blink = false
 
 keybind = alt+one=goto_tab:1
 keybind = alt+two=goto_tab:2

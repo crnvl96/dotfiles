@@ -1,0 +1,23 @@
+local function minifiles_explorer()
+    local bufname = vim.api.nvim_buf_get_name(0)
+    local path = vim.fn.fnamemodify(bufname, ':p')
+    if path and vim.uv.fs_stat(path) then require('mini.files').open(bufname, false) end
+end
+
+vim.keymap.set({ 'n', 'x' }, '<C-a>', '<Cmd>CodeCompanionActions<CR>', { desc = 'Actions' })
+vim.keymap.set('v', 'ga', ':CodeCompanionChat Add<CR>', { desc = 'Add to chat' })
+
+vim.keymap.set('n', '<Leader>/', function() Snacks.picker.lines() end, { desc = 'Lines' })
+vim.keymap.set('n', '<Leader>b', function() Snacks.picker.buffers() end, { desc = 'Buffers' })
+vim.keymap.set('n', '<Leader>c', function() Snacks.picker.resume() end, { desc = 'Resume' })
+vim.keymap.set('n', '<Leader>f', function() Snacks.picker.files({ hidden = true }) end, { desc = 'Files' })
+vim.keymap.set({ 'n', 'x' }, '<Leader>G', function() Snacks.picker.grep_word() end, { desc = 'Grep Word' })
+vim.keymap.set('n', '<Leader>g', function() Snacks.picker.grep({ hidden = true }) end, { desc = 'Grep' })
+vim.keymap.set('n', '<Leader>h', function() Snacks.picker.help() end, { desc = 'Help' })
+vim.keymap.set('n', '<Leader>k', function() Snacks.picker.keymaps() end, { desc = 'Keymaps' })
+vim.keymap.set('n', '<Leader>p', function() Snacks.picker.pickers() end, { desc = 'Pickers' })
+
+vim.keymap.set('n', '<Leader>d', '<Cmd>Gvdiffsplit!<CR>', { desc = 'Diff' })
+vim.keymap.set('n', '<Leader>o', function() require('mini.diff').toggle_overlay() end, { desc = 'Overlay' })
+vim.keymap.set('n', '<Leader>e', minifiles_explorer, { desc = 'File explorer' })
+vim.keymap.set('n', '<Leader>n', '<Cmd>Neogen<CR>', { desc = 'Neogen' })

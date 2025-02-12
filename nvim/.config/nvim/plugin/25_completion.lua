@@ -1,5 +1,4 @@
-Add('saghen/blink.compat')
-
+Add({ source = 'saghen/blink.compat' })
 Add({
     source = 'Saghen/blink.cmp',
     hooks = {
@@ -16,7 +15,7 @@ require('blink.compat').setup()
 
 require('blink.cmp').setup({
     enabled = function()
-        return not vim.tbl_contains({ 'minifiles', 'deck' }, vim.bo.filetype)
+        return not vim.tbl_contains({ 'minifiles' }, vim.bo.filetype)
             and vim.bo.buftype ~= 'prompt'
             and vim.b.completion ~= false
     end,
@@ -38,20 +37,20 @@ require('blink.cmp').setup({
             },
         },
         menu = {
-            border = 'rounded',
+            border = 'none',
             scrollbar = false,
         },
         documentation = {
             auto_show = true,
             auto_show_delay_ms = 500,
             window = {
-                border = 'rounded',
+                border = 'none',
                 scrollbar = false,
             },
         },
     },
     signature = {
         enabled = true,
-        window = { border = 'rounded' },
+        window = { border = 'none' },
     },
 })

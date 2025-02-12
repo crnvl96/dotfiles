@@ -1,3 +1,6 @@
+# asdf
+PATH=$HOME/.asdf/shims:$PATH
+
 # aliases
 alias ls="eza -l"
 alias la="eza -lA"
@@ -18,7 +21,6 @@ alias gp="git fetch --all --prune && git pull --rebase"
 source $HOME/.config/bash/git-prompt.sh
 source $HOME/.config/bash/git-completion.sh
 
-
 # prompt
 PS1='[\j][\W$(__git_ps1 " (%s)")]\n\$ '
 
@@ -26,11 +28,11 @@ PS1='[\j][\W$(__git_ps1 " (%s)")]\n\$ '
 # nvim
 if [ -n "$NVIM" ]; then
     export EDITOR="nvim --server $NVIM --remote"
-		export VISUAL="$EDITOR"
+    export VISUAL="$EDITOR"
     alias nvim="$EDITOR"
 else
     export EDITOR="nvim"
-		export VISUAL="$EDITOR"
+    export VISUAL="$EDITOR"
 fi
 
 PATH=$HOME/.local/share/bob/nvim-bin:$PATH
@@ -50,10 +52,6 @@ PATH=$HOME/gems/bin:$PATH
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="rg --files --hidden --follow --glob "!.git/*" --null | xargs -0 dirname | sort | uniq"
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-# asdf
-PATH=${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH
 
 # path
 export PATH=$HOME/.local/bin:$PATH
@@ -62,4 +60,6 @@ export PATH=$HOME/.local/bin:$PATH
 # MUST BE AT THE END!!!
 # Zoxide
 export _ZO_RESOLVE_SYMLINKS=1
+
+eval "$(fzf --bash)"
 eval "$(zoxide init --cmd x bash)"
