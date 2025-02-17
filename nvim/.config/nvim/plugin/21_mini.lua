@@ -8,15 +8,6 @@ require('mini.align').setup({
     },
 })
 
-require('mini.indentscope').setup({
-    options = {
-        -- Type of scope's border: which line(s) with smaller indent to
-        -- categorize as border. Can be one of: 'both', 'top', 'bottom', 'none'.
-        border = 'top',
-        try_as_border = true,
-    },
-})
-
 require('mini.snippets').setup({
     snippets = {
         require('mini.snippets').gen_loader.from_file('~/.config/nvim/snippets/global.json'),

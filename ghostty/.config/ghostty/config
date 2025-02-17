@@ -1,10 +1,23 @@
-theme = tokyonight_night
+theme = Dracula
+
 font-family = Berkeley Mono
 font-size = 13
+adjust-cell-width = -5%
+adjust-cell-height = 20%
+adjust-underline-position = 6
+adjust-underline-thickness = 40%
+adjust-cursor-thickness = 150%
 
-window-decoration = false
-cursor-style = block_hollow
+confirm-close-surface = false
+
+shell-integration-features = no-cursor
+cursor-style = block
+cursor-color = F8F8F2
 cursor-style-blink = false
+cursor-text = 000000
+
+gtk-adwaita = false
+gtk-titlebar = false
 
 keybind = alt+one=goto_tab:1
 keybind = alt+two=goto_tab:2
@@ -29,7 +42,5 @@ keybind = ctrl+shift+c=copy_to_clipboard
 keybind = ctrl+shift+v=paste_from_clipboard
 
 keybind = alt+shift+v=write_screen_file:paste
-
-confirm-close-surface = false
 
 # vim set ft=conf

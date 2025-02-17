@@ -20,24 +20,38 @@ require('nvim-treesitter.configs').setup({
         'python',
         'sql',
         'csv',
+        'html',
+        'css',
+        'norg',
+        'scss',
+        'vue',
     },
     textobjects = {
         move = {
             enable = true,
             set_jumps = true,
             goto_next_start = {
-                [']f'] = { query = '@function.outer', desc = 'Next function start' },
-                [']c'] = { query = '@class.outer', desc = 'Next class start' },
+                [']f'] = '@function.outer',
+                [']c'] = '@class.outer',
+            },
+            goto_next_end = {
+                [']F'] = '@function.outer',
+                [']C'] = '@class.outer',
             },
             goto_previous_start = {
-                ['[f'] = { query = '@function.outer', desc = 'Prev function start' },
-                ['[c'] = { query = '@class.outer', desc = 'Prev class start' },
+                ['[f'] = '@function.outer',
+                ['[c'] = '@class.outer',
+            },
+            goto_previous_end = {
+                ['[F'] = '@function.outer',
+                ['[C'] = '@class.outer',
             },
         },
     },
 })
 
 local ai = require('mini.ai')
+local gen_ai_spec = require('mini.extra').gen_ai_spec
 
 ai.setup({
     n_lines = 500,
@@ -48,14 +62,9 @@ ai.setup({
         }),
         f = ai.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
         c = ai.gen_spec.treesitter({ a = '@class.outer', i = '@class.inner' }),
-        g = function()
-            local from = { line = 1, col = 1 }
-            local to = {
-                line = vim.fn.line('$'),
-                col = math.max(vim.fn.getline('$'):len(), 1),
-            }
-            return { from = from, to = to }
-        end,
+        g = gen_ai_spec.buffer(),
+        d = gen_ai_spec.diagnostic(),
+        i = gen_ai_spec.indent(),
     },
     silent = true,
     search_method = 'cover',
