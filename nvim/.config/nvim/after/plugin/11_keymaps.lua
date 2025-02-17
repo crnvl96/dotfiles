@@ -6,6 +6,7 @@ end
 
 vim.keymap.set({ 'n', 'x' }, '<C-a>', '<Cmd>CodeCompanionActions<CR>', { desc = 'Actions' })
 vim.keymap.set('v', 'ga', ':CodeCompanionChat Add<CR>', { desc = 'Add to chat' })
+vim.keymap.set({ 'n', 'x' }, '<Leader>a', '<Cmd>CodeCompanionChat Toggle<CR>', { desc = 'Toggle' })
 
 vim.keymap.set('n', '<Leader>/', function() Snacks.picker.lines() end, { desc = 'Lines' })
 vim.keymap.set('n', '<Leader>b', function() Snacks.picker.buffers() end, { desc = 'Buffers' })

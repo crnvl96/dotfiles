@@ -15,8 +15,4 @@ log/
 
 .aider*
 
-.tool-versions
-.prototools
 Session.vim
-
-annotations.md

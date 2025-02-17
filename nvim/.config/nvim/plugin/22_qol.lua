@@ -1,6 +1,7 @@
 Add({ source = 'nvim-lua/plenary.nvim' })
 Add({ source = 'tpope/vim-fugitive' })
 Add({ source = 'danymat/neogen' })
+Add({ source = 'MagicDuck/grug-far.nvim' })
 
 require('mini.base16').setup({
     palette = Utils.Palette(),
@@ -15,3 +16,5 @@ require('neogen').setup({
         python = { template = { annotation_convention = 'numpydoc' } },
     },
 })
+
+require('grug-far').setup()

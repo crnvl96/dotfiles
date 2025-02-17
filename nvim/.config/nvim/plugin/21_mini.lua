@@ -1,11 +1,19 @@
 require('mini.icons').setup()
 require('mini.extra').setup()
-require('mini.bracketed').setup()
 
 require('mini.align').setup({
     mappings = {
         start = '&',
         start_with_preview = '',
+    },
+})
+
+require('mini.indentscope').setup({
+    options = {
+        -- Type of scope's border: which line(s) with smaller indent to
+        -- categorize as border. Can be one of: 'both', 'top', 'bottom', 'none'.
+        border = 'top',
+        try_as_border = true,
     },
 })
 

@@ -23,31 +23,64 @@ Utils.OnAttach = function(client, bufnr)
     s('n', 'ga', function() vim.lsp.buf.code_action() end, { desc = 'Actions', buffer = bufnr })
     s('n', 'gn', function() vim.lsp.buf.rename() end, { desc = 'Rename', buffer = bufnr })
 
-    s('n', 'gD', function() Snacks.picker.diagnostics() end, { desc = 'Diagnostic logs', buffer = bufnr })
+    s('n', 'ge', function() Snacks.picker.diagnostics_buffer() end, { desc = 'Buffer diagnostic', buffer = bufnr })
+    s('n', 'gE', function() Snacks.picker.diagnostics() end, { desc = 'Diagnostic', buffer = bufnr })
     s('n', 'gs', function() Snacks.picker.lsp_symbols() end, { desc = 'Symbols', buffer = bufnr })
     s('n', 'gS', function() Snacks.picker.lsp_workspace_symbols() end, { desc = 'Symbols', buffer = bufnr })
     s(
         'n',
         'gd',
-        function() Snacks.picker.lsp_definitions({ include_current = true, auto_confirm = false }) end,
+        function()
+            Snacks.picker.lsp_definitions({
+                include_current = true,
+                auto_confirm = false,
+                jump = { reuse_win = false },
+            })
+        end,
+        { desc = 'Definition', buffer = bufnr }
+    )
+    s(
+        'n',
+        'gD',
+        function()
+            Snacks.picker.lsp_declarations({
+                include_current = true,
+                auto_confirm = false,
+                jump = { reuse_win = false },
+            })
+        end,
         { desc = 'Definition', buffer = bufnr }
     )
     s(
         'n',
         'gi',
-        function() Snacks.picker.lsp_implementations({ include_current = true, auto_confirm = false }) end,
+        function()
+            Snacks.picker.lsp_implementations({
+                include_current = true,
+                auto_confirm = false,
+                jump = { reuse_win = false },
+            })
+        end,
         { desc = 'Impl', buffer = bufnr }
     )
     s(
         'n',
         'gr',
-        function() Snacks.picker.lsp_references({ include_current = true, auto_confirm = false }) end,
+        function()
+            Snacks.picker.lsp_references({ include_current = true, auto_confirm = false, jump = { reuse_win = false } })
+        end,
         { desc = 'References', nowait = true, buffer = bufnr }
     )
     s(
         'n',
         'gy',
-        function() Snacks.picker.lsp_type_definitions({ include_current = true, auto_confirm = false }) end,
+        function()
+            Snacks.picker.lsp_type_definitions({
+                include_current = true,
+                auto_confirm = false,
+                jump = { reuse_win = false },
+            })
+        end,
         { desc = 'Typedefs', buffer = bufnr }
     )
 end

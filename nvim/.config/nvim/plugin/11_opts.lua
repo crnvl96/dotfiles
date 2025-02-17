@@ -9,7 +9,7 @@ vim.g.maplocalleader = ','
 
 vim.o.autoindent = true
 vim.o.autoread = true
-vim.o.background = 'light'
+-- vim.o.background = 'light'
 vim.o.breakindent = true
 vim.o.clipboard = 'unnamedplus'
 vim.o.cmdheight = 1
