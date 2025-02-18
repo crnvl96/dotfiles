@@ -20,68 +20,29 @@ Utils.OnAttach = function(client, bufnr)
     local s = vim.keymap.set
     s('n', 'E', function() vim.diagnostic.open_float({ border = 'rounded' }) end, { desc = 'Eval', buffer = bufnr })
     s('n', 'K', function() vim.lsp.buf.hover({ border = 'rounded' }) end, { desc = 'Eval', buffer = bufnr })
-    s('n', 'ga', function() vim.lsp.buf.code_action() end, { desc = 'Actions', buffer = bufnr })
-    s('n', 'gn', function() vim.lsp.buf.rename() end, { desc = 'Rename', buffer = bufnr })
+    s('n', '<Leader>la', function() vim.lsp.buf.code_action() end, { desc = 'Actions', buffer = bufnr })
+    s('n', '<Leader>ln', function() vim.lsp.buf.rename() end, { desc = 'Rename', buffer = bufnr })
 
-    s('n', 'ge', function() Snacks.picker.diagnostics_buffer() end, { desc = 'Buffer diagnostic', buffer = bufnr })
-    s('n', 'gE', function() Snacks.picker.diagnostics() end, { desc = 'Diagnostic', buffer = bufnr })
-    s('n', 'gs', function() Snacks.picker.lsp_symbols() end, { desc = 'Symbols', buffer = bufnr })
-    s('n', 'gS', function() Snacks.picker.lsp_workspace_symbols() end, { desc = 'Symbols', buffer = bufnr })
     s(
         'n',
-        'gd',
-        function()
-            Snacks.picker.lsp_definitions({
-                include_current = true,
-                auto_confirm = false,
-                jump = { reuse_win = false },
-            })
-        end,
-        { desc = 'Definition', buffer = bufnr }
+        '<Leader>le',
+        function() Snacks.picker.diagnostics_buffer() end,
+        { desc = 'Buffer diagnostic', buffer = bufnr }
     )
+
+    s('n', '<Leader>lE', function() Snacks.picker.diagnostics() end, { desc = 'Diagnostic', buffer = bufnr })
+    s('n', '<Leader>ls', function() Snacks.picker.lsp_symbols() end, { desc = 'Symbols', buffer = bufnr })
+    s('n', '<Leader>lS', function() Snacks.picker.lsp_workspace_symbols() end, { desc = 'Symbols', buffer = bufnr })
+    s('n', '<Leader>ld', function() Snacks.picker.lsp_definitions() end, { desc = 'Definition', buffer = bufnr })
+    s('n', '<Leader>lD', function() Snacks.picker.lsp_declarations() end, { desc = 'Definition', buffer = bufnr })
+    s('n', '<Leader>li', function() Snacks.picker.lsp_implementations() end, { desc = 'Impl', buffer = bufnr })
+    s('n', '<Leader>ly', function() Snacks.picker.lsp_type_definitions() end, { desc = 'Typedefs', buffer = bufnr })
+
     s(
         'n',
-        'gD',
-        function()
-            Snacks.picker.lsp_declarations({
-                include_current = true,
-                auto_confirm = false,
-                jump = { reuse_win = false },
-            })
-        end,
-        { desc = 'Definition', buffer = bufnr }
-    )
-    s(
-        'n',
-        'gi',
-        function()
-            Snacks.picker.lsp_implementations({
-                include_current = true,
-                auto_confirm = false,
-                jump = { reuse_win = false },
-            })
-        end,
-        { desc = 'Impl', buffer = bufnr }
-    )
-    s(
-        'n',
-        'gr',
-        function()
-            Snacks.picker.lsp_references({ include_current = true, auto_confirm = false, jump = { reuse_win = false } })
-        end,
+        '<Leader>lr',
+        function() Snacks.picker.lsp_references() end,
         { desc = 'References', nowait = true, buffer = bufnr }
-    )
-    s(
-        'n',
-        'gy',
-        function()
-            Snacks.picker.lsp_type_definitions({
-                include_current = true,
-                auto_confirm = false,
-                jump = { reuse_win = false },
-            })
-        end,
-        { desc = 'Typedefs', buffer = bufnr }
     )
 end
 

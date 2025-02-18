@@ -22,3 +22,28 @@ vim.keymap.set('n', '<Leader>d', '<Cmd>Gvdiffsplit!<CR>', { desc = 'Diff' })
 vim.keymap.set('n', '<Leader>o', function() require('mini.diff').toggle_overlay() end, { desc = 'Overlay' })
 vim.keymap.set('n', '<Leader>e', minifiles_explorer, { desc = 'File explorer' })
 vim.keymap.set('n', '<Leader>n', '<Cmd>Neogen<CR>', { desc = 'Neogen' })
+
+local ts_repeat_move = require('nvim-treesitter.textobjects.repeatable_move')
+vim.keymap.set({ 'n', 'x', 'o' }, ';', ts_repeat_move.repeat_last_move)
+vim.keymap.set({ 'n', 'x', 'o' }, ',', ts_repeat_move.repeat_last_move_opposite)
+
+-- vim.keymap.del('x', 'ys')
+-- vim.keymap.set('x', 'S', [[:<C-u>lua MiniSurround.add('visual')<CR>]], { silent = true })
+-- vim.keymap.set('n', 'yss', 'ys_', { remap = true })
+
+vim.keymap.set(
+    'n',
+    'ghy',
+    function() return MiniDiff.operator('yank') .. 'gh' end,
+    { expr = true, remap = true, desc = "Copy hunk's reference lines" }
+)
+
+local remap = function(mode, lhs_from, lhs_to)
+    local keymap = vim.fn.maparg(lhs_from, mode, false, true)
+    local rhs = keymap.callback or keymap.rhs
+    if rhs == nil then error('Could not remap from ' .. lhs_from .. ' to ' .. lhs_to) end
+    vim.keymap.set(mode, lhs_to, rhs, { desc = keymap.desc })
+end
+
+remap('n', 'gx', '<Leader>ox')
+remap('x', 'gx', '<Leader>ox')

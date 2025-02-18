@@ -27,6 +27,7 @@ for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
     end, { expr = true })
 end
 
+vim.keymap.set({ 'n', 'x', 'i', 's' }, '<M-x>', '<Cmd>noh<CR><Esc>', { desc = 'Clear highlight' })
 vim.keymap.set({ 'n', 'x', 'i', 's' }, '<Esc>', '<Cmd>noh<CR><Esc>', { desc = 'Clear highlight' })
 
 vim.keymap.set({ 'n', 'i', 'x' }, '<C-s>', '<Esc><Cmd>noh<CR><Cmd>w<CR><Esc>', { desc = 'Save' })

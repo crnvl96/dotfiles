@@ -31,18 +31,22 @@ require('nvim-treesitter.configs').setup({
             enable = true,
             set_jumps = true,
             goto_next_start = {
+                [']a'] = '@parameter.outer',
                 [']f'] = '@function.outer',
                 [']c'] = '@class.outer',
             },
             goto_next_end = {
+                [']A'] = '@parameter.outer',
                 [']F'] = '@function.outer',
                 [']C'] = '@class.outer',
             },
             goto_previous_start = {
+                ['[a'] = '@parameter.outer',
                 ['[f'] = '@function.outer',
                 ['[c'] = '@class.outer',
             },
             goto_previous_end = {
+                ['[A'] = '@parameter.outer',
                 ['[F'] = '@function.outer',
                 ['[C'] = '@class.outer',
             },
@@ -62,9 +66,18 @@ ai.setup({
         }),
         f = ai.gen_spec.treesitter({ a = '@function.outer', i = '@function.inner' }),
         c = ai.gen_spec.treesitter({ a = '@class.outer', i = '@class.inner' }),
+        a = ai.gen_spec.treesitter({ a = '@parameter.outer', i = '@parameter.inner' }),
+        t = { '<([%p%w]-)%f[^<%w][^<>]->.-</%1>', '^<.->().*()</[^/]->$' }, -- tags
         g = gen_ai_spec.buffer(),
         d = gen_ai_spec.diagnostic(),
-        i = gen_ai_spec.indent(),
+        -- i = gen_ai_spec.indent(),
+        n = gen_ai_spec.number(),
+        e = { -- Word with case
+            { '%u[%l%d]+%f[^%l%d]', '%f[%S][%l%d]+%f[^%l%d]', '%f[%P][%l%d]+%f[^%l%d]', '^[%l%d]+%f[^%l%d]' },
+            '^().*()$',
+        },
+        u = ai.gen_spec.function_call(), -- u for "Usage"
+        U = ai.gen_spec.function_call({ name_pattern = '[%w_]' }), -- without dot in function nam
     },
     silent = true,
     search_method = 'cover',

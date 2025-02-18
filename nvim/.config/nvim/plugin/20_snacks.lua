@@ -22,11 +22,11 @@ require('snacks').setup({
             statuscolumn = '',
         },
     },
-    indent = {
-        indent = { enabled = true },
-        scope = { enabled = true },
-        chunk = { enabled = true },
-    },
+    -- indent = {
+    --     indent = { enabled = true },
+    --     scope = { enabled = true },
+    --     chunk = { enabled = true },
+    -- },
     gitbrowse = {
         notify = true,
         open = function(url) vim.fn.setreg('+', url) end,
