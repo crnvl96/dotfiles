@@ -9,7 +9,6 @@ vim.g.maplocalleader = ','
 
 vim.o.autoindent = true
 vim.o.autoread = true
--- vim.o.background = 'light'
 vim.o.breakindent = true
 vim.o.clipboard = 'unnamedplus'
 vim.o.cmdheight = 1
@@ -45,7 +44,8 @@ vim.o.splitbelow = true
 vim.o.splitkeep = 'screen'
 vim.o.splitright = true
 vim.o.swapfile = false
-vim.o.switchbuf = 'usetab'
+vim.o.switchbuf = 'useopen'
+vim.o.splitkeep = 'screen'
 vim.o.tabstop = 4
 vim.o.softtabstop = 4
 vim.o.termguicolors = true
@@ -58,7 +58,7 @@ vim.o.writebackup = false
 vim.opt.diffopt = 'filler,internal,closeoff,algorithm:histogram,context:5,linematch:60'
 
 vim.o.signcolumn = 'yes'
-vim.o.statuscolumn = '%l%s%s'
+-- vim.o.statuscolumn = '%l%s'
 
 vim.diagnostic.config({
     float = { border = 'rounded', source = true },

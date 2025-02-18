@@ -20,7 +20,7 @@ local load_key = function(f)
     return nil
 end
 
-vim.g.codecompanion_adapter = 'deepseek'
+vim.g.codecompanion_adapter = 'anthropic'
 
 require('codecompanion').setup({
     display = {

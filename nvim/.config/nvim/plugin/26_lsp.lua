@@ -33,7 +33,6 @@ for server, config in pairs({
                 analysis = {
                     autoImportCompletions = true,
                     diagnosticMode = 'openFilesOnly',
-                    -- typeCheckingMode = 'off',
                 },
             },
         },

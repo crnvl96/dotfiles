@@ -1,4 +1,4 @@
-theme = Dracula
+theme = GruvboxDark
 
 font-family = Berkeley Mono
 font-size = 13
@@ -10,11 +10,7 @@ adjust-cursor-thickness = 150%
 
 confirm-close-surface = false
 
-shell-integration-features = no-cursor
-cursor-style = block
-cursor-color = F8F8F2
-cursor-style-blink = false
-cursor-text = 000000
+shell-integration-features = cursor
 
 gtk-adwaita = false
 gtk-titlebar = false

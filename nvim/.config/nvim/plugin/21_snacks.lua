@@ -1,9 +1,7 @@
 Add('folke/snacks.nvim')
 
 require('snacks').setup({
-    notifier = { enabled = true },
     input = { enabled = true },
-    statuscolumn = { enabled = true },
     bigfile = {
         size = 1 * 1024 * 1024,
         line_length = 300,
@@ -22,16 +20,12 @@ require('snacks').setup({
             statuscolumn = '',
         },
     },
-    indent = {
-        indent = { enabled = true },
-        scope = { enabled = true },
-        chunk = { enabled = true },
-    },
     gitbrowse = {
         notify = true,
         open = function(url) vim.fn.setreg('+', url) end,
     },
     picker = {
+        layout = 'ivy',
         matcher = {
             cwd_bonus = true,
             frecency = true,
@@ -44,6 +38,11 @@ require('snacks').setup({
             },
         },
         win = {
+            preview = {
+                keys = {
+                    ['<a-W>'] = 'cycle_win',
+                },
+            },
             input = {
                 keys = {
                     ['<a-D>'] = { 'inspect', mode = { 'n', 'i' } },
@@ -54,6 +53,15 @@ require('snacks').setup({
                     ['<a-P>'] = { 'toggle_preview', mode = { 'i', 'n' } },
                     ['<a-W>'] = { 'cycle_win', mode = { 'i', 'n' } },
                     ['<a-Y>'] = { 'copy', mode = { 'i', 'n' } },
+
+                    ['<a-d>'] = false,
+                    ['<a-f>'] = false,
+                    ['<a-h>'] = false,
+                    ['<a-i>'] = false,
+                    ['<a-m>'] = false,
+                    ['<a-p>'] = false,
+                    ['<a-w>'] = false,
+                    ['<a-y>'] = false,
                 },
             },
             list = {
@@ -66,29 +74,35 @@ require('snacks').setup({
                     ['<a-P>'] = 'toggle_preview',
                     ['<a-W>'] = 'cycle_win',
                     ['<a-Y>'] = 'copy',
-                },
-            },
-            preview = {
-                keys = {
-                    ['<a-W>'] = 'cycle_win',
+
+                    ['<a-d>'] = false,
+                    ['<a-f>'] = false,
+                    ['<a-h>'] = false,
+                    ['<a-i>'] = false,
+                    ['<a-m>'] = false,
+                    ['<a-p>'] = false,
+                    ['<a-w>'] = false,
+                    ['<a-y>'] = false,
                 },
             },
         },
         layouts = {
-            default = {
+            ivy = {
                 layout = {
-                    box = 'horizontal',
-                    width = 0.8,
-                    min_width = 120,
-                    height = 0.8,
+                    box = 'vertical',
+                    backdrop = false,
+                    row = -1,
+                    width = 0,
+                    height = 0.5,
+                    border = 'top',
+                    title = ' {title} {live} {flags}',
+                    title_pos = 'left',
+                    { win = 'input', height = 1, border = 'bottom' },
                     {
-                        box = 'vertical',
-                        border = 'none',
-                        title = '{title} {live} {flags}',
-                        { win = 'input', height = 1, border = 'bottom' },
+                        box = 'horizontal',
                         { win = 'list', border = 'none' },
+                        { win = 'preview', title = '{preview}', width = 0.618, border = 'left' },
                     },
-                    { win = 'preview', title = '{preview}', border = 'none', width = 0.5 },
                 },
             },
         },

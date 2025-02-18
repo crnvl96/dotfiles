@@ -1,9 +1,7 @@
----@type string
 local mini_path = vim.fn.stdpath('data') .. '/site/pack/deps/start/mini.nvim'
 
 if not vim.loop.fs_stat(mini_path) then
     vim.cmd('echo "Installing `mini.nvim`" | redraw')
-    ---@type string[]
     local clone_cmd = {
         'git',
         'clone',
@@ -17,7 +15,6 @@ if not vim.loop.fs_stat(mini_path) then
 end
 
 require('mini.deps').setup()
-
 Add = MiniDeps.add
 Now = MiniDeps.now
 Later = MiniDeps.later

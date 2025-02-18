@@ -27,6 +27,12 @@ for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
     end, { expr = true })
 end
 
+vim.keymap.set({ 'n', 'v' }, '<C-x>', function()
+    local function feed(k, m) return vim.api.nvim_feedkeys(k, m, true) end
+    local keycode = vim.api.nvim_replace_termcodes(':', true, false, true)
+    feed(keycode, 't')
+end)
+
 vim.keymap.set({ 'n', 'x', 'i', 's' }, '<Esc>', '<Cmd>noh<CR><Esc>', { desc = 'Clear highlight' })
 
 vim.keymap.set({ 'n', 'i', 'x' }, '<C-s>', '<Esc><Cmd>noh<CR><Cmd>w<CR><Esc>', { desc = 'Save' })

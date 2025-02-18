@@ -16,6 +16,7 @@ alias gl="git log --all --oneline --graph --decorate"
 alias gs="git status"
 alias gb="git branch"
 alias gp="git fetch --all --prune && git pull --rebase"
+alias sv="source .venv/bin/activate"
 
 # git
 source $HOME/.config/bash/git-prompt.sh
