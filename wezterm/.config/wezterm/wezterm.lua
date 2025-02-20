@@ -14,7 +14,7 @@ config.disable_default_key_bindings = true
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
 config.cursor_thickness = 2
 config.hide_tab_bar_if_only_one_tab = false
-config.color_scheme = 'Classic Dark (base16)'
+config.color_scheme = 'Gruvbox dark, medium (base16)'
 
 local function pane_navigation_action(direction, fallback_direction)
   return wezterm.action_callback(function(win, pane)

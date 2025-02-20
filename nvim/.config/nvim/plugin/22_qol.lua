@@ -5,8 +5,17 @@ Add('MagicDuck/grug-far.nvim')
 Add('folke/which-key.nvim')
 Add('sainnhe/gruvbox-material')
 Add('andymass/vim-matchup')
+Add('ggandor/flit.nvim')
+Add('ggandor/leap.nvim')
+Add('tpope/vim-repeat')
 
-require('grug-far').setup()
+require('leap').add_default_mappings(true)
+
+require('flit').setup({ labeled_modes = 'nx' })
+
+require('grug-far').setup({
+    headerMaxWidth = 80,
+})
 
 vim.cmd([[
     let g:gruvbox_material_enable_bold = 1
@@ -32,7 +41,7 @@ require('which-key').setup({
     },
     win = {
         border = 'none',
-        padding = { 1, 2 }, -- extra window padding [top/bottom, right/left]
+        padding = { 1, 2 },
         title = false,
     },
     icons = { mappings = false },

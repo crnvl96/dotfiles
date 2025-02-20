@@ -14,6 +14,7 @@ Utils.Build = function(params, cmd)
 end
 
 Utils.OnAttach = function(client, bufnr)
+    -- Formatting is handled by `stevearc/conform.nvim`
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
 
@@ -35,48 +36,7 @@ Utils.OnAttach = function(client, bufnr)
             { '<Leader>li', function() Snacks.picker.lsp_implementations() end, desc = 'Impl' },
             { '<Leader>ly', function() Snacks.picker.lsp_type_definitions() end, desc = 'Typedefs' },
             { '<Leader>lr', function() Snacks.picker.lsp_references() end, desc = 'References', nowait = true },
+            { '<leader>lN', function() Snacks.rename.rename_file() end, desc = 'Rename File' },
         },
     })
-end
-
-Utils.Palette = function()
-    if vim.o.background == 'dark' then
-        return {
-            base00 = '#151515',
-            base01 = '#202020',
-            base02 = '#303030',
-            base03 = '#505050',
-            base04 = '#b0b0b0',
-            base05 = '#d0d0d0',
-            base06 = '#e0e0e0',
-            base07 = '#f5f5f5',
-            base08 = '#ac4142',
-            base09 = '#d28445',
-            base0A = '#f4bf75',
-            base0B = '#90a959',
-            base0C = '#75b5aa',
-            base0D = '#6a9fb5',
-            base0E = '#aa759f',
-            base0F = '#8f5536',
-        }
-    else
-        return {
-            base00 = '#f5f5f5',
-            base01 = '#e0e0e0',
-            base02 = '#d0d0d0',
-            base03 = '#b0b0b0',
-            base04 = '#505050',
-            base05 = '#303030',
-            base06 = '#202020',
-            base07 = '#151515',
-            base08 = '#ac4142',
-            base09 = '#d28445',
-            base0A = '#f4bf75',
-            base0B = '#90a959',
-            base0C = '#75b5aa',
-            base0D = '#6a9fb5',
-            base0E = '#aa759f',
-            base0F = '#8f5536',
-        }
-    end
 end

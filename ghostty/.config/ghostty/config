@@ -20,6 +20,11 @@ keybind = alt+two=goto_tab:2
 keybind = alt+three=goto_tab:3
 keybind = alt+four=goto_tab:4
 keybind = alt+five=goto_tab:5
+keybind = alt+six=goto_tab:6
+keybind = alt+seven=goto_tab:7
+keybind = alt+eight=goto_tab:8
+keybind = alt+nine=goto_tab:9
+keybind = alt+zero=goto_tab:10
 
 keybind = alt+t=new_tab
 keybind = alt+q=close_surface

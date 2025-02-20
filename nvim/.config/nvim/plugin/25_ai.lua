@@ -59,7 +59,7 @@ require('codecompanion').setup({
             env = { api_key = load_key('anthropic') },
             schema = {
                 model = {
-                    default = 'claude-3-5-sonnet-20241022',
+                    default = 'claude-3-5-haiku-20241022',
                 },
             },
         }),

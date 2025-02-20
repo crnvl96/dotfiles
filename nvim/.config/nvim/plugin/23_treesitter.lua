@@ -1,12 +1,5 @@
 Add({ source = 'nvim-treesitter/nvim-treesitter', hooks = { post_checkout = function() vim.cmd('TSUpdate') end } })
 Add({ source = 'nvim-treesitter/nvim-treesitter-textobjects' })
-Add('nvim-treesitter/nvim-treesitter-context')
-
-require('treesitter-context').setup({
-    max_lines = 1,
-    multiline_threshold = 1,
-    min_window_height = 20,
-})
 
 require('nvim-treesitter.configs').setup({
     highlight = { enable = true },

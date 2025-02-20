@@ -2,10 +2,29 @@ Add('folke/snacks.nvim')
 
 require('snacks').setup({
     input = { enabled = true },
+    words = { enabled = true },
+    scope = { enabled = true },
     bigfile = {
         size = 1 * 1024 * 1024,
         line_length = 300,
         notify = true,
+    },
+    indent = {
+        enabled = false,
+        indent = {
+            enabled = true,
+            only_scope = false,
+            only_current = false,
+        },
+        scope = {
+            enabled = true,
+            underline = false,
+            only_current = false,
+        },
+        chunk = {
+            enabled = true,
+            only_current = false,
+        },
     },
     image = {
         wo = {
@@ -40,49 +59,21 @@ require('snacks').setup({
         win = {
             preview = {
                 keys = {
-                    ['<a-W>'] = 'cycle_win',
+                    ['<a-w>'] = 'cycle_win',
                 },
             },
             input = {
                 keys = {
-                    ['<a-D>'] = { 'inspect', mode = { 'n', 'i' } },
-                    ['<a-F>'] = { 'toggle_follow', mode = { 'i', 'n' } },
-                    ['<a-H>'] = { 'toggle_hidden', mode = { 'i', 'n' } },
-                    ['<a-I>'] = { 'toggle_ignored', mode = { 'i', 'n' } },
-                    ['<a-M>'] = { 'toggle_maximize', mode = { 'i', 'n' } },
-                    ['<a-P>'] = { 'toggle_preview', mode = { 'i', 'n' } },
-                    ['<a-W>'] = { 'cycle_win', mode = { 'i', 'n' } },
-                    ['<a-Y>'] = { 'copy', mode = { 'i', 'n' } },
-
-                    ['<a-d>'] = false,
-                    ['<a-f>'] = false,
                     ['<a-h>'] = false,
-                    ['<a-i>'] = false,
-                    ['<a-m>'] = false,
-                    ['<a-p>'] = false,
-                    ['<a-w>'] = false,
-                    ['<a-y>'] = false,
+                    ['<a-H>'] = { 'toggle_hidden', mode = { 'i', 'n' } },
+                    ['<a-y>'] = { 'copy', mode = { 'i', 'n' } },
                 },
             },
             list = {
                 keys = {
-                    ['<a-D>'] = 'inspect',
-                    ['<a-F>'] = 'toggle_follow',
-                    ['<a-H>'] = 'toggle_hidden',
-                    ['<a-I>'] = 'toggle_ignored',
-                    ['<a-M>'] = 'toggle_maximize',
-                    ['<a-P>'] = 'toggle_preview',
-                    ['<a-W>'] = 'cycle_win',
-                    ['<a-Y>'] = 'copy',
-
-                    ['<a-d>'] = false,
-                    ['<a-f>'] = false,
                     ['<a-h>'] = false,
-                    ['<a-i>'] = false,
-                    ['<a-m>'] = false,
-                    ['<a-p>'] = false,
-                    ['<a-w>'] = false,
-                    ['<a-y>'] = false,
+                    ['<a-H>'] = 'toggle_hidden',
+                    ['<a-y>'] = 'copy',
                 },
             },
         },

@@ -36,8 +36,6 @@ else
     export VISUAL="$EDITOR"
 fi
 
-PATH=$HOME/.local/share/bob/nvim-bin:$PATH
-
 # rg
 export RIPGREP_CONFIG_PATH="$HOME/.config/ripgrep/ripgreprc"
 
