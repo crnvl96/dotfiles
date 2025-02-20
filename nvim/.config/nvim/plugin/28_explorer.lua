@@ -70,9 +70,6 @@ require('oil').setup({
         winbar = '%!v:lua.get_oil_winbar()',
     },
     view_options = {
-        -- view_options = {
-        --     show_hidden = true,
-        -- },
         is_hidden_file = function(name, bufnr)
             local dir = require('oil').get_current_dir(bufnr)
             local is_dotfile = vim.startswith(name, '.') and name ~= '..'

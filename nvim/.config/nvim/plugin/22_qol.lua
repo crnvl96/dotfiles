@@ -32,7 +32,7 @@ require('which-key').setup({
     },
     win = {
         border = 'none',
-        padding = { 1, 2 }, -- extra window padding [top/bottom, right/left]
+        padding = { 1, 2 },
         title = false,
     },
     icons = { mappings = false },

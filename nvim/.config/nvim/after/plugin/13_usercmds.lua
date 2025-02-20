@@ -29,8 +29,8 @@ vim.api.nvim_create_user_command('Format', function(args)
 end, { range = true })
 
 vim.api.nvim_create_user_command('FormatDisable', function(args)
+    -- FormatDisable! will disable formatting just for this buffer
     if args.bang then
-        -- FormatDisable! will disable formatting just for this buffer
         vim.b.disable_autoformat = true
     else
         vim.g.disable_autoformat = true

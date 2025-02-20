@@ -3,30 +3,6 @@ require('mini.icons').setup({
 })
 
 require('mini.extra').setup()
-require('mini.bracketed').setup()
-require('mini.jump').setup()
--- require('mini.pairs').setup()
--- require('mini.statusline').setup()
--- require('mini.tabline').setup({
---     tabpage_section = 'right',
---     format = function(bufnr, label)
---         local suffix = vim.bo[bufnr].modified and '*' or ''
---         return require('mini.tabline').default_format(bufnr, label) .. '[' .. suffix .. bufnr .. '] '
---     end,
--- })
-
-require('mini.operators').setup({
-    exchange = {
-        prefix = 'gX',
-    },
-})
-
-require('mini.align').setup({
-    mappings = {
-        start = '&',
-        start_with_preview = '',
-    },
-})
 
 require('mini.indentscope').setup({
     border = 'both',
@@ -43,19 +19,5 @@ require('mini.snippets').setup({
 require('mini.diff').setup({
     view = {
         style = 'sign',
-    },
-})
-
-require('mini.jump2d').setup({
-    spotter = require('mini.jump2d').gen_pattern_spotter('[^%s%p]+'),
-    view = { dim = true, n_steps_ahead = 2 },
-    mappings = { start_jumping = 'S' },
-})
-
-require('mini.surround').setup({
-    mappings = {
-        add = 'ss',
-        delete = 'sx',
-        replace = 'sr',
     },
 })

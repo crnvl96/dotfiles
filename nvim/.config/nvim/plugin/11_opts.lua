@@ -37,17 +37,18 @@ vim.o.shiftwidth = 4
 vim.o.showcmd = false
 vim.o.showmode = false
 vim.o.sidescrolloff = 8
+vim.o.signcolumn = 'yes'
 vim.o.smartcase = true
 vim.o.smartindent = true
+vim.o.softtabstop = 4
 vim.o.spell = false
 vim.o.splitbelow = true
+vim.o.splitkeep = 'screen'
 vim.o.splitkeep = 'screen'
 vim.o.splitright = true
 vim.o.swapfile = false
 vim.o.switchbuf = 'useopen'
-vim.o.splitkeep = 'screen'
 vim.o.tabstop = 4
-vim.o.softtabstop = 4
 vim.o.termguicolors = true
 vim.o.timeoutlen = 1000
 vim.o.undofile = true
@@ -57,12 +58,9 @@ vim.o.wrap = false
 vim.o.writebackup = false
 vim.opt.diffopt = 'filler,internal,closeoff,algorithm:histogram,context:5,linematch:60'
 
-vim.o.signcolumn = 'yes'
--- vim.o.statuscolumn = '%l%s'
-
 vim.diagnostic.config({
     float = { border = 'rounded', source = true },
-    virtual_text = false,
+    virtual_text = true,
     update_in_insert = true,
     virtual_lines = false,
     signs = {
@@ -86,9 +84,9 @@ vim.cmd('filetype plugin indent on')
 vim.cmd('packadd cfilter')
 
 local methods = vim.lsp.protocol.Methods
-
 local show_handler = vim.diagnostic.handlers.virtual_text.show
 assert(show_handler)
+
 local hide_handler = vim.diagnostic.handlers.virtual_text.hide
 vim.diagnostic.handlers.virtual_text = {
     show = function(ns, bufnr, diagnostics, opts)
