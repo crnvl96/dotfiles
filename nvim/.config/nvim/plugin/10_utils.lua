@@ -40,3 +40,26 @@ Utils.OnAttach = function(client, bufnr)
         },
     })
 end
+
+Utils.LoadKey = function(f)
+    local path = vim.fn.stdpath('config') .. '/' .. f
+    local file = io.open(path, 'r')
+
+    if file then
+        local key = file:read('*a'):gsub('%s+$', '')
+        file:close()
+
+        if not key then
+            vim.notify('Missing file: ' .. f, 'ERROR')
+            return nil
+        end
+
+        return key
+    end
+
+    return nil
+end
+
+Utils.BuildBlink = function(p)
+    Later(function() Utils.Build(params, { 'cargo', 'build', '--release' }) end)
+end
