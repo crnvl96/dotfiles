@@ -1,7 +1,9 @@
 vim.g.disable_autoformat = false
 
-vim.keymap.del({ 'x', 'o' }, 'x')
-vim.keymap.del({ 'x', 'o' }, 'X')
+vim.keymap.set('n', 's', '<Plug>(leap-anywhere)')
+vim.keymap.set('x', 's', '<Plug>(leap)')
+vim.keymap.set('o', 's', '<Plug>(leap-forward)')
+vim.keymap.set('o', 'S', '<Plug>(leap-backward)')
 
 require('which-key').add({
     {
@@ -9,20 +11,40 @@ require('which-key').add({
         { '|', function() Utils.LeapLineStart() end },
     },
     {
-        mode = { 'x', 'o' },
-        {
-            'OO',
-            function()
-                local V = vim.fn.mode(true):match('V') and '' or 'V'
-                local input = vim.v.count > 1 and (vim.v.count - 1 .. 'j') or 'hl'
-                require('leap.remote').action({ input = V .. input, count = false })
-            end,
-        },
-    },
-    {
         mode = { 'n', 'x' },
+
         { '<Leader>a', group = 'AI' },
         { '<Leader>a', '<Cmd>CodeCompanionChat Toggle<CR>', desc = 'Toggle AI chat' },
+
+        { '<Leader>s', group = 'Search' },
+        {
+            '<leader>sr',
+            function()
+                local grug = require('grug-far')
+                local ext = vim.bo.buftype == '' and vim.fn.expand('%:.')
+                grug.open({
+                    transient = true,
+                    prefills = {
+                        filesFilter = ext ~= '' and ext or nil,
+                    },
+                })
+            end,
+            desc = 'Search and replace in current buf',
+        },
+        {
+            '<leader>sR',
+            function()
+                local grug = require('grug-far')
+                local ext = vim.bo.buftype == '' and vim.fn.expand('%:e')
+                grug.open({
+                    transient = true,
+                    prefills = {
+                        filesFilter = ext and ext ~= '' and '*.' .. ext or nil,
+                    },
+                })
+            end,
+            desc = 'Search and Replace',
+        },
     },
     {
         mode = 'x',
@@ -31,8 +53,8 @@ require('which-key').add({
     {
         mode = 'n',
         { '-', '<Cmd>Oil<CR>', desc = 'File explorer' },
-        { ']]', function() Snacks.words.jump(vim.v.count1) end, desc = 'Next Reference', mode = { 'n', 't' } },
-        { '[[', function() Snacks.words.jump(-vim.v.count1) end, desc = 'Prev Reference', mode = { 'n', 't' } },
+
+        { '<Leader>tt', function() Snacks.terminal() end, desc = 'Terminal' },
 
         { '<Leader>b', group = 'Buffers' },
         { '<Leader>bd', function() Snacks.bufdelete.delete() end, desc = 'Delete buffer' },
@@ -53,44 +75,11 @@ require('which-key').add({
         { '<Leader>g', group = 'Git' },
         { '<Leader>gd', '<Cmd>Gvdiffsplit!<CR>', desc = 'Diff' },
         { '<Leader>gg', '<Cmd>G<CR>', desc = 'Git' },
-        { '<Leader>go', '<Cmd>lua MiniDiff.toggle_overlay()<CR>', desc = 'Overlay' },
         { '<leader>gB', function() Snacks.gitbrowse() end, desc = 'Git Browse', mode = { 'n', 'v' } },
         { '<leader>gG', function() Snacks.lazygit() end, desc = 'Lazygit' },
 
         { '<Leader>o', group = 'Code' },
         { '<Leader>on', '<Cmd>Neogen<CR>', desc = 'Neogen' },
-
-        { '<Leader>s', group = 'Search' },
-        {
-            '<leader>sr',
-            function()
-                local grug = require('grug-far')
-                local ext = vim.bo.buftype == '' and vim.fn.expand('%:.')
-                grug.open({
-                    transient = true,
-                    prefills = {
-                        filesFilter = ext ~= '' and ext or nil,
-                    },
-                })
-            end,
-            mode = { 'n', 'v' },
-            desc = 'Search and replace in current buf',
-        },
-        {
-            '<leader>sR',
-            function()
-                local grug = require('grug-far')
-                local ext = vim.bo.buftype == '' and vim.fn.expand('%:e')
-                grug.open({
-                    transient = true,
-                    prefills = {
-                        filesFilter = ext and ext ~= '' and '*.' .. ext or nil,
-                    },
-                })
-            end,
-            mode = { 'n', 'v' },
-            desc = 'Search and Replace',
-        },
 
         { '<Leader>u', group = 'Toggle' },
 
@@ -120,7 +109,6 @@ Snacks.toggle.option('wrap', { name = 'Wrap' }):map('<leader>uw')
 Snacks.toggle.line_number():map('<leader>ul')
 Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map('<leader>uL')
 Snacks.toggle.diagnostics():map('<leader>ud')
-Snacks.toggle.indent():map('<leader>ui')
 
 Snacks.toggle({
     name = 'Autofmt',

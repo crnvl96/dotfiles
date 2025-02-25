@@ -1,4 +1,4 @@
-theme = GruvboxDark
+# theme = NvimDark
 
 font-family = Berkeley Mono
 font-size = 13

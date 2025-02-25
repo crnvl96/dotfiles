@@ -31,12 +31,32 @@ Utils.OnAttach = function(client, bufnr)
             { '<Leader>lE', function() Snacks.picker.diagnostics() end, desc = 'Diagnostic' },
             { '<Leader>ls', function() Snacks.picker.lsp_symbols() end, desc = 'Symbols' },
             { '<Leader>lS', function() Snacks.picker.lsp_workspace_symbols() end, desc = 'Symbols' },
-            { '<Leader>ld', function() Snacks.picker.lsp_definitions() end, desc = 'Definition' },
-            { '<Leader>lD', function() Snacks.picker.lsp_declarations() end, desc = 'Definition' },
-            { '<Leader>li', function() Snacks.picker.lsp_implementations() end, desc = 'Impl' },
-            { '<Leader>ly', function() Snacks.picker.lsp_type_definitions() end, desc = 'Typedefs' },
-            { '<Leader>lr', function() Snacks.picker.lsp_references() end, desc = 'References', nowait = true },
             { '<leader>lN', function() Snacks.rename.rename_file() end, desc = 'Rename File' },
+            {
+                '<Leader>ld',
+                function() Snacks.picker.lsp_definitions({ jump = { reuse_win = false } }) end,
+                desc = 'Definition',
+            },
+            {
+                '<Leader>lD',
+                function() Snacks.picker.lsp_declarations({ jump = { reuse_win = false } }) end,
+                desc = 'Definition',
+            },
+            {
+                '<Leader>li',
+                function() Snacks.picker.lsp_implementations({ jump = { reuse_win = false } }) end,
+                desc = 'Impl',
+            },
+            {
+                '<Leader>ly',
+                function() Snacks.picker.lsp_type_definitions({ jump = { reuse_win = false } }) end,
+                desc = 'Typedefs',
+            },
+            {
+                '<Leader>lr',
+                function() Snacks.picker.lsp_references({ jump = { reuse_win = false } }) end,
+                desc = 'References',
+            },
         },
     })
 end
@@ -44,19 +64,15 @@ end
 Utils.LoadKey = function(f)
     local path = vim.fn.stdpath('config') .. '/' .. f
     local file = io.open(path, 'r')
-
     if file then
         local key = file:read('*a'):gsub('%s+$', '')
         file:close()
-
         if not key then
             vim.notify('Missing file: ' .. f, 'ERROR')
             return nil
         end
-
         return key
     end
-
     return nil
 end
 

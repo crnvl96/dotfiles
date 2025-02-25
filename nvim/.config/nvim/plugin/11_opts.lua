@@ -1,13 +1,7 @@
-local node_path = os.getenv('HOME') .. '/.asdf/installs/nodejs/22.14.0'
-local asdf_path = os.getenv('HOME') .. '/.asdf/shims'
-
-vim.env.PATH = asdf_path .. ':' .. node_path .. '/bin:' .. vim.env.PATH
-vim.env.NODE_PATH = node_path
-
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
-vim.g.codecompanion_adapter = 'anthropic'
+vim.g.codecompanion_adapter = 'deepseek'
 vim.g.oil_show_file_detail = false
 
 vim.o.autoindent = true
@@ -32,13 +26,12 @@ vim.o.linebreak = true
 vim.o.list = true
 vim.o.mouse = 'a'
 vim.o.mousescroll = 'ver:2,hor:6'
-vim.o.number = false
+vim.o.number = true
 vim.o.numberwidth = 3
-vim.o.relativenumber = false
+vim.o.relativenumber = true
 vim.o.ruler = false
 vim.o.scrolloff = 8
 vim.o.shiftwidth = 4
-vim.o.shortmess = 'ascWICF'
 vim.o.showcmd = false
 vim.o.showmode = false
 vim.o.sidescrolloff = 8
@@ -49,7 +42,6 @@ vim.o.softtabstop = 4
 vim.o.spell = false
 vim.o.spell = false
 vim.o.splitbelow = true
-vim.o.splitkeep = 'screen'
 vim.o.splitkeep = 'screen'
 vim.o.splitright = true
 vim.o.swapfile = false
@@ -62,7 +54,10 @@ vim.o.virtualedit = 'block'
 vim.o.wildignorecase = true
 vim.o.wrap = false
 vim.o.writebackup = false
-vim.opt.diffopt = 'filler,internal,closeoff,algorithm:histogram,context:5,linematch:60'
+vim.o.diffopt = 'filler,internal,closeoff,algorithm:histogram,context:5,linematch:60'
+
+vim.opt.completeopt:append('fuzzy')
+vim.opt.wildoptions:append('fuzzy')
 
 vim.diagnostic.config({
     float = { border = 'rounded', source = true },

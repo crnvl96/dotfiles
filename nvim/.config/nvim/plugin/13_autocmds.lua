@@ -33,13 +33,13 @@ Utils.Group('crnvl96-open-list', function(g)
     vim.api.nvim_create_autocmd('QuickFixCmdPost', {
         group = g,
         pattern = '[^lc]*',
-        callback = function() vim.cmd('cwindow') end,
+        callback = function() vim.cmd('botright cwindow') end,
     })
 
     vim.api.nvim_create_autocmd('QuickFixCmdPost', {
         group = g,
         pattern = 'l*',
-        callback = function() vim.cmd('lwindow') end,
+        callback = function() vim.cmd('botright lwindow') end,
     })
 end)
 
