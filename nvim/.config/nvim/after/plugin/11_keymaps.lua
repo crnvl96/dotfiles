@@ -1,11 +1,31 @@
+vim.g.disable_autoformat = false
+
+vim.keymap.del({ 'x', 'o' }, 'x')
+vim.keymap.del({ 'x', 'o' }, 'X')
+
 require('which-key').add({
+    {
+        mode = { 'n', 'x', 'o' },
+        { '|', function() Utils.LeapLineStart() end },
+    },
+    {
+        mode = { 'x', 'o' },
+        {
+            'OO',
+            function()
+                local V = vim.fn.mode(true):match('V') and '' or 'V'
+                local input = vim.v.count > 1 and (vim.v.count - 1 .. 'j') or 'hl'
+                require('leap.remote').action({ input = V .. input, count = false })
+            end,
+        },
+    },
     {
         mode = { 'n', 'x' },
         { '<Leader>a', group = 'AI' },
         { '<Leader>a', '<Cmd>CodeCompanionChat Toggle<CR>', desc = 'Toggle AI chat' },
     },
     {
-        mode = 'v',
+        mode = 'x',
         { 'ga', ':CodeCompanionChat Add<CR>', desc = 'Add to AI chat' },
     },
     {
@@ -95,17 +115,13 @@ require('which-key').add({
     },
 })
 
-vim.keymap.del({ 'x', 'o' }, 'x')
-vim.keymap.del({ 'x', 'o' }, 'X')
-
 Snacks.toggle.option('spell', { name = 'Spelling' }):map('<leader>us')
 Snacks.toggle.option('wrap', { name = 'Wrap' }):map('<leader>uw')
-Snacks.toggle.line_number():map('<leader>uL')
-Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map('<leader>ul')
+Snacks.toggle.line_number():map('<leader>ul')
+Snacks.toggle.option('relativenumber', { name = 'Relative Number' }):map('<leader>uL')
 Snacks.toggle.diagnostics():map('<leader>ud')
 Snacks.toggle.indent():map('<leader>ui')
 
-vim.g.disable_autoformat = false
 Snacks.toggle({
     name = 'Autofmt',
     get = function() return not vim.g.disable_autoformat end,

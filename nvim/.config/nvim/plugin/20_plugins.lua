@@ -4,7 +4,6 @@ Add('tpope/vim-fugitive')
 Add('danymat/neogen')
 Add('MagicDuck/grug-far.nvim')
 Add('folke/which-key.nvim')
-Add('sainnhe/gruvbox-material')
 Add('andymass/vim-matchup')
 Add('ggandor/flit.nvim')
 Add('ggandor/leap.nvim')
@@ -18,26 +17,42 @@ Add('olimorris/codecompanion.nvim')
 Add('neovim/nvim-lspconfig')
 Add({ source = 'stevearc/conform.nvim' })
 Add('stevearc/oil.nvim')
+Add('stevearc/quicker.nvim')
 
-require('mini.icons').setup({ style = 'glyph' })
-require('leap').add_default_mappings(true)
-require('flit').setup({ labeled_modes = 'nx' })
+vim.cmd([[colorscheme ham]])
 require('mini.extra').setup()
-require('mini.diff').setup({ view = { style = 'number' } })
-require('grug-far').setup({ headerMaxWidth = 80 })
-require('blink.compat').setup()
 
-vim.g.codecompanion_adapter = 'anthropic'
-vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-local detail = false
+require('leap').add_default_mappings(true)
+require('leap').opts.equivalence_classes = { ' \t\r\n', '([{', ')]}', '\'"`' }
+require('leap.user').set_repeat_keys('<enter>', '<backspace>')
+require('leap').opts.preview_filter = function(ch0, ch1, ch2)
+    return not (ch1:match('%s') or ch0:match('%w') and ch1:match('%w') and ch2:match('%w'))
+end
 
-vim.cmd([[
-    let g:gruvbox_material_enable_bold = 1
-    let g:gruvbox_material_enable_italic = 0
-    let g:gruvbox_material_better_performance = 1
+require('flit').setup({ labeled_modes = 'nx' })
 
-    colorscheme gruvbox-material
-]])
+require('grug-far').setup({
+    headerMaxWidth = 80,
+    windowCreationCommand = 'tabnew',
+    maxLineLength = -1,
+    transient = true,
+    wrap = false,
+})
+
+require('quicker').setup({
+    keys = {
+        {
+            '>',
+            function() require('quicker').expand({ before = 2, after = 2, add_to_existing = true }) end,
+            desc = 'Expand quickfix context',
+        },
+        {
+            '<',
+            function() require('quicker').collapse() end,
+            desc = 'Collapse quickfix context',
+        },
+    },
+})
 
 require('nvim-treesitter.configs').setup({
     highlight = { enable = true },
@@ -68,7 +83,6 @@ require('nvim-treesitter.configs').setup({
 
 require('snacks').setup({
     input = { enabled = true },
-    words = { enabled = true },
     scope = { enabled = true },
     bigfile = {
         size = 1 * 1024 * 1024,
@@ -122,6 +136,7 @@ require('snacks').setup({
                 truncate = 120,
             },
         },
+        icons = { files = { enabled = false } },
         win = {
             preview = {
                 keys = {
@@ -229,6 +244,7 @@ require('mini.ai').setup({
     },
 })
 
+require('blink.compat').setup()
 require('blink.cmp').setup({
     enabled = function()
         return not vim.tbl_contains({ 'minifiles' }, vim.bo.filetype)
@@ -273,12 +289,10 @@ require('blink.cmp').setup({
 
 require('codecompanion').setup({
     display = {
-        diff = {
-            enabled = true,
-            close_chat_at = 240,
-            layout = 'vertical',
-            opts = { 'filler', 'internal', 'closeoff', 'algorithm:histogram', 'context:5', 'linematch:60' },
-            provider = 'mini_diff',
+        chat = {
+            window = {
+                layout = 'buffer',
+            },
         },
     },
     strategies = {
@@ -347,8 +361,8 @@ require('oil').setup({
         ['gd'] = {
             desc = 'Toggle file detail view',
             callback = function()
-                detail = not detail
-                if detail then
+                vim.g.oil_show_file_detail = not vim.g.oil_show_file_detail
+                if vim.g.oil_show_file_detail then
                     require('oil').set_columns({ 'icon', 'permissions', 'size', 'mtime' })
                 else
                     require('oil').set_columns({ 'icon' })

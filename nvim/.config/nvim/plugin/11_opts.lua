@@ -7,6 +7,9 @@ vim.env.NODE_PATH = node_path
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
+vim.g.codecompanion_adapter = 'anthropic'
+vim.g.oil_show_file_detail = false
+
 vim.o.autoindent = true
 vim.o.autoread = true
 vim.o.breakindent = true
@@ -20,6 +23,7 @@ vim.o.foldenable = true
 vim.o.foldlevel = 99
 vim.o.foldlevel = 99
 vim.o.foldlevelstart = 99
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 vim.o.grepprg = 'rg --vimgrep'
 vim.o.ignorecase = true
 vim.o.infercase = true

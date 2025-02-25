@@ -61,5 +61,5 @@ Utils.LoadKey = function(f)
 end
 
 Utils.BuildBlink = function(p)
-    Later(function() Utils.Build(params, { 'cargo', 'build', '--release' }) end)
+    Later(function() Utils.Build(p, { 'cargo', 'build', '--release' }) end)
 end

@@ -5,14 +5,7 @@ for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
     vim.keymap.set({ 'n', 'v', 'i' }, lhs, '<Esc><C-w><C-' .. key .. '>')
 end
 
-vim.keymap.set({ 'n', 'v' }, '<C-x>', function()
-    local function feed(k, m) return vim.api.nvim_feedkeys(k, m, true) end
-    local keycode = vim.api.nvim_replace_termcodes(':', true, false, true)
-    feed(keycode, 't')
-end)
-
 vim.keymap.set({ 'n', 'x', 'i', 's' }, '<Esc>', '<Cmd>noh<CR><Esc>')
-
 vim.keymap.set({ 'n', 'i', 'x' }, '<C-s>', '<Esc><Cmd>noh<CR><Cmd>w<CR><Esc>')
 
 vim.keymap.set({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
