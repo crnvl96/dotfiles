@@ -1,0 +1,17 @@
+font-family = Berkeley Mono
+font-size = 13
+adjust-cell-width = -5%
+adjust-cell-height = 20%
+adjust-underline-position = 6
+adjust-underline-thickness = 40%
+adjust-cursor-thickness = 150%
+
+window-theme = ghostty
+gtk-adwaita = false
+gtk-titlebar = false
+
+keybind = alt+equal=increase_font_size:1
+keybind = alt+minus=decrease_font_size:1
+keybind = alt+zero=reset_font_size
+
+# vim set ft=conf

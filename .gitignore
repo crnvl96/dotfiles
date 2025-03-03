@@ -1,0 +1,8 @@
+anthropic
+huggingface
+deepseek
+
+.env
+.aider*
+
+tmux-*

@@ -1,0 +1,31 @@
+theme = "base16_transparent"
+
+[editor]
+line-number = "relative"
+mouse = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[keys.normal]
+C-s = ":w"
+ret = ["open_below", "normal_mode"]
+C-y = ":sh 'zellij run -c -f -x 10% -y 10% --width 80% --height 80% -- bash ~/.config/helix/yazi-picker.sh open'"
+"C-." = "save_selection"
+
+[keys.normal.space.space]
+b = ":sh git -C $(dirname $(realpath %{buffer_name})) blame -L %{cursor_line},%{cursor_line} $(realpath %{buffer_name})"
+
+[keys.normal.g]
+a = "code_action"
+
+[keys.insert]
+C-s = [":w", "normal_mode"]
+
+[keys.select]
+C-s = [":w", "normal_mode"]
