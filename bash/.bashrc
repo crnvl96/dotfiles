@@ -4,8 +4,8 @@ PATH=$HOME/.asdf/shims:$PATH
 # aliases
 alias ls="eza -l"
 alias la="eza -lA"
-alias lzd="lazydocker"
-alias lzg="lazygit"
+alias lzd="$HOME/.asdf/installs/golang/1.23.5/packages/bin/lazydocker"
+alias lzg="$HOME/.asdf/installs/golang/1.23.5/packages/bin/lazygit"
 alias pvc="pavucontrol"
 alias bc="sudo brightnessctl"
 alias ar="arandr"
