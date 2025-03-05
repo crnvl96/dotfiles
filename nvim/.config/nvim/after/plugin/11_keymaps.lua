@@ -1,8 +1,5 @@
 local set = vim.keymap.set
 
-set('x', 'ga', ':CodeCompanionChat Add<CR>', { desc = 'Add to AI chat' })
-set({ 'n', 'x' }, '<Leader>a', '<Cmd>CodeCompanionChat Toggle<CR>', { desc = 'Toggle AI chat' })
-
 set('n', '<Leader>,', '<Cmd>Pick buffers<CR>', { desc = 'Buffers picker' })
 set('n', '<Leader>e', '<Cmd>Pick explorer<CR>', { desc = 'Explorer' })
 
@@ -19,3 +16,6 @@ set('n', '-', function()
     local path = vim.fn.fnamemodify(bufname, ':p')
     if path and vim.uv.fs_stat(path) then require('mini.files').open(bufname, false) end
 end, { desc = 'File explorer' })
+
+vim.keymap.set('n', '<leader>sy', ":<C-U>let @+ = expand('%:.')<CR>", { desc = 'Copy file name to default register' })
+vim.keymap.set('n', '<leader>sr', '<Cmd>GrugFar<CR>', { desc = 'GrugFar' })

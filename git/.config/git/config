@@ -21,15 +21,15 @@
   algorithm = patience
   compactionHeuristic = true
 [fetch]
-	prune = true
-	all = true
+  prune = true
+  all = true
 [pull]
-	rebase = true
+  rebase = true
 [push]
-	autoSetupRemote = true
+  autoSetupRemote = true
 [merge]
-	conflictstyle = zdiff3
-	; conflictstyle = merge
+  conflictstyle = zdiff3
+  ; conflictstyle = merge
 [delta]
-	navigate = true
-	dark = true
+  navigate = true
+  dark = true

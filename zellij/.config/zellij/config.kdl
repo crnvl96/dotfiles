@@ -237,8 +237,8 @@ load_plugins {
 //   - true
 //   - false (Default)
 //
-simplified_ui true
-default_layout "compact"
+simplified_ui false
+default_layout "default"
 pane_frames false
 
 ui {

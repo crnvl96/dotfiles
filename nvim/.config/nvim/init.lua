@@ -14,8 +14,3 @@ if not vim.loop.fs_stat(mini_path) then
 end
 
 require('mini.deps').setup()
-Add = MiniDeps.add
-Now = MiniDeps.now
-Later = MiniDeps.later
-
-Add({ name = 'mini.nvim' })

@@ -129,13 +129,8 @@ hi Type         ctermfg=11
 hi @variable.member ctermfg=4
 
 " Plugins
-hi MiniJump2dSpot      ctermfg=1 cterm=undercurl
-hi MiniJump2dSpotAhead ctermfg=3 cterm=undercurl
-
 hi MiniPickMatchCurrent cterm=bold
 hi MiniFilesCursorLine  cterm=bold
-
-hi EyelinerPrimary     ctermfg=1 cterm=undercurl,bold
-hi EyelinerSecondary   ctermfg=2 cterm=underline
-
-hi BqfPreviewCursorLine ctermbg=NONE ctermfg=14 cterm=bold
+hi MiniJump2dSpot ctermfg=2
+hi MiniJump2dSpotAhead ctermfg=3
+hi MiniJump2dSpotUnique ctermfg=4
