@@ -1,15 +1,3 @@
-if [[ -z "$ZELLIJ" ]]; then
-    if [[ "$ZELLIJ_AUTO_ATTACH" == "true" ]]; then
-        zellij attach -c
-    else
-        zellij
-    fi
-
-    if [[ "$ZELLIJ_AUTO_EXIT" == "true" ]]; then
-        exit
-    fi
-fi
-
 # asdf
 PATH=$HOME/.asdf/shims:$PATH
 
@@ -29,6 +17,7 @@ alias gs="git status"
 alias gb="git branch"
 alias gp="git fetch --all --prune && git pull --rebase"
 alias sv="source .venv/bin/activate"
+alias z="zellij"
 
 # yazi file manager
 function y() {
