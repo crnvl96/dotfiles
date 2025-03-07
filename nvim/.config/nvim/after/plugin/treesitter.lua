@@ -1,8 +1,3 @@
-local hooks = Utils.MiniDepsHooks()
-
-MiniDeps.add({ source = 'nvim-treesitter/nvim-treesitter', hooks = hooks.treesitter })
-MiniDeps.add('nvim-treesitter/nvim-treesitter-textobjects')
-
 require('nvim-treesitter.configs').setup({
     highlight = {
         enable = true,

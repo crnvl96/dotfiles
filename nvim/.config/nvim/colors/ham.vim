@@ -71,7 +71,7 @@ hi SpellBad          cterm=undercurl
 hi SpellCap          cterm=undercurl
 hi SpellLocal        cterm=undercurl
 hi SpellRare         cterm=undercurl
-hi StatusLine        ctermfg=15   ctermbg=8    cterm=NONE
+hi StatusLine        ctermfg=15   ctermbg=0    cterm=NONE
 hi StatusLineNC      ctermfg=15   ctermbg=0    cterm=NONE
 hi TabLine           ctermfg=7    ctermbg=0
 hi TabLineFill       ctermfg=0    ctermbg=NONE

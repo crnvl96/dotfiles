@@ -3,6 +3,13 @@ for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
     vim.keymap.set({ 'n', 'v', 'i' }, lhs, '<Esc><C-w><C-' .. key .. '>')
 end
 
+vim.keymap.set('i', '<C-n>', '<C-x><C-o>')
+
+-- Set up mappings for normal and visual modes
+vim.keymap.set({ 'n', 'x' }, 'm', Utils.Marks.set_mark_swapped, { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'x' }, "'", Utils.Marks.goto_mark_swapped_quote, { noremap = true, silent = true })
+vim.keymap.set({ 'n', 'x' }, '`', Utils.Marks.goto_mark_swapped_backtick, { noremap = true, silent = true })
+
 vim.keymap.set({ 'n', 'x', 'i', 's' }, '<Esc>', '<Cmd>noh<CR><Esc>')
 vim.keymap.set({ 'n', 'i', 'x' }, '<C-s>', '<Esc><Cmd>noh<CR><Cmd>w<CR><Esc>')
 

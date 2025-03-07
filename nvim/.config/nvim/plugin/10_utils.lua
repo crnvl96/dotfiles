@@ -1,28 +1,10 @@
-local later = MiniDeps.later
-
 _G.Utils = {}
 
 Utils.Group = function(name, fn) fn(vim.api.nvim_create_augroup(name, { clear = true })) end
 
-Utils.OnAttach = function(client, bufnr)
-    -- Formatting is handled by `stevearc/conform.nvim`
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
-    vim.o.omnifunc = 'v:lua.MiniCompletion.completefunc_lsp'
-
-    local set = vim.keymap.set
-    set('n', 'E', function() vim.diagnostic.open_float({ border = 'rounded' }) end, { desc = 'Eval', buffer = bufnr })
-    set('n', 'K', function() vim.lsp.buf.hover({ border = 'rounded' }) end, { desc = 'Eval', buffer = bufnr })
-    set('n', '<Leader>la', function() vim.lsp.buf.code_action() end, { desc = 'Actions', buffer = bufnr })
-    set('n', '<Leader>ln', function() vim.lsp.buf.rename() end, { desc = 'Rename', buffer = bufnr })
-    set('n', '<Leader>le', '<Cmd>FzfLua diagnostics_document<CR>', { desc = 'Diagnostics', buffer = bufnr })
-    set('n', '<Leader>ls', '<Cmd>FzfLua lsp_document_symbols<CR>', { desc = 'Document Symbols', buffer = bufnr })
-    set('n', '<Leader>lS', '<Cmd>FzfLua lsp_workspace_symbols<CR>', { desc = 'Wksp Symbols', buffer = bufnr })
-    set('n', '<Leader>ld', '<Cmd>FzfLua lsp_definitions<CR>', { desc = 'Definition', buffer = bufnr })
-    set('n', '<Leader>lD', '<Cmd>FzfLua lsp_declarations<CR>', { desc = 'Declaration', buffer = bufnr })
-    set('n', '<Leader>li', '<Cmd>FzfLua lsp_implementations<CR>', { desc = 'Impl', buffer = bufnr })
-    set('n', '<Leader>ly', '<Cmd>FzfLua lsp_typedefs<CR>', { desc = 'Typedefs', buffer = bufnr })
-    set('n', '<Leader>lr', '<Cmd>FzfLua lsp_references<CR>', { desc = 'References', buffer = bufnr })
+Utils.ExpandCallable = function(x, ...)
+    if vim.is_callable(x) then return x(...) end
+    return x
 end
 
 Utils.LoadFile = function(f)
@@ -56,71 +38,96 @@ Utils.MiniDepsHooks = function()
     return {
         treesitter = {
             post_install = function()
-                later(function() vim.cmd('TSUpdate') end)
+                MiniDeps.later(function() vim.cmd('TSUpdate') end)
             end,
             post_checkout = function()
-                later(function() vim.cmd('TSUpdate') end)
+                MiniDeps.later(function() vim.cmd('TSUpdate') end)
             end,
         },
         blink = {
             post_install = function(p)
-                later(function() Utils.MiniDepsBuild(p, { 'cargo', 'build', '--release' }) end)
+                MiniDeps.later(function() Utils.MiniDepsBuild(p, { 'cargo', 'build', '--release' }) end)
             end,
             post_checkout = function(p)
-                later(function() Utils.MiniDepsBuild(p, { 'cargo', 'build', '--release' }) end)
+                MiniDeps.later(function() Utils.MiniDepsBuild(p, { 'cargo', 'build', '--release' }) end)
+            end,
+        },
+        fzf = {
+            post_install = function()
+                MiniDeps.later(function() vim.fn['fzf#install']() end)
+            end,
+            post_checkout = function()
+                MiniDeps.later(function() vim.fn['fzf#install']() end)
             end,
         },
     }
 end
 
-function _G.qftf(info)
-    local items
-    local ret = {}
-    -- The name of item in list is based on the directory of quickfix window.
-    -- Change the directory for quickfix window make the name of item shorter.
-    -- It's a good opportunity to change current directory in quickfixtextfunc :)
-    --
-    -- local alterBufnr = vim.fn.bufname('#') -- alternative buffer is the buffer before enter qf window
-    -- local root = getRootByAlterBufnr(alterBufnr)
-    -- vim.cmd(('noa lcd %s'):format(vim.fn.fnameescape(root)))
-
-    local fn = vim.fn
-
-    if info.quickfix == 1 then
-        items = fn.getqflist({ id = info.id, items = 0 }).items
-    else
-        items = fn.getloclist(info.winid, { id = info.id, items = 0 }).items
-    end
-    local limit = 62
-    local fnameFmt1, fnameFmt2 = '%-' .. limit .. 's', '…%.' .. (limit - 1) .. 's'
-    local validFmt = '%s │%5d:%-3d│%s %s'
-    for i = info.start_idx, info.end_idx do
-        local e = items[i]
-        local fname = ''
-        local str
-        if e.valid == 1 then
-            if e.bufnr > 0 then
-                fname = fn.bufname(e.bufnr)
-                if fname == '' then
-                    fname = '[No Name]'
-                else
-                    fname = fname:gsub('^' .. vim.env.HOME, '~')
-                end
-                -- char in fname may occur more than 1 width, ignore this issue in order to keep performance
-                if #fname <= limit then
-                    fname = fnameFmt1:format(fname)
-                else
-                    fname = fnameFmt2:format(fname:sub(1 - limit))
-                end
-            end
-            local lnum = e.lnum > 99999 and -1 or e.lnum
-            local col = e.col > 999 and -1 or e.col
-            local qtype = e.type == '' and '' or ' ' .. e.type:sub(1, 1):upper()
-            str = validFmt:format(fname, lnum, col, qtype, e.text)
-        else
-            str = e.text
+Utils.ReadFromFile = function(f)
+    local path = vim.fn.stdpath('config') .. '/static/files/' .. f
+    local file = io.open(path, 'r')
+    if file then
+        local key = file:read('*a'):gsub('%s+$', '')
+        file:close()
+        if not key then
+            vim.notify('Missing file: ' .. f, 'ERROR')
+            return nil
         end
-        table.insert(ret, str)
+        return key
     end
-    return ret
+    return nil
 end
+
+Utils.OnAttach = function(client, bufnr)
+    -- Formatting is handled by `stevearc/conform.nvim`
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+
+    local set = vim.keymap.set
+
+    set('n', 'E', '<Cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>', { desc = 'Eval', buffer = bufnr })
+    set('n', 'K', '<Cmd>lua vim.lsp.buf.hover({ border = "rounded" })<CR>', { desc = 'Eval', buffer = bufnr })
+    set('n', '<Leader>la', '<Cmd>lua vim.lsp.buf.code_action()<CR>', { desc = 'Actions', buffer = bufnr })
+    set('n', '<Leader>ln', '<Cmd>lua vim.lsp.buf.rename()<CR>', { desc = 'Rename', buffer = bufnr })
+end
+
+local function swap_mark_case(key)
+    if key:match('%u') then -- Uppercase
+        return key:lower()
+    elseif key:match('%l') then -- Lowercase
+        return key:upper()
+    else
+        return key -- Return unchanged for non-alphabetic characters
+    end
+end
+
+Utils.Marks = {
+    set_mark_swapped = function()
+        local ok, char = pcall(function() return vim.fn.nr2char(vim.fn.getchar()) end)
+
+        if not ok or char == '' or char == '\27' then -- ESC or error
+            return
+        end
+
+        local swapped = swap_mark_case(char)
+        vim.cmd('normal! m' .. swapped)
+    end,
+
+    goto_mark_swapped_quote = function()
+        local ok, char = pcall(function() return vim.fn.nr2char(vim.fn.getchar()) end)
+
+        if not ok or char == '' or char == '\27' then return end
+
+        local swapped = swap_mark_case(char)
+        vim.cmd("normal! '" .. swapped)
+    end,
+
+    goto_mark_swapped_backtick = function()
+        local ok, char = pcall(function() return vim.fn.nr2char(vim.fn.getchar()) end)
+
+        if not ok or char == '' or char == '\27' then return end
+
+        local swapped = swap_mark_case(char)
+        vim.cmd('normal! `' .. swapped)
+    end,
+}

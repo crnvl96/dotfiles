@@ -14,3 +14,6 @@ if not vim.loop.fs_stat(mini_path) then
 end
 
 require('mini.deps').setup()
+
+--- We manage mini nvim plugins library with MiniDeps itself
+MiniDeps.add({ name = 'mini.nvim' })
