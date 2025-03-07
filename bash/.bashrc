@@ -45,7 +45,9 @@ export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="rg --files --hidden --follow --glob "!.git/*" --null | xargs -0 dirname | sort | uniq"
 export HELIX_RUNTIME=$HOME/.local/state/helix/runtime
+
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$HOME/gems/bin:$HOME/.local/bin:$PATH"
+
 export _ZO_RESOLVE_SYMLINKS=1
 
 eval "$(zoxide init --cmd x bash)"
