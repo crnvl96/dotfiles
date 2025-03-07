@@ -8,20 +8,21 @@ Utils.OnAttach = function(client, bufnr)
     -- Formatting is handled by `stevearc/conform.nvim`
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
+    vim.o.omnifunc = 'v:lua.MiniCompletion.completefunc_lsp'
 
     local set = vim.keymap.set
     set('n', 'E', function() vim.diagnostic.open_float({ border = 'rounded' }) end, { desc = 'Eval', buffer = bufnr })
     set('n', 'K', function() vim.lsp.buf.hover({ border = 'rounded' }) end, { desc = 'Eval', buffer = bufnr })
     set('n', '<Leader>la', function() vim.lsp.buf.code_action() end, { desc = 'Actions', buffer = bufnr })
     set('n', '<Leader>ln', function() vim.lsp.buf.rename() end, { desc = 'Rename', buffer = bufnr })
-    set('n', '<Leader>le', "<Cmd>Pick diagnostic scope='all'<CR>", { desc = 'Diagnostics', buffer = bufnr })
-    set('n', '<Leader>ls', "<Cmd>Pick lsp scope='document_symbol'<CR>", { desc = 'Document Symbols', buffer = bufnr })
-    set('n', '<Leader>lS', "<Cmd>Pick lsp scope='workspace_symbol'<CR>", { desc = 'Wksp Symbols', buffer = bufnr })
-    set('n', '<Leader>ld', "<Cmd>Pick lsp scope='definition'<CR>", { desc = 'Definition', buffer = bufnr })
-    set('n', '<Leader>lD', "<Cmd>Pick lsp scope='declaration'<CR>", { desc = 'Declaration', buffer = bufnr })
-    set('n', '<Leader>li', "<Cmd>Pick lsp scope='implementation'<CR>", { desc = 'Impl', buffer = bufnr })
-    set('n', '<Leader>ly', "<Cmd>Pick lsp scope='type_definition'<CR>", { desc = 'Typedefs', buffer = bufnr })
-    set('n', '<Leader>lr', "<Cmd>Pick lsp scope='references'<CR>", { desc = 'References', buffer = bufnr })
+    set('n', '<Leader>le', '<Cmd>FzfLua diagnostics_document<CR>', { desc = 'Diagnostics', buffer = bufnr })
+    set('n', '<Leader>ls', '<Cmd>FzfLua lsp_document_symbols<CR>', { desc = 'Document Symbols', buffer = bufnr })
+    set('n', '<Leader>lS', '<Cmd>FzfLua lsp_workspace_symbols<CR>', { desc = 'Wksp Symbols', buffer = bufnr })
+    set('n', '<Leader>ld', '<Cmd>FzfLua lsp_definitions<CR>', { desc = 'Definition', buffer = bufnr })
+    set('n', '<Leader>lD', '<Cmd>FzfLua lsp_declarations<CR>', { desc = 'Declaration', buffer = bufnr })
+    set('n', '<Leader>li', '<Cmd>FzfLua lsp_implementations<CR>', { desc = 'Impl', buffer = bufnr })
+    set('n', '<Leader>ly', '<Cmd>FzfLua lsp_typedefs<CR>', { desc = 'Typedefs', buffer = bufnr })
+    set('n', '<Leader>lr', '<Cmd>FzfLua lsp_references<CR>', { desc = 'References', buffer = bufnr })
 end
 
 Utils.LoadFile = function(f)
