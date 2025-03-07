@@ -1,5 +1,3 @@
-local later = MiniDeps.later
-
 _G.Utils = {}
 
 Utils.Group = function(name, fn) fn(vim.api.nvim_create_augroup(name, { clear = true })) end
@@ -8,21 +6,20 @@ Utils.OnAttach = function(client, bufnr)
     -- Formatting is handled by `stevearc/conform.nvim`
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
-    vim.o.omnifunc = 'v:lua.MiniCompletion.completefunc_lsp'
 
     local set = vim.keymap.set
     set('n', 'E', function() vim.diagnostic.open_float({ border = 'rounded' }) end, { desc = 'Eval', buffer = bufnr })
     set('n', 'K', function() vim.lsp.buf.hover({ border = 'rounded' }) end, { desc = 'Eval', buffer = bufnr })
     set('n', '<Leader>la', function() vim.lsp.buf.code_action() end, { desc = 'Actions', buffer = bufnr })
     set('n', '<Leader>ln', function() vim.lsp.buf.rename() end, { desc = 'Rename', buffer = bufnr })
-    set('n', '<Leader>le', '<Cmd>FzfLua diagnostics_document<CR>', { desc = 'Diagnostics', buffer = bufnr })
-    set('n', '<Leader>ls', '<Cmd>FzfLua lsp_document_symbols<CR>', { desc = 'Document Symbols', buffer = bufnr })
-    set('n', '<Leader>lS', '<Cmd>FzfLua lsp_workspace_symbols<CR>', { desc = 'Wksp Symbols', buffer = bufnr })
-    set('n', '<Leader>ld', '<Cmd>FzfLua lsp_definitions<CR>', { desc = 'Definition', buffer = bufnr })
-    set('n', '<Leader>lD', '<Cmd>FzfLua lsp_declarations<CR>', { desc = 'Declaration', buffer = bufnr })
-    set('n', '<Leader>li', '<Cmd>FzfLua lsp_implementations<CR>', { desc = 'Impl', buffer = bufnr })
-    set('n', '<Leader>ly', '<Cmd>FzfLua lsp_typedefs<CR>', { desc = 'Typedefs', buffer = bufnr })
-    set('n', '<Leader>lr', '<Cmd>FzfLua lsp_references<CR>', { desc = 'References', buffer = bufnr })
+    set('n', '<Leader>le', '<Cmd>lua Snacks.picker.diagnostics()<CR>', { desc = 'Diagnostics', buffer = bufnr })
+    set('n', '<Leader>ls', '<Cmd>lua Snacks.picker.lsp_symbols()<CR>', { desc = 'Document Symbols', buffer = bufnr })
+    set('n', '<Leader>lS', '<Cmd>lua Snacks.picker.lsp_workspace_symbols()<CR>', { desc = 'WSymbols', buffer = bufnr })
+    set('n', '<Leader>ld', '<Cmd>lua Snacks.picker.lsp_definitions()<CR>', { desc = 'Definition', buffer = bufnr })
+    set('n', '<Leader>lD', '<Cmd>lua Snacks.picker.lsp_declarations()<CR>', { desc = 'Declaration', buffer = bufnr })
+    set('n', '<Leader>li', '<Cmd>lua Snacks.picker.lsp_implementations()<CR>', { desc = 'Impl', buffer = bufnr })
+    set('n', '<Leader>ly', '<Cmd>lua Snacks.picker.lsp_type_definitions()<CR>', { desc = 'Typedefs', buffer = bufnr })
+    set('n', '<Leader>lr', '<Cmd>lua Snacks.picker.lsp_references()<CR>', { desc = 'References', buffer = bufnr })
 end
 
 Utils.LoadFile = function(f)
@@ -56,21 +53,36 @@ Utils.MiniDepsHooks = function()
     return {
         treesitter = {
             post_install = function()
-                later(function() vim.cmd('TSUpdate') end)
+                MiniDeps.later(function() vim.cmd('TSUpdate') end)
             end,
             post_checkout = function()
-                later(function() vim.cmd('TSUpdate') end)
+                MiniDeps.later(function() vim.cmd('TSUpdate') end)
             end,
         },
         blink = {
             post_install = function(p)
-                later(function() Utils.MiniDepsBuild(p, { 'cargo', 'build', '--release' }) end)
+                MiniDeps.later(function() Utils.MiniDepsBuild(p, { 'cargo', 'build', '--release' }) end)
             end,
             post_checkout = function(p)
-                later(function() Utils.MiniDepsBuild(p, { 'cargo', 'build', '--release' }) end)
+                MiniDeps.later(function() Utils.MiniDepsBuild(p, { 'cargo', 'build', '--release' }) end)
             end,
         },
     }
+end
+
+Utils.ReadFromFile = function(f)
+    local path = vim.fn.stdpath('config') .. '/static/files/' .. f
+    local file = io.open(path, 'r')
+    if file then
+        local key = file:read('*a'):gsub('%s+$', '')
+        file:close()
+        if not key then
+            vim.notify('Missing file: ' .. f, 'ERROR')
+            return nil
+        end
+        return key
+    end
+    return nil
 end
 
 function _G.qftf(info)

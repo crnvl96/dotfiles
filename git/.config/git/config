@@ -11,8 +11,8 @@
   gpgsign = true
 [core]
   editor = $EDITOR
-  excludesfile = ~/.config/git/.gitignore_global
-	pager = delta
+  ; excludesfile = ~/.config/git/.gitignore_global
+  pager = delta
 [interactive]
     diffFilter = delta --color-only
 [init]

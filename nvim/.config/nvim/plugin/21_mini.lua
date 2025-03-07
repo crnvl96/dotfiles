@@ -3,21 +3,23 @@ MiniDeps.add({ name = 'mini.nvim' })
 
 --- Icons provider for nvim
 require('mini.icons').setup()
-MiniDeps.later(function() require('mini.icons').tweak_lsp_kind() end)
 
 --- Some extra functionality for the mini plugins
---- Other modules, like and `MiniAI` use it
 require('mini.extra').setup()
 
 --- Indent scope utilities: highlight the current scope and jump to top/bottom of it
 require('mini.indentscope').setup()
 
---- I don´t need these utilities very much, but once a year, when i need them, they prove being very handy to have on my config
+--- Interactively align  lines of text
 require('mini.align').setup({ mappings = { start = '' } }) --- Align lines
+
+--- Interactively Split/Join multiple lines
 require('mini.splitjoin').setup({ mappings = { toggle = 'S' } }) --- Split/Join lines
 
+--- Vertical/horizontal repositioning of lines
 require('mini.move').setup()
 
+--- Snippets provider
 require('mini.snippets').setup({
     snippets = {
         require('mini.snippets').gen_loader.from_file('~/.config/nvim/snippets/global.json'),
@@ -74,7 +76,7 @@ require('mini.clue').setup({
         require('mini.clue').gen_clues.g(),
         require('mini.clue').gen_clues.marks(),
         require('mini.clue').gen_clues.registers(),
-        require('mini.clue').gen_clues.windows({ submode_resize = true }),
+        require('mini.clue').gen_clues.windows(),
         require('mini.clue').gen_clues.z(),
     },
     triggers = {

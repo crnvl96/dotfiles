@@ -1,10 +1,167 @@
+local hooks = Utils.MiniDepsHooks()
+
 --- Use binaries installed with asdf to feed nvim lsps and formatters
 --- When necessary, use local bin directory for the same purpose
 local asdf = vim.env.HOME .. '/.asdf/shims/'
 local lbin = vim.env.HOME .. '/.local/bin/'
 
+--- These plugins don't require the `setup` call to work
+MiniDeps.add('nvim-lua/plenary.nvim')
+MiniDeps.add('andymass/vim-matchup')
+MiniDeps.add('tpope/vim-fugitive')
+MiniDeps.add('tpope/vim-sleuth')
+MiniDeps.add('tpope/vim-eunuch')
+MiniDeps.add('tpope/vim-rhubarb')
+
+MiniDeps.add({ source = 'nvim-treesitter/nvim-treesitter', hooks = hooks.treesitter })
+MiniDeps.add('nvim-treesitter/nvim-treesitter-textobjects')
+MiniDeps.add('MagicDuck/grug-far.nvim')
+MiniDeps.add('danymat/neogen')
+MiniDeps.add('kdheepak/lazygit.nvim')
+MiniDeps.add({ source = 'Saghen/blink.cmp', hooks = hooks.blink })
+
+--- LSP/Formatting features
 MiniDeps.add('stevearc/conform.nvim')
 MiniDeps.add('neovim/nvim-lspconfig')
+
+--- Some plugins to provide AI integration
+MiniDeps.add({ source = 'olimorris/codecompanion.nvim', depends = { 'j-hui/fidget.nvim' } })
+MiniDeps.add('GeorgesAlkhouri/nvim-aider')
+
+require('nvim-treesitter.configs').setup({
+    highlight = {
+        enable = true,
+    },
+    indent = {
+        enable = true,
+        disable = {
+            'yaml',
+        },
+    },
+    sync_install = false,
+    auto_install = true,
+    ensure_installed = {
+        'c',
+        'vim',
+        'vimdoc',
+        'query',
+        'markdown',
+        'markdown_inline',
+        'lua',
+        'javascript',
+        'typescript',
+        'tsx',
+        'python',
+        'sql',
+        'csv',
+        'html',
+        'css',
+        'norg',
+        'scss',
+        'vue',
+    },
+})
+
+vim.g.codecompanion_adapter = 'deepseek'
+
+require('codecompanion').setup({
+    display = {
+        chat = {
+            window = {
+                layout = 'vertical',
+            },
+        },
+    },
+    strategies = {
+        inline = { adapter = vim.g.codecompanion_adapter },
+        cmd = { adapter = vim.g.codecompanion_adapter },
+        chat = {
+            adapter = vim.g.codecompanion_adapter,
+            keymaps = {
+                completion = {
+                    modes = {
+                        i = '<C-Space>',
+                    },
+                },
+            },
+            slash_commands = {
+                file = { opts = { provider = 'snacks' } },
+                buffer = { opts = { provider = 'snacks' } },
+                help = { opts = { provider = 'snacks' } },
+                symbols = { opts = { provider = 'snacks' } },
+            },
+        },
+    },
+    adapters = {
+        huggingface = require('codecompanion.adapters').extend('huggingface', {
+            env = { api_key = Utils.ReadFromFile('huggingface') },
+            schema = {
+                model = {
+                    default = 'deepseek-ai/DeepSeek-R1-Distill-Qwen-32B',
+                },
+            },
+        }),
+        anthropic = require('codecompanion.adapters').extend('anthropic', {
+            env = { api_key = Utils.ReadFromFile('anthropic') },
+            schema = {
+                model = {
+                    default = 'claude-3-7-sonnet-20250219',
+                },
+            },
+        }),
+        deepseek = require('codecompanion.adapters').extend('deepseek', {
+            env = { api_key = Utils.ReadFromFile('deepseek') },
+            schema = {
+                model = {
+                    default = 'deepseek-chat',
+                },
+            },
+        }),
+    },
+})
+
+require('blink.cmp').setup({
+    enabled = function() return vim.bo.buftype ~= 'prompt' end,
+    completion = {
+        menu = { border = 'single' },
+        documentation = {
+            auto_show = true,
+            auto_show_delay_ms = 500,
+            window = { border = 'single' },
+        },
+    },
+    cmdline = {
+        keymap = {
+            ['<Tab>'] = { 'accept' },
+            ['<CR>'] = { 'accept_and_enter', 'fallback' },
+        },
+        completion = {
+            menu = { auto_show = true },
+        },
+    },
+    signature = {
+        enabled = true,
+        window = { show_documentation = true, border = 'single' },
+    },
+    keymap = {
+        preset = 'default',
+        ['<C-k>'] = {},
+        ['<C-i>'] = { 'show_signature', 'hide_signature', 'fallback' },
+    },
+})
+
+--- AI integration (requires aider.chat)
+require('nvim_aider').setup()
+
+require('grug-far').setup()
+
+require('neogen').setup({
+    snippet_engine = 'mini',
+    languages = {
+        lua = { template = { annotation_convention = 'emmylua' } },
+        python = { template = { annotation_convention = 'google_docstrings' } },
+    },
+})
 
 for server, config in pairs({
     vtsls = {
@@ -90,11 +247,12 @@ for server, config in pairs({
     },
 }) do
     config = config or {}
-    config.capabilities = require('blink.cmp').get_lsp_capabilities()
+    -- config.capabilities = require('blink.cmp').get_lsp_capabilities()
     require('lspconfig')[server].setup(config)
 end
 
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+vim.g.disable_autoformat = false
 
 require('conform').setup({
     notify_on_error = true,

@@ -125,6 +125,7 @@ Utils.Group('crnvl96-term', function(g)
                 vim.keymap.set('t', '<C-' .. key .. '>', function()
                     local code_dir = vim.api.nvim_replace_termcodes('<C-' .. key .. '>', true, true, true)
                     vim.api.nvim_feedkeys(code_term_esc .. code_dir, 't', true)
+                    vim.cmd([[checktime]]) -- Reload nvim to sync any file changed by a terminal cmd
                 end, { noremap = true })
             end
 
