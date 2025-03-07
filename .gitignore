@@ -6,3 +6,5 @@ deepseek
 .aider*
 
 tmux-*
+
+yazi/**/plugins/

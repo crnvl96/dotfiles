@@ -16,7 +16,7 @@ hidden = false
 C-s = ":w"
 ret = ["open_below", "normal_mode"]
 "C-." = "save_selection"
-C-y = ":sh 'zellij run -c -f -x 10% -y 10% --width 80% --height 80% -- bash ~/.config/helix/yazi-picker.sh open'"
+- = ":sh 'zellij run -c -f --x 5% --y 10% --width 90% --height 90% -- bash ~/.config/helix/yazi-picker.sh open'"
 
 [keys.normal.space.g]
 b = ":sh git -C $(dirname $(realpath %{buffer_name})) blame -L %{cursor_line},%{cursor_line} $(realpath %{buffer_name})"

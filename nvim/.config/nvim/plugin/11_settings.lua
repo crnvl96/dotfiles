@@ -1,5 +1,6 @@
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
+vim.g.loaded_netrwPlugin = 1
 
 vim.g.oil_show_file_detail = false
 vim.g.disable_autoformat = false

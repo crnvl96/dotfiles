@@ -1,0 +1,3 @@
+{
+  "Vim API": { "prefix": "api", "body": "vim.api." }
+}

@@ -1,3 +1,8 @@
+vim.ui.select = function(items, opts, on_choice)
+    local start_opts = { window = { config = { width = vim.o.columns } } }
+    return MiniPick.ui_select(items, opts, on_choice, start_opts)
+end
+
 local set = vim.keymap.set
 
 set('n', '<Leader>,', '<Cmd>Pick buffers<CR>', { desc = 'Buffers picker' })
@@ -11,11 +16,5 @@ set('n', '<Leader>fg', '<Cmd>Pick grep_live<CR>', { desc = 'Grep' })
 set('n', '<Leader>fr', '<Cmd>Pick resume<CR>', { desc = 'Resume' })
 set('n', '<Leader>fl', '<Cmd>Pick buf_lines<CR>', { desc = 'Buffer lines' })
 
-set('n', '-', function()
-    local bufname = vim.api.nvim_buf_get_name(0)
-    local path = vim.fn.fnamemodify(bufname, ':p')
-    if path and vim.uv.fs_stat(path) then require('mini.files').open(bufname, false) end
-end, { desc = 'File explorer' })
-
-vim.keymap.set('n', '<leader>sy', ":<C-U>let @+ = expand('%:.')<CR>", { desc = 'Copy file name to default register' })
-vim.keymap.set('n', '<leader>sr', '<Cmd>GrugFar<CR>', { desc = 'GrugFar' })
+set('n', '<leader>sy', ":<C-U>let @+ = expand('%:.')<CR>", { desc = 'Copy file name to default register' })
+set('n', '-', '<Cmd>Yazi<CR>', { desc = 'Yazi' })

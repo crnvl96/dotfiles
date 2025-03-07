@@ -1,33 +1,47 @@
 local add = MiniDeps.add
 local hooks = Utils.MiniDepsHooks()
 
+--- Use binaries installed with asdf to feed nvim lsps and formatters
+--- When necessary, use local bin directory for the same purpose
 local asdf = vim.env.HOME .. '/.asdf/shims/'
 local lbin = vim.env.HOME .. '/.local/bin/'
 
+--- We manage mini nvim plugins library with MiniDeps itself
 add({ name = 'mini.nvim' })
+
+--- These plugins don't require the `setup` call to work
 add('nvim-lua/plenary.nvim')
-add('MagicDuck/grug-far.nvim')
-add({ source = 'nvim-treesitter/nvim-treesitter', hooks = hooks.treesitter })
-add({ source = 'Saghen/blink.cmp', hooks = hooks.blink })
-add('nvim-treesitter/nvim-treesitter-textobjects')
+add('andymass/vim-matchup')
 add('tpope/vim-fugitive')
 add('tpope/vim-sleuth')
 add('tpope/vim-eunuch')
 add('tpope/vim-rhubarb')
+
+add('MagicDuck/grug-far.nvim')
+add({ source = 'nvim-treesitter/nvim-treesitter', hooks = hooks.treesitter })
+add({ source = 'Saghen/blink.cmp', hooks = hooks.blink })
+add('nvim-treesitter/nvim-treesitter-textobjects')
 add('stevearc/conform.nvim')
 add('neovim/nvim-lspconfig')
 add('danymat/neogen')
+add('mikavilpas/yazi.nvim')
 
+--- Icons provider for nvim
 require('mini.icons').setup()
 require('mini.extra').setup()
-
-require('mini.pairs').setup()
-require('mini.move').setup()
-require('mini.snippets').setup()
 require('mini.indentscope').setup()
 require('mini.align').setup({ mappings = { start = '' } })
 require('mini.splitjoin').setup({ mappings = { toggle = 'S' } })
 require('mini.pick').setup({ window = { prompt_cursor = '▇ ', prompt_prefix = ' ' } })
+require('mini.move').setup()
+require('yazi').setup({ open_for_directories = true })
+
+require('mini.snippets').setup({
+    snippets = {
+        require('mini.snippets').gen_loader.from_file('~/.config/nvim/snippets/global.json'),
+        require('mini.snippets').gen_loader.from_lang(),
+    },
+})
 
 require('mini.jump2d').setup({
     spotter = require('mini.jump2d').gen_pattern_spotter('[^%s%p]+'),
@@ -40,19 +54,6 @@ require('mini.operators').setup({
     exchange = { prefix = '' },
     multiply = { prefix = '' },
     sort = { prefix = '' },
-})
-
-require('mini.files').setup({
-    windows = {
-        preview = true,
-        width_preview = 80,
-    },
-    mappings = {
-        go_in = '',
-        go_in_plus = '<CR>',
-        go_out = '',
-        go_out_plus = '-',
-    },
 })
 
 require('mini.surround').setup({
