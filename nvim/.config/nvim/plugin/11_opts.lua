@@ -64,6 +64,9 @@ vim.o.wrap = false
 vim.o.writebackup = false
 vim.o.diffopt = 'filler,internal,closeoff,algorithm:histogram,context:5,linematch:60'
 
+vim.opt.completeopt:append('fuzzy')
+vim.opt.wildoptions:append('fuzzy')
+
 if vim.fn.exists('syntax_on') ~= 1 then vim.cmd('syntax enable') end
 vim.cmd('filetype plugin indent on')
 vim.cmd('packadd cfilter')
