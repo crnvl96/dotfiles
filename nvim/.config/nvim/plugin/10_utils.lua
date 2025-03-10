@@ -26,7 +26,23 @@ Utils.OnAttach = function(client, bufnr)
     set('n', '<Leader>lD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', { desc = 'Declaration', buffer = bufnr })
     set('n', '<Leader>li', '<Cmd>lua vim.lsp.buf.implementation()<CR>', { desc = 'Impl', buffer = bufnr })
     set('n', '<Leader>ly', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', { desc = 'Typedefs', buffer = bufnr })
-    set('n', '<Leader>lr', '<Cmd>lua vim.lsp.buf.references()<CR>', { desc = 'References', buffer = bufnr })
+
+    set('n', '<Leader>lr', function()
+        require('deck').start(LSPUtils.references, {
+            name = 'LSP References',
+            query = '',
+            view = function()
+                return require('deck.builtin.view.bottom_picker')({
+                    max_height = math.floor(vim.o.lines * 0.4),
+                    preview = {
+                        enabled = true,
+                        side = 'right',
+                        width = math.floor(vim.o.columns * 0.5),
+                    },
+                })
+            end,
+        })
+    end, { desc = 'References' })
 end
 
 Utils.LoadFile = function(f)

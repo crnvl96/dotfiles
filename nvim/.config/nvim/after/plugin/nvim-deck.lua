@@ -1,4 +1,5 @@
 local deck = require('deck')
+local builtin_decorators = deck.get_decorators()
 
 require('deck.easy').setup()
 
@@ -88,13 +89,14 @@ Utils.Group('crnvl96-deck-setup', function(g)
 end)
 
 vim.ui.select = function(items, opts, on_choice)
-    local formatter = opts.format_item
-        or function(item)
-            item = Utils.ExpandCallable(item)
-            if type(item) == 'string' then return item end
-            if type(item) == 'table' and type(item.text) == 'string' then return item.text end
-            return vim.inspect(item, { newline = ' ', indent = '' })
-        end
+    local function to_str(item)
+        item = Utils.ExpandCallable(item)
+        if type(item) == 'string' then return item end
+        if type(item) == 'table' and type(item.text) == 'string' then return item.text end
+        return vim.inspect(item, { newline = ' ', indent = '' })
+    end
+
+    local formatter = opts.format_item or to_str
 
     local previewer = vim.is_callable(opts.preview_item) and opts.preview_item
         or function(x) return vim.split(vim.inspect(x), '\n') end
@@ -111,7 +113,7 @@ vim.ui.select = function(items, opts, on_choice)
             for _, i in ipairs(ui_select_option_list) do
                 ctx.item({
                     display_text = i.text,
-                    data = { item = i },
+                    data = { item = i, filename = i.text },
                 })
             end
 
@@ -145,6 +147,11 @@ vim.ui.select = function(items, opts, on_choice)
                 preview = function(_, item, env) Utils.SetBufLines(vim.fn.winbufnr(env.win), previewer(item.data.item)) end,
             },
         },
+        decorators = {
+            builtin_decorators.filename,
+            -- builtin_decorators.query_matches,
+            -- builtin_decorators.highlights,
+        },
     })
 
     if item == nil then on_choice(nil) end
@@ -154,9 +161,30 @@ local set = vim.keymap.set
 
 set('n', '-', '<Cmd>Deck explorer<CR>', { desc = 'File Explorer' })
 set('n', '<Leader>,', '<Cmd>Deck buffers<CR>', { desc = 'Buffers picker' })
-set('n', '<Leader>ff', '<Cmd>Deck files<CR>', { desc = 'Files' })
 set('n', '<Leader>fh', '<Cmd>Deck helpgrep<CR>', { desc = 'Help' })
-set('n', '<Leader>fg', '<Cmd>Deck grep<CR>', { desc = 'Grep' })
+set('n', '<Leader>fl', '<Cmd>Deck lines<CR>', { desc = 'Lines' })
+
+set(
+    'n',
+    '<Leader>ff',
+    function()
+        deck.start(require('deck.builtin.source.files')({
+            root_dir = vim.uv.cwd(),
+        }))
+    end,
+    { desc = 'Files' }
+)
+
+set(
+    'n',
+    '<Leader>fg',
+    function()
+        deck.start(require('deck.builtin.source.grep')({
+            root_dir = vim.uv.cwd(),
+        }))
+    end,
+    { desc = 'Grep' }
+)
 
 set('n', '<Leader>fr', function()
     local context = deck.get_history()[vim.v.count == 0 and 1 or vim.v.count]
