@@ -22,3 +22,6 @@ MiniDeps.add({ source = 'olimorris/codecompanion.nvim', depends = { 'j-hui/fidge
 
 -- Picker/Explorer
 MiniDeps.add('hrsh7th/nvim-deck')
+
+-- Documentation utilities
+MiniDeps.add('danymat/neogen')

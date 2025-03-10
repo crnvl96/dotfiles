@@ -2,33 +2,6 @@ _G.Utils = {}
 
 Utils.Group = function(name, fn) fn(vim.api.nvim_create_augroup(name, { clear = true })) end
 
-Utils.ExpandCallable = function(x, ...)
-    if vim.is_callable(x) then return x(...) end
-    return x
-end
-
-Utils.SetBufLines = function(buf_id, lines) pcall(vim.api.nvim_buf_set_lines, buf_id, 0, -1, false, lines) end
-
-Utils.OnAttach = function(client, bufnr)
-    -- Formatting is handled by `stevearc/conform.nvim`
-    client.server_capabilities.documentFormattingProvider = false
-    client.server_capabilities.documentRangeFormattingProvider = false
-
-    local set = vim.keymap.set
-    set('n', 'E', '<Cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>', { desc = 'Eval', buffer = bufnr })
-    set('n', 'K', '<Cmd>lua vim.lsp.buf.hover({ border = "rounded" })<CR>', { desc = 'Eval', buffer = bufnr })
-    set('n', '<Leader>la', '<Cmd>lua vim.lsp.buf.code_action()<CR>', { desc = 'Actions', buffer = bufnr })
-    set('n', '<Leader>ln', '<Cmd>lua vim.lsp.buf.rename()<CR>', { desc = 'Rename', buffer = bufnr })
-    set('n', '<Leader>le', '<Cmd>lua vim.diagnostic.setqflist()<CR>', { desc = 'Diagnostics', buffer = bufnr })
-    set('n', '<Leader>ls', '<Cmd>lua vim.lsp.buf.document_symbol()<CR>', { desc = 'Document Symbols', buffer = bufnr })
-    set('n', '<Leader>lS', '<Cmd>lua vim.lsp.buf.workspace_symbol()<CR>', { desc = 'WSymbols', buffer = bufnr })
-    set('n', '<Leader>ld', '<Cmd>lua vim.lsp.buf.definition()<CR>', { desc = 'Definition', buffer = bufnr })
-    set('n', '<Leader>lD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', { desc = 'Declaration', buffer = bufnr })
-    set('n', '<Leader>li', '<Cmd>lua vim.lsp.buf.implementation()<CR>', { desc = 'Impl', buffer = bufnr })
-    set('n', '<Leader>ly', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', { desc = 'Typedefs', buffer = bufnr })
-    set('n', '<Leader>lr', '<Cmd>lua vim.lsp.buf.references()<CR>', { desc = 'References', buffer = bufnr })
-end
-
 Utils.LoadFile = function(f)
     local path = vim.fn.stdpath('config') .. '/static/files/' .. f
     local file = io.open(path, 'r')
@@ -90,6 +63,26 @@ Utils.ReadFromFile = function(f)
         return key
     end
     return nil
+end
+
+Utils.OnAttach = function(client, bufnr)
+    -- Formatting is handled by `stevearc/conform.nvim`
+    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentRangeFormattingProvider = false
+
+    local set = vim.keymap.set
+
+    set('n', 'E', '<Cmd>lua vim.diagnostic.open_float({ border = "rounded" })<CR>', { desc = 'Eval', buffer = bufnr })
+    set('n', 'K', '<Cmd>lua vim.lsp.buf.hover({ border = "rounded" })<CR>', { desc = 'Eval', buffer = bufnr })
+    set('n', '<Leader>la', '<Cmd>lua vim.lsp.buf.code_action()<CR>', { desc = 'Actions', buffer = bufnr })
+    set('n', '<Leader>ln', '<Cmd>lua vim.lsp.buf.rename()<CR>', { desc = 'Rename', buffer = bufnr })
+
+    set('n', '<Leader>le', '<Cmd>DeckLspBufDiagnostics<CR>', { desc = 'Diagnostics', buffer = bufnr })
+    set('n', '<Leader>ly', '<Cmd>DeckLspTypeDefinition<CR>', { desc = 'Typedefs', buffer = bufnr })
+    set('n', '<Leader>li', '<Cmd>DeckLspImplementation<CR>', { desc = 'Impl', buffer = bufnr })
+    set('n', '<Leader>ld', '<Cmd>DeckLspDefinition<CR>', { desc = 'Definition', buffer = bufnr })
+    set('n', '<Leader>lr', '<Cmd>DeckLspReferences<CR>', { desc = 'LSP References', buffer = bufnr })
+    set('n', '<Leader>ls', '<Cmd>DeckLspDocumentSymbols<CR>', { desc = 'Document Symbols', buffer = bufnr })
 end
 
 function _G.qftf(info)

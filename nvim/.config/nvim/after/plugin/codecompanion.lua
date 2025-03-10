@@ -1,4 +1,4 @@
-vim.g.codecompanion_adapter = 'deepseek'
+vim.g.codecompanion_adapter = 'anthropic'
 
 require('codecompanion').setup({
     display = {
