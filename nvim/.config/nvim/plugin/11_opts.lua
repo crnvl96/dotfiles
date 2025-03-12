@@ -5,8 +5,6 @@ local register_capability = vim.lsp.handlers[methods.client_registerCapability]
 
 assert(show_handler)
 
-vim.env.PATH = vim.env.HOME .. '/.asdf/shims' .. ':' .. vim.env.PATH
-
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 vim.g.loaded_netrwPlugin = 1

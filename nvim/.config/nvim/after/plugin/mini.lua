@@ -1,3 +1,22 @@
+require('mini.icons').setup()
+
+require('mini.snippets').setup({
+    snippets = {
+        require('mini.snippets').gen_loader.from_file('~/.config/nvim/snippets/global.json'),
+        require('mini.snippets').gen_loader.from_lang(),
+    },
+})
+
+require('mini.operators').setup({
+    evaluate = { prefix = 'g=' },
+    replace = { prefix = 's' },
+    exchange = { prefix = '' },
+    multiply = { prefix = '' },
+    sort = { prefix = '' },
+})
+
+require('mini.jump').setup()
+
 require('mini.ai').setup({
     n_lines = 500,
     custom_textobjects = {

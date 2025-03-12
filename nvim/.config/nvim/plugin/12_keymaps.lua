@@ -3,20 +3,22 @@ for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
     vim.keymap.set({ 'n', 'v', 'i' }, lhs, '<Esc><C-w><C-' .. key .. '>')
 end
 
+vim.keymap.set('', '<M-x>', ':')
 vim.keymap.set('i', '<C-n>', '<C-x><C-o>')
 
--- Set up mappings for normal and visual modes
-vim.keymap.set({ 'n', 'x' }, 'm', Utils.Marks.set_mark_swapped, { noremap = true, silent = true })
-vim.keymap.set({ 'n', 'x' }, "'", Utils.Marks.goto_mark_swapped_quote, { noremap = true, silent = true })
-vim.keymap.set({ 'n', 'x' }, '`', Utils.Marks.goto_mark_swapped_backtick, { noremap = true, silent = true })
+vim.keymap.set('n', 'gy', ":<C-U>let @+ = expand('%:.')<CR>", { desc = 'Copy file name to default register' })
+vim.keymap.set('n', 'gp', '`[v`]', { desc = 'Select pasted text' })
+
+vim.keymap.set({ 'n', 'x' }, 'm', Utils.Marks.set_mark_swapped)
+vim.keymap.set({ 'n', 'x' }, '<M-O>', Utils.Marks.goto_mark_swapped_quote)
+vim.keymap.set({ 'n', 'x' }, '<M-o>', Utils.Marks.goto_mark_swapped_backtick)
 
 vim.keymap.set({ 'n', 'x', 'i', 's' }, '<Esc>', '<Cmd>noh<CR><Esc>')
+vim.keymap.set({ 'n', 'x', 'i', 's' }, '<C-x>', '<Cmd>noh<CR><Esc>')
 vim.keymap.set({ 'n', 'i', 'x' }, '<C-s>', '<Esc><Cmd>noh<CR><Cmd>w<CR><Esc>')
 
 vim.keymap.set({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
 vim.keymap.set({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true })
-
-vim.keymap.set('n', 'gp', '`[v`]', { desc = 'Select pasted text' })
 
 vim.keymap.set('n', '#', '#zzzv')
 vim.keymap.set('n', '*', '*zzzv')
@@ -30,8 +32,6 @@ vim.keymap.set('n', '<C-w>+', '<Cmd>resize +5<CR>')
 vim.keymap.set('n', '<C-w>-', '<Cmd>resize -5<CR>')
 vim.keymap.set('n', '<C-w><', '<Cmd>vertical resize -20<CR>')
 vim.keymap.set('n', '<C-w>>', '<Cmd>vertical resize +20<CR>')
-
-vim.keymap.set('n', 'gy', ":<C-U>let @+ = expand('%:.')<CR>", { desc = 'Copy file name to default register' })
 
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 vim.keymap.set('n', 'N', "'nN'[v:searchforward].'zzzv'", { expr = true })

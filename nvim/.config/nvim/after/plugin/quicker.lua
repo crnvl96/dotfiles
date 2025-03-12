@@ -1,6 +1,6 @@
 require('quicker').setup({
     borders = {
-        vert = ' ╎ ',
+        vert = ' ┃ ',
     },
     keys = {
         {

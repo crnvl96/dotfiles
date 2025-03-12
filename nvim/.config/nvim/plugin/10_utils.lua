@@ -1,5 +1,15 @@
 _G.Utils = {}
 
+local function swap_mark_case(key)
+    if key:match('%u') then
+        return key:lower()
+    elseif key:match('%l') then
+        return key:upper()
+    else
+        return key
+    end
+end
+
 Utils.Group = function(name, fn) fn(vim.api.nvim_create_augroup(name, { clear = true })) end
 
 Utils.ExpandCallable = function(x, ...)
@@ -79,7 +89,6 @@ Utils.ReadFromFile = function(f)
 end
 
 Utils.OnAttach = function(client, bufnr)
-    -- Formatting is handled by `stevearc/conform.nvim`
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
 
@@ -91,42 +100,26 @@ Utils.OnAttach = function(client, bufnr)
     set('n', '<Leader>ln', '<Cmd>lua vim.lsp.buf.rename()<CR>', { desc = 'Rename', buffer = bufnr })
 end
 
-local function swap_mark_case(key)
-    if key:match('%u') then -- Uppercase
-        return key:lower()
-    elseif key:match('%l') then -- Lowercase
-        return key:upper()
-    else
-        return key -- Return unchanged for non-alphabetic characters
-    end
-end
-
 Utils.Marks = {
     set_mark_swapped = function()
         local ok, char = pcall(function() return vim.fn.nr2char(vim.fn.getchar()) end)
-
         if not ok or char == '' or char == '\27' then -- ESC or error
             return
         end
-
         local swapped = swap_mark_case(char)
         vim.cmd('normal! m' .. swapped)
     end,
 
     goto_mark_swapped_quote = function()
         local ok, char = pcall(function() return vim.fn.nr2char(vim.fn.getchar()) end)
-
         if not ok or char == '' or char == '\27' then return end
-
         local swapped = swap_mark_case(char)
         vim.cmd("normal! '" .. swapped)
     end,
 
     goto_mark_swapped_backtick = function()
         local ok, char = pcall(function() return vim.fn.nr2char(vim.fn.getchar()) end)
-
         if not ok or char == '' or char == '\27' then return end
-
         local swapped = swap_mark_case(char)
         vim.cmd('normal! `' .. swapped)
     end,

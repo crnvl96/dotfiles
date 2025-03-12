@@ -1,0 +1,3 @@
+{
+  "Code Block": { "prefix": "cd", "body": "```$1\n$0\n```" }
+}
