@@ -1,4 +1,5 @@
 export PATH="$PATH:$HOME/.asdf/shims:$HOME/gems/bin:$HOME/.local/bin"
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 alias ls="eza -l"
 alias la="eza -lA"
@@ -12,10 +13,13 @@ alias ex="exit"
 alias nv="nvim"
 alias gl="git log --all --oneline --graph --decorate"
 alias gs="git status"
+alias gd="git difftool --dir-diff"
 alias gb="git branch"
 alias gp="git fetch --all --prune && git pull --rebase"
 alias sv="source .venv/bin/activate"
 alias z="zellij"
+alias oil='~/.config/nvim/static/scripts/oil-ssh.sh'
+alias chr='docker run -v ./chroma-data:/data -p 8000:8000 chromadb/chroma:latest'
 
 function y() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
@@ -48,8 +52,10 @@ export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="rg --files --hidden --follow --glob "!.git/*" --null | xargs -0 dirname | sort | uniq"
 export HELIX_RUNTIME=$HOME/.local/state/helix/runtime
 
+
 export _ZO_RESOLVE_SYMLINKS=1
 
 . <(asdf completion bash)
+
 eval "$(fzf --bash)"
 eval "$(zoxide init --cmd x bash)"

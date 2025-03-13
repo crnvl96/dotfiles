@@ -87,6 +87,7 @@ Utils.Group('crnvl96-term', function(g)
             vim.o.signcolumn = is_terminal and 'no' or 'yes'
 
             local code_term_esc = vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, true, true)
+
             for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
                 vim.keymap.set('t', '<C-' .. key .. '>', function()
                     local code_dir = vim.api.nvim_replace_termcodes('<C-' .. key .. '>', true, true, true)
@@ -94,6 +95,8 @@ Utils.Group('crnvl96-term', function(g)
                     vim.cmd([[checktime]]) -- Reload nvim to sync any file changed by a terminal cmd
                 end, { noremap = true })
             end
+
+            vim.keymap.set('t', '<C-t>', function() vim.api.nvim_feedkeys(code_term_esc, 't', true) end)
 
             if vim.bo.filetype == '' then
                 vim.api.nvim_set_option_value('filetype', 'terminal', { buf = event.buf })

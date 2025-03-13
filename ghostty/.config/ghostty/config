@@ -1,3 +1,5 @@
+theme = nord
+
 font-family = Berkeley Mono
 font-size = 13
 adjust-cell-width = -5%
@@ -5,6 +7,10 @@ adjust-cell-height = 20%
 adjust-underline-position = 6
 adjust-underline-thickness = 40%
 adjust-cursor-thickness = 150%
+
+shell-integration-features = no-cursor
+cursor-style = block
+cursor-style-blink = false
 
 window-theme = ghostty
 gtk-adwaita = false
@@ -34,6 +40,10 @@ keybind = alt+shift+l=goto_split:right
 
 keybind = alt+shift+t=new_tab
 keybind = alt+shift+q=close_surface
+
+keybind = alt+shift+.=resize_split:right,80
+keybind = alt+shift+,=resize_split:left,80
+keybind = alt+shift+/=equalize_splits
 
 keybind = alt+equal=increase_font_size:1
 keybind = alt+minus=decrease_font_size:1

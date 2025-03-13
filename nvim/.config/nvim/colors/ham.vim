@@ -127,10 +127,3 @@ hi Type         ctermfg=11
 " Treesitter
 " :help treesitter-highlight-groups
 hi @variable.member ctermfg=4
-
-" Plugins
-hi MiniPickMatchCurrent cterm=bold
-hi MiniFilesCursorLine  cterm=bold
-hi MiniJump2dSpot ctermfg=2
-hi MiniJump2dSpotAhead ctermfg=3
-hi MiniJump2dSpotUnique ctermfg=4
