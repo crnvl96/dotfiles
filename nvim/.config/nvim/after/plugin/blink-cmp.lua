@@ -2,7 +2,6 @@ require('blink.cmp').setup({
     enabled = function() return vim.bo.buftype ~= 'prompt' end,
     completion = {
         menu = { border = 'single' },
-        accept = { dot_repeat = false },
         documentation = {
             auto_show = true,
             auto_show_delay_ms = 500,

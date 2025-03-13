@@ -15,5 +15,4 @@ end
 
 require('mini.deps').setup()
 
---- We manage mini nvim plugins library with MiniDeps itself
 MiniDeps.add({ name = 'mini.nvim' })

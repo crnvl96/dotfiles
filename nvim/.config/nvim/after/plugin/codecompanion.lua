@@ -1,61 +1,35 @@
-vim.g.codecompanion_adapter = 'deepseek'
+local cmd = vim.api.nvim_create_autocmd
+local set = vim.keymap.set
+local adapter = 'deepseek'
 
 require('codecompanion').setup({
-    display = {
-        chat = {
-            window = {
-                layout = 'vertical',
-            },
-        },
-    },
+    display = { chat = { window = { layout = 'vertical' } } },
     strategies = {
-        inline = {
-            adapter = vim.g.codecompanion_adapter,
-        },
-        cmd = {
-            adapter = vim.g.codecompanion_adapter,
-        },
+        inline = { adapter = adapter },
+        cmd = { adapter = adapter },
         chat = {
-            adapter = vim.g.codecompanion_adapter,
+            adapter = adapter,
             slash_commands = {
-                file = { opts = { provider = 'snacks' } },
-                buffer = { opts = { provider = 'snacks' } },
-                help = { opts = { provider = 'snacks' } },
-                symbols = { opts = { provider = 'snacks' } },
+                file = { opts = { provider = 'fzf_lua' } },
+                buffer = { opts = { provider = 'fzf_lua' } },
+                help = { opts = { provider = 'fzf_lua' } },
+                symbols = { opts = { provider = 'fzf_lua' } },
             },
-            keymaps = {
-                completion = {
-                    modes = {
-                        i = '<C-n>',
-                    },
-                },
-            },
+            keymaps = { completion = { modes = { i = '<C-n>' } } },
         },
     },
     adapters = {
         huggingface = require('codecompanion.adapters').extend('huggingface', {
             env = { api_key = Utils.ReadFromFile('huggingface') },
-            schema = {
-                model = {
-                    default = 'deepseek-ai/DeepSeek-R1-Distill-Qwen-32B',
-                },
-            },
+            schema = { model = { default = 'deepseek-ai/DeepSeek-R1-Distill-Qwen-32B' } },
         }),
         anthropic = require('codecompanion.adapters').extend('anthropic', {
             env = { api_key = Utils.ReadFromFile('anthropic') },
-            schema = {
-                model = {
-                    default = 'claude-3-7-sonnet-20250219',
-                },
-            },
+            schema = { model = { default = 'claude-3-7-sonnet-20250219' } },
         }),
         deepseek = require('codecompanion.adapters').extend('deepseek', {
             env = { api_key = Utils.ReadFromFile('deepseek') },
-            schema = {
-                model = {
-                    default = 'deepseek-chat',
-                },
-            },
+            schema = { model = { default = 'deepseek-reasoner' } },
         }),
     },
 })
@@ -64,7 +38,7 @@ Utils.Group('crnvl96-codecompanion-fidget-integration', function(g)
     local handlers = {}
     local progress = require('fidget.progress')
 
-    vim.api.nvim_create_autocmd('User', {
+    cmd('User', {
         pattern = 'CodeCompanionRequestStarted',
         group = g,
         callback = function(e)
@@ -88,7 +62,7 @@ Utils.Group('crnvl96-codecompanion-fidget-integration', function(g)
         end,
     })
 
-    vim.api.nvim_create_autocmd('User', {
+    cmd('User', {
         pattern = 'CodeCompanionRequestFinished',
         group = g,
         callback = function(e)
@@ -110,7 +84,8 @@ Utils.Group('crnvl96-codecompanion-fidget-integration', function(g)
     })
 end)
 
-local set = vim.keymap.set
-
 set({ 'n', 'x' }, '<Leader>cc', '<Cmd>CodeCompanionChat Toggle<CR>', { desc = 'Toggle AI chat' })
 set('x', 'ga', ':CodeCompanionChat Add<CR>', { desc = 'Add to AI chat' })
+
+Utils.Abbr('cc', 'CodeCompanion')
+Utils.Abbr('ccc', 'CodeCompanionChat Toggle')

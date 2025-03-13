@@ -1,9 +1,31 @@
 --- Use binaries installed with asdf to feed nvim lsps and formatters
 --- When necessary, use local bin directory for the same purpose
 local asdf = vim.env.HOME .. '/.asdf/shims/'
+local brew = '/home/linuxbrew/.linuxbrew/bin/'
 local lbin = vim.env.HOME .. '/.local/bin/'
 
+vim.opt.rtp:append(brew .. 'fzf')
+
 for server, config in pairs({
+    harper_ls = {
+        cmd = { brew .. 'harper-ls', '--stdio' },
+        filetypes = { 'markdown', 'codecompanion', 'gitcommit' },
+        settings = {
+            ['harper-ls'] = {
+                userDictPath = '~/.config/nvim/spell/en.utf-8.add',
+                linters = {
+                    ToDoHyphen = false,
+                    SentenceCapitalization = true,
+                    SpellCheck = true,
+                },
+                isolateEnglish = true,
+                markdown = {
+                    IgnoreLinkTitle = true,
+                },
+            },
+        },
+    },
+
     vtsls = {
         cmd = { asdf .. 'vtsls', '--stdio' },
         root_dir = function(_, buffer) return buffer and vim.fs.root(buffer, { 'package.json' }) end,
@@ -56,7 +78,7 @@ for server, config in pairs({
         },
     },
     lua_ls = {
-        cmd = { asdf .. 'lua-language-server' },
+        cmd = { brew .. 'lua-language-server' },
         on_init = function(client)
             client.server_capabilities.semanticTokensProvider = nil
 

@@ -1,4 +1,5 @@
 require('mini.icons').setup()
+require('mini.jump').setup()
 
 require('mini.snippets').setup({
     snippets = {
@@ -14,8 +15,6 @@ require('mini.operators').setup({
     multiply = { prefix = '' },
     sort = { prefix = '' },
 })
-
-require('mini.jump').setup()
 
 require('mini.ai').setup({
     n_lines = 500,

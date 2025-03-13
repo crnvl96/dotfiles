@@ -12,6 +12,11 @@ end
 
 Utils.Group = function(name, fn) fn(vim.api.nvim_create_augroup(name, { clear = true })) end
 
+Utils.Abbr = function(abbr, cmd)
+    local expand = function() return (vim.fn.getcmdtype() == ':' and vim.fn.getcmdline() == abbr) and cmd or abbr end
+    vim.keymap.set('ca', abbr, expand, { expr = true })
+end
+
 Utils.ExpandCallable = function(x, ...)
     if vim.is_callable(x) then return x(...) end
     return x
@@ -62,14 +67,6 @@ Utils.MiniDepsHooks = function()
                 MiniDeps.later(function() Utils.MiniDepsBuild(p, { 'cargo', 'build', '--release' }) end)
             end,
         },
-        fzf = {
-            post_install = function()
-                MiniDeps.later(function() vim.fn['fzf#install']() end)
-            end,
-            post_checkout = function()
-                MiniDeps.later(function() vim.fn['fzf#install']() end)
-            end,
-        },
     }
 end
 
@@ -98,6 +95,15 @@ Utils.OnAttach = function(client, bufnr)
     set('n', 'K', '<Cmd>lua vim.lsp.buf.hover({ border = "rounded" })<CR>', { desc = 'Eval', buffer = bufnr })
     set('n', '<Leader>la', '<Cmd>lua vim.lsp.buf.code_action()<CR>', { desc = 'Actions', buffer = bufnr })
     set('n', '<Leader>ln', '<Cmd>lua vim.lsp.buf.rename()<CR>', { desc = 'Rename', buffer = bufnr })
+
+    set('n', '<Leader>ld', '<Cmd>FzfLua lsp_definitions<CR>', { desc = 'Goto Definition' })
+    set('n', '<Leader>lD', '<Cmd>FzfLua lsp_declarations<CR>', { desc = 'Goto Declaration' })
+    set('n', '<Leader>lr', '<Cmd>FzfLua lsp_references<CR>', { nowait = true, desc = 'References' })
+    set('n', '<Leader>li', '<Cmd>FzfLua lsp_implementations<CR>', { desc = 'Goto Implementation' })
+    set('n', '<Leader>ly', '<Cmd>FzfLua lsp_typedefs<CR>', { desc = 'Goto T[y]pe Definition' })
+    set('n', '<Leader>le', '<Cmd>FzfLua lsp_document_diagnostics<CR>', { desc = 'Diagnostics' })
+    set('n', '<Leader>ls', '<Cmd>FzfLua lsp_document_symbols<CR>', { desc = 'LSP Symbols' })
+    set('n', '<Leader>lS', '<Cmd>FzfLua lsp_workspace_symbols<CR>', { desc = 'LSP Workspace Symbols' })
 end
 
 Utils.Marks = {

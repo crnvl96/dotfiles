@@ -1,0 +1,22 @@
+{
+  "mcpServers": {
+    "fetch": {
+      "disabled": false,
+      "command": "uvx",
+      "args": [
+        "mcp-server-fetch"
+      ]
+    },
+    "todoist": {
+      "env": {
+        "TODOIST_API_TOKEN": "your-api-token-here"
+      },
+      "disabled": false,
+      "command": "npx",
+      "args": [
+        "-y",
+        "@abhiz123/todoist-mcp-server"
+      ]
+    }
+  }
+}
