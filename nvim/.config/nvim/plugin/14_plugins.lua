@@ -1,30 +1,41 @@
+local add = MiniDeps.add
 local hooks = Utils.MiniDepsHooks()
 
-MiniDeps.add('folke/snacks.nvim')
+add('stevearc/oil.nvim')
+add('ibhagwan/fzf-lua')
+add('stevearc/conform.nvim')
 
---- These plugins don't require the `setup` call to work
-MiniDeps.add('nvim-lua/plenary.nvim') -- libraty
-MiniDeps.add('tpope/vim-eunuch') -- unix operations
-MiniDeps.add('tpope/vim-fugitive') -- git
-MiniDeps.add('tpope/vim-rhubarb') -- github links
+add({
+    source = 'nvim-treesitter/nvim-treesitter-textobjects',
+    depends = {
+        { source = 'nvim-treesitter/nvim-treesitter', hooks = hooks.treesitter },
+    },
+})
 
-MiniDeps.add({ source = 'nvim-treesitter/nvim-treesitter', hooks = hooks.treesitter })
-MiniDeps.add('nvim-treesitter/nvim-treesitter-textobjects')
-MiniDeps.add('MagicDuck/grug-far.nvim')
-MiniDeps.add({ source = 'Saghen/blink.cmp', hooks = hooks.blink })
+add({
+    source = 'tpope/vim-rhubarb',
+    depends = { 'tpope/vim-fugitive' },
+})
 
---- LSP/Formatting features
-MiniDeps.add('stevearc/conform.nvim')
-MiniDeps.add('neovim/nvim-lspconfig')
+add({
+    source = 'neovim/nvim-lspconfig',
+    depends = {
+        { source = 'Saghen/blink.cmp', hooks = hooks.blink },
+    },
+})
 
---- Some plugins to provide AI integration
-MiniDeps.add({ source = 'olimorris/codecompanion.nvim', depends = { 'j-hui/fidget.nvim' } })
-MiniDeps.add('GeorgesAlkhouri/nvim-aider')
+add({
+    source = 'olimorris/codecompanion.nvim',
+    depends = {
+        { source = 'j-hui/fidget.nvim' },
+        { source = 'nvim-lua/plenary.nvim' },
+    },
+})
 
--- Documentation utilities
-MiniDeps.add('danymat/neogen')
-
--- Quickfix
-MiniDeps.add({ source = 'junegunn/fzf', hooks = hooks.fzf })
-MiniDeps.add('stevearc/quicker.nvim')
-MiniDeps.add('kevinhwang91/nvim-bqf')
+add({
+    source = 'ravitemer/mcphub.nvim',
+    hooks = hooks.mcphub,
+    depends = {
+        { source = 'nvim-lua/plenary.nvim' },
+    },
+})

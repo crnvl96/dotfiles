@@ -1,2 +1,2 @@
 #!/bin/sh
-setxkbmap -layout us,us -variant ,intl -option grp:alt_space_toggle
+setxkbmap -layout us,us -variant ,intl -option grp:win_space_toggle

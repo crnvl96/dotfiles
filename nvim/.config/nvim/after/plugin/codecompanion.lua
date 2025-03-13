@@ -1,61 +1,61 @@
-vim.g.codecompanion_adapter = 'deepseek'
+local cmd = vim.api.nvim_create_autocmd
+local set = vim.keymap.set
+local adapter = 'deepseek'
 
 require('codecompanion').setup({
     display = {
         chat = {
-            window = {
-                layout = 'vertical',
-            },
+            show_settings = true,
+        },
+        diff = {
+            enabled = true,
+            close_chat_at = 360,
+            opts = { 'filler', 'internal', 'closeoff', 'algorithm:histogram', 'context:5', 'linematch:60' },
         },
     },
     strategies = {
-        inline = {
-            adapter = vim.g.codecompanion_adapter,
-        },
-        cmd = {
-            adapter = vim.g.codecompanion_adapter,
-        },
+        inline = { adapter = adapter },
+        cmd = { adapter = adapter },
         chat = {
-            adapter = vim.g.codecompanion_adapter,
-            slash_commands = {
-                file = { opts = { provider = 'snacks' } },
-                buffer = { opts = { provider = 'snacks' } },
-                help = { opts = { provider = 'snacks' } },
-                symbols = { opts = { provider = 'snacks' } },
-            },
-            keymaps = {
-                completion = {
-                    modes = {
-                        i = '<C-n>',
-                    },
+            adapter = adapter,
+            tools = {
+                mcp = {
+                    callback = function() return require('mcphub.extensions.codecompanion') end,
+                    description = 'Call tools and resources from the MCP Servers',
+                    opts = { requires_approval = true },
                 },
+            },
+            slash_commands = {
+                file = { opts = { provider = 'fzf_lua' } },
+                buffer = { opts = { provider = 'fzf_lua' } },
+                help = { opts = { provider = 'fzf_lua' } },
+                symbols = { opts = { provider = 'fzf_lua' } },
             },
         },
     },
     adapters = {
         huggingface = require('codecompanion.adapters').extend('huggingface', {
             env = { api_key = Utils.ReadFromFile('huggingface') },
-            schema = {
-                model = {
-                    default = 'deepseek-ai/DeepSeek-R1-Distill-Qwen-32B',
-                },
-            },
+            schema = { model = { default = 'deepseek-ai/DeepSeek-R1-Distill-Qwen-32B' } },
         }),
         anthropic = require('codecompanion.adapters').extend('anthropic', {
             env = { api_key = Utils.ReadFromFile('anthropic') },
             schema = {
                 model = {
+                    choices = {
+                        ['claude-3-7-sonnet-20250219'] = { opts = { can_reason = false } },
+                        'claude-3-5-sonnet-20241022',
+                        'claude-3-5-haiku-20241022',
+                        'claude-3-opus-20240229',
+                        'claude-2.1',
+                    },
                     default = 'claude-3-7-sonnet-20250219',
                 },
             },
         }),
         deepseek = require('codecompanion.adapters').extend('deepseek', {
             env = { api_key = Utils.ReadFromFile('deepseek') },
-            schema = {
-                model = {
-                    default = 'deepseek-chat',
-                },
-            },
+            schema = { model = { default = 'deepseek-chat' } },
         }),
     },
 })
@@ -64,7 +64,7 @@ Utils.Group('crnvl96-codecompanion-fidget-integration', function(g)
     local handlers = {}
     local progress = require('fidget.progress')
 
-    vim.api.nvim_create_autocmd('User', {
+    cmd('User', {
         pattern = 'CodeCompanionRequestStarted',
         group = g,
         callback = function(e)
@@ -88,7 +88,7 @@ Utils.Group('crnvl96-codecompanion-fidget-integration', function(g)
         end,
     })
 
-    vim.api.nvim_create_autocmd('User', {
+    cmd('User', {
         pattern = 'CodeCompanionRequestFinished',
         group = g,
         callback = function(e)
@@ -110,7 +110,8 @@ Utils.Group('crnvl96-codecompanion-fidget-integration', function(g)
     })
 end)
 
-local set = vim.keymap.set
-
 set({ 'n', 'x' }, '<Leader>cc', '<Cmd>CodeCompanionChat Toggle<CR>', { desc = 'Toggle AI chat' })
 set('x', 'ga', ':CodeCompanionChat Add<CR>', { desc = 'Add to AI chat' })
+
+Utils.Abbr('cc', 'CodeCompanion')
+Utils.Abbr('ccc', 'CodeCompanionChat Toggle')

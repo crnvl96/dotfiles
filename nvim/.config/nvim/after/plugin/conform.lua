@@ -28,7 +28,7 @@ require('conform').setup({
         yaml = { 'yamlfmt' },
         yml = { 'yamlfmt' },
         toml = { 'taplo' },
-        markdown = { 'injected' },
+        markdown = { 'prettierd', 'injected' },
         python = { 'ruff_fix', 'ruff_organize_imports', 'ruff_format' },
         typescript = function(bufnr)
             if bufnr and vim.fs.root(bufnr, { 'biome.json', 'biome.jsonc' }) then

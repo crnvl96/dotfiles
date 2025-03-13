@@ -1,12 +1,12 @@
 require('blink.cmp').setup({
     enabled = function() return vim.bo.buftype ~= 'prompt' end,
     completion = {
-        menu = { border = 'single' },
-        accept = { dot_repeat = false },
         documentation = {
-            auto_show = true,
+            auto_show = false,
             auto_show_delay_ms = 500,
-            window = { border = 'single' },
+        },
+        menu = {
+            auto_show = true,
         },
     },
     cmdline = {
@@ -15,12 +15,8 @@ require('blink.cmp').setup({
         },
     },
     signature = {
-        enabled = true,
-        window = { show_documentation = true, border = 'single' },
+        enabled = false,
+        window = { show_documentation = false },
     },
-    keymap = {
-        preset = 'default',
-        ['<C-k>'] = {},
-        ['<C-i>'] = { 'show_signature', 'hide_signature', 'fallback' },
-    },
+    keymap = { preset = 'default' },
 })
