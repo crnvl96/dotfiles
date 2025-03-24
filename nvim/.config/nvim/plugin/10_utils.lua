@@ -1,5 +1,7 @@
 _G.Utils = {}
 
+local set = vim.keymap.set
+
 local function swap_mark_case(key)
     if key:match('%u') then
         return key:lower()
@@ -14,7 +16,7 @@ Utils.Group = function(name, fn) fn(vim.api.nvim_create_augroup(name, { clear = 
 
 Utils.Abbr = function(abbr, cmd)
     local expand = function() return (vim.fn.getcmdtype() == ':' and vim.fn.getcmdline() == abbr) and cmd or abbr end
-    vim.keymap.set('ca', abbr, expand, { expr = true })
+    set('ca', abbr, expand, { expr = true })
 end
 
 Utils.ExpandCallable = function(x, ...)
@@ -90,40 +92,27 @@ Utils.ReadFromFile = function(f)
     local path = vim.fn.stdpath('config') .. '/static/api_keys/' .. f
     local file = io.open(path, 'r')
 
-    if file then
-        local key = file:read('*a'):gsub('%s+$', '')
-        file:close()
+    if not file then return nil end
 
-        if not key then
-            vim.notify('Missing file: ' .. f, 'ERROR')
-            return nil
-        end
+    local key = file:read('*a'):gsub('%s+$', '')
+    file:close()
 
-        return key
+    if not key then
+        vim.notify('Missing file: ' .. f, 'ERROR')
+        return nil
     end
 
-    return nil
+    return key
 end
 
 Utils.OnAttach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
 
-    local set = vim.keymap.set
-
     set('n', 'E', '<Cmd>lua vim.diagnostic.open_float()<CR>', { desc = 'Eval', buffer = bufnr })
     set('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', { desc = 'Eval', buffer = bufnr })
-    set('n', '<Leader>la', '<Cmd>lua vim.lsp.buf.code_action()<CR>', { desc = 'Actions', buffer = bufnr })
-    set('n', '<Leader>ln', '<Cmd>lua vim.lsp.buf.rename()<CR>', { desc = 'Rename', buffer = bufnr })
-
-    set('n', '<Leader>ld', '<Cmd>FzfLua lsp_definitions<CR>', { desc = 'Goto Definition' })
-    set('n', '<Leader>lD', '<Cmd>FzfLua lsp_declarations<CR>', { desc = 'Goto Declaration' })
-    set('n', '<Leader>lr', '<Cmd>FzfLua lsp_references<CR>', { nowait = true, desc = 'References' })
-    set('n', '<Leader>li', '<Cmd>FzfLua lsp_implementations<CR>', { desc = 'Goto Implementation' })
-    set('n', '<Leader>ly', '<Cmd>FzfLua lsp_typedefs<CR>', { desc = 'Goto T[y]pe Definition' })
-    set('n', '<Leader>le', '<Cmd>FzfLua lsp_document_diagnostics<CR>', { desc = 'Diagnostics' })
-    set('n', '<Leader>ls', '<Cmd>FzfLua lsp_document_symbols<CR>', { desc = 'LSP Symbols' })
-    set('n', '<Leader>lS', '<Cmd>FzfLua lsp_workspace_symbols<CR>', { desc = 'LSP Workspace Symbols' })
+    set('n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>', { desc = 'Actions', buffer = bufnr })
+    set('n', 'gn', '<Cmd>lua vim.lsp.buf.rename()<CR>', { desc = 'Rename', buffer = bufnr })
 end
 
 Utils.Marks = {

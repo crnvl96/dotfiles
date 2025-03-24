@@ -1,16 +1,18 @@
 return {
-  ["blink.cmp"] = "247744293512c852f6932982126a0bf118f4a2ad",
+  ["blink.cmp"] = "21fbc4d161d63b987e901dadc882a61562626050",
   ["codecompanion.nvim"] = "57bc5689a64a15b12251a8cd3c28dddd0d52c0cc",
   ["conform.nvim"] = "f9ef25a7ef00267b7d13bfc00b0dea22d78702d5",
   ["fidget.nvim"] = "d9ba6b7bfe29b3119a610892af67602641da778e",
   ["fzf-lua"] = "ac6a34ea39831ec71c14f72075facf377ea9a00d",
   ["mcphub.nvim"] = "0755da600727746f1a315d81f16f73f4203862b0",
-  ["mini.nvim"] = "04ea90af6cd12cf88e169eff82dc57a3ebc5c3ab",
+  ["mini.nvim"] = "f048957e4e2ce8a7f44cc906450f5579ca9cfa20",
   ["nvim-lspconfig"] = "fb733ac734249ccf293e5c8018981d4d8f59fa8f",
   ["nvim-treesitter"] = "e329e94a6a0a5ccf6ec8bfec1d10faf5eaae665f",
+  ["nvim-treesitter-context"] = "93b29a32d5f4be10e39226c6b796f28d68a8b483",
   ["nvim-treesitter-textobjects"] = "9937e5e356e5b227ec56d83d0a9d0a0f6bc9cad4",
   ["oil.nvim"] = "ab887d926c2665a708fbe9e6c4654042cc5f4c60",
   ["plenary.nvim"] = "857c5ac632080dba10aae49dba902ce3abf91b35",
   ["vim-fugitive"] = "4a745ea72fa93bb15dd077109afbb3d1809383f2",
-  ["vim-rhubarb"] = "386daa2e9d98e23e27ad089afcbe5c5a903e488d"
+  ["vim-rhubarb"] = "386daa2e9d98e23e27ad089afcbe5c5a903e488d",
+  ["vim-sleuth"] = "be69bff86754b1aa5adcbb527d7fcd1635a84080"
 }

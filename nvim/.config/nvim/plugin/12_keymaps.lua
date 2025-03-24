@@ -1,6 +1,4 @@
-local later = MiniDeps.later
 local set = vim.keymap.set
-local del = vim.keymap.del
 
 for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
     local lhs = '<C-' .. key .. '>'
@@ -47,9 +45,3 @@ set('n', 'n', "'Nn'[v:searchforward].'zzzv'", { expr = true })
 
 set('x', '<', '<gv')
 set('x', '>', '>gv')
-
-later(function()
-    for _, lhs in ipairs({ '[%', ']%', 'g%' }) do
-        del('n', lhs)
-    end
-end)
