@@ -16,3 +16,13 @@ end
 require('mini.deps').setup()
 
 MiniDeps.add({ name = 'mini.nvim' })
+
+vim.lsp.enable({
+    'basedpyright',
+    'biome',
+    'eslint',
+    'harper_ls',
+    'lua_ls',
+    'ruff',
+    'vtsls',
+})

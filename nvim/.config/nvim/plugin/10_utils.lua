@@ -61,22 +61,22 @@ Utils.MiniDepsHooks = function()
                 MiniDeps.later(function() vim.cmd('TSUpdate') end)
             end,
         },
-        blink = {
-            post_install = function(p)
-                MiniDeps.later(function() Utils.Build(p, { 'cargo', 'build', '--release' }) end)
-            end,
-            post_checkout = function(p)
-                MiniDeps.later(function() Utils.Build(p, { 'cargo', 'build', '--release' }) end)
-            end,
-        },
-        vectorcode = {
-            post_install = function(p)
-                MiniDeps.later(function() Utils.Build(p, { 'uv', 'tool', 'install', '--upgrade', 'vectorcode' }) end)
-            end,
-            post_checkout = function(p)
-                MiniDeps.later(function() Utils.Build(p, { 'uv', 'tool', 'install', '--upgrade', 'vectorcode' }) end)
-            end,
-        },
+        -- blink = {
+        --     post_install = function(p)
+        --         MiniDeps.later(function() Utils.Build(p, { 'cargo', 'build', '--release' }) end)
+        --     end,
+        --     post_checkout = function(p)
+        --         MiniDeps.later(function() Utils.Build(p, { 'cargo', 'build', '--release' }) end)
+        --     end,
+        -- },
+        -- vectorcode = {
+        --     post_install = function(p)
+        --         MiniDeps.later(function() Utils.Build(p, { 'uv', 'tool', 'install', '--upgrade', 'vectorcode' }) end)
+        --     end,
+        --     post_checkout = function(p)
+        --         MiniDeps.later(function() Utils.Build(p, { 'uv', 'tool', 'install', '--upgrade', 'vectorcode' }) end)
+        --     end,
+        -- },
         mcphub = {
             post_install = function(p)
                 MiniDeps.later(function() Utils.Build(p, { 'npm', 'install', '-g', 'mcp-hub@latest' }) end)
@@ -113,6 +113,11 @@ Utils.OnAttach = function(client, bufnr)
     set('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', { desc = 'Eval', buffer = bufnr })
     set('n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>', { desc = 'Actions', buffer = bufnr })
     set('n', 'gn', '<Cmd>lua vim.lsp.buf.rename()<CR>', { desc = 'Rename', buffer = bufnr })
+
+    if client:supports_method('textDocument/completion') then
+        client.server_capabilities.completionProvider.triggerCharacters = vim.split('qwertyuiopasdfghjklzxcvbnm. ', '')
+        vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+    end
 end
 
 Utils.Marks = {

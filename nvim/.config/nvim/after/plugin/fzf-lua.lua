@@ -33,7 +33,7 @@ fzflua.setup({
     keymap = {
         fzf = {
             ['ctrl-q'] = 'select-all+accept',
-            ['ctrl-w'] = 'toggle+down',
+            ['ctrl-r'] = 'toggle+down',
             ['ctrl-e'] = 'toggle+up',
             ['ctrl-a'] = 'select-all',
             ['ctrl-o'] = 'toggle-all',

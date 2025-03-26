@@ -1,10 +1,5 @@
-local show_handler = vim.diagnostic.handlers.virtual_text.show
-local hide_handler = vim.diagnostic.handlers.virtual_text.hide
-
 local methods = vim.lsp.protocol.Methods
 local register_capability = vim.lsp.handlers[methods.client_registerCapability]
-
-assert(show_handler)
 
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
@@ -67,7 +62,7 @@ vim.o.wrap = false
 vim.o.writebackup = false
 vim.o.diffopt = 'filler,internal,closeoff,algorithm:histogram,context:5,linematch:60'
 
-vim.opt.completeopt:append('fuzzy')
+vim.opt.completeopt:append('fuzzy,noselect')
 vim.opt.wildoptions:append('fuzzy')
 
 if vim.fn.exists('syntax_on') ~= 1 then vim.cmd('syntax enable') end
@@ -79,6 +74,10 @@ if vim.o.background == 'dark' then
 else
     vim.cmd([[colorscheme ham_light]])
 end
+
+vim.lsp.config('*', {
+    capabilities = vim.lsp.protocol.make_client_capabilities(),
+})
 
 vim.diagnostic.config({
     float = { source = true },
@@ -100,25 +99,6 @@ vim.diagnostic.config({
         },
     },
 })
-
-vim.diagnostic.handlers.virtual_text = {
-    show = function(ns, bufnr, diagnostics, opts)
-        table.sort(diagnostics, function(diag1, diag2) return diag1.severity > diag2.severity end)
-        return show_handler(ns, bufnr, diagnostics, opts)
-    end,
-    hide = hide_handler,
-}
-
-vim.lsp.util.stylize_markdown = function(bufnr, contents, opts)
-    contents = vim.lsp.util._normalize_markdown(contents, {
-        width = vim.lsp.util._make_floating_popup_size(contents, opts),
-    })
-    vim.bo[bufnr].filetype = 'markdown'
-    vim.treesitter.start(bufnr)
-    vim.api.nvim_buf_set_lines(bufnr, 0, -1, false, contents)
-
-    return contents
-end
 
 vim.lsp.handlers[methods.client_registerCapability] = function(err, res, ctx)
     local client = vim.lsp.get_client_by_id(ctx.client_id)

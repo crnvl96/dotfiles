@@ -26,22 +26,15 @@ set({ 'n', 'i', 'x' }, '<C-s>', '<Esc><Cmd>noh<CR><Cmd>w<CR><Esc>')
 set({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
 set({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true })
 
-set('n', '#', '#zzzv')
-set('n', '*', '*zzzv')
 set('n', '<C-Down>', '<Cmd>resize -5<CR>')
 set('n', '<C-Left>', '<Cmd>vertical resize -20<CR>')
 set('n', '<C-Right>', '<Cmd>vertical resize +20<CR>')
 set('n', '<C-Up>', '<Cmd>resize +5<CR>')
-set('n', '<C-d>', '<C-d>zz')
-set('n', '<C-u>', '<C-u>zz')
+
 set('n', '<C-w>+', '<Cmd>resize +5<CR>')
 set('n', '<C-w>-', '<Cmd>resize -5<CR>')
 set('n', '<C-w><', '<Cmd>vertical resize -20<CR>')
 set('n', '<C-w>>', '<Cmd>vertical resize +20<CR>')
-
--- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-set('n', 'N', "'nN'[v:searchforward].'zzzv'", { expr = true })
-set('n', 'n', "'Nn'[v:searchforward].'zzzv'", { expr = true })
 
 set('x', '<', '<gv')
 set('x', '>', '>gv')

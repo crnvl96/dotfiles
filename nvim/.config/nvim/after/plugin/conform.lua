@@ -1,6 +1,7 @@
 --- Use binaries installed with asdf to feed nvim lsps and formatters
 --- When necessary, use local bin directory for the same purpose
-local asdf = vim.env.HOME .. '/.asdf/shims/'
+-- local asdf = vim.env.HOME .. '/.asdf/shims/'
+local asdf = vim.env.HOME .. '/.asdf/installs/nodejs/22.14.0/bin/'
 local lbin = vim.env.HOME .. '/.local/bin/'
 
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"

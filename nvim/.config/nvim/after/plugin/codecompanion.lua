@@ -1,6 +1,6 @@
 local cmd = vim.api.nvim_create_autocmd
 local set = vim.keymap.set
-local adapter = 'deepseek'
+local adapter = 'anthropic'
 
 require('codecompanion').setup({
     display = {
@@ -60,31 +60,36 @@ require('codecompanion').setup({
     },
 })
 
-Utils.Group('crnvl96-codecompanion-fidget-integration', function(g)
-    local handlers = {}
-    local progress = require('fidget.progress')
+-- Create a global table to track active CodeCompanion requests
+_G.codecompanion_status = {
+    active_requests = {},
+    count = 0,
+}
 
+-- Function to get statusline component
+function _G.codecompanion_statusline()
+    if _G.codecompanion_status.count > 0 then
+        return ' 󱜚  [cc running...]' -- Icon showing CodeCompanion is active
+    else
+        return ''
+    end
+end
+
+Utils.Group('crnvl96-codecompanion-statusline-integration', function(g)
     cmd('User', {
         pattern = 'CodeCompanionRequestStarted',
         group = g,
         callback = function(e)
-            local parts = {}
+            -- Add request to tracking table
+            _G.codecompanion_status.active_requests[e.data.id] = {
+                adapter = e.data.adapter.formatted_name,
+                model = e.data.adapter.model,
+                strategy = e.data.strategy,
+            }
+            _G.codecompanion_status.count = _G.codecompanion_status.count + 1
 
-            table.insert(parts, e.data.adapter.formatted_name)
-
-            if e.data.adapter.model and e.data.adapter.model ~= '' then
-                table.insert(parts, '(' .. e.data.adapter.model .. ')')
-            end
-
-            local handler = progress.handle.create({
-                title = ' Requesting assistance (' .. e.data.strategy .. ')',
-                message = 'In progress...',
-                lsp_client = {
-                    name = table.concat(parts, ' '),
-                },
-            })
-
-            handlers[e.data.id] = handler
+            -- Force statusline refresh
+            vim.cmd('redrawstatus')
         end,
     })
 
@@ -92,23 +97,27 @@ Utils.Group('crnvl96-codecompanion-fidget-integration', function(g)
         pattern = 'CodeCompanionRequestFinished',
         group = g,
         callback = function(e)
-            local handler = handlers[e.data.id]
-            handlers[e.data.id] = nil
+            -- Remove request from tracking table
+            if _G.codecompanion_status.active_requests[e.data.id] then
+                _G.codecompanion_status.active_requests[e.data.id] = nil
+                _G.codecompanion_status.count = _G.codecompanion_status.count - 1
 
-            if handler then
-                if e.data.status == 'success' then
-                    handler.message = 'Completed'
-                elseif e.data.status == 'error' then
-                    handler.message = ' Error'
-                else
-                    handler.message = '󰜺 Cancelled'
-                end
-
-                handler:finish()
+                -- Force statusline refresh
+                vim.cmd('redrawstatus')
             end
         end,
     })
 end)
+
+vim.opt.statusline = table.concat({
+    ' %f', -- File path
+    ' %m%r%h%w', -- File flags (modified, readonly, etc.)
+    '%=', -- Right align the rest
+    '%{%v:lua.codecompanion_statusline()%}', -- CodeCompanion status
+    ' %y', -- File type
+    ' %l:%c ', -- Line and column
+    ' %p%% ', -- Percentage through file
+}, '')
 
 set({ 'n', 'x' }, '<Leader>cc', '<Cmd>CodeCompanionChat Toggle<CR>', { desc = 'Toggle AI chat' })
 set('x', 'ga', ':CodeCompanionChat Add<CR>', { desc = 'Add to AI chat' })
