@@ -20,6 +20,7 @@ alias sv="source .venv/bin/activate"
 alias z="zellij"
 alias oil='~/.config/nvim/static/scripts/oil-ssh.sh'
 alias chr='docker run -v ./chroma-data:/data -p 8000:8000 chromadb/chroma:latest'
+alias cursor='~/Desktop/Cursor-0.47.9-x86_64.AppImage --no-sandbox'
 
 function y() {
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd

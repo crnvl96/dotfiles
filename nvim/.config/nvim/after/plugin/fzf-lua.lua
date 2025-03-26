@@ -9,11 +9,13 @@ end
 
 fzflua.setup({
     winopts = {
-        border = 'none',
+        border = 'single',
         preview = {
-            layout = 'vertical',
-            vertical = 'up:40%',
-            border = 'none',
+            layout = 'flex',
+            flip_columns = 120,
+            vertical = 'up:70%',
+            horizontal = 'right:65%',
+            border = 'single',
         },
     },
     fzf_colors = {
@@ -31,6 +33,10 @@ fzflua.setup({
     keymap = {
         fzf = {
             ['ctrl-q'] = 'select-all+accept',
+            ['ctrl-w'] = 'toggle+down',
+            ['ctrl-e'] = 'toggle+up',
+            ['ctrl-a'] = 'select-all',
+            ['ctrl-o'] = 'toggle-all',
             ['ctrl-u'] = 'half-page-up',
             ['ctrl-d'] = 'half-page-down',
             ['ctrl-x'] = 'jump',

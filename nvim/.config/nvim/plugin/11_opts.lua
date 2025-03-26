@@ -15,6 +15,8 @@ local node_path = '/home/crnvl96/.asdf/installs/nodejs/22.14.0'
 vim.g.node_host_prog = node_path .. '/bin/node'
 vim.env.PATH = node_path .. '/bin:' .. vim.env.PATH
 
+vim.o.background = 'light'
+
 vim.o.autoindent = true
 vim.o.autoread = true
 vim.o.breakindent = true
@@ -72,7 +74,11 @@ if vim.fn.exists('syntax_on') ~= 1 then vim.cmd('syntax enable') end
 vim.cmd('filetype plugin indent on')
 vim.cmd('packadd cfilter')
 
-vim.cmd([[colorscheme ham]])
+if vim.o.background == 'dark' then
+    vim.cmd([[colorscheme ham]])
+else
+    vim.cmd([[colorscheme ham_light]])
+end
 
 vim.diagnostic.config({
     float = { source = true },

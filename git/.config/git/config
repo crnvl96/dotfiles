@@ -12,9 +12,9 @@
 [core]
   editor = $EDITOR
   excludesfile = ~/.config/git/.gitignore_global
-  pager = delta
-[interactive]
-  diffFilter = delta --color-only
+  ; pager = delta
+; [interactive]
+;   diffFilter = delta --color-only
 [init]
   defaultBranch = main
 [diff]
@@ -30,6 +30,6 @@
 [merge]
   conflictstyle = zdiff3
   ; conflictstyle = merge
-[delta]
-  navigate = true
-  dark = true
+; [delta]
+;   navigate = true
+;   dark = true

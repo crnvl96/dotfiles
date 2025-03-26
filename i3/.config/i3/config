@@ -88,7 +88,9 @@ bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcu
 bindsym $mod+Shift+d exec --no-startup-id ~/.config/i3/screen_layout_default.sh
 bindsym $mod+Shift+f exec --no-startup-id ~/.config/i3/screen_layout_hdmi.sh
 bindsym $mod+Shift+p exec --no-startup-id flameshot gui
-bindsym $mod+Shift+a exec --no-startup-id ~/.config/i3/keyboard_layout.sh
+
+bindsym $mod+Shift+i exec --no-startup-id ~/.config/i3/keyboard_layout_us_intl.sh
+bindsym $mod+Shift+u exec --no-startup-id ~/.config/i3/keyboard_layout_us.sh
 
 bindsym $mod+r mode "resize"
 
@@ -104,5 +106,6 @@ mode "resize" {
 }
 
 bar {
-        status_command i3status
+    mode hide
+    hidden_state hide
 }

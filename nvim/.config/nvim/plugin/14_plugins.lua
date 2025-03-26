@@ -8,6 +8,7 @@ add('tpope/vim-sleuth')
 add('tpope/vim-fugitive')
 add('j-hui/fidget.nvim')
 add('nvim-lua/plenary.nvim')
+add('lewis6991/gitsigns.nvim')
 
 add({
     source = 'nvim-treesitter/nvim-treesitter',
@@ -41,7 +42,5 @@ add({
 add({
     source = 'ravitemer/mcphub.nvim',
     hooks = hooks.mcphub,
-    depends = {
-        'nvim-lua/plenary.nvim',
-    },
+    depends = { 'nvim-lua/plenary.nvim' },
 })
