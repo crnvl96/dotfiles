@@ -75,29 +75,12 @@ else
     vim.cmd([[colorscheme ham_light]])
 end
 
-vim.lsp.config('*', {
-    capabilities = vim.lsp.protocol.make_client_capabilities(),
-})
-
 vim.diagnostic.config({
     float = { source = true },
     virtual_text = true,
     update_in_insert = true,
     virtual_lines = false,
-    signs = {
-        text = {
-            [vim.diagnostic.severity.ERROR] = 'E',
-            [vim.diagnostic.severity.WARN] = 'W',
-            [vim.diagnostic.severity.HINT] = 'H',
-            [vim.diagnostic.severity.INFO] = 'I',
-        },
-        numhl = {
-            [vim.diagnostic.severity.WARN] = 'WarningMsg',
-            [vim.diagnostic.severity.ERROR] = 'ErrorMsg',
-            [vim.diagnostic.severity.INFO] = 'DiagnosticInfo',
-            [vim.diagnostic.severity.HINT] = 'DiagnosticHint',
-        },
-    },
+    signs = false,
 })
 
 vim.lsp.handlers[methods.client_registerCapability] = function(err, res, ctx)

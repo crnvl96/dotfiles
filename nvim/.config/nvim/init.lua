@@ -17,6 +17,15 @@ require('mini.deps').setup()
 
 MiniDeps.add({ name = 'mini.nvim' })
 
+-- vim.lsp.config('*', {
+--     capabilities = vim.lsp.protocol.make_client_capabilities(),
+-- })
+
+-- if client:supports_method('textDocument/completion') then
+--     client.server_capabilities.completionProvider.triggerCharacters = vim.split('qwertyuiopasdfghjklzxcvbnm. ', '')
+--     vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+-- end
+
 vim.lsp.enable({
     'basedpyright',
     'biome',

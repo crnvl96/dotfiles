@@ -1,7 +1,9 @@
 --- Use binaries installed with asdf to feed nvim lsps and formatters
 --- When necessary, use local bin directory for the same purpose
 -- local asdf = vim.env.HOME .. '/.asdf/shims/'
-local asdf = vim.env.HOME .. '/.asdf/installs/nodejs/22.14.0/bin/'
+local asdf_node = vim.env.HOME .. '/.asdf/installs/nodejs/22.14.0/bin/'
+local asdf_rust = vim.env.HOME .. '/.asdf/installs/rust/1.84.1/bin/'
+local asdf_go = vim.env.HOME .. '/.asdf/installs/golang/1.23.5/bin/'
 local lbin = vim.env.HOME .. '/.local/bin/'
 
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
@@ -11,12 +13,12 @@ require('conform').setup({
     notify_on_error = true,
     formatters = {
         injected = { ignore_errors = true },
-        stylua = { command = asdf .. 'stylua' },
-        prettierd = { command = asdf .. 'prettierd' },
-        biome = { command = asdf .. 'biome' },
-        yamlfmt = { command = asdf .. 'yamlfmt' },
+        stylua = { command = asdf_rust .. 'stylua' },
+        prettierd = { command = asdf_node .. 'prettierd' },
+        biome = { command = asdf_node .. 'biome' },
+        yamlfmt = { command = asdf_go .. 'yamlfmt' },
         ruff = { command = lbin .. 'ruff' },
-        taplo = { command = asdf .. 'taplo' },
+        taplo = { command = asdf_rust .. 'taplo' },
     },
     formatters_by_ft = {
         ['_'] = { 'trim_whitespace', 'trim_newlines' },

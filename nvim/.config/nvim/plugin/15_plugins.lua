@@ -14,10 +14,11 @@ add({
     hooks = hooks.treesitter,
 })
 
--- add({
---     source = 'Saghen/blink.cmp',
---     hooks = hooks.blink,
--- })
+add({
+    source = 'Saghen/blink.cmp',
+    hooks = hooks.blink,
+    checkout = 'v1.0.0',
+})
 
 add({
     source = 'tpope/vim-rhubarb',
