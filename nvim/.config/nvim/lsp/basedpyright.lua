@@ -1,25 +1,28 @@
-local lbin = vim.env.HOME .. '/.local/bin/'
-
 vim.lsp.config.basedpyright = {
-    cmd = { lbin .. 'basedpyright-langserver', '--stdio' },
-
+    cmd = {
+        LBin .. 'basedpyright-langserver',
+        '--stdio',
+    },
     filetypes = { 'python' },
-
-    root_dir = function(buffer, cb)
-        local file_patterns = {
-            'pyproject.toml',
-        }
-
-        if buffer then
-            local root = vim.fs.root(buffer, file_patterns)
-            if root then return cb(root) end
-        end
-    end,
-
+    root_markers = {
+        'pyproject.toml',
+        'setup.py',
+        'setup.cfg',
+        'requirements.txt',
+        'Pipfile',
+        'pyrightconfig.json',
+        '.git',
+    },
+    capabilities = vim.lsp.protocol.make_client_capabilities(),
     settings = {
         basedpyright = {
             disableOrganizeImports = true,
-            analysis = { autoImportCompletions = true, diagnosticMode = 'openFilesOnly' },
+            analysis = {
+                autoImportCompletions = true,
+                autoSearchPaths = true,
+                useLibraryCodeForTypes = true,
+                diagnosticMode = 'openFilesOnly',
+            },
         },
     },
 }

@@ -1,22 +1,8 @@
 {
   "mcpServers": {
     "fetch": {
-      "args": [
-        "mcp-server-fetch"
-      ],
+      "args": ["mcp-server-fetch"],
       "command": "uvx",
-      "disabled": false
-    },
-    "erickwendel-contributions-mcp": {
-      "args": [
-        "-y",
-        "@smithery/cli@latest",
-        "run",
-        "@ErickWendel/erickwendel-contributions-mcp",
-        "--config",
-        "{}"
-      ],
-      "command": "npx",
       "disabled": false
     },
     "inkdrop": {
@@ -26,10 +12,8 @@
         "INKDROP_LOCAL_USERNAME": "inkdrop"
       },
       "command": "npx",
-      "args": [
-        "-y",
-        "@inkdropapp/mcp-server"
-      ]
+      "args": ["-y", "@inkdropapp/mcp-server"]
     }
   }
 }
+

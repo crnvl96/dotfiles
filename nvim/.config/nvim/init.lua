@@ -17,14 +17,17 @@ require('mini.deps').setup()
 
 MiniDeps.add({ name = 'mini.nvim' })
 
--- vim.lsp.config('*', {
---     capabilities = vim.lsp.protocol.make_client_capabilities(),
--- })
+NodePath = '/home/crnvl96/.asdf/installs/nodejs/22.14.0'
+Methods = vim.lsp.protocol.Methods
+RegisterCapability = vim.lsp.handlers[Methods.client_registerCapability]
+LBin = vim.env.HOME .. '/.local/bin/'
+ASDFNode = vim.env.HOME .. '/.asdf/installs/nodejs/22.14.0/bin/'
+ASDFRust = vim.env.HOME .. '/.asdf/installs/rust/1.84.1/bin/'
+ASDFGo = vim.env.HOME .. '/.asdf/installs/golang/1.23.5/bin/'
+Brew = '/home/linuxbrew/.linuxbrew/bin/'
+Adapter = 'anthropic'
 
--- if client:supports_method('textDocument/completion') then
---     client.server_capabilities.completionProvider.triggerCharacters = vim.split('qwertyuiopasdfghjklzxcvbnm. ', '')
---     vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
--- end
+vim.env.PATH = NodePath .. '/bin:' .. vim.env.PATH
 
 vim.lsp.enable({
     'basedpyright',

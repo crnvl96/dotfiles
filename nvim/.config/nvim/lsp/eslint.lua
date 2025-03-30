@@ -1,28 +1,40 @@
--- local asdf = vim.env.HOME .. '/.asdf/shims/'
-local asdf = vim.env.HOME .. '/.asdf/installs/nodejs/22.14.0/bin/'
-
 vim.lsp.config.eslint = {
     cmd = {
-        asdf .. 'vscode-eslint-language-server',
+        ASDFNode .. 'vscode-eslint-language-server',
         '--stdio',
     },
-
-    filetypes = { 'typescript' },
-
+    filetypes = {
+        'javascript',
+        'javascriptreact',
+        'javascript.jsx',
+        'typescript',
+        'typescriptreact',
+        'typescript.tsx',
+        'vue',
+        'svelte',
+        'astro',
+    },
     root_dir = function(buffer, cb)
         local file_patterns = {
+            '.eslintrc',
             '.eslintrc.js',
+            '.eslintrc.cjs',
+            '.eslintrc.yaml',
+            '.eslintrc.yml',
+            '.eslintrc.json',
+            'eslint.config.js',
             'eslint.config.mjs',
+            'eslint.config.cjs',
+            'eslint.config.ts',
+            'eslint.config.mts',
+            'eslint.config.cts',
         }
-
-        if buffer then
-            local root = vim.fs.root(buffer, file_patterns)
-            if root then cb(root) end
-        end
+        if not buffer then return end
+        local root = vim.fs.root(buffer, file_patterns)
+        if root then cb(root) end
     end,
-
+    capabilities = vim.lsp.protocol.make_client_capabilities(),
     on_init = function(client) client.server_capabilities.completionProvider = false end,
-
     settings = {
         validate = 'on',
         packageManager = nil,

@@ -1,45 +1,4 @@
-_G.Utils = {}
-
-local set = vim.keymap.set
-
-local function swap_mark_case(key)
-    if key:match('%u') then
-        return key:lower()
-    elseif key:match('%l') then
-        return key:upper()
-    else
-        return key
-    end
-end
-
-Utils.Group = function(name, fn) fn(vim.api.nvim_create_augroup(name, { clear = true })) end
-
-Utils.Abbr = function(abbr, cmd)
-    local expand = function() return (vim.fn.getcmdtype() == ':' and vim.fn.getcmdline() == abbr) and cmd or abbr end
-    set('ca', abbr, expand, { expr = true })
-end
-
-Utils.ExpandCallable = function(x, ...)
-    if vim.is_callable(x) then return x(...) end
-    return x
-end
-
-Utils.LoadFile = function(f)
-    local path = vim.fn.stdpath('config') .. '/static/api_keys/' .. f
-    local file = io.open(path, 'r')
-    if file then
-        local key = file:read('*a'):gsub('%s+$', '')
-        file:close()
-        if not key then
-            vim.notify('Missing file: ' .. f, 'ERROR')
-            return nil
-        end
-        return key
-    end
-    return nil
-end
-
-Utils.Build = function(p, cmd)
+Build = function(p, cmd)
     vim.notify('Building ' .. p.name, vim.log.levels.INFO)
 
     local obj = vim.system(cmd, { cwd = p.path }):wait()
@@ -51,36 +10,7 @@ Utils.Build = function(p, cmd)
     end
 end
 
-Utils.MiniDepsHooks = function()
-    return {
-        treesitter = {
-            post_install = function()
-                MiniDeps.later(function() vim.cmd('TSUpdate') end)
-            end,
-            post_checkout = function()
-                MiniDeps.later(function() vim.cmd('TSUpdate') end)
-            end,
-        },
-        blink = {
-            post_install = function(p)
-                MiniDeps.later(function() Utils.Build(p, { 'cargo', 'build', '--release' }) end)
-            end,
-            post_checkout = function(p)
-                MiniDeps.later(function() Utils.Build(p, { 'cargo', 'build', '--release' }) end)
-            end,
-        },
-        mcphub = {
-            post_install = function(p)
-                MiniDeps.later(function() Utils.Build(p, { 'npm', 'install', '-g', 'mcp-hub@latest' }) end)
-            end,
-            post_checkout = function(p)
-                MiniDeps.later(function() Utils.Build(p, { 'npm', 'install', '-g', 'mcp-hub@latest' }) end)
-            end,
-        },
-    }
-end
-
-Utils.ReadFromFile = function(f)
+ReadFromFile = function(f)
     local path = vim.fn.stdpath('config') .. '/static/api_keys/' .. f
     local file = io.open(path, 'r')
 
@@ -97,37 +27,81 @@ Utils.ReadFromFile = function(f)
     return key
 end
 
-Utils.OnAttach = function(client, bufnr)
+OnAttach = function(client, bufnr)
     client.server_capabilities.documentFormattingProvider = false
     client.server_capabilities.documentRangeFormattingProvider = false
 
-    set('n', 'E', '<Cmd>lua vim.diagnostic.open_float()<CR>', { desc = 'Eval', buffer = bufnr })
-    set('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', { desc = 'Eval', buffer = bufnr })
-    set('n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>', { desc = 'Actions', buffer = bufnr })
-    set('n', 'gn', '<Cmd>lua vim.lsp.buf.rename()<CR>', { desc = 'Rename', buffer = bufnr })
+    vim.keymap.set('n', 'E', '<Cmd>lua vim.diagnostic.open_float()<CR>', { desc = 'Eval', buffer = bufnr })
+    vim.keymap.set('n', 'K', '<Cmd>lua vim.lsp.buf.hover()<CR>', { desc = 'Eval', buffer = bufnr })
+    vim.keymap.set('n', 'ga', '<Cmd>lua vim.lsp.buf.code_action()<CR>', { desc = 'Actions', buffer = bufnr })
+    vim.keymap.set('n', 'gn', '<Cmd>lua vim.lsp.buf.rename()<CR>', { desc = 'Rename', buffer = bufnr })
+
+    if client:supports_method('textDocument/completion') then
+        client.server_capabilities.completionProvider.triggerCharacters = vim.split('qwertyuiopasdfghjklzxcvbnm. ', '')
+        vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
+    end
+
+    if client:supports_method('textDocument/foldingRange') then
+        local win = vim.api.nvim_get_current_win()
+        vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
+    end
 end
 
-Utils.Marks = {
-    set_mark_swapped = function()
-        local ok, char = pcall(function() return vim.fn.nr2char(vim.fn.getchar()) end)
-        if not ok or char == '' or char == '\27' then -- ESC or error
-            return
-        end
-        local swapped = swap_mark_case(char)
-        vim.cmd('normal! m' .. swapped)
-    end,
+CodecompanionStatus = {
+    active_requests = {},
+    count = 0,
+}
 
-    goto_mark_swapped_quote = function()
-        local ok, char = pcall(function() return vim.fn.nr2char(vim.fn.getchar()) end)
-        if not ok or char == '' or char == '\27' then return end
-        local swapped = swap_mark_case(char)
-        vim.cmd("normal! '" .. swapped)
-    end,
+function StatuslineDiagnostics()
+    local diagnostics = vim.diagnostic.get(0)
+    local counts = { 0, 0, 0, 0 }
 
-    goto_mark_swapped_backtick = function()
-        local ok, char = pcall(function() return vim.fn.nr2char(vim.fn.getchar()) end)
-        if not ok or char == '' or char == '\27' then return end
-        local swapped = swap_mark_case(char)
-        vim.cmd('normal! `' .. swapped)
-    end,
+    for _, diagnostic in ipairs(diagnostics) do
+        counts[diagnostic.severity] = counts[diagnostic.severity] + 1
+    end
+
+    local icons = { 'E:', 'W:', 'I:', 'H:' }
+    local result = {}
+
+    for i, count in ipairs(counts) do
+        if count > 0 then table.insert(result, icons[i] .. count) end
+    end
+
+    return #result > 0 and table.concat(result, ' ') or ''
+end
+
+function CodeCompanionStatusline()
+    if CodecompanionStatus.count > 0 then
+        return ' 󱜚  [cc running...]' -- Showing CodeCompanion is active
+    else
+        return ''
+    end
+end
+
+CursorPreYank = nil
+
+function YankCmd(cmd)
+    return function()
+        CursorPreYank = vim.api.nvim_win_get_cursor(0)
+        return cmd
+    end
+end
+
+MiniDepsHooks = {
+    treesitter = {
+        post_install = function()
+            MiniDeps.later(function() vim.cmd('TSUpdate') end)
+        end,
+        post_checkout = function()
+            MiniDeps.later(function() vim.cmd('TSUpdate') end)
+        end,
+    },
+    mcphub = {
+        post_install = function(p)
+            MiniDeps.later(function() Build(p, { 'npm', 'install', '-g', 'mcp-hub@latest' }) end)
+        end,
+        post_checkout = function(p)
+            MiniDeps.later(function() Build(p, { 'npm', 'install', '-g', 'mcp-hub@latest' }) end)
+        end,
+    },
 }

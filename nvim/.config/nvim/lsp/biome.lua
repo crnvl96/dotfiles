@@ -1,20 +1,30 @@
--- local asdf = vim.env.HOME .. '/.asdf/shims/'
-local asdf = vim.env.HOME .. '/.asdf/installs/nodejs/22.14.0/bin/'
-
 vim.lsp.config.biome = {
-    cmd = { asdf .. 'biome', 'lsp-proxy' },
-
-    filetypes = { 'typescript' },
-
+    cmd = {
+        ASDFNode .. 'biome',
+        'lsp-proxy',
+    },
+    filetypes = {
+        'astro',
+        'css',
+        'graphql',
+        'javascript',
+        'javascriptreact',
+        'json',
+        'jsonc',
+        'svelte',
+        'typescript',
+        'typescript.tsx',
+        'typescriptreact',
+        'vue',
+    },
     root_dir = function(buffer, cb)
         local file_patterns = {
             'biome.json',
             'biome.jsonc',
         }
-
-        if buffer then
-            local root = vim.fs.root(buffer, file_patterns)
-            if root then cb(root) end
-        end
+        if not buffer then return end
+        local root = vim.fs.root(buffer, file_patterns)
+        if root then cb(root) end
     end,
+    capabilities = vim.lsp.protocol.make_client_capabilities(),
 }

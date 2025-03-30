@@ -1,23 +1,17 @@
-local brew = '/home/linuxbrew/.linuxbrew/bin/'
-
 vim.lsp.config.lua_ls = {
-    cmd = { brew .. 'lua-language-server' },
-
+    cmd = { Brew .. 'lua-language-server' },
     filetypes = { 'lua' },
-
-    single_file_support = true,
-
-    root_dir = function(buffer, cb)
-        local file_patterns = {
-            '.luarc.json',
-        }
-
-        if buffer then
-            local root = vim.fs.root(buffer, file_patterns)
-            if root then return cb(root) end
-        end
-    end,
-
+    root_markers = {
+        '.luarc.json',
+        '.luarc.jsonc',
+        '.luacheckrc',
+        '.stylua.toml',
+        'stylua.toml',
+        'selene.toml',
+        'selene.yml',
+        '.git',
+    },
+    capabilities = vim.lsp.protocol.make_client_capabilities(),
     on_init = function(client)
         client.server_capabilities.semanticTokensProvider = nil
 

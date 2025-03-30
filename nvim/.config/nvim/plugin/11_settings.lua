@@ -1,29 +1,26 @@
-local methods = vim.lsp.protocol.Methods
-local register_capability = vim.lsp.handlers[methods.client_registerCapability]
-
+vim.g.disable_autoformat = false
+vim.g.loaded_netrwPlugin = 1
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
-vim.g.loaded_netrwPlugin = 1
-
-local node_path = '/home/crnvl96/.asdf/installs/nodejs/22.14.0'
-
-vim.g.node_host_prog = node_path .. '/bin/node'
-vim.env.PATH = node_path .. '/bin:' .. vim.env.PATH
-
-vim.o.background = 'light'
+vim.g.node_host_prog = NodePath .. '/bin/node'
 
 vim.o.autoindent = true
 vim.o.autoread = true
+vim.o.background = 'dark'
 vim.o.breakindent = true
+vim.o.clipboard = 'unnamedplus'
 vim.o.cursorline = false
+vim.o.diffopt = 'filler,internal,closeoff,algorithm:histogram,context:5,linematch:60'
 vim.o.expandtab = true
-vim.opt.fillchars:append('eob: ')
+vim.o.foldcolumn = '0'
 vim.o.foldcolumn = '0'
 vim.o.foldenable = true
+vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.o.foldlevel = 99
-vim.o.foldlevel = 99
-vim.o.clipboard = 'unnamedplus'
 vim.o.foldlevelstart = 99
+vim.o.foldmethod = 'expr'
+vim.o.foldtext = ''
+vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
 vim.o.grepprg = 'rg --vimgrep'
 vim.o.ignorecase = true
 vim.o.infercase = true
@@ -60,20 +57,31 @@ vim.o.wildignorecase = true
 vim.o.winborder = 'single'
 vim.o.wrap = false
 vim.o.writebackup = false
-vim.o.diffopt = 'filler,internal,closeoff,algorithm:histogram,context:5,linematch:60'
 
+vim.opt.fillchars:append({ eob = ' ', fold = ' ' })
 vim.opt.completeopt:append('fuzzy,noselect')
 vim.opt.wildoptions:append('fuzzy')
 
-if vim.fn.exists('syntax_on') ~= 1 then vim.cmd('syntax enable') end
-vim.cmd('filetype plugin indent on')
-vim.cmd('packadd cfilter')
+vim.opt.statusline = table.concat({
+    ' %f', -- File path
+    ' %m%r%h%w', -- File flags (modified, readonly, etc.)
+    ' %{%v:lua.StatuslineDiagnostics()%}', -- Diagnostics
+    '%=', -- Right align the rest
+    '%{%v:lua.CodeCompanionStatusline()%}', -- CodeCompanion status
+    ' %y', -- File type
+    ' %l:%c ', -- Line and column
+    ' %p%% ', -- Percentage through file
+}, '')
 
 if vim.o.background == 'dark' then
     vim.cmd([[colorscheme ham]])
 else
     vim.cmd([[colorscheme ham_light]])
 end
+
+if vim.fn.exists('syntax_on') ~= 1 then vim.cmd('syntax enable') end
+vim.cmd('filetype plugin indent on')
+vim.cmd('packadd cfilter')
 
 vim.diagnostic.config({
     float = { source = true },
@@ -83,9 +91,13 @@ vim.diagnostic.config({
     signs = false,
 })
 
-vim.lsp.handlers[methods.client_registerCapability] = function(err, res, ctx)
+vim.lsp.config('*', {
+    capabilities = vim.lsp.protocol.make_client_capabilities(),
+})
+
+vim.lsp.handlers[Methods.client_registerCapability] = function(err, res, ctx)
     local client = vim.lsp.get_client_by_id(ctx.client_id)
     if not client then return end
-    Utils.OnAttach(client, vim.api.nvim_get_current_buf())
-    return register_capability(err, res, ctx)
+    OnAttach(client, vim.api.nvim_get_current_buf())
+    return RegisterCapability(err, res, ctx)
 end

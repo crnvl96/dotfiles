@@ -1,19 +1,25 @@
--- local asdf = vim.env.HOME .. '/.asdf/shims/'
-local asdf = vim.env.HOME .. '/.asdf/installs/nodejs/22.14.0/bin/'
-
 vim.lsp.config.vtsls = {
-    cmd = { asdf .. 'vtsls', '--stdio' },
-
-    filetypes = { 'typescript', 'javascript' },
-
+    cmd = {
+        ASDFNode .. 'vtsls',
+        '--stdio',
+    },
+    filetypes = {
+        'javascript',
+        'javascriptreact',
+        'javascript.jsx',
+        'typescript',
+        'typescriptreact',
+        'typescript.tsx',
+    },
     root_dir = function(buffer, cb)
         local file_patterns = {
+            'tsconfig.json',
             'package.json',
+            'jsconfig.json',
+            '.git',
         }
-
-        if buffer then
-            local root = vim.fs.root(buffer, file_patterns)
-            if root then return cb(root) end
-        end
+        if not buffer then return end
+        local root = vim.fs.root(buffer, file_patterns)
+        if root then cb(root) end
     end,
 }
