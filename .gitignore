@@ -1,6 +1,7 @@
-anthropic
-huggingface
-deepseek
+.anthropic*
+.huggingface*
+.deepseek*
+.gemini*
 
 .env
 .aider*

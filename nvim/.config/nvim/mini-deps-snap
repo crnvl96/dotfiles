@@ -1,14 +1,16 @@
 return {
-  ["codecompanion.nvim"] = "7ffbc5a8f7ba349cea0c3f20bac6c404d4130a4a",
+  ["blink.cmp"] = "ea29ab1620de5e61284abc01ae39e56df5a5fe53",
+  ["codecompanion.nvim"] = "ef9cdc6f7a04d99b74988af70d0e724ec32cf236",
   ["conform.nvim"] = "b1a75324ddf96b7bb84963a297b1ed334db087c0",
   ["fzf-lua"] = "6488ada2f376e47789391dc353b6d91a3f9de6f6",
-  ["gitsigns.nvim"] = "3c76f7fabac723aa682365ef782f88a83ccdb4ac",
-  ["mcphub.nvim"] = "c677898f49a56750a8f62c582f2060f1448326c2",
-  ["mini.nvim"] = "687fa868d869078194c02065628712982d971fd6",
-  ["nvim-treesitter"] = "30654ee72a69e7c76a54b66d748dae088429e863",
+  ["gitsigns.nvim"] = "17ab794b6fce6fce768430ebc925347e349e1d60",
+  ["mcphub.nvim"] = "339a8c338dca121126d363d483a0d806b92952ba",
+  ["mini.nvim"] = "2e38ed16c2ced64bcd576986ccad4b18e2006e18",
+  ["nvim-treesitter"] = "523a9e148919f58eb5a013f76787e57696e00c93",
   ["oil.nvim"] = "302bbaceeafc690e6419e0c8296e804d60cb9446",
   ["plenary.nvim"] = "857c5ac632080dba10aae49dba902ce3abf91b35",
   ["vim-fugitive"] = "4a745ea72fa93bb15dd077109afbb3d1809383f2",
   ["vim-rhubarb"] = "386daa2e9d98e23e27ad089afcbe5c5a903e488d",
-  ["vim-sleuth"] = "be69bff86754b1aa5adcbb527d7fcd1635a84080"
+  ["vim-sleuth"] = "be69bff86754b1aa5adcbb527d7fcd1635a84080",
+  vimtex = "a531f6bf9ce61172e4ea8eea2ecbf59fd08c232a"
 }

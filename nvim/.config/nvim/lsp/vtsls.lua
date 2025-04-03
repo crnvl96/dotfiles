@@ -1,8 +1,5 @@
 vim.lsp.config.vtsls = {
-    cmd = {
-        ASDFNode .. 'vtsls',
-        '--stdio',
-    },
+    cmd = { ASDFNode .. 'vtsls', '--stdio' },
     filetypes = {
         'javascript',
         'javascriptreact',
