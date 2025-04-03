@@ -11,7 +11,6 @@ vim.lsp.config.lua_ls = {
         'selene.yml',
         '.git',
     },
-    capabilities = vim.lsp.protocol.make_client_capabilities(),
     on_init = function(client)
         client.server_capabilities.semanticTokensProvider = nil
 

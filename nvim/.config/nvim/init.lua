@@ -25,7 +25,8 @@ ASDFNode = vim.env.HOME .. '/.asdf/installs/nodejs/22.14.0/bin/'
 ASDFRust = vim.env.HOME .. '/.asdf/installs/rust/1.84.1/bin/'
 ASDFGo = vim.env.HOME .. '/.asdf/installs/golang/1.23.5/bin/'
 Brew = '/home/linuxbrew/.linuxbrew/bin/'
-Adapter = 'anthropic'
+
+Adapter = 'gemini' -- huggingface, anthropic, gemini, deepseek
 
 vim.env.PATH = NodePath .. '/bin:' .. vim.env.PATH
 

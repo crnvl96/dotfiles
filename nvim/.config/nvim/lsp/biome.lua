@@ -26,5 +26,4 @@ vim.lsp.config.biome = {
         local root = vim.fs.root(buffer, file_patterns)
         if root then cb(root) end
     end,
-    capabilities = vim.lsp.protocol.make_client_capabilities(),
 }

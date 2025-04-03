@@ -13,7 +13,6 @@ vim.lsp.config.basedpyright = {
         'pyrightconfig.json',
         '.git',
     },
-    capabilities = vim.lsp.protocol.make_client_capabilities(),
     settings = {
         basedpyright = {
             disableOrganizeImports = true,

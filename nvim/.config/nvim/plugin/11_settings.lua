@@ -21,7 +21,8 @@ vim.o.foldlevelstart = 99
 vim.o.foldmethod = 'expr'
 vim.o.foldtext = ''
 vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-vim.o.grepprg = 'rg --vimgrep'
+vim.o.grepprg = 'rg --vimgrep --smart-case'
+vim.o.makeprg = 'make'
 vim.o.ignorecase = true
 vim.o.infercase = true
 vim.o.laststatus = 2
@@ -89,10 +90,6 @@ vim.diagnostic.config({
     update_in_insert = true,
     virtual_lines = false,
     signs = false,
-})
-
-vim.lsp.config('*', {
-    capabilities = vim.lsp.protocol.make_client_capabilities(),
 })
 
 vim.lsp.handlers[Methods.client_registerCapability] = function(err, res, ctx)

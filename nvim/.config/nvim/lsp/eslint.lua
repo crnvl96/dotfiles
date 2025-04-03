@@ -33,7 +33,6 @@ vim.lsp.config.eslint = {
         local root = vim.fs.root(buffer, file_patterns)
         if root then cb(root) end
     end,
-    capabilities = vim.lsp.protocol.make_client_capabilities(),
     on_init = function(client) client.server_capabilities.completionProvider = false end,
     settings = {
         validate = 'on',
