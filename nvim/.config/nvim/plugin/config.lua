@@ -222,8 +222,10 @@ vim.o.wildignorecase = true
 vim.o.winborder = 'single'
 vim.o.wrap = false
 vim.o.writebackup = false
+vim.o.list = false
 
 vim.opt.fillchars:append({ eob = '~', fold = '.' })
+vim.o.listchars = table.concat({ 'extends:…', 'nbsp:␣', 'precedes:…', 'tab:  ' }, ',')
 vim.opt.completeopt:append('fuzzy,noselect')
 vim.opt.wildoptions:append('fuzzy')
 
