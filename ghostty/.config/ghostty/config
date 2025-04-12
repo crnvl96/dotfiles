@@ -1,6 +1,6 @@
 theme = catppuccin-latte
 
-font-family = Berkeley Mono
+font-family = Go Mono
 font-size = 13
 adjust-cell-width = -5%
 adjust-cell-height = 20%
