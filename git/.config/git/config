@@ -1,0 +1,28 @@
+[github]
+  user = crnvl96
+[gpg]
+  format = ssh
+[user]
+  name = "Adran Carnavale"
+  email = adran.carnavale@hey.com
+  signingkey = ~/.ssh/id_ed25519.pub
+[commit]
+  verbose = true
+  gpgsign = true
+[core]
+  editor = $EDITOR
+  excludesfile = ~/.config/git/.gitignore_global
+[init]
+  defaultBranch = main
+[diff]
+  algorithm = patience
+  compactionHeuristic = true
+[fetch]
+  prune = true
+  all = true
+[pull]
+  rebase = true
+[push]
+  autoSetupRemote = true
+[merge]
+  conflictstyle = zdiff3

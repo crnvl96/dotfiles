@@ -1,0 +1,41 @@
+[language-server.ruff]
+command = "/home/crnvl96/.local/bin/ruff"
+args = ["server"]
+
+[language-server.ruff.config.settings]
+logLevel = "debug"
+lineLength = 88
+
+
+[language-server.basedpyright]
+command = "/home/crnvl96/.local/bin/basedpyright-langserver"
+args = ["--stdio"]
+
+[language-server.basedpyright.config]
+basedpyright.analysis.diagnosticMode = "openFilesOnly"
+basedpyright.analysis.autoImportCompletions = true
+basedpyright.disableOrganizeImports = true
+
+
+[[language]]
+name = "toml"
+auto-format = true
+formatter.command = '/home/crnvl96/.asdf/installs/rust/1.84.1/bin/taplo'
+formatter.args = ["format", "-"]
+
+[[language]]
+name = "python"
+language-servers = ["ruff", "basedpyright"]
+auto-format = true
+
+[[language]]
+name = "lua"
+auto-format = true
+formatter.command = "/home/crnvl96/.asdf/installs/rust/1.84.1/bin/stylua"
+formatter.args = [
+  "--search-parent-directories",
+  "--respect-ignores",
+  "--stdin-filepath",
+  "$FILENAME",
+  "-",
+]
