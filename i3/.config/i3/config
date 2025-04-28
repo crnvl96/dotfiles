@@ -1,0 +1,117 @@
+font pango:monospace 11
+
+exec --no-startup-id dex --autostart --environment i3
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id nm-applet
+exec --no-startup-id xset s off
+exec --no-startup-id xset -dpms
+exec --no-startup-id xset s noblank
+
+set $up k
+set $down j
+set $left h
+set $right l
+set $mod Mod4
+
+floating_modifier $mod
+tiling_drag modifier titlebar
+
+for_window [class="^.*"] border pixel 2
+
+# Colors for windows        border    background  text     indicator  child_border
+client.focused              #9db89c   #9db89c     #0a0a0c  #9db89c    #9db89c
+client.focused_inactive     #555873   #555873     #9c9eb4  #555873    #555873
+client.unfocused            #31323c   #31323c     #9c9eb4  #31323c    #31323c
+client.urgent               #e77f88   #e77f88     #0a0a0c  #e77f88    #e77f88
+client.placeholder          #1e2122   #1e2122     #9c9eb4  #1e2122    #1e2122
+
+bindsym $mod+Return exec kitty
+bindsym $mod+q kill
+bindsym $mod+p exec --no-startup-id i3-dmenu-desktop
+
+# change focus
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# move focused window
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+bindsym $mod+s split h
+bindsym $mod+v split v
+
+bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+bindsym $mod+a focus parent
+bindsym $mod+d focus child
+
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+
+# switch to workspace
+bindsym $mod+1 workspace number $ws1
+bindsym $mod+2 workspace number $ws2
+bindsym $mod+3 workspace number $ws3
+bindsym $mod+4 workspace number $ws4
+bindsym $mod+5 workspace number $ws5
+bindsym $mod+6 workspace number $ws6
+bindsym $mod+7 workspace number $ws7
+bindsym $mod+8 workspace number $ws8
+bindsym $mod+9 workspace number $ws9
+bindsym $mod+0 workspace number $ws10
+
+# move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+r restart
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+d exec --no-startup-id ~/.config/i3/screen_layout_default.sh
+bindsym $mod+Shift+f exec --no-startup-id ~/.config/i3/screen_layout_hdmi.sh
+bindsym $mod+Shift+p exec --no-startup-id flameshot gui
+
+bindsym $mod+Shift+i exec --no-startup-id ~/.config/i3/keyboard_layout_us_intl.sh
+bindsym $mod+Shift+u exec --no-startup-id ~/.config/i3/keyboard_layout_us.sh
+
+bindsym $mod+r mode "resize"
+
+mode "resize" {
+        bindsym $left       resize shrink width 10 px or 10 ppt
+        bindsym $down       resize grow height 10 px or 10 ppt
+        bindsym $up         resize shrink height 10 px or 10 ppt
+        bindsym $right      resize grow width 10 px or 10 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+        bindsym $mod+r mode "default"
+}
+
+# bar {
+#     mode hide
+#     hidden_state hide
+# }
+
+exec --no-startup-id picom
+exec --no-startup-id feh --bg-fill ~/.config/i3/road.jpg
