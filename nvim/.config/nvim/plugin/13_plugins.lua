@@ -1,4 +1,14 @@
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
+now(function()
+    add('metalelf0/black-metal-theme-neovim')
+
+    require('black-metal').setup({
+        -- Can be one of: bathory | burzum | dark-funeral | darkthrone | emperor | gorgoroth | immortal | impaled-nazarene | khold | marduk | mayhem | nile | taake | venom
+        theme = 'bathory',
+    })
+
+    require('black-metal').load()
+end)
 
 now(function()
     vim.lsp.enable({

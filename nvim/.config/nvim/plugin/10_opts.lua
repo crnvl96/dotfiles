@@ -5,7 +5,6 @@ vim.env.PATH = default_nodejs .. ':' .. vim.env.PATH -- Update neovim path
 if vim.fn.exists('syntax_on') ~= 1 then vim.cmd('syntax enable') end -- Syntax highlight
 vim.cmd('filetype plugin indent on') -- Filetype detection; Filetype plugins; Indentation scripts
 vim.cmd('packadd cfilter') -- Allow iltering the QF list
-vim.cmd('colorscheme ham') -- Colorscheme
 
 vim.o.fillchars = table.concat({
     'diff:/', -- git diff
