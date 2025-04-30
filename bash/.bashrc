@@ -19,6 +19,7 @@ export PATH="$HOME/.local/share/mise/shims:$PATH"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
+alias aider="aider --env-file ~/.config/nvim/.env"
 alias ls="eza -l"
 alias la="eza -lA"
 alias lzd="lazydocker"
