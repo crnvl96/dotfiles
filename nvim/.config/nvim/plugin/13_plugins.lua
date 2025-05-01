@@ -1,18 +1,15 @@
 local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
+
+now(function() add({ name = 'mini.nvim' }) end)
+
 now(function()
     add('metalelf0/black-metal-theme-neovim')
-
-    require('black-metal').setup({
-        -- Can be one of: bathory | burzum | dark-funeral | darkthrone | emperor | gorgoroth | immortal | impaled-nazarene | khold | marduk | mayhem | nile | taake | venom
-        theme = 'bathory',
-    })
-
+    require('black-metal').setup({ theme = 'bathory' })
     require('black-metal').load()
 end)
 
 now(function()
     vim.lsp.enable({
-        -- 'efm',
         'eslint',
         'vtsls',
         'ruff',
@@ -20,32 +17,20 @@ now(function()
         'lua_ls',
         'ruby_lsp',
     })
-end)
 
-now(function() add({ name = 'mini.nvim' }) end)
-now(function() add('nvim-lua/plenary.nvim') end)
-now(function() add('neovim/nvim-lspconfig') end)
-
-later(function() add('mbbill/undotree') end)
-
-later(function()
+    add('nvim-lua/plenary.nvim')
+    add('nvim-neotest/nvim-nio')
     add('tpope/vim-dadbod')
     add('tpope/vim-fugitive')
     add('tpope/vim-rhubarb')
     add('tpope/vim-sleuth')
-end)
-
-later(function()
-    add('lervag/vimtex')
-    vim.g.vimtex_view_method = 'zathura'
+    add('neovim/nvim-lspconfig')
+    add('mbbill/undotree')
 end)
 
 now(function()
     add('mfussenegger/nvim-dap')
-    add('nvim-neotest/nvim-nio')
     add('rcarriga/nvim-dap-ui')
-
-    -- RUBY_DEBUG_HOST=127.0.0.1 RUBY_DEBUG_PORT=38698 rdbg -O -c -- bin/rails server
     add('suketa/nvim-dap-ruby')
 
     local dap, du, dr = require('dap'), require('dapui'), require('dap-ruby')
@@ -63,7 +48,6 @@ now(function()
 
     set({ 'n', 'v' }, '<leader>de', du.eval)
     set('n', '<leader>du', du.toggle)
-
     set('n', '<leader>db', dap.toggle_breakpoint)
     set('n', '<leader>dc', dap.continue)
     set('n', '<leader>dt', dap.terminate)
