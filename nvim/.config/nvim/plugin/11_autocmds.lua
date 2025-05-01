@@ -36,40 +36,13 @@ local function on_attach(client, bufnr)
         set('<C-n>', function() feedkeys('<Tab>', 't') end, {}, 'c')
         set('<C-p>', function() feedkeys('<S-Tab>', 't') end, {}, 'c')
         set('<C-u>', '<C-x><C-n>', {}, 'i')
-        set(
-            '<C-Space>',
-            function() return pumvisible() and '<C-e>' or vim.lsp.completion.get() end,
-            { expr = true },
-            'i'
-        )
-        set(
-            '<C-n>',
-            function() return pumvisible() and feedkeys('<C-n>') or vim.lsp.completion.get() end,
-            { expr = true },
-            'i'
-        )
-        set(
-            '<C-p>',
-            function() return pumvisible() and feedkeys('<C-p>') or vim.lsp.completion.get() end,
-            { expr = true },
-            'i'
-        )
-
-        set('<Tab>', function()
-            if pumvisible() then
-                feedkeys('<C-n>')
-            else
-                feedkeys('<Tab>')
-            end
-        end, {}, { 'i', 's' })
-
-        set('<S-Tab>', function()
-            if pumvisible() then
-                feedkeys('<C-p>')
-            else
-                feedkeys('<S-Tab>')
-            end
-        end, {}, { 'i', 's' })
+        -- stylua: ignore start
+        set('<C-Space>', function() return pumvisible() and '<C-e>' or vim.lsp.completion.get() end, { expr = true }, 'i')
+        set('<C-n>', function() return pumvisible() and feedkeys('<C-n>') or vim.lsp.completion.get() end, { expr = true }, 'i')
+        set('<C-p>', function() return pumvisible() and feedkeys('<C-p>') or vim.lsp.completion.get() end, { expr = true }, 'i')
+        set('<Tab>', function() if pumvisible() then feedkeys('<C-n>') else feedkeys('<Tab>') end end, {}, { 'i', 's' })
+        set('<S-Tab>', function() if pumvisible() then feedkeys('<C-p>') else feedkeys('<S-Tab>') end end, {}, { 'i', 's' })
+        -- stylua: ignore end
 
         vim.opt.completeopt:append('fuzzy,noselect,menu,menuone,noinsert')
         vim.opt.wildoptions:append('fuzzy')

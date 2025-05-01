@@ -28,31 +28,6 @@ now(function()
     add('mbbill/undotree')
 end)
 
-now(function()
-    add('mfussenegger/nvim-dap')
-    add('rcarriga/nvim-dap-ui')
-    add('suketa/nvim-dap-ruby')
-
-    local dap, du, dr = require('dap'), require('dapui'), require('dap-ruby')
-    local b = dap.listeners.before
-
-    du.setup()
-    dr.setup()
-
-    b.attach.dapui_config = du.open
-    b.launch.dapui_config = du.open
-    b.event_terminated.dapui_config = du.close
-    b.event_exited.dapui_config = du.close
-
-    local set = vim.keymap.set
-
-    set({ 'n', 'v' }, '<leader>de', du.eval)
-    set('n', '<leader>du', du.toggle)
-    set('n', '<leader>db', dap.toggle_breakpoint)
-    set('n', '<leader>dc', dap.continue)
-    set('n', '<leader>dt', dap.terminate)
-end)
-
 later(function()
     add('nvim-treesitter/nvim-treesitter')
 
@@ -83,6 +58,31 @@ later(function()
             additional_vim_regex_highlighting = false,
         },
     })
+end)
+
+now(function()
+    add('mfussenegger/nvim-dap')
+    add('rcarriga/nvim-dap-ui')
+    add('suketa/nvim-dap-ruby')
+
+    local dap, du, dr = require('dap'), require('dapui'), require('dap-ruby')
+    local b = dap.listeners.before
+
+    du.setup()
+    dr.setup()
+
+    b.attach.dapui_config = du.open
+    b.launch.dapui_config = du.open
+    b.event_terminated.dapui_config = du.close
+    b.event_exited.dapui_config = du.close
+
+    local set = vim.keymap.set
+
+    set({ 'n', 'v' }, '<leader>de', du.eval)
+    set('n', '<leader>du', du.toggle)
+    set('n', '<leader>db', dap.toggle_breakpoint)
+    set('n', '<leader>dc', dap.continue)
+    set('n', '<leader>dt', dap.terminate)
 end)
 
 later(function()
