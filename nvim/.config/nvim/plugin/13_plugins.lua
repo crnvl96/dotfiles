@@ -29,6 +29,7 @@ now(function() add('neovim/nvim-lspconfig') end)
 later(function() add('mbbill/undotree') end)
 
 later(function()
+    add('tpope/vim-dadbod')
     add('tpope/vim-fugitive')
     add('tpope/vim-rhubarb')
     add('tpope/vim-sleuth')
