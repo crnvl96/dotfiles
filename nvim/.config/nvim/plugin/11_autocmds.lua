@@ -25,26 +25,35 @@ local function on_attach(client, bufnr)
     set('ge', vim.diagnostic.setqflist)
     set('gs', vim.lsp.buf.document_symbol)
     set('gS', vim.lsp.buf.workspace_symbol)
-    -- set('g=', vim.lsp.buf.format)
 
-
-    -- stylua: ignore
     if client:supports_method('textDocument/completion') then
         local trigger = client.server_capabilities.completionProvider
         trigger.triggerCharacters = vim.split('abcdefghijklmnopqrstuvwxyz:.', '')
 
         vim.lsp.completion.enable(true, client.id, bufnr, { autotrigger = true })
 
-
         set('<CR>', function() return pumvisible() and '<C-y>' or '<cr>' end, { expr = true }, 'i')
         set('<C-n>', function() feedkeys('<Tab>', 't') end, {}, 'c')
         set('<C-p>', function() feedkeys('<S-Tab>', 't') end, {}, 'c')
         set('<C-u>', '<C-x><C-n>', {}, 'i')
-        set('<C-Space>', function() return pumvisible() and '<C-e>' or vim.lsp.completion.get() end, { expr = true }, 'i')
-        set('<C-n>', function() return pumvisible() and feedkeys('<C-n>') or vim.lsp.completion.get() end, { expr = true },
-            'i')
-        set('<C-p>', function() return pumvisible() and feedkeys('<C-p>') or vim.lsp.completion.get() end, { expr = true },
-            'i')
+        set(
+            '<C-Space>',
+            function() return pumvisible() and '<C-e>' or vim.lsp.completion.get() end,
+            { expr = true },
+            'i'
+        )
+        set(
+            '<C-n>',
+            function() return pumvisible() and feedkeys('<C-n>') or vim.lsp.completion.get() end,
+            { expr = true },
+            'i'
+        )
+        set(
+            '<C-p>',
+            function() return pumvisible() and feedkeys('<C-p>') or vim.lsp.completion.get() end,
+            { expr = true },
+            'i'
+        )
 
         set('<Tab>', function()
             if pumvisible() then
@@ -73,17 +82,15 @@ local function on_attach(client, bufnr)
     end
 end
 
--- Handle dynamic capabilities of lsp servers
 local signature = vim.lsp.protocol.Methods.client_registerCapability
-local register_capability = vim.lsp.handlers[signature] -- Store the method's original signature here
+local register_capability = vim.lsp.handlers[signature]
 vim.lsp.handlers[vim.lsp.protocol.Methods.client_registerCapability] = function(err, res, ctx)
     local client = vim.lsp.get_client_by_id(ctx.client_id)
     if not client then return end
-    on_attach(client, vim.api.nvim_get_current_buf()) -- Call the default `on_attach` function
-    return register_capability(err, res, ctx) -- Call the original method's signature
+    on_attach(client, vim.api.nvim_get_current_buf())
+    return register_capability(err, res, ctx)
 end
 
--- Event that handles LSP Attach
 vim.api.nvim_create_autocmd('LspAttach', {
     group = vim.api.nvim_create_augroup('crnvl96-on-lsp-attach', {}),
     callback = function(args)
@@ -96,7 +103,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.api.nvim_create_autocmd('BufReadPost', {
     group = vim.api.nvim_create_augroup('crnvl96-restore-cursor', {}),
     callback = function(e)
-        -- Restore cursor position when enteting a buffer
         pcall(vim.api.nvim_win_set_cursor, vim.fn.bufwinid(e.buf), vim.api.nvim_buf_get_mark(e.buf, [["]]))
     end,
 })
