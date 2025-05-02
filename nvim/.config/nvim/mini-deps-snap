@@ -11,7 +11,6 @@ return {
   ["nvim-treesitter"] = "94ea4f436d2b59c80f02e293466c374584f03b8c",
   ["plenary.nvim"] = "857c5ac632080dba10aae49dba902ce3abf91b35",
   undotree = "b951b87b46c34356d44aa71886aecf9dd7f5788a",
-  ["vim-dadbod"] = "fa31d0ffeebaa59cf97a81e7f92194cced54a13f",
   ["vim-fugitive"] = "4a745ea72fa93bb15dd077109afbb3d1809383f2",
   ["vim-rhubarb"] = "386daa2e9d98e23e27ad089afcbe5c5a903e488d",
   ["vim-sleuth"] = "be69bff86754b1aa5adcbb527d7fcd1635a84080"

@@ -20,7 +20,6 @@ now(function()
 
     add('nvim-lua/plenary.nvim')
     add('nvim-neotest/nvim-nio')
-    add('tpope/vim-dadbod')
     add('tpope/vim-fugitive')
     add('tpope/vim-rhubarb')
     add('tpope/vim-sleuth')
