@@ -19,12 +19,20 @@ now(function()
     })
 
     add('nvim-lua/plenary.nvim')
-    add('nvim-neotest/nvim-nio')
+
+    add('tpope/vim-dadbod')
+    add('kristijanhusak/vim-dadbod-ui')
     add('tpope/vim-fugitive')
     add('tpope/vim-rhubarb')
     add('tpope/vim-sleuth')
     add('neovim/nvim-lspconfig')
     add('mbbill/undotree')
+    add('christoomey/vim-tmux-navigator')
+
+    vim.keymap.set('n', '<C-h>', '<Cmd>TmuxNavigateLeft<CR>')
+    vim.keymap.set('n', '<C-j>', '<Cmd>TmuxNavigateDown<CR>')
+    vim.keymap.set('n', '<C-k>', '<Cmd>TmuxNavigateUp<CR>')
+    vim.keymap.set('n', '<C-l>', '<Cmd>TmuxNavigateRight<CR>')
 end)
 
 later(function()
@@ -61,27 +69,28 @@ end)
 
 now(function()
     add('mfussenegger/nvim-dap')
-    add('rcarriga/nvim-dap-ui')
     add('suketa/nvim-dap-ruby')
 
-    local dap, du, dr = require('dap'), require('dapui'), require('dap-ruby')
-    local b = dap.listeners.before
+    require('dap-ruby').setup()
 
-    du.setup()
-    dr.setup()
+    vim.keymap.set('n', '<leader>db', require('dap').toggle_breakpoint)
+    vim.keymap.set('n', '<leader>dc', require('dap').continue)
+    vim.keymap.set('n', '<leader>dt', require('dap').terminate)
+    vim.keymap.set('n', '<Leader>dr', require('dap').repl.toggle)
 
-    b.attach.dapui_config = du.open
-    b.launch.dapui_config = du.open
-    b.event_terminated.dapui_config = du.close
-    b.event_exited.dapui_config = du.close
+    vim.keymap.set({ 'n', 'v' }, '<Leader>dh', require('dap.ui.widgets').hover)
 
-    local set = vim.keymap.set
+    vim.keymap.set('n', '<Leader>df', function()
+        local widgets = require('dap.ui.widgets')
+        local my_sidebar = widgets.sidebar(widgets.frames)
+        my_sidebar.open()
+    end)
 
-    set({ 'n', 'v' }, '<leader>de', du.eval)
-    set('n', '<leader>du', du.toggle)
-    set('n', '<leader>db', dap.toggle_breakpoint)
-    set('n', '<leader>dc', dap.continue)
-    set('n', '<leader>dt', dap.terminate)
+    vim.keymap.set('n', '<Leader>ds', function()
+        local widgets = require('dap.ui.widgets')
+        local my_sidebar = widgets.sidebar(widgets.scopes)
+        my_sidebar.open()
+    end)
 end)
 
 later(function()
@@ -152,8 +161,9 @@ later(function()
             markdown = { 'prettierd', 'injected' },
             python = { 'ruff_fix', 'ruff_organize_imports', 'ruff_format' },
             ruby = { 'rubocop' },
-            eruby = { 'erb_format' },
+            eruby = { 'rubocop' },
             typescript = { 'prettierd' },
+            javascript = { 'prettierd' },
             typescriptreact = { 'prettierd' },
         },
         format_on_save = function()
