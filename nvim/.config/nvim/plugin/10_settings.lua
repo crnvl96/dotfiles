@@ -40,7 +40,6 @@ vim.opt.diffopt = {
     'inline:char', -- also accept inline:word here
 }
 
-vim.keymap.set('n', '-', '<Cmd>Explore<CR>')
 vim.keymap.set('x', 'p', 'P')
 vim.keymap.set('x', 'Y', 'yg_')
 vim.keymap.set({ 'n', 'x', 'o' }, '<Leader>p', '"+p')
