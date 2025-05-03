@@ -1,3 +1,5 @@
+local methods = vim.lsp.protocol.Methods
+
 local function on_attach(client, bufnr)
     vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
@@ -25,8 +27,19 @@ local function on_attach(client, bufnr)
     set('ge', vim.diagnostic.setqflist)
     set('gs', vim.lsp.buf.document_symbol)
     set('gS', vim.lsp.buf.workspace_symbol)
+    set('<C-k>', vim.lsp.buf.signature_help, {}, 'i')
 
-    if client:supports_method('textDocument/completion') then
+    if client:supports_method(methods.textDocument_codeLens) then
+        set('<Leader>cc', vim.lsp.codelens.run)
+
+        -- vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+        --     group = vim.api.nvim_create_augroup('crnvl96-on-lsp-attach', {}),
+        --     buffer = bufnr,
+        --     callback = function(e) vim.lsp.codelens.refresh({ bufnr = e.buf }) end,
+        -- })
+    end
+
+    if client:supports_method(methods.textDocument_completion) then
         local trigger = client.server_capabilities.completionProvider
         trigger.triggerCharacters = vim.split('abcdefghijklmnopqrstuvwxyz:.', '')
 
@@ -48,7 +61,9 @@ local function on_attach(client, bufnr)
         vim.opt.wildoptions:append('fuzzy')
     end
 
-    if client:supports_method('textDocument/foldingRange') then
+    if client:supports_method(methods.textDocument_documentColor) then vim.lsp.document_color.enable(true, bufnr) end
+
+    if client:supports_method(methods.textDocument_foldingRange) then
         vim.wo[vim.api.nvim_get_current_win()][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
     else
         vim.wo[vim.api.nvim_get_current_win()][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
@@ -70,12 +85,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
         local client = vim.lsp.get_client_by_id(args.data.client_id)
         if not client then return end
         on_attach(client, args.buf)
-    end,
-})
-
-vim.api.nvim_create_autocmd('BufReadPost', {
-    group = vim.api.nvim_create_augroup('crnvl96-restore-cursor', {}),
-    callback = function(e)
-        pcall(vim.api.nvim_win_set_cursor, vim.fn.bufwinid(e.buf), vim.api.nvim_buf_get_mark(e.buf, [["]]))
     end,
 })

@@ -1,42 +1,9 @@
-local add, now, later = MiniDeps.add, MiniDeps.now, MiniDeps.later
+MiniDeps.now(function() MiniDeps.add({ name = 'mini.nvim' }) end)
+MiniDeps.now(function() MiniDeps.add('nvim-lua/plenary.nvim') end)
+MiniDeps.now(function() MiniDeps.add('neovim/nvim-lspconfig') end)
 
-now(function() add({ name = 'mini.nvim' }) end)
-
-now(function()
-    add('metalelf0/black-metal-theme-neovim')
-    require('black-metal').setup({ theme = 'bathory' })
-    require('black-metal').load()
-end)
-
-now(function()
-    vim.lsp.enable({
-        'eslint',
-        'vtsls',
-        'ruff',
-        'basedpyright',
-        'lua_ls',
-        'ruby_lsp',
-    })
-
-    add('nvim-lua/plenary.nvim')
-
-    add('tpope/vim-dadbod')
-    add('kristijanhusak/vim-dadbod-ui')
-    add('tpope/vim-fugitive')
-    add('tpope/vim-rhubarb')
-    add('tpope/vim-sleuth')
-    add('neovim/nvim-lspconfig')
-    add('mbbill/undotree')
-    add('christoomey/vim-tmux-navigator')
-
-    vim.keymap.set('n', '<C-h>', '<Cmd>TmuxNavigateLeft<CR>')
-    vim.keymap.set('n', '<C-j>', '<Cmd>TmuxNavigateDown<CR>')
-    vim.keymap.set('n', '<C-k>', '<Cmd>TmuxNavigateUp<CR>')
-    vim.keymap.set('n', '<C-l>', '<Cmd>TmuxNavigateRight<CR>')
-end)
-
-later(function()
-    add('nvim-treesitter/nvim-treesitter')
+MiniDeps.now(function()
+    MiniDeps.add('nvim-treesitter/nvim-treesitter')
 
     require('nvim-treesitter.configs').setup({
         ensure_installed = {
@@ -55,6 +22,7 @@ later(function()
         },
         sync_install = false,
         ignore_install = {},
+        indent = { enable = true },
         highlight = {
             enable = true,
             disable = function(_, buf)
@@ -67,9 +35,24 @@ later(function()
     })
 end)
 
-now(function()
-    add('mfussenegger/nvim-dap')
-    add('suketa/nvim-dap-ruby')
+MiniDeps.later(function()
+    MiniDeps.add('tpope/vim-dadbod')
+    MiniDeps.add('kristijanhusak/vim-dadbod-ui')
+    MiniDeps.add('tpope/vim-fugitive')
+    MiniDeps.add('tpope/vim-rhubarb')
+    MiniDeps.add('mbbill/undotree')
+    MiniDeps.add('christoomey/vim-tmux-navigator')
+    MiniDeps.add('RRethy/nvim-treesitter-endwise')
+
+    vim.keymap.set('n', '<C-h>', '<Cmd>TmuxNavigateLeft<CR>')
+    vim.keymap.set('n', '<C-j>', '<Cmd>TmuxNavigateDown<CR>')
+    vim.keymap.set('n', '<C-k>', '<Cmd>TmuxNavigateUp<CR>')
+    vim.keymap.set('n', '<C-l>', '<Cmd>TmuxNavigateRight<CR>')
+end)
+
+MiniDeps.later(function()
+    MiniDeps.add('mfussenegger/nvim-dap')
+    MiniDeps.add('suketa/nvim-dap-ruby')
 
     require('dap-ruby').setup()
 
@@ -77,15 +60,12 @@ now(function()
     vim.keymap.set('n', '<leader>dc', require('dap').continue)
     vim.keymap.set('n', '<leader>dt', require('dap').terminate)
     vim.keymap.set('n', '<Leader>dr', require('dap').repl.toggle)
-
     vim.keymap.set({ 'n', 'v' }, '<Leader>dh', require('dap.ui.widgets').hover)
-
     vim.keymap.set('n', '<Leader>df', function()
         local widgets = require('dap.ui.widgets')
         local my_sidebar = widgets.sidebar(widgets.frames)
         my_sidebar.open()
     end)
-
     vim.keymap.set('n', '<Leader>ds', function()
         local widgets = require('dap.ui.widgets')
         local my_sidebar = widgets.sidebar(widgets.scopes)
@@ -93,8 +73,8 @@ now(function()
     end)
 end)
 
-later(function()
-    add('ibhagwan/fzf-lua')
+MiniDeps.later(function()
+    MiniDeps.add('ibhagwan/fzf-lua')
 
     require('fzf-lua').setup({
         fzf_opts = {
@@ -144,8 +124,8 @@ later(function()
     vim.keymap.set('n', '<Leader>x', function() require('fzf-lua').quickfix() end)
 end)
 
-later(function()
-    add('stevearc/conform.nvim')
+MiniDeps.later(function()
+    MiniDeps.add('stevearc/conform.nvim')
 
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
     vim.g.conform = true
