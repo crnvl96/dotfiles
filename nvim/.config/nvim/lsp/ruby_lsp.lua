@@ -1,9 +1,7 @@
 vim.lsp.config('ruby_lsp', {
     init_options = {
         addonSettings = {
-            ['Ruby LSP Rails'] = {
-                enablePendingMigrationsPrompt = false,
-            },
+            ['Ruby LSP Rails'] = {},
         },
     },
 })

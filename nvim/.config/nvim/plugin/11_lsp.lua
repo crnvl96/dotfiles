@@ -29,16 +29,7 @@ local function on_attach(client, bufnr)
     set('gS', vim.lsp.buf.workspace_symbol)
     set('<C-k>', vim.lsp.buf.signature_help, {}, 'i')
 
-    if client:supports_method(methods.textDocument_codeLens) then
-        set('<Leader>cc', vim.lsp.codelens.run)
-
-        -- vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
-        --     group = vim.api.nvim_create_augroup('crnvl96-on-lsp-attach', {}),
-        --     buffer = bufnr,
-        --     callback = function(e) vim.lsp.codelens.refresh({ bufnr = e.buf }) end,
-        -- })
-    end
-
+    -- stylua: ignore
     if client:supports_method(methods.textDocument_completion) then
         local trigger = client.server_capabilities.completionProvider
         trigger.triggerCharacters = vim.split('abcdefghijklmnopqrstuvwxyz:.', '')
@@ -49,13 +40,11 @@ local function on_attach(client, bufnr)
         set('<C-n>', function() feedkeys('<Tab>', 't') end, {}, 'c')
         set('<C-p>', function() feedkeys('<S-Tab>', 't') end, {}, 'c')
         set('<C-u>', '<C-x><C-n>', {}, 'i')
-        -- stylua: ignore start
         set('<C-Space>', function() return pumvisible() and '<C-e>' or vim.lsp.completion.get() end, { expr = true }, 'i')
         set('<C-n>', function() return pumvisible() and feedkeys('<C-n>') or vim.lsp.completion.get() end, { expr = true }, 'i')
         set('<C-p>', function() return pumvisible() and feedkeys('<C-p>') or vim.lsp.completion.get() end, { expr = true }, 'i')
         set('<Tab>', function() if pumvisible() then feedkeys('<C-n>') else feedkeys('<Tab>') end end, {}, { 'i', 's' })
         set('<S-Tab>', function() if pumvisible() then feedkeys('<C-p>') else feedkeys('<S-Tab>') end end, {}, { 'i', 's' })
-        -- stylua: ignore end
 
         vim.opt.completeopt:append('fuzzy,noselect,menu,menuone,noinsert')
         vim.opt.wildoptions:append('fuzzy')

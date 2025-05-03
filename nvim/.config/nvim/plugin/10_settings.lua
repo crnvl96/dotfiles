@@ -33,7 +33,7 @@ vim.opt.diffopt = {
     'internal',
     'filler',
     'closeoff',
-    -- 'context:12',
+    'context:4',
     'algorithm:histogram',
     'linematch:60',
     'indent-heuristic',
@@ -55,11 +55,6 @@ vim.keymap.set({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true })
 vim.keymap.set('n', '<C-Down>', '<Cmd>resize -5<CR>')
 vim.keymap.set('n', '<C-Left>', '<Cmd>vertical resize -20<CR>')
 vim.keymap.set('n', '<C-Right>', '<Cmd>vertical resize +20<CR>')
-vim.keymap.set('n', '<C-Up>', '<Cmd>resize +5<CR>')
-vim.keymap.set('n', '<C-w>+', '<Cmd>resize +5<CR>')
-vim.keymap.set('n', '<C-w>-', '<Cmd>resize -5<CR>')
-vim.keymap.set('n', '<C-w><', '<Cmd>vertical resize -20<CR>')
-vim.keymap.set('n', '<C-w>>', '<Cmd>vertical resize +20<CR>')
 vim.keymap.set('x', '<', '<gv')
 vim.keymap.set('x', '>', '>gv')
 

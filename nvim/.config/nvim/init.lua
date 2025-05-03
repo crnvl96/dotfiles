@@ -17,7 +17,8 @@ require('mini.deps').setup()
 vim.cmd('colorscheme ansi')
 
 vim.lsp.enable({
-    'eslint',
+    -- 'efm',
+    -- 'eslint',
     'vtsls',
     'ruff',
     'basedpyright',

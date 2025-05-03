@@ -22,16 +22,8 @@ MiniDeps.now(function()
         },
         sync_install = false,
         ignore_install = {},
-        indent = { enable = true },
-        highlight = {
-            enable = true,
-            disable = function(_, buf)
-                local max_filesize = 250 * 1024
-                local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-                if ok and stats and stats.size > max_filesize then return true end
-            end,
-            additional_vim_regex_highlighting = false,
-        },
+        highlight = { enable = true },
+        indent = { enable = true, disable = { 'yaml' } },
     })
 end)
 
@@ -136,14 +128,29 @@ MiniDeps.later(function()
             python = { 'ruff_fix', 'ruff_organize_imports', 'ruff_format' },
             ruby = { 'rubocop' },
             eruby = { 'rubocop' },
-            typescript = { 'prettierd' },
-            -- javascript = { 'prettierd' },
-            typescriptreact = { 'prettierd' },
+            typescript = { 'prettierd', 'eslint_d' },
+            javascript = { 'prettierd', 'eslint_d' },
+            typescriptreact = { 'prettierd', 'eslint_d' },
         },
         format_on_save = function()
             if not vim.g.conform then return end
             return { timeout_ms = 3000, lsp_format = 'fallback' }
         end,
+    })
+end)
+
+MiniDeps.later(function()
+    MiniDeps.add('mfussenegger/nvim-lint')
+    require('lint').linters_by_ft = {
+        javascript = { 'eslint_d' },
+        typescript = { 'eslint_d' },
+        typescriptreact = { 'eslint_d' },
+        ruby = { 'rubocop' },
+        eruby = { 'rubocop' },
+    }
+    vim.api.nvim_create_autocmd({ 'BufWritePost', 'InsertLeave', 'TextChanged' }, {
+        group = vim.api.nvim_create_augroup('crnvl96-try-lint', {}),
+        callback = function() require('lint').try_lint() end,
     })
 end)
 
@@ -163,7 +170,6 @@ MiniDeps.later(function()
         end
         vim.keymap.set('n', lhs, rhs, { buffer = buf_id, desc = 'Split ' .. string.sub(direction, 12) })
     end
-
     vim.api.nvim_create_autocmd('User', {
         pattern = 'MiniFilesBufferCreate',
         callback = function(args)
@@ -172,18 +178,16 @@ MiniDeps.later(function()
             map_split(buf_id, '<C-w>v', 'belowright vertical')
         end,
     })
-
     vim.keymap.set('n', '-', function()
         local bufname = vim.api.nvim_buf_get_name(0)
         local path = vim.fn.fnamemodify(bufname, ':p')
         if path and vim.uv.fs_stat(path) then require('mini.files').open(bufname, false) end
     end)
-
     require('mini.files').setup({
         mappings = {
             show_help = '?',
-            go_in_plus = 'L',
-            go_out_plus = 'H',
+            go_in_plus = '<CR>',
+            go_out_plus = '-',
             go_in = '',
             go_out = '',
         },
