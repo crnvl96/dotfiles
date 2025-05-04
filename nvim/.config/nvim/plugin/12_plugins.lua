@@ -222,6 +222,8 @@ MiniDeps.later(function()
       ruby = { 'rubocop' },
       typescript = { 'prettierd' },
       typescriptreact = { 'prettierd' },
+      javascript = { 'prettierd' },
+      css = { 'prettierd' },
     },
     format_on_save = function()
       if not vim.g.conform then
@@ -235,7 +237,9 @@ end)
 MiniDeps.later(function()
   MiniDeps.add 'mfussenegger/nvim-lint'
 
-  require('lint').linters_by_ft = {}
+  require('lint').linters_by_ft = {
+    css = { 'stylelint' },
+  }
 
   vim.api.nvim_create_autocmd(
     { 'BufWritePost', 'InsertLeave', 'TextChanged' },
