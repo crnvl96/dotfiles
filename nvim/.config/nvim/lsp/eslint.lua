@@ -1,5 +1,5 @@
 vim.lsp.config('eslint', {
-    settings = {
-        format = true,
-    },
+  settings = {
+    format = true,
+  },
 })
