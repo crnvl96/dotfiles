@@ -216,14 +216,14 @@ MiniDeps.later(function()
     formatters_by_ft = {
       ['_'] = { 'trim_whitespace', 'trim_newlines' },
       lua = { 'stylua' },
-      json = { 'prettierd' },
-      markdown = { 'prettierd', 'injected' },
+      json = { 'prettier' },
+      markdown = { 'prettier', 'injected' },
       python = { 'ruff_fix', 'ruff_organize_imports', 'ruff_format' },
       ruby = { 'rubocop' },
-      typescript = { 'prettierd' },
-      typescriptreact = { 'prettierd' },
-      javascript = { 'prettierd' },
-      css = { 'prettierd' },
+      typescript = { 'prettier' },
+      typescriptreact = { 'prettier' },
+      javascript = { 'prettier' },
+      css = { 'prettier' },
     },
     format_on_save = function()
       if not vim.g.conform then
