@@ -2,6 +2,8 @@ local add = MiniDeps.add
 local now = MiniDeps.now
 local later = MiniDeps.later
 local set = vim.keymap.set
+local autocmd = vim.api.nvim_create_autocmd
+local au = vim.api.nvim_create_augroup
 
 now(function()
   add { name = 'mini.nvim' }
@@ -43,6 +45,7 @@ later(function()
   add 'kristijanhusak/vim-dadbod-ui'
   add 'tpope/vim-fugitive'
   add 'tpope/vim-rhubarb'
+  add 'tpope/vim-sleuth'
   add 'mbbill/undotree'
   add 'christoomey/vim-tmux-navigator'
 
@@ -206,48 +209,53 @@ later(function()
   }
 end)
 
-MiniDeps.later(function()
-  MiniDeps.add 'stevearc/conform.nvim'
+later(function()
+  add 'stevearc/conform.nvim'
+
   vim.o.formatexpr = 'v:lua.require\'conform\'.formatexpr()'
   vim.g.conform = true
+
   require('conform').setup {
     notify_on_error = true,
-    formatters = { injected = { ignore_errors = true } },
+    formatters = {
+      injected = {
+        ignore_errors = true,
+      },
+    },
     formatters_by_ft = {
       ['_'] = { 'trim_whitespace', 'trim_newlines' },
       lua = { 'stylua' },
       json = { 'prettier' },
       markdown = { 'prettier', 'injected' },
       python = { 'ruff_fix', 'ruff_organize_imports', 'ruff_format' },
-      ruby = { 'rubocop' },
+
       typescript = { 'prettier' },
       typescriptreact = { 'prettier' },
-      javascript = { 'prettier' },
+      javascript = { lsp_format = 'prefer' },
       css = { 'prettier' },
+
+      ruby = { 'rubocop' },
+      eruby = { 'rubocop' },
     },
     format_on_save = function()
-      if not vim.g.conform then
-        return
-      end
-      return { timeout_ms = 3000, lsp_format = 'fallback' }
+      return vim.g.conform and { timeout_ms = 3000, lsp_format = 'fallback' }
     end,
   }
 end)
 
-MiniDeps.later(function()
-  MiniDeps.add 'mfussenegger/nvim-lint'
+later(function()
+  add 'mfussenegger/nvim-lint'
 
-  require('lint').linters_by_ft = {
+  local lint = require 'lint'
+
+  lint.linters_by_ft = {
     css = { 'stylelint' },
   }
 
-  vim.api.nvim_create_autocmd(
-    { 'BufWritePost', 'InsertLeave', 'TextChanged' },
-    {
-      group = vim.api.nvim_create_augroup('crnvl96-try-lint', {}),
-      callback = function()
-        require('lint').try_lint()
-      end,
-    }
-  )
+  autocmd({ 'BufWritePost', 'InsertLeave', 'TextChanged' }, {
+    group = au('crnvl96-try-lint', {}),
+    callback = function()
+      lint.try_lint()
+    end,
+  })
 end)

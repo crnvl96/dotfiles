@@ -126,7 +126,7 @@ local function on_attach(client, bufnr)
   end
 
   if client:supports_method(methods.textDocument_formatting) then
-    client.server_capabilities.documentFormattingProvider = false
+    client.server_capabilities.documentFormattingProvider = true
   end
 
   if client:supports_method(methods.textDocument_documentColor) then
