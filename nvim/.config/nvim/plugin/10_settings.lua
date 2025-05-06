@@ -1,5 +1,4 @@
-local default_nodejs = vim.env.HOME
-  .. '/.local/share/mise/installs/node/22.14.0/bin/'
+local default_nodejs = vim.env.HOME .. '/.local/share/mise/installs/node/22.14.0/bin/'
 
 vim.g.node_host_prog = default_nodejs .. 'node'
 vim.env.PATH = default_nodejs .. ':' .. vim.env.PATH
@@ -11,6 +10,8 @@ vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_node_provider = 0
+vim.g.loaded_netrwPlugin = 1
+vim.g.loaded_netrw = 1
 
 vim.o.guicursor = ''
 vim.o.scrolloff = 8
@@ -19,8 +20,6 @@ vim.o.ignorecase = true
 vim.o.wildignorecase = true
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.shiftwidth = 4
-vim.o.tabstop = 4
 vim.o.mouse = 'a'
 vim.o.signcolumn = 'yes'
 vim.o.virtualedit = 'block'
@@ -48,26 +47,12 @@ vim.keymap.set({ 'n', 'x', 'o' }, '<Leader>p', '"+p')
 vim.keymap.set({ 'n', 'x', 'o' }, '<Leader>P', '"+P')
 vim.keymap.set({ 'n', 'x', 'o' }, '<Leader>y', '"+y')
 vim.keymap.set({ 'n', 'x', 'o' }, '<Leader>Y', '"+yg_')
-vim.keymap.set(
-  { 'n', 'x', 'o', 'i' },
-  '<C-s>',
-  '<Esc><Cmd>nohl<CR><Cmd>w<CR><Esc>'
-)
+vim.keymap.set({ 'n', 'x', 'o', 'i' }, '<C-s>', '<Esc><Cmd>nohl<CR><Cmd>w<CR><Esc>')
 vim.keymap.set('n', 'gc', ':<C-U>let @+ = expand(\'%:.\')<CR>')
 vim.keymap.set('n', 'gp', '`[v`]')
 vim.keymap.set({ 'n', 'x', 'i', 's' }, '<Esc>', '<Cmd>noh<CR><Esc>')
-vim.keymap.set(
-  { 'n', 'x' },
-  'j',
-  'v:count == 0 ? \'gj\' : \'j\'',
-  { expr = true }
-)
-vim.keymap.set(
-  { 'n', 'x' },
-  'k',
-  'v:count == 0 ? \'gk\' : \'k\'',
-  { expr = true }
-)
+vim.keymap.set({ 'n', 'x' }, 'j', 'v:count == 0 ? \'gj\' : \'j\'', { expr = true })
+vim.keymap.set({ 'n', 'x' }, 'k', 'v:count == 0 ? \'gk\' : \'k\'', { expr = true })
 vim.keymap.set('n', '<C-Down>', '<Cmd>resize -5<CR>')
 vim.keymap.set('n', '<C-Left>', '<Cmd>vertical resize -20<CR>')
 vim.keymap.set('n', '<C-Right>', '<Cmd>vertical resize +20<CR>')
@@ -105,9 +90,7 @@ vim.keymap.set(
         was_insert = vim.api.nvim_get_mode().mode == 't'
         return vim.api.nvim_win_close(win, true)
       end
-      if was_insert then
-        vim.cmd 'startinsert'
-      end
+      if was_insert then vim.cmd 'startinsert' end
     end
   end)()
 )
@@ -127,15 +110,13 @@ vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('crnvl96-big-file', { clear = true }),
   pattern = 'bigfile',
   callback = function(args)
-    vim.schedule(function()
-      vim.bo[args.buf].syntax = vim.filetype.match { buf = args.buf } or ''
-    end)
+    vim.schedule(
+      function() vim.bo[args.buf].syntax = vim.filetype.match { buf = args.buf } or '' end
+    )
   end,
 })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('crnvl96-yank-hl', { clear = true }),
-  callback = function()
-    vim.hl.on_yank { higroup = 'Visual', priority = 250 }
-  end,
+  callback = function() vim.hl.on_yank { higroup = 'Visual', priority = 250 } end,
 })

@@ -1,3 +1,1 @@
-vim.lsp.config('ruby_lsp', {
-  init_options = {},
-})
+vim.lsp.config('ruby_lsp', {})
