@@ -13,6 +13,18 @@ now(function()
 end)
 
 now(function()
+  add 'metalelf0/black-metal-theme-neovim'
+
+  require('black-metal').setup {
+    theme = 'emperor',
+  }
+
+  -- require('black-metal').load()
+
+  vim.cmd 'colorscheme ansi'
+end)
+
+now(function()
   add 'nvim-treesitter/nvim-treesitter'
 
   require('nvim-treesitter.configs').setup {
@@ -193,7 +205,7 @@ later(function()
   local adapter = 'venice'
 
   local function retrieve_llm_key(key_name)
-    local filepath = '.env'
+    local filepath = vim.fn.stdpath 'config' .. '/.env'
     local file = io.open(filepath, 'r')
 
     if not file then return nil end
