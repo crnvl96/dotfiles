@@ -1,5 +1,7 @@
 # Check if tmux is installed
 if command -v tmux &> /dev/null &&
+   # Check if we're not in a VSCode terminal
+   [ "$TERM_PROGRAM" != "vscode" ] &&
    # Check if we're in an interactive shell
    [ -n "$PS1" ] &&
    # Check if we're not already in a screen session
