@@ -3,9 +3,7 @@ MiniDeps.later(function()
 
   local lint = require 'lint'
 
-  lint.linters_by_ft = {
-    css = { 'stylelint' },
-  }
+  lint.linters_by_ft = {}
 
   vim.api.nvim_create_autocmd({ 'BufWritePost', 'InsertLeave', 'TextChanged' }, {
     group = vim.api.nvim_create_augroup('crnvl96-try-lint', {}),
