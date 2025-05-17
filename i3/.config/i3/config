@@ -19,11 +19,11 @@ tiling_drag modifier titlebar
 for_window [class="^.*"] border pixel 2
 
 # Colors for windows        border    background  text     indicator  child_border
-client.focused              #556b2f   #556b2f     #ffffff  #556b2f    #556b2f
-client.focused_inactive     #2d4059   #2d4059     #a3b18a  #2d4059    #2d4059
-client.unfocused            #2d4059   #2d4059     #a3b18a  #2d4059    #2d4059
-client.urgent               #2f343a   #900000     #ffffff  #900000    #900000
-client.placeholder          #000000   #0c0c0c     #ffffff  #000000    #0c0c0c
+client.focused              #9db89c   #9db89c     #0a0a0c  #9db89c    #9db89c
+client.focused_inactive     #555873   #555873     #9c9eb4  #555873    #555873
+client.unfocused            #31323c   #31323c     #9c9eb4  #31323c    #31323c
+client.urgent               #e77f88   #e77f88     #0a0a0c  #e77f88    #e77f88
+client.placeholder          #1e2122   #1e2122     #9c9eb4  #1e2122    #1e2122
 
 bindsym $mod+Return exec kitty
 bindsym $mod+q kill
@@ -114,4 +114,4 @@ bar {
 }
 
 exec --no-startup-id picom
-exec --no-startup-id feh --bg-fill ~/.config/i3/norway.png
+exec --no-startup-id feh --bg-fill ~/.config/i3/road.jpg
