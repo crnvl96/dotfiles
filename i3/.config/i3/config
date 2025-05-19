@@ -108,10 +108,10 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
-bar {
-    mode hide
-    hidden_state hide
-}
+# bar {
+#     mode hide
+#     hidden_state hide
+# }
 
 exec --no-startup-id picom
 exec --no-startup-id feh --bg-fill ~/.config/i3/road.jpg
