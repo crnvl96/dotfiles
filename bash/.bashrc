@@ -36,6 +36,7 @@ alias gs="git status"
 alias gd="git difftool --dir-diff"
 alias gb="git branch"
 alias gp="git fetch --all --prune && git pull --rebase"
+alias mtg="~/run-mtgo --winecfg --bind ~/mtgo"
 
 source $HOME/.config/bash/git-prompt.sh
 source $HOME/.config/bash/git-completion.sh
