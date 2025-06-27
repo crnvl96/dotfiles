@@ -25,11 +25,11 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
-alias nv='nvim'
-alias lzd='lazydocker'
-alias lzg='lazygit'
-alias cl='clear'
-alias ex='exit'
+alias nv="nvim"
+alias lzd="lazydocker"
+alias lzg="lazygit"
+alias cl="clear"
+alias ex="exit"
 alias gl="git log --all --oneline --graph --decorate"
 alias gs="git status"
 alias gd="git difftool --dir-diff"
