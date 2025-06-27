@@ -11,6 +11,8 @@ if ! fc-list | grep -qi "CaskaydiaMono Nerd Font"; then
   cp CascadiaFont/CaskaydiaMonoNerdFont-Italic.ttf ~/.local/share/fonts
   cp CascadiaFont/CaskaydiaMonoNerdFont-BoldItalic.ttf ~/.local/share/fonts
   rm -rf CascadiaMono.zip CascadiaFont
+  cp -r ~/.local/share/omarchy/fonts/Berkeley Mono/ ~/.local/share/fonts
+  cp -r ~/.local/share/omarchy/fonts/Go Mono/ ~/.local/share/fonts
   fc-cache
   cd -
 fi
