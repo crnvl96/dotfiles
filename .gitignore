@@ -1,0 +1,11 @@
+# API Keys
+.anthropic*
+.huggingface*
+.deepseek*
+.gemini*
+.openai*
+.venice*
+.xai*
+
+# Env vars
+.env
