@@ -90,7 +90,7 @@ vim.opt.diffopt = {
   'algorithm:histogram',
   'linematch:60',
   'indent-heuristic',
-  'inline:char', -- also accept inline:word
+  -- 'inline:char', -- also accept inline:word
 }
 
 vim.keymap.set('x', 'p', 'P')
