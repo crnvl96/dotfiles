@@ -17,18 +17,18 @@ require('mini.deps').setup()
 
 vim.cmd [[colorscheme ansi]]
 
-MiniDeps.later(function()
-  vim.cmd 'set rtp+=~/Developer/personal/lazydocker.nvim/'
-  require('lazydocker').setup {
-    window = {
-      settings = {
-        width = 0.9,
-        height = 0.9,
-      },
-    },
-  }
-  vim.keymap.set({ 'n', 't' }, '<leader>zz', '<Cmd>lua LazyDocker.toggle()<CR>')
-end)
+-- MiniDeps.later(function()
+--   vim.cmd 'set rtp+=~/Developer/personal/lazydocker.nvim/'
+--   require('lazydocker').setup {
+--     window = {
+--       settings = {
+--         width = 0.9,
+--         height = 0.9,
+--       },
+--     },
+--   }
+--   vim.keymap.set({ 'n', 't' }, '<leader>zz', '<Cmd>lua LazyDocker.toggle()<CR>')
+-- end)
 
 local lsp_dir = vim.fn.stdpath 'config' .. '/lsp'
 local excluded_servers = { 'basedpyright', 'pyrefly', 'rubocop' }
@@ -45,7 +45,7 @@ end
 
 vim.lsp.enable(lsp_servers)
 
-local default_nodejs = vim.env.HOME .. '/.local/share/mise/installs/node/23.11.1/bin/'
+local default_nodejs = vim.env.HOME .. '/.local/share/mise/installs/node/22.17.0/bin/'
 
 vim.g.node_host_prog = default_nodejs .. 'node'
 vim.env.PATH = default_nodejs .. ':' .. vim.env.PATH
@@ -204,9 +204,9 @@ local function on_attach(client, bufnr)
     client.server_capabilities.documentFormattingProvider = true
   end
 
-  if client:supports_method(methods.textDocument_documentColor) then
-    vim.lsp.document_color.enable(true, bufnr)
-  end
+  -- if client:supports_method(methods.textDocument_documentColor) then
+  --   vim.lsp.document_color.enable(true, bufnr)
+  -- end
 
   vim.bo[bufnr].indentexpr = 'v:lua.require\'nvim-treesitter\'.indentexpr()'
 
