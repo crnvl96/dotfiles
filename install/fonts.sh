@@ -11,8 +11,6 @@ if ! fc-list | grep -qi "CaskaydiaMono Nerd Font"; then
   cp CascadiaFont/CaskaydiaMonoNerdFont-Italic.ttf ~/.local/share/fonts
   cp CascadiaFont/CaskaydiaMonoNerdFont-BoldItalic.ttf ~/.local/share/fonts
   rm -rf CascadiaMono.zip CascadiaFont
-  cp -r ~/.local/share/omarchy/fonts/Berkeley Mono/ ~/.local/share/fonts
-  cp -r ~/.local/share/omarchy/fonts/Go Mono/ ~/.local/share/fonts
   fc-cache
   cd -
 fi
@@ -25,4 +23,14 @@ if ! fc-list | grep -qi "iA Writer Mono S"; then
   rm -rf iafonts.zip iaFonts
   fc-cache
   cd -
+fi
+
+if [ ! -d "$HOME/.local/share/fonts/Berkeley Mono" ]; then
+    cp -r "$HOME/.local/share/omarchy/fonts/Berkeley Mono" "$HOME/.local/share/fonts/"
+    fc-cache
+fi
+
+if [ ! -d "$HOME/.local/share/fonts/Go Mono" ]; then
+    cp -r "$HOME/.local/share/omarchy/fonts/Go Mono" "$HOME/.local/share/fonts/"
+    fc-cache
 fi
