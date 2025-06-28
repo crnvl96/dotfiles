@@ -62,7 +62,7 @@
       "tooltip-format-disconnected": "Disconnected",
       "interval": 3,
       "nospacing": 1,
-      "on-click": "impala"
+      "on-click": "alacritty -e impala"
     },
     "battery": {
       "interval": 5,
