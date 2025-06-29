@@ -7,8 +7,3 @@ else
     export SUDO_EDITOR="$EDITOR"
     export VISUAL="$EDITOR"
 fi
-
-if command -v tmux &> /dev/null && [ "$TERM_PROGRAM" != "vscode" ] && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [[ ! "$TERMINAL_EMULATOR" =~ "JetBrains-JediTerm" ]] && [ -z "$TMUX" ]; then
-  tmux attach-session -t default || tmux new-session -s default
-  return
-fi
