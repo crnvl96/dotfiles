@@ -8,20 +8,20 @@
   --link-color: #2077b2;
   --control-text-color: #667176;
   --side-bar-bg-color: #fafafa;
-  --body-font: "iA Writer Mono S";
+  --body-font: "Berkeley Mono";
   --border-radius: 2px;
   --document-horizontal-margin: 80px;
   --document-padding-x: 10ch;
   --font-size: 20px;
-  --h1-fontsize: 20px;   /* 1,5   rem = 24px */
+  --h1-fontsize: 20px; /* 1,5   rem = 24px */
   --h2-fontsize: 20px; /* 1,375 rem = 22px */
-  --h3-fontsize: 20px;  /* 1,25  rem = 20px */
+  --h3-fontsize: 20px; /* 1,25  rem = 20px */
   --h4-fontsize: 20px; /* 1,125 rem = 18px */
   --line-height: 1.8;
   --main-content-margin: 0 auto;
   --main-content-max-width: 85ch;
   --monospace-font-size: 20px;
-  --monospace-font: "iA Writer Mono S";
+  --monospace-font: "Berkeley Mono";
   --monospace-line-height: 1.6;
   --monospace: var(--monospace-font); /* Fixes source code mode */
   --nav-width: 200px;
@@ -48,7 +48,7 @@ body {
 }
 
 #write {
-	/* size of writing area: */
+  /* size of writing area: */
   padding-left: var(--document-padding-x);
   padding-right: var(--document-padding-x);
   max-width: var(--main-content-max-width);
@@ -63,16 +63,18 @@ body {
 /* yaml */
 pre.md-meta-block {
   background-color: var(--background-color);
-  padding-bottom: .5rem;
+  padding-bottom: 0.5rem;
   color: var(--accent-color);
   border-bottom: 2px solid var(--border-color);
   font-family: var(--monospace-font);
 }
 
 /* headings */
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   font-weight: bold;
-  color: var(--header-color);  
+  color: var(--header-color);
 }
 
 h1 {
@@ -97,8 +99,10 @@ h3 {
   font-size: var(--h3-fontsize);
 }
 
-h4, h5, h6 {
-  color: var(--header-color);  
+h4,
+h5,
+h6 {
+  color: var(--header-color);
   margin-top: 1rem;
   margin-bottom: 0rem;
   font-size: 1rem;
@@ -109,7 +113,7 @@ h4 {
 }
 
 h6 {
-  color: var(--control-text-color);	
+  color: var(--control-text-color);
 }
 
 h1::before,
@@ -125,40 +129,40 @@ h3::before {
 }
 
 h1::before {
-  content: '#';
+  content: "#";
 }
 
 h2::before {
-  content: '##';
+  content: "##";
 }
 
 h3::before {
-  content: '###';
+  content: "###";
 }
 
 h1 tt,
 h1 code {
-    font-size: inherit;
+  font-size: inherit;
 }
 h2 tt,
 h2 code {
-    font-size: inherit;
+  font-size: inherit;
 }
 h3 tt,
 h3 code {
-    font-size: inherit;
+  font-size: inherit;
 }
 h4 tt,
 h4 code {
-    font-size: inherit;
+  font-size: inherit;
 }
 h5 tt,
 h5 code {
-    font-size: inherit;
+  font-size: inherit;
 }
 h6 tt,
 h6 code {
-    font-size: inherit;
+  font-size: inherit;
 }
 
 /* table */
@@ -169,7 +173,7 @@ table {
 
 table tr:nth-child(2n),
 thead {
-    background-color: var(--side-bar-bg-color);
+  background-color: var(--side-bar-bg-color);
 }
 
 td,
@@ -177,7 +181,7 @@ th {
   border-style: solid;
   border-color: var(--border-color);
   border-width: 1px;
-  padding: .35rem .7rem
+  padding: 0.35rem 0.7rem;
 }
 
 li p {
@@ -193,14 +197,14 @@ li p {
   margin-bottom: 0rem;
 }
 
-#write input[type='checkbox'] {
+#write input[type="checkbox"] {
   margin-top: 5px;
 }
 
 blockquote {
   margin: 1rem 0;
   padding-left: 2ch;
-  margin-left: .5ch;
+  margin-left: 0.5ch;
   position: relative;
   overflow: hidden;
   border-left: 2px solid var(--border-color);
@@ -225,7 +229,7 @@ p {
  */
 
 .cm-s-inner .CodeMirror-gutters {
-   background: var(--code-bg-color);
+  background: var(--code-bg-color);
 }
 
 .code-tooltip {
@@ -277,8 +281,8 @@ tt {
   background-color: var(--code-bg-color);
   font-family: var(--monospace-font);
   font-size: var(--monospace-font-size);
-  border-radius: .25rem;
-  padding: 0 .125rem;
+  border-radius: 0.25rem;
+  padding: 0 0.125rem;
   line-height: var(--monospace-line-height);
 }
 
@@ -291,9 +295,8 @@ tt {
 }
 
 a {
-  color:  var(--link-color);
+  color: var(--link-color);
 }
-
 
 /**
  * Control UI (optional)
@@ -304,6 +307,5 @@ a {
 }
 
 #write div.md-toc-tooltip {
-	background-color: var(--background-color);
+  background-color: var(--background-color);
 }
-
