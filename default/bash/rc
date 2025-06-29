@@ -1,11 +1,5 @@
-if command -v tmux &> /dev/null                                    # Check if tmux is installed
-   && [ "$TERM_PROGRAM" != "vscode" ]                              # Check if we're not in a VSCode terminal
-   && [ -n "$PS1" ]						                           # Check if we're in an interactive shell
-   && [[ ! "$TERM" =~ screen ]]                                    # Check if we're not already in a screen session
-   && [[ ! "$TERM" =~ tmux ]]		                               # Check if we're not already in a tmux session (by $TERM)
-   && [[ ! "$TERMINAL_EMULATOR" =~ "JetBrains-JediTerm" ]]         # Check if we're not in a JetBrains terminal
-   && [ -z "$TMUX" ];    								           # Check if the TMUX variable is not set (another way to detect if we're in tmux)
-       then tmux a -t default || exec tmux new -s default && exit; # Try to attach to existing "default" session or create a new one named "default"
+if command -v tmux &> /dev/null && [ "$TERM_PROGRAM" != "vscode" ] && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [[ ! "$TERMINAL_EMULATOR" =~ "JetBrains-JediTerm" ]] && [ -z "$TMUX" ]; then
+  tmux attach-session -t default || exec tmux new-session -s default
 fi
 
 source ~/.local/share/dotfiles/default/bash/shell
