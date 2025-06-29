@@ -12,6 +12,9 @@ if [ -d "$repo" ]; then
 fi
 
 if git clone https://github.com/crnvl96/dotfiles.git "$repo" >/dev/null; then
+    cd "$repo"
+    git remote set-url origin git@github.com:crnvl96/dotfiles.git
+    cd - >/dev/null
     rm -rf "$backup"
 else
     echo "Clone failed, restoring backup..."
