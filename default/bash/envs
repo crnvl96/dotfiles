@@ -1,21 +1,3 @@
-# # Check if tmux is installed
-# if command -v tmux &> /dev/null &&
-#    # Check if we're not in a VSCode terminal
-#    [ "$TERM_PROGRAM" != "vscode" ] &&
-#    # Check if we're in an interactive shell
-#    [ -n "$PS1" ] &&
-#    # Check if we're not already in a screen session
-#    [[ ! "$TERM" =~ screen ]] &&
-#    # Check if we're not already in a tmux session (by $TERM)
-#    [[ ! "$TERM" =~ tmux ]] &&
-#    # Check if we're not in a JetBrains terminal
-#    [[ ! "$TERMINAL_EMULATOR" =~ "JetBrains-JediTerm" ]] &&
-#    # Check if the TMUX variable is not set (another way to detect if we're in tmux)
-#    [ -z "$TMUX" ]; then
-#   # Try to attach to existing "default" session or create a new one named "default"
-#   tmux a -t default || exec tmux new -s default && exit;
-# fi
-
 if [ -n "$NVIM" ]; then
     export EDITOR="nvim --server $NVIM --remote"
     export SUDO_EDITOR="$EDITOR"

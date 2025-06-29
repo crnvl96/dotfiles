@@ -1,7 +1,7 @@
 yay -S --noconfirm --needed \
-  signal-desktop spotify dropbox-cli zoom \
+  spotify zoom \
   obsidian typora libreoffice obs-studio kdenlive \
   pinta xournalpp
 
-# Copy over Omarchy applications
-source ~/.local/share/omarchy/bin/omarchy-sync-applications
+# Copy over Dotfiles applications
+source ~/.local/share/dotfiles/bin/dotfiles-sync-applications

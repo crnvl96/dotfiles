@@ -26,11 +26,6 @@ if ! fc-list | grep -qi "iA Writer Mono S"; then
 fi
 
 if [ ! -d "$HOME/.local/share/fonts/Berkeley Mono" ]; then
-    cp -r "$HOME/.local/share/omarchy/fonts/Berkeley Mono" "$HOME/.local/share/fonts/"
-    fc-cache
-fi
-
-if [ ! -d "$HOME/.local/share/fonts/Go Mono" ]; then
-    cp -r "$HOME/.local/share/omarchy/fonts/Go Mono" "$HOME/.local/share/fonts/"
+    cp -r "$HOME/.local/share/dotfiles/fonts/Berkeley Mono" "$HOME/.local/share/fonts/"
     fc-cache
 fi

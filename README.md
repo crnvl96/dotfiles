@@ -1,15 +1,9 @@
-# Omarchy
+# Install
 
-> ### Install Omarchy from this fork:
 > ```sh
-> eval "$(wget -qO- https://raw.githubusercontent.com/crnvl96/omarchy/refs/heads/master/boot.sh)"
+> wget -qO- https://crnvl96.dev/dotfiles | bash
 > ```
 
-Turn a fresh Arch installation into a fully-configured, beautiful, and modern web development system based on Hyprland by running a single command. That's the one-line pitch for Omarchy (like it was for Omakub). No need to write bespoke configs for every essential tool just to get started or to be up on all the latest command-line tools. Omarchy is an opinionated take on what Linux can be at its best.
+# Acknowledgements
 
-Read more at [omarchy.org](https://omarchy.org).
-
-## License
-
-Omarchy is released under the [MIT License](https://opensource.org/licenses/MIT).
-
+These dotfiles were originally forked from [omarchy](https://omarchy.org/), but have since been heavily modified and now exist independently.

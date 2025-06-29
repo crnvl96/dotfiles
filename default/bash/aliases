@@ -1,5 +1,3 @@
-alias updt='eval "$(wget -qO- https://raw.githubusercontent.com/crnvl96/omarchy/refs/heads/master/boot.sh)"'
-
 # File system
 alias ls='eza -lh --group-directories-first --icons=auto'
 alias lsa='ls -A'
