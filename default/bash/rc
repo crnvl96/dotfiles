@@ -6,5 +6,6 @@ source ~/.local/share/dotfiles/default/bash/init
 source ~/.local/share/dotfiles/default/bash/envs
 
 if command -v tmux &> /dev/null && [ "$TERM_PROGRAM" != "vscode" ] && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [[ ! "$TERMINAL_EMULATOR" =~ "JetBrains-JediTerm" ]] && [ -z "$TMUX" ]; then
-  tmux attach-session -t default || exec tmux new-session -s default
+  tmux attach-session -t default || tmux new-session -s default
+  return
 fi
