@@ -1,6 +1,6 @@
 yay -S --noconfirm --needed \
   wget curl unzip inetutils iwd \
-  eza fzf ripgrep zoxide tmux \
+  eza fzf ripgrep zoxide bat tmux \
   wl-clipboard fastfetch btop \
   man tldr less whois plocate \
   alacritty
