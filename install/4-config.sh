@@ -20,19 +20,21 @@ git config --global alias.st status
 git config --global pull.rebase true
 
 # Set identification from install inputs
-if [[ -n "${OMARCHY_USER_NAME//[[:space:]]/}" ]]; then
-  git config --global user.name "$OMARCHY_USER_NAME"
-fi
-
-if [[ -n "${OMARCHY_USER_EMAIL//[[:space:]]/}" ]]; then
-  git config --global user.email "$OMARCHY_USER_EMAIL"
-fi
+# This is already setup on the git config file
+# if [[ -n "${OMARCHY_USER_NAME//[[:space:]]/}" ]]; then
+#   git config --global user.name "$OMARCHY_USER_NAME"
+# fi
+#
+# if [[ -n "${OMARCHY_USER_EMAIL//[[:space:]]/}" ]]; then
+#   git config --global user.email "$OMARCHY_USER_EMAIL"
+# fi
 
 # Set default XCompose that is triggered with CapsLock
-tee ~/.XCompose >/dev/null <<EOF
-include "%H/.local/share/omarchy/default/xcompose"
-
-# Identification
-<Multi_key> <space> <n> : "$OMARCHY_USER_NAME"
-<Multi_key> <space> <e> : "$OMARCHY_USER_EMAIL"
-EOF
+# We actually don't need this
+# tee ~/.XCompose >/dev/null <<EOF
+# include "%H/.local/share/omarchy/default/xcompose"
+#
+# # Identification
+# <Multi_key> <space> <n> : "$OMARCHY_USER_NAME"
+# <Multi_key> <space> <e> : "$OMARCHY_USER_EMAIL"
+# EOF
