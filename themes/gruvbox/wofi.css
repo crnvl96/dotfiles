@@ -1,9 +1,9 @@
-@define-color	selected-text  #fabd2f;
-@define-color	text  #ebdbb2;
-@define-color	base  #282828;
+@define-color selected-text  #fabd2f;
+@define-color text  #ebdbb2;
+@define-color base  #282828;
 
 * {
-  font-family: 'CaskaydiaMono Nerd Font', monospace;
+  font-family: "Berkeley Mono", monospace;
   font-size: 18px;
 }
 

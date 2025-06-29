@@ -1,5 +1,5 @@
 {
-  "layer": "top",
+    "layer": "top",
     "position": "top",
     "spacing": 0,
     "height": 26,
@@ -41,6 +41,9 @@
         "5": []
       }
     },
+	"bar": {
+	    "start_hidden": true
+	},
     "cpu": {
       "interval": 5,
       "format": "󰍛",
