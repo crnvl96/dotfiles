@@ -1,3 +1,3 @@
 mkdir -p "$BACKGROUNDS_DIR/gruvbox"
-download_background_image "https://github.com/basecamp/omakub/raw/refs/heads/master/themes/gruvbox/background.jpg" "gruvbox/1-grubox.jpg"
-download_background_image "https://gruvbox-wallpapers.pages.dev/wallpapers/irl/octopus.jpg" "gruvbox/2-grubox.jpg"
+download_background_image "https://github.com/basecamp/omakub/raw/refs/heads/master/themes/gruvbox/background.jpg" "gruvbox/1-gruvbox.jpg"
+download_background_image "https://gruvbox-wallpapers.pages.dev/wallpapers/irl/octopus.jpg" "gruvbox/2-gruvbox.jpg"
