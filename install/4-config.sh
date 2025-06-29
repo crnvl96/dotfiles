@@ -3,6 +3,7 @@ cp -R ~/.local/share/dotfiles/config/* ~/.config/
 
 # Use default bashrc from Dotfiles
 echo "source ~/.local/share/dotfiles/default/bash/rc" >~/.bashrc
+echo -e '\nif [ -f ~/.bashrc ]; then\n    source ~/.bashrc\nfi' >> ~/.bash_profile
 
 # Login directly as user, rely on disk encryption + hyprlock for security
 sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
