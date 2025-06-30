@@ -251,12 +251,11 @@ MiniDeps.now(function()
   MiniDeps.add 'tpope/vim-rhubarb'
   MiniDeps.add 'tpope/vim-sleuth'
   MiniDeps.add 'mbbill/undotree'
-  MiniDeps.add 'christoomey/vim-tmux-navigator'
 
-  vim.keymap.set('n', '<C-h>', '<Cmd>TmuxNavigateLeft<CR>')
-  vim.keymap.set('n', '<C-j>', '<Cmd>TmuxNavigateDown<CR>')
-  vim.keymap.set('n', '<C-k>', '<Cmd>TmuxNavigateUp<CR>')
-  vim.keymap.set('n', '<C-l>', '<Cmd>TmuxNavigateRight<CR>')
+  vim.keymap.set('n', '<C-h>', '<C-w>h')
+  vim.keymap.set('n', '<C-j>', '<C-w>j')
+  vim.keymap.set('n', '<C-k>', '<C-w>k')
+  vim.keymap.set('n', '<C-l>', '<C-w>l')
 end)
 
 MiniDeps.now(function()
