@@ -16,6 +16,7 @@ ln -snf ~/.config/dotfiles/themes/kanagawa ~/.config/dotfiles/current/theme
 source ~/.local/share/dotfiles/themes/kanagawa/backgrounds.sh
 ln -snf ~/.config/dotfiles/backgrounds/kanagawa ~/.config/dotfiles/current/backgrounds
 ln -snf ~/.config/dotfiles/current/backgrounds/1-kanagawa.jpg ~/.config/dotfiles/current/background
+source ~/.local/share/dotfiles/themes/kanagawa/ghostty.sh
 
 # Set specific app links for current theme
 ln -snf ~/.config/dotfiles/current/theme/hyprlock.conf ~/.config/hypr/hyprlock.conf
