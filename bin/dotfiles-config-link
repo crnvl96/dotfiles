@@ -1,7 +1,0 @@
-#!/bin/bash
-
-# Link all the key config files to dotfiles internal versions for quicker testing
-ln -nsf ~/.local/share/dotfiles/config/hypr/hyprland.conf ~/.config/hypr/
-ln -nsf ~/.local/share/dotfiles/config/hypr/hypridle.conf ~/.config/hypr/
-ln -nsf ~/.local/share/dotfiles/config/waybar/config ~/.config/waybar/
-ln -nsf ~/.local/share/dotfiles/config/wofi/config ~/.config/wofi/
