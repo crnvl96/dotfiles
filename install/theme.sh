@@ -12,10 +12,10 @@ for f in ~/.local/share/dotfiles/themes/*; do ln -s "$f" ~/.config/dotfiles/them
 
 # Set initial theme
 mkdir -p ~/.config/dotfiles/current
-ln -snf ~/.config/dotfiles/themes/gruvbox ~/.config/dotfiles/current/theme
-source ~/.local/share/dotfiles/themes/gruvbox/backgrounds.sh
-ln -snf ~/.config/dotfiles/backgrounds/gruvbox ~/.config/dotfiles/current/backgrounds
-ln -snf ~/.config/dotfiles/current/backgrounds/2-gruvbox.jpg ~/.config/dotfiles/current/background
+ln -snf ~/.config/dotfiles/themes/kanagawa ~/.config/dotfiles/current/theme
+source ~/.local/share/dotfiles/themes/kanagawa/backgrounds.sh
+ln -snf ~/.config/dotfiles/backgrounds/kanagawa ~/.config/dotfiles/current/backgrounds
+ln -snf ~/.config/dotfiles/current/backgrounds/1-kanagawa.jpg ~/.config/dotfiles/current/background
 
 # Set specific app links for current theme
 ln -snf ~/.config/dotfiles/current/theme/hyprlock.conf ~/.config/hypr/hyprlock.conf
