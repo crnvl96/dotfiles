@@ -3,10 +3,10 @@
 # The '00' prefix ensures it is loaded first.
 
 # --- Terminal Colors ---
-readonly C_RESET='\033[0m'
-readonly C_BOLD='\033[1m'
-readonly C_GREEN='\033[0;32m'
-readonly C_BLUE='\033[0;34m'
+C_RESET='\033[0m'
+C_BOLD='\033[1m'
+C_GREEN='\033[0;32m'
+C_BLUE='\033[0;34m'
 
 # --- Helper Functions ---
 

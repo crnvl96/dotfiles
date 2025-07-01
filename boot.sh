@@ -8,10 +8,10 @@
 
 set -euo pipefail # Exit on error, undefined variable, or pipe failure.
 
-readonly REPO_DIR="$HOME/.local/share/dotfiles"
-readonly REPO_BACKUP_DIR="$HOME/.local/share/dotfiles.bak"
-readonly REPO_URL="https://github.com/crnvl96/dotfiles.git"
-readonly REPO_SSH_URL="git@github.com:crnvl96/dotfiles.git"
+REPO_DIR="$HOME/.local/share/dotfiles"
+REPO_BACKUP_DIR="$HOME/.local/share/dotfiles.bak"
+REPO_URL="https://github.com/crnvl96/dotfiles.git"
+REPO_SSH_URL="git@github.com:crnvl96/dotfiles.git"
 
 # Helper for printing messages, as helpers script is not yet available.
 _msg() {
