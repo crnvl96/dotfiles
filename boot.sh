@@ -3,7 +3,20 @@ repo="$HOME/.local/share/dotfiles"
 
 echo -e "\nInstalling dotfiles...\n"
 
-pacman -Q git &>/dev/null || sudo pacman -Sy --noconfirm --needed git
+### Enable Multilib (for steam) ###
+# https://wiki.archlinux.org/title/Official_repositories#multilib
+if grep -q "^\[multilib\]" /etc/pacman.conf; then
+    echo "Multilib repository is already enabled."
+else
+    sudo tee -a /etc/pacman.conf >/dev/null <<EOF
+
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+EOF
+    echo "Multilib repository has been enabled in /etc/pacman.conf."
+fi
+
+pacman -Q git &>/dev/null || sudo pacman -Syu --noconfirm --needed git
 
 echo -e "\nCloning dotfiles..."
 
