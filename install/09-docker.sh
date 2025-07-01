@@ -4,6 +4,10 @@ msg "Installing Docker..."
 install_packages docker docker-compose
 
 msg "Configuring Docker to limit log size..."
+
+# Ensure the /etc/docker directory exists
+sudo mkdir -p /etc/docker
+
 # This prevents log files from consuming excessive disk space.
 echo '{"log-driver":"json-file","log-opts":{"max-size":"10m","max-file":"5"}}' | sudo tee /etc/docker/daemon.json
 
