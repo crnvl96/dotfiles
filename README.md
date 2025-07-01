@@ -65,10 +65,3 @@ For packages
 yay -Qe | grep -i <package_name>
 yay -Rns <package_name>
 ```
-
-For webapps
-
-```bash
-# webapps are located at `install/28-webapps.sh`
-web2app-remove <webapp_name>
-```

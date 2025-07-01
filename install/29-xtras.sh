@@ -1,6 +1,6 @@
 yay -S --noconfirm --needed \
   spotify zoom \
-  obsidian typora libreoffice obs-studio kdenlive \
+  typora libreoffice obs-studio kdenlive \
   pinta xournalpp steam
 
 # Copy and sync icon files
