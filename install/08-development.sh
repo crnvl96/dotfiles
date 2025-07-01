@@ -16,9 +16,6 @@ dev_packages=(
 
   # TUI applications
   "lazygit" "lazydocker"
-
-  # Editors
-  "cursor-bin"
 )
 
 install_packages "${dev_packages[@]}"
