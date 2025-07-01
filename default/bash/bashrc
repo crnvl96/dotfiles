@@ -1,6 +1,4 @@
-###
-### shell
-###
+### Shell Settings ###
 
 # History control
 shopt -s histappend
@@ -15,11 +13,23 @@ HISTFILESIZE="${HISTSIZE}"
 export PATH="./bin:$HOME/.local/bin:$HOME/.local/share/dotfiles/bin:$PATH"
 set +h
 
-###
-### aliases
-###
 
-# File system
+### Environment Variables ###
+
+if [ -n "$NVIM" ]; then
+    export EDITOR="nvim --server $NVIM --remote"
+    export SUDO_EDITOR="$EDITOR"
+    export VISUAL="$EDITOR"
+else
+    export EDITOR="nvim"
+    export SUDO_EDITOR="$EDITOR"
+    export VISUAL="$EDITOR"
+fi
+
+
+### Aliases ###
+
+#### File System Navigation ####
 alias d='pwd'
 alias ls='eza -lh --group-directories-first --icons=auto'
 alias lsa='ls -A'
@@ -44,29 +54,32 @@ open() {
   xdg-open "$@" >/dev/null 2>&1
 }
 
-# Directories
+# Quick directory traversal
 alias ..='cd ..'
 alias ...='cd ../..'
 alias ....='cd ../../..'
 
+#### Tools and Utilities ####
 alias nv="nvim"
 alias lzd="lazydocker"
 alias lzg="lazygit"
 alias cl="clear"
 alias ex="exit"
+
+#### Git Commands ####
 alias gl="git log --all --oneline --graph --decorate"
 alias gs="git status"
 alias gd="git difftool --dir-diff"
 alias gb="git branch"
 
-###
-### functions
-###
 
-# Compression
+### Functions ###
+
+#### File Compression ####
 compress() { tar -czf "${1%/}.tar.gz" "${1%/}"; }
 alias decompress="tar -xzf"
 
+#### System Utilities ####
 # Write iso file to sd card
 iso2sd() {
   if [ $# -ne 2 ]; then
@@ -80,6 +93,7 @@ iso2sd() {
   fi
 }
 
+#### Web App Management ####
 # Create a desktop launcher for a web app
 web2app() {
   if [ "$#" -ne 3 ]; then
@@ -131,18 +145,18 @@ web2app-remove() {
   rm "$ICON_PATH"
 }
 
+#### Input Configuration ####
 # Ensure changes to ~/.XCompose are immediately available
 refresh-xcompose() {
   pkill fcitx5
   setsid fcitx5 &>/dev/null &
 }
 
-# Ensure that external keyboards that use an fn key has the F keys as the default
+# Ensure that external keyboards that use an fn key have the F keys as the default
 alias fix_fkeys='echo 2 | sudo tee /sys/module/hid_apple/parameters/fnmode'
 
-###
-### prompt
-###
+
+### Prompt Customization ###
 
 # Technicolor dreams
 force_color_prompt=yes
@@ -152,9 +166,8 @@ color_prompt=yes
 PS1=$'\uf0a9 '
 PS1="\[\e]0;\w\a\]$PS1"
 
-###
-### init
-###
+
+### Initialization Scripts ###
 
 if command -v mise &> /dev/null; then
   eval "$(mise activate bash)"
@@ -171,18 +184,4 @@ if command -v fzf &> /dev/null; then
   if [[ -f /usr/share/fzf/key-bindings.bash ]]; then
     source /usr/share/fzf/key-bindings.bash
   fi
-fi
-
-###
-### envs
-###
-
-if [ -n "$NVIM" ]; then
-    export EDITOR="nvim --server $NVIM --remote"
-    export SUDO_EDITOR="$EDITOR"
-    export VISUAL="$EDITOR"
-else
-    export EDITOR="nvim"
-    export SUDO_EDITOR="$EDITOR"
-    export VISUAL="$EDITOR"
 fi
