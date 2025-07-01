@@ -17,3 +17,5 @@ msg "Installing custom .desktop files..."
 mkdir -p ~/.local/share/applications
 cp ~/.local/share/dotfiles/applications/*.desktop ~/.local/share/applications/
 update-desktop-database ~/.local/share/applications
+
+msg "Done!"
