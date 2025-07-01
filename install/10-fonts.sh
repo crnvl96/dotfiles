@@ -1,7 +1,7 @@
 # Installs system fonts and links custom fonts.
 
 msg "Installing standard system fonts..."
-local -a font_packages=(
+font_packages=(
   "ttf-font-awesome"
   "noto-fonts"
   "noto-fonts-emoji"

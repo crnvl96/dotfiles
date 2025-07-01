@@ -2,7 +2,7 @@
 
 msg "Installing development tools..."
 
-local -a dev_packages=(
+dev_packages=(
   # Build tools and compilers
   "cargo" "clang" "llvm"
 

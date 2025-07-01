@@ -2,7 +2,7 @@
 
 msg "Installing core desktop applications..."
 
-local -a desktop_packages=(
+desktop_packages=(
   # System tray and session utilities
   "brightnessctl"  # Control screen brightness
   "playerctl"      # Control media players

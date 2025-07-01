@@ -6,7 +6,7 @@ if command_exists nvim; then
 fi
 
 msg "Installing Neovim and dependencies..."
-local -a nvim_packages=(
+nvim_packages=(
   "nvim"
   "luarocks"        # Package manager for Lua modules
   "tree-sitter-cli" # For generating parsers

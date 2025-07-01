@@ -2,7 +2,7 @@
 
 msg "Installing Hyprland and related components..."
 
-local -a hyprland_packages=(
+hyprland_packages=(
   # The Wayland compositor itself
   "hyprland"
 

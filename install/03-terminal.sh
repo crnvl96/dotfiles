@@ -2,7 +2,7 @@
 
 msg "Installing essential CLI tools..."
 
-local -a cli_packages=(
+cli_packages=(
   # Core utilities
   "wget" "curl" "unzip" "inetutils"
 

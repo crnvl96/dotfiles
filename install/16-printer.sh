@@ -1,7 +1,7 @@
 # Installs and configures CUPS for printing support.
 
 msg "Installing CUPS printing service..."
-local -a printer_packages=(
+printer_packages=(
   "cups"
   "cups-pdf"
   "cups-filters"

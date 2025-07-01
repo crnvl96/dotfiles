@@ -1,7 +1,7 @@
 # Installs extra applications and integrates their assets.
 
 msg "Installing extra applications..."
-local -a extra_packages=(
+extra_packages=(
   "spotify" "zoom"
   "typora" "libreoffice" "obs-studio" "kdenlive"
   "pinta" "xournalpp" "steam"
