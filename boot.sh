@@ -20,6 +20,11 @@ _msg() {
 
 # --- Main Logic ---
 
+if [ "$PWD" != "$HOME" ]; then
+  _msg "ERROR: Please run this script from your home directory (\$HOME: $HOME). Current directory: $PWD." >&2
+  exit 1
+fi
+
 _msg "Starting dotfiles installation..."
 
 # Step 1: Enable Multilib repository in pacman.conf
