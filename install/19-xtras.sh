@@ -10,14 +10,18 @@ install_packages "${extra_packages[@]}"
 
 msg "Installing custom application icons..."
 mkdir -p ~/.local/share/icons/hicolor/48x48/apps/
+
 for icon in ~/.local/share/dotfiles/applications/icons/*.png; do
   [ -f "$icon" ] && cp "$icon" ~/.local/share/icons/hicolor/48x48/apps/
 done
-gtk-update-icon-cache ~/.local/share/icons/hicolor &>/dev/null
+
+gtk-update-icon-cache ~/.local/share/icons/hicolor &>/dev/null || true
 
 msg "Installing custom .desktop files..."
 mkdir -p ~/.local/share/applications
+
 for desktop_file in ~/.local/share/dotfiles/applications/*.desktop; do
   [ -f "$desktop_file" ] && cp "$desktop_file" ~/.local/share/applications/
 done
-update-desktop-database ~/.local/share/applications
+
+update-desktop-database ~/.local/share/applications || true
