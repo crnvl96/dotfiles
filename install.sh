@@ -6,7 +6,7 @@
 
 set -euo pipefail
 
-INSTALL_DIR="$(dirname "$0")/install"
+INSTALL_DIR="$REPO_DIR/install"
 
 # Source helper functions first. It must be named '00-helpers.sh' to be sourced first.
 if [ -f "$INSTALL_DIR/00-helpers.sh" ]; then
