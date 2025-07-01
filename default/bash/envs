@@ -1,9 +1,0 @@
-if [ -n "$NVIM" ]; then
-    export EDITOR="nvim --server $NVIM --remote"
-    export SUDO_EDITOR="$EDITOR"
-    export VISUAL="$EDITOR"
-else
-    export EDITOR="nvim"
-    export SUDO_EDITOR="$EDITOR"
-    export VISUAL="$EDITOR"
-fi
