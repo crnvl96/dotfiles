@@ -6,9 +6,6 @@ HISTCONTROL=ignoreboth
 HISTSIZE=32768
 HISTFILESIZE="${HISTSIZE}"
 
-# Autocompletion
-# source /usr/share/bash-completion/bash_completion
-
 # Set complete path
 export PATH="./bin:$HOME/.local/bin:$HOME/.local/share/dotfiles/bin:$PATH"
 set +h
@@ -50,10 +47,6 @@ zd() {
   fi
 }
 
-open() {
-  xdg-open "$@" >/dev/null 2>&1
-}
-
 # Quick directory traversal
 alias ..='cd ..'
 alias ...='cd ../..'
@@ -67,13 +60,11 @@ alias cl="clear"
 alias ex="exit"
 
 #### Git Commands ####
+alias g="git"
 alias gl="git log --all --oneline --graph --decorate"
 alias gs="git status"
 alias gd="git difftool --dir-diff"
 alias gb="git branch"
-
-
-### Functions ###
 
 #### File Compression ####
 compress() { tar -czf "${1%/}.tar.gz" "${1%/}"; }
