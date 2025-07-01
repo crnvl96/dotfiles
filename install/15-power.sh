@@ -1,11 +1,13 @@
-# Setting the performance profile can make a big difference. By default, most systems seem to start in balanced mode,
-# even if they're not running off a battery. So let's make sure that's changed to performance.
-yay -S --noconfirm power-profiles-daemon
+# Installs and configures power management profiles.
 
+msg "Installing power-profiles-daemon..."
+install_packages power-profiles-daemon
+
+# This check determines if the system has a battery.
 if ls /sys/class/power_supply/BAT* &>/dev/null; then
-  # This computer runs on a battery
+  msg "Battery detected. Setting power profile to 'balanced'."
   powerprofilesctl set balanced
 else
-  # This computer runs on power outlet
+  msg "No battery detected. Setting power profile to 'performance'."
   powerprofilesctl set performance
 fi

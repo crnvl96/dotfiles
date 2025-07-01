@@ -1,10 +1,14 @@
-# Copy over Dotfiles configs
+# Applies core system and user configurations.
+
+msg "Copying user configuration files from dotfiles..."
 cp -R ~/.local/share/dotfiles/config/* ~/.config/
 
-# Use default bashrc from Dotfiles
+msg "Setting default .bashrc to source from dotfiles..."
 echo "source ~/.local/share/dotfiles/default/bash/bashrc" >~/.bashrc
 
-# Login directly as user, rely on disk encryption + hyprlock for security
+msg "Configuring auto-login for TTY1..."
+# This avoids the need to enter a password on boot for the console user.
+# Security is handled by disk encryption and the Hyprland lock screen.
 sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
 sudo tee /etc/systemd/system/getty@tty1.service.d/override.conf >/dev/null <<EOF
 [Service]

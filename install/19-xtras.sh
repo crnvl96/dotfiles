@@ -1,14 +1,19 @@
-yay -S --noconfirm --needed \
-  spotify zoom \
-  typora libreoffice obs-studio kdenlive \
-  pinta xournalpp steam
+# Installs extra applications and integrates their assets.
 
-# Copy and sync icon files
+msg "Installing extra applications..."
+local -a extra_packages=(
+  "spotify" "zoom"
+  "typora" "libreoffice" "obs-studio" "kdenlive"
+  "pinta" "xournalpp" "steam"
+)
+install_packages "${extra_packages[@]}"
+
+msg "Installing custom application icons..."
 mkdir -p ~/.local/share/icons/hicolor/48x48/apps/
 cp ~/.local/share/dotfiles/applications/icons/*.png ~/.local/share/icons/hicolor/48x48/apps/
 gtk-update-icon-cache ~/.local/share/icons/hicolor &>/dev/null
 
-# Copy .desktop declarations
+msg "Installing custom .desktop files..."
 mkdir -p ~/.local/share/applications
 cp ~/.local/share/dotfiles/applications/*.desktop ~/.local/share/applications/
 update-desktop-database ~/.local/share/applications
