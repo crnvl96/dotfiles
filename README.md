@@ -56,3 +56,19 @@ These dotfiles were originally forked from [omarchy](https://omarchy.org/), but 
      # env = __GLX_VENDOR_LIBRARY_NAME,nvidia
      ```
    - Note: Automation for Nvidia setup is planned via an [open issue](https://github.com/basecamp/omarchy/issues/4).
+
+## How do I get rid of all the extra software?
+
+For packages
+
+```bash
+yay -Qe | grep -i <package_name>
+yay -Rns <package_name>
+```
+
+For webapps
+
+```bash
+# webapps are located at `install/28-webapps.sh`
+web2app-remove <webapp_name>
+```
