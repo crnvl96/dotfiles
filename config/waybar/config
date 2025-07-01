@@ -1,5 +1,5 @@
 {
-	"start_hidden": true,
+	"start_hidden": false,
     "layer": "top",
     "position": "top",
     "spacing": 0,

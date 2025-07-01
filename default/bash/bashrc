@@ -9,7 +9,7 @@ HISTSIZE=32768
 HISTFILESIZE="${HISTSIZE}"
 
 # Autocompletion
-source /usr/share/bash-completion/bash_completion
+# source /usr/share/bash-completion/bash_completion
 
 # Set complete path
 export PATH="./bin:$HOME/.local/bin:$HOME/.local/share/dotfiles/bin:$PATH"
@@ -29,6 +29,7 @@ alias lta='lt -A'
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 alias fd='fdfind'
 alias cd="zd"
+
 zd() {
   if [ $# -eq 0 ]; then
     builtin cd ~ && return
@@ -38,6 +39,7 @@ zd() {
     z "$@" && printf " \U000F17A9 " && pwd || echo "Error: Directory not found"
   fi
 }
+
 open() {
   xdg-open "$@" >/dev/null 2>&1
 }
