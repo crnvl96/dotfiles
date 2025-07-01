@@ -1,7 +1,7 @@
 yay -S --noconfirm --needed \
   spotify zoom \
   obsidian typora libreoffice obs-studio kdenlive \
-  pinta xournalpp
+  pinta xournalpp steam
 
 # Copy and sync icon files
 mkdir -p ~/.local/share/icons/hicolor/48x48/apps/
