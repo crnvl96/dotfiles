@@ -40,7 +40,10 @@ nvidia_packages=(
     "qt5-wayland"
     "qt6-wayland"
 )
-install_packages "${nvidia_packages[@]}"
+# The `install_packages` function uses the `--noconfirm` flag, which causes the installation to fail if there's a conflict.
+# Replace the call to `install_packages` with a direct `yay` command for this specific set of packages.
+# By removing `--noconfirm`, `yay` will prompt when it finds a conflict, and the `yes |` pipe will automatically answer "y" to it.
+yes | yay -S --needed "${nvidia_packages[@]}"
 
 # --- Kernel Module Configuration ---
 msg "Configuring kernel modules for early KMS..."
