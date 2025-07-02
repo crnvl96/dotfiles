@@ -15,7 +15,7 @@ dev_packages=(
   "github-cli"
 
   # TUI applications
-  "lazygit" "lazydocker"
+  "lazygit" "lazydocker" "diff-so-fancy" # prettier git diff
 )
 
 install_packages "${dev_packages[@]}"
