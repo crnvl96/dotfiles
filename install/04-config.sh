@@ -1,15 +1,7 @@
 # Applies core system and user configurations.
 
-msg "Symlinking user configuration files from dotfiles..."
-
-for item in ~/.local/share/dotfiles/config/*; do
-    target=~/.config/$(basename "$item")
-    if [ -e "$target" ]; then
-        msg "Overwriting existing $target with symlink"
-    fi
-    ln -sf "$item" "$target"
-    msg "Created/Updated symlink for $(basename "$item")"
-done
+msg "Copying user configuration files from dotfiles..."
+cp -R ~/.local/share/dotfiles/config/* ~/.config/
 
 msg "Setting default .bashrc to source from dotfiles..."
 echo "source ~/.local/share/dotfiles/default/bash/bashrc" >~/.bashrc
