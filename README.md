@@ -44,19 +44,6 @@ These dotfiles were originally forked from [omarchy](https://omarchy.org/), but 
      wget -qO- https://crnvl96.dev/dotfiles | bash
      ```
 
-3. **Additional Steps for Nvidia GPU Users**:
-   - After running the Omarchy installer, and before rebooting, install Nvidia-specific packages:
-     ```bash
-     sudo pacman -S nvidia-utils libva-nvidia-driver nvidia-dkms
-     ```
-   - Edit `~/.config/hypr/hyprland.conf` to uncomment the following environment variables:
-     ```bash
-     # env = NVD_BACKEND,direct
-     # env = LIBVA_DRIVER_NAME,nvidia
-     # env = __GLX_VENDOR_LIBRARY_NAME,nvidia
-     ```
-   - Note: Automation for Nvidia setup is planned via an [open issue](https://github.com/basecamp/omarchy/issues/4).
-
 ## How do I get rid of all the extra software?
 
 For packages
