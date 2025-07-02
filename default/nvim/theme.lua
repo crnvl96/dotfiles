@@ -217,6 +217,4 @@ hi link @markup.list Special
 hi link @diff.plus diffAdded
 hi link @diff.minus diffRemoved
 hi link @diff.delta diffChanged
-
-colorscheme ansi
 ]]
