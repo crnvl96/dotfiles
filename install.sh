@@ -11,7 +11,7 @@ _msg "Enabling helper functions..."
 if [ -f "$INSTALL_DIR/00-helpers.sh" ]; then
   source "$INSTALL_DIR/00-helpers.sh"
 else
-  _msg "ERROR: Helper script '00-helpers.sh' not found. Aborting." >&2
+  echo "ERROR: Helper script '00-helpers.sh' not found. Aborting." >&2
   exit 1
 fi
 

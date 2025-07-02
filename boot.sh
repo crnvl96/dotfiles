@@ -25,47 +25,47 @@ _msg "Starting dotfiles installation..."
 _msg "Ensuring 'multilib' repository is enabled..."
 
 if ! grep -q "^\\[multilib\\]" /etc/pacman.conf; then
-    _msg "Enabling multilib repository..."
+    echo "Enabling multilib repository..."
     sudo tee -a /etc/pacman.conf >/dev/null <<EOF
 
 [multilib]
 Include = /etc/pacman.d/mirrorlist
 EOF
-    _msg "Multilib repository enabled. Syncing package databases..."
+    echo "Multilib repository enabled. Syncing package databases..."
     sudo pacman -Syu --noconfirm
 else
-    _msg "Multilib repository is already enabled."
+    echo "Multilib repository is already enabled."
 fi
 
 # --- Step 2: Ensure Git is installed ---
 _msg "Checking for Git..."
 
 if ! command -v git &>/dev/null; then
-    _msg "Git not found. Installing..."
+    echo "Git not found. Installing..."
     sudo pacman -S --noconfirm --needed git
 else
-    _msg "Git is already installed."
+    echo "Git is already installed."
 fi
 
 # --- Step 3: Clone the dotfiles repository ---
 _msg "Cloning dotfiles repository from ${REPO_URL}..."
 
 if [ -d "$REPO_DIR" ]; then
-    _msg "Existing dotfiles directory found. Moving to ${REPO_BACKUP_DIR}."
+    echo "Existing dotfiles directory found. Moving to ${REPO_BACKUP_DIR}."
     mv -f "$REPO_DIR" "$REPO_BACKUP_DIR"
 fi
 
 if git clone "$REPO_URL" "$REPO_DIR"; then
-    _msg "Repository cloned successfully."
+    echo "Repository cloned successfully."
     cd "$REPO_DIR"
-    _msg "Setting remote URL to use SSH for future pulls/pushes."
+    echo "Setting remote URL to use SSH for future pulls/pushes."
     git remote set-url origin "$REPO_SSH_URL"
     cd - >/dev/null
     rm -rf "$REPO_BACKUP_DIR"
 else
-    _msg "ERROR: Git clone failed." >&2
+    echo "ERROR: Git clone failed." >&2
     if [ -d "$REPO_BACKUP_DIR" ]; then
-        _msg "Restoring backup from ${REPO_BACKUP_DIR}."
+        echo "Restoring backup from ${REPO_BACKUP_DIR}."
         mv -f "$REPO_BACKUP_DIR" "$REPO_DIR"
     fi
     exit 1
@@ -76,4 +76,5 @@ _msg "Executing the main installation script..."
 
 source "$REPO_DIR/install.sh"
 
+echo
 _msg "Dotfiles installation process finished."

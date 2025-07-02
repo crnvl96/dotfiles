@@ -3,6 +3,11 @@
 msg "Copying user configuration files from dotfiles..."
 cp -R ~/.local/share/dotfiles/config/* ~/.config/
 
+msg "Linking mini-deps-snap for Neovim..."
+if [ -d ~/.local/share/dotfiles/default/nvim/mini-deps-snap ]; then
+  ln -sf ~/.local/share/dotfiles/default/nvim/mini-deps-snap ~/.config/nvim/mini-deps-snap
+fi
+
 msg "Setting default .bashrc to source from dotfiles..."
 echo "source ~/.local/share/dotfiles/default/bash/bashrc" >~/.bashrc
 
