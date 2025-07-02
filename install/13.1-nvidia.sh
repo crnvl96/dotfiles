@@ -64,7 +64,7 @@ sudo sed -i -E "s/^(MODULES=\\()/\\1${NVIDIA_MODULES} /" "$MKINITCPIO_CONF"
 sudo sed -i -E 's/  +/ /g' "$MKINITCPIO_CONF" # Clean up potential double spaces
 
 msg "Rebuilding initramfs..."
-sudo mkinitcpio -P
+sudo mkinitcpio -P || true
 
 # --- Hyprland Environment Configuration ---
 HYPRLAND_CONF="$HOME/.config/hypr/hyprland.conf"
