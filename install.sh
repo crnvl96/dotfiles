@@ -1,18 +1,17 @@
-# install.sh - Main installer for all components.
-#
-# This script sources all shell scripts within the 'install' directory
-# in alphanumeric order to set up the system. It assumes that 'boot.sh'
-# has already been run.
+# --- install.sh - Main installer for all components. ---
 
-set -euo pipefail
+set -euo pipefail # Exit on error, undefined variable, or pipe failure.
 
-INSTALL_DIR="$REPO_DIR/install"
+INSTALL_DIR="$REPO_DIR/install" # Directory that contails the installation scripts
 
 # Source helper functions first. It must be named '00-helpers.sh' to be sourced first.
+
+_msg "Enabling helper functions..."
+
 if [ -f "$INSTALL_DIR/00-helpers.sh" ]; then
   source "$INSTALL_DIR/00-helpers.sh"
 else
-  echo "ERROR: Helper script '00-helpers.sh' not found. Aborting." >&2
+  _msg "ERROR: Helper script '00-helpers.sh' not found. Aborting." >&2
   exit 1
 fi
 
