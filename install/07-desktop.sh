@@ -21,7 +21,7 @@ desktop_packages=(
   "nautilus" "sushi" "gnome-calculator"
 
   # Essential Apps
-  "bitwarden" "chromium" "vlc" "evince" "imv"
+  "chromium" "vlc" "evince" "imv"
 )
 
 install_packages "${desktop_packages[@]}"
