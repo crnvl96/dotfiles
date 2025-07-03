@@ -57,7 +57,7 @@ if [ -n "$(lspci | grep -i 'nvidia')" ]; then
   NVIDIA_MODULES="nvidia nvidia_modeset nvidia_uvm nvidia_drm"
 
   # Create backup
-  sudo cp "$MKINITCPIO_CONF" "${MKINITCPIO_CONF}.backup"
+  sudo cp "$MKINITCPIO_CONF" "${MKINITCPIO_CONF}.backup" || true
 
   # Remove any old nvidia modules to prevent duplicates
   sudo sed -i -E 's/ nvidia_drm//g; s/ nvidia_uvm//g; s/ nvidia_modeset//g; s/ nvidia//g;' "$MKINITCPIO_CONF"
