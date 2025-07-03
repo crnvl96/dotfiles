@@ -3,7 +3,7 @@ Version=1.0
 Name=Bitwarden
 GenericName=Password Manager
 Comment=A secure and free password manager for all of your devices.
-Exec=bitwarden-desktop --ozone-platform=x11
+Exec=bitwarden-desktop --enable-features=UseOzonePlatform --ozone-platform=x11 --gtk-version=4
 Terminal=false
 MimeType=x-scheme-handler/bitwarden
 Type=Application
