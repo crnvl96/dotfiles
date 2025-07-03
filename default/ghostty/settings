@@ -1,6 +1,22 @@
-font-family = "Berkeley Mono"
-cursor-style-blink = false
-shell-integration-features = no-cursor
-confirm-close-surface = false
+# Font configuration
+font-family = CaskaydiaMono Nerd Font
 font-size = 10
-window-theme = ghostty
+adjust-cell-height=7%
+
+# Window settings
+window-padding-x = 14
+window-padding-y = 14
+window-decoration = false
+background-opacity = 0.98
+
+# Window behavior
+confirm-close-surface=false
+resize-overlay = never
+
+# Cursor stlying
+shell-integration-features = no-cursor
+cursor-style = "block"
+cursor-style-blink = false
+
+# Terminal settings
+term = xterm-256color

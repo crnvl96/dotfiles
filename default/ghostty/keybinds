@@ -1,3 +1,5 @@
+keybind = f11=toggle_fullscreen
+
 keybind = alt+one=goto_tab:1
 keybind = alt+two=goto_tab:2
 keybind = alt+three=goto_tab:3
