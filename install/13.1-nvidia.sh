@@ -9,74 +9,88 @@
 # ==============================================================================
 
 # --- GPU Detection ---
-if [ -n "$(lspci | grep -i 'nvidia')" ]; then
-  # --- Driver Selection ---
-  # Turing (16xx, 20xx), Ampere (30xx), Ada (40xx), and newer recommend the open-source kernel modules
-  if echo "$gpu_info" | grep -q -E "RTX [2-9][0-9]|GTX 16"; then
-    NVIDIA_DRIVER_PACKAGE="nvidia-open-dkms"
-  else
-    NVIDIA_DRIVER_PACKAGE="nvidia-dkms"
-  fi
+gpu_info=$(lspci | grep -i 'nvidia')
+if [ -z "$gpu_info" ]; then
+  msg "No NVIDIA GPU detected. Skipping driver installation."
+  return
+fi
 
-  # Check which kernel is installed and set appropriate headers package
-  KERNEL_HEADERS="linux-headers" # Default
-  if pacman -Q linux-zen &>/dev/null; then
-    KERNEL_HEADERS="linux-zen-headers"
-  elif pacman -Q linux-lts &>/dev/null; then
-    KERNEL_HEADERS="linux-lts-headers"
-  elif pacman -Q linux-hardened &>/dev/null; then
-    KERNEL_HEADERS="linux-hardened-headers"
-  fi
+msg "NVIDIA GPU detected. Installing drivers and configuring..."
 
-  # Enable multilib repository for 32-bit libraries
-  if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
-    sudo sed -i '/^#\[multilib\]/,/^#Include/ s/^#//' /etc/pacman.conf
-  fi
+# --- Driver Selection ---
+# Turing (16xx, 20xx), Ampere (30xx), Ada (40xx), and newer recommend the open-source kernel modules
+if echo "$gpu_info" | grep -q -E "RTX [2-9][0-9]|GTX 16"; then
+  NVIDIA_DRIVER_PACKAGE="nvidia-open-dkms"
+else
+  NVIDIA_DRIVER_PACKAGE="nvidia-dkms"
+fi
+msg "Selected driver package: ${NVIDIA_DRIVER_PACKAGE}"
 
-  # Install packages
-  PACKAGES_TO_INSTALL=(
-    "${KERNEL_HEADERS}"
-    "${NVIDIA_DRIVER_PACKAGE}"
-    "nvidia-utils"
-    "lib32-nvidia-utils"
-    "egl-wayland"
-    "libva-nvidia-driver" # For VA-API hardware acceleration
-    "qt5-wayland"
-    "qt6-wayland"
-  )
+# Check which kernel is installed and set appropriate headers package
+KERNEL_HEADERS="linux-headers" # Default
+if pacman -Q linux-zen &>/dev/null; then
+  KERNEL_HEADERS="linux-zen-headers"
+elif pacman -Q linux-lts &>/dev/null; then
+  KERNEL_HEADERS="linux-lts-headers"
+elif pacman -Q linux-hardened &>/dev/null; then
+  KERNEL_HEADERS="linux-hardened-headers"
+fi
+msg "Selected kernel headers: ${KERNEL_HEADERS}"
 
-  yay -Syu --needed --noconfirm "${PACKAGES_TO_INSTALL[@]}"
+# Enable multilib repository for 32-bit libraries
+if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
+  msg "Enabling multilib repository..."
+  sudo sed -i '/^#\[multilib\]/,/^#Include/ s/^#//' /etc/pacman.conf
+fi
 
-  # Configure modprobe for early KMS
-  echo "options nvidia_drm modeset=1" | sudo tee /etc/modprobe.d/nvidia.conf >/dev/null
+# Install packages
+msg "Installing NVIDIA packages..."
+nvidia_packages=(
+  "${KERNEL_HEADERS}"
+  "${NVIDIA_DRIVER_PACKAGE}"
+  "nvidia-utils"
+  "lib32-nvidia-utils"
+  "egl-wayland"
+  "libva-nvidia-driver" # For VA-API hardware acceleration
+  "qt5-wayland"
+  "qt6-wayland"
+)
+install_packages "${nvidia_packages[@]}"
 
-  # Configure mkinitcpio for early loading
-  MKINITCPIO_CONF="/etc/mkinitcpio.conf"
+# Configure modprobe for early KMS
+msg "Configuring modprobe for early KMS..."
+echo "options nvidia_drm modeset=1" | sudo tee /etc/modprobe.d/nvidia.conf >/dev/null
 
-  # Define modules
-  NVIDIA_MODULES="nvidia nvidia_modeset nvidia_uvm nvidia_drm"
+# Configure mkinitcpio for early loading
+msg "Configuring mkinitcpio for early loading..."
+MKINITCPIO_CONF="/etc/mkinitcpio.conf"
+NVIDIA_MODULES="nvidia nvidia_modeset nvidia_uvm nvidia_drm"
 
-  # Create backup
-  sudo cp "$MKINITCPIO_CONF" "${MKINITCPIO_CONF}.backup"
+msg "Backing up mkinitcpio.conf..."
+sudo cp "$MKINITCPIO_CONF" "${MKINITCPIO_CONF}.backup"
 
-  # Remove any old nvidia modules to prevent duplicates
-  sudo sed -i -E 's/ nvidia_drm//g; s/ nvidia_uvm//g; s/ nvidia_modeset//g; s/ nvidia//g;' "$MKINITCPIO_CONF"
-  # Add the new modules at the start of the MODULES array
-  sudo sed -i -E "s/^(MODULES=\\()/\\1${NVIDIA_MODULES} /" "$MKINITCPIO_CONF"
-  # Clean up potential double spaces
-  sudo sed -i -E 's/  +/ /g' "$MKINITCPIO_CONF"
+msg "Updating MODULES in mkinitcpio.conf..."
+# Remove any old nvidia modules to prevent duplicates
+sudo sed -i -E 's/ nvidia_drm//g; s/ nvidia_uvm//g; s/ nvidia_modeset//g; s/ nvidia//g;' "$MKINITCPIO_CONF"
+# Add the new modules at the start of the MODULES array
+sudo sed -i -E "s/^(MODULES=\\()/\\1${NVIDIA_MODULES} /" "$MKINITCPIO_CONF"
+# Clean up potential double spaces
+sudo sed -i -E 's/  +/ /g' "$MKINITCPIO_CONF"
 
-  sudo mkinitcpio -P
+msg "Rebuilding initramfs..."
+sudo mkinitcpio -P
 
-  # Add NVIDIA environment variables to hyprland.conf
-  HYPRLAND_CONF="$HOME/.config/hypr/hyprland.conf"
-  if [ -f "$HYPRLAND_CONF" ]; then
-    cat >>"$HYPRLAND_CONF" <<'EOF'
+# Add NVIDIA environment variables to hyprland.conf
+HYPRLAND_CONF="$HOME/.config/hypr/hyprland.conf"
+if [ ! -f "$HYPRLAND_CONF" ]; then
+  return
+fi
+
+msg "Adding NVIDIA environment variables to ${HYPRLAND_CONF}..."
+cat >>"$HYPRLAND_CONF" <<'EOF'
 
 # NVIDIA environment variables
 env = NVD_BACKEND,direct
 env = LIBVA_DRIVER_NAME,nvidia
 env = __GLX_VENDOR_LIBRARY_NAME,nvidia
 EOF
-  fi
-fi
