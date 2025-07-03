@@ -10,6 +10,9 @@ alias lta='lt -A'
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
 alias cd="zd"
 
+# Find packages without leaving the terminal
+alias yayf="yay -Slq | fzf --multi --preview 'yay -Sii {1}' --preview-window=down:75% | xargs -ro yay -S"
+
 zd() {
   if [ $# -eq 0 ]; then
     builtin cd ~ && return
