@@ -1,3 +1,10 @@
 [Desktop Entry]
 Version=1.0
+Name=Typora
+GenericName=Markdown Editor
 Exec=typora --ozone-platform=x11 %U
+Icon=typora
+Type=Application
+StartupNotify=true
+Categories=Office;WordProcessor;
+MimeType=text/markdown;text/x-markdown;
