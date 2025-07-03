@@ -1,1 +1,1 @@
-echo 'theme = Kanagawa Dragon' >> ~/.config/ghostty/config
+echo 'theme = Kanagawa Wave' >> ~/.config/ghostty/config
