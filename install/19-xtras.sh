@@ -4,7 +4,7 @@ msg "Installing extra applications..."
 extra_packages=(
   "spotify" "zoom"
   "libreoffice" "obs-studio" "kdenlive"
-  "xournalpp" "steam" "typora" "bitwarden"
+  "xournalpp" "steam" "typora" "bitwarden" "discord"
 )
 install_packages "${extra_packages[@]}"
 
