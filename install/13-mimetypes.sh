@@ -1,6 +1,7 @@
 # Configures default applications for common file types.
 
 msg "Updating desktop database for MIME types..."
+mkdir -p ~/.local/share/applications
 update-desktop-database ~/.local/share/applications
 
 msg "Setting default applications..."
