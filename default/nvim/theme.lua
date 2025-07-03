@@ -1,4 +1,4 @@
-vim.cmd [[
+vim.cmd([[
 
 set background=dark
 
@@ -96,7 +96,7 @@ hi link MiniFilesNormal Ignore
 hi link MiniFilesBorder Ignore
 hi link MiniFilesFile Ignore
 
-hi Pmenu ctermbg=0 ctermfg=15
+hi Pmenu ctermbg=15 ctermfg=0
 hi PmenuSbar ctermbg=8 ctermfg=7
 hi PmenuSel ctermbg=15 ctermfg=8 cterm=bold
 hi PmenuThumb ctermbg=7 ctermfg=NONE
@@ -217,4 +217,4 @@ hi link @markup.list Special
 hi link @diff.plus diffAdded
 hi link @diff.minus diffRemoved
 hi link @diff.delta diffChanged
-]]
+]])
