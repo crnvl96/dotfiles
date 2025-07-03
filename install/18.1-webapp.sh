@@ -39,5 +39,4 @@ web2app "YouTube" https://youtube.com/ https://cdn.jsdelivr.net/gh/homarr-labs/d
 web2app "GitHub" https://github.com/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/github-light.png
 web2app "Discord" https://discord.com/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/discord.png
 web2app "Teams" https://teams.microsoft.com/v2/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/microsoft-teams.png
-web2app "Bitwarden" https://bitwarden.com/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/bitwarden.png
 web2app "Excalidraw" https://excalidraw.com/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/excalidraw.png

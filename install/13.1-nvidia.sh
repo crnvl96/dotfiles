@@ -28,6 +28,11 @@ if [ -n "$(lspci | grep -i 'nvidia')" ]; then
     KERNEL_HEADERS="linux-hardened-headers"
   fi
 
+  # Enable multilib repository for 32-bit libraries
+  if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
+    sudo sed -i '/^#\[multilib\]/,/^#Include/ s/^#//' /etc/pacman.conf
+  fi
+
   # Install packages
   PACKAGES_TO_INSTALL=(
     "${KERNEL_HEADERS}"

@@ -7,6 +7,7 @@ cli_packages=(
   "wget" "curl" "unzip" "inetutils"
 
   # Modern replacements
+  "fd"        # 'find' replacement
   "eza"       # 'ls' replacement
   "fzf"       # Command-line fuzzy finder
   "ripgrep"   # 'grep' replacement

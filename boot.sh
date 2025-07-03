@@ -12,24 +12,6 @@ _msg() {
 
 _msg "Starting dotfiles installation..."
 
-# --- Step 1: Enable Multilib repository in pacman.conf ---
-# The multilib repository is required for running 32-bit applications on a 64-bit system
-
-_msg "Ensuring 'multilib' repository is enabled..."
-
-if ! grep -q "^\\[multilib\\]" /etc/pacman.conf; then
-    echo "Enabling multilib repository..."
-    sudo tee -a /etc/pacman.conf >/dev/null <<EOF
-
-[multilib]
-Include = /etc/pacman.d/mirrorlist
-EOF
-    echo "Multilib repository enabled. Syncing package databases..."
-    sudo pacman -Syu --noconfirm
-else
-    echo "Multilib repository is already enabled."
-fi
-
 # --- Step 2: Ensure Git is installed ---
 _msg "Checking for Git..."
 

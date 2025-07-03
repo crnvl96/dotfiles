@@ -8,7 +8,6 @@ alias la="eza -lA"
 alias lt='eza --tree --level=2 --long --icons --git'
 alias lta='lt -A'
 alias ff="fzf --preview 'bat --style=numbers --color=always {}'"
-alias fd='fdfind'
 alias cd="zd"
 
 zd() {
