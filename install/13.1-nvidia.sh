@@ -1,36 +1,40 @@
-# Installs and configures NVIDIA drivers for Hyprland.
+# ==============================================================================
+# Hyprland NVIDIA Setup Script for Arch Linux
+# ==============================================================================
+# This script automates the installation and configuration of NVIDIA drivers
+# for use with Hyprland on Arch Linux, following the official Hyprland wiki.
+#
+# Author: https://github.com/Kn0ax
+#
+# ==============================================================================
 
-msg "Checking for NVIDIA GPU..."
-
-gpu_info=$(lspci | grep -i 'nvidia')
-if [ -z "$gpu_info" ]; then
-    msg "No NVIDIA GPU found. Skipping."
-    return
-fi
-
-msg "NVIDIA GPU detected. Installing drivers and configuring system..."
-
-# --- Driver Selection ---
-# Select open-source or proprietary driver based on GPU architecture.
-if echo "$gpu_info" | grep -q -E "RTX [2-9][0-9]|GTX 16"; then
+# --- GPU Detection ---
+if [ -n "$(lspci | grep -i 'nvidia')" ]; then
+  # --- Driver Selection ---
+  # Turing (16xx, 20xx), Ampere (30xx), Ada (40xx), and newer recommend the open-source kernel modules
+  if echo "$gpu_info" | grep -q -E "RTX [2-9][0-9]|GTX 16"; then
     NVIDIA_DRIVER_PACKAGE="nvidia-open-dkms"
-else
+  else
     NVIDIA_DRIVER_PACKAGE="nvidia-dkms"
-fi
+  fi
 
-# Select kernel headers based on the installed kernel.
-KERNEL_HEADERS="linux-headers" # Default
-if pacman -Q linux-zen &>/dev/null; then
+  # Check which kernel is installed and set appropriate headers package
+  KERNEL_HEADERS="linux-headers" # Default
+  if pacman -Q linux-zen &>/dev/null; then
     KERNEL_HEADERS="linux-zen-headers"
-elif pacman -Q linux-lts &>/dev/null; then
+  elif pacman -Q linux-lts &>/dev/null; then
     KERNEL_HEADERS="linux-lts-headers"
-elif pacman -Q linux-hardened &>/dev/null; then
+  elif pacman -Q linux-hardened &>/dev/null; then
     KERNEL_HEADERS="linux-hardened-headers"
-fi
+  fi
 
-# --- Package Installation ---
-msg "Installing NVIDIA packages..."
-nvidia_packages=(
+  # Enable multilib repository for 32-bit libraries
+  if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
+    sudo sed -i '/^#\[multilib\]/,/^#Include/ s/^#//' /etc/pacman.conf
+  fi
+
+  # Install packages
+  PACKAGES_TO_INSTALL=(
     "${KERNEL_HEADERS}"
     "${NVIDIA_DRIVER_PACKAGE}"
     "nvidia-utils"
@@ -39,49 +43,40 @@ nvidia_packages=(
     "libva-nvidia-driver" # For VA-API hardware acceleration
     "qt5-wayland"
     "qt6-wayland"
-)
-# The `install_packages` function uses the `--noconfirm` flag, which causes the installation to fail if there's a conflict.
-# Replace the call to `install_packages` with a direct `yay` command for this specific set of packages.
-# By removing `--noconfirm`, `yay` will prompt when it finds a conflict, and the `yes |` pipe will automatically answer "y" to it.
-yes | yay -S --needed "${nvidia_packages[@]}" || true
+  )
 
-# --- Kernel Module Configuration ---
-msg "Configuring kernel modules for early KMS..."
-echo "options nvidia_drm modeset=1" | sudo tee /etc/modprobe.d/nvidia.conf >/dev/null
+  yay -Syu --needed --noconfirm "${PACKAGES_TO_INSTALL[@]}"
 
-msg "Configuring mkinitcpio for early module loading..."
-MKINITCPIO_CONF="/etc/mkinitcpio.conf"
-NVIDIA_MODULES="nvidia nvidia_modeset nvidia_uvm nvidia_drm"
+  # Configure modprobe for early KMS
+  echo "options nvidia_drm modeset=1" | sudo tee /etc/modprobe.d/nvidia.conf >/dev/null
 
-# Create a backup before modifying.
-if [ -f "$MKINITCPIO_CONF" ]; then
-    sudo cp "$MKINITCPIO_CONF" "${MKINITCPIO_CONF}.backup"
-fi
+  # Configure mkinitcpio for early loading
+  MKINITCPIO_CONF="/etc/mkinitcpio.conf"
 
-# Remove existing nvidia modules to prevent duplicates, then add the new ones.
-sudo sed -i -E 's/ nvidia_drm//g; s/ nvidia_uvm//g; s/ nvidia_modeset//g; s/ nvidia//g;' "$MKINITCPIO_CONF"
-sudo sed -i -E "s/^(MODULES=\\()/\\1${NVIDIA_MODULES} /" "$MKINITCPIO_CONF"
-sudo sed -i -E 's/  +/ /g' "$MKINITCPIO_CONF" # Clean up potential double spaces
+  # Define modules
+  NVIDIA_MODULES="nvidia nvidia_modeset nvidia_uvm nvidia_drm"
 
-msg "Rebuilding initramfs..."
-sudo mkinitcpio -P || true
+  # Create backup
+  sudo cp "$MKINITCPIO_CONF" "${MKINITCPIO_CONF}.backup"
 
-# --- Hyprland Environment Configuration ---
-HYPRLAND_CONF="$HOME/.config/hypr/hyprland.conf"
-if [ -f "$HYPRLAND_CONF" ]; then
-    # Check if variables are already present to avoid duplication.
-    if ! grep -q "env = NVD_BACKEND,direct" "$HYPRLAND_CONF"; then
-        msg "Adding NVIDIA environment variables to ${HYPRLAND_CONF}..."
-        cat >> "$HYPRLAND_CONF" << 'EOF'
+  # Remove any old nvidia modules to prevent duplicates
+  sudo sed -i -E 's/ nvidia_drm//g; s/ nvidia_uvm//g; s/ nvidia_modeset//g; s/ nvidia//g;' "$MKINITCPIO_CONF"
+  # Add the new modules at the start of the MODULES array
+  sudo sed -i -E "s/^(MODULES=\\()/\\1${NVIDIA_MODULES} /" "$MKINITCPIO_CONF"
+  # Clean up potential double spaces
+  sudo sed -i -E 's/  +/ /g' "$MKINITCPIO_CONF"
+
+  sudo mkinitcpio -P
+
+  # Add NVIDIA environment variables to hyprland.conf
+  HYPRLAND_CONF="$HOME/.config/hypr/hyprland.conf"
+  if [ -f "$HYPRLAND_CONF" ]; then
+    cat >>"$HYPRLAND_CONF" <<'EOF'
 
 # NVIDIA environment variables
 env = NVD_BACKEND,direct
 env = LIBVA_DRIVER_NAME,nvidia
 env = __GLX_VENDOR_LIBRARY_NAME,nvidia
 EOF
-    else
-        msg "NVIDIA environment variables already present in ${HYPRLAND_CONF}. Skipping."
-    fi
-else
-    msg "Hyprland config not found at ${HYPRLAND_CONF}. Skipping."
+  fi
 fi
