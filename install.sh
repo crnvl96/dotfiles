@@ -1,7 +1,5 @@
 # --- install.sh - Main installer for all components. ---
 
-set -euo pipefail # Exit on error, undefined variable, or pipe failure.
-
 INSTALL_DIR="$REPO_DIR/install" # Directory that contails the installation scripts
 
 # Source helper functions first. It must be named '00-helpers.sh' to be sourced first.

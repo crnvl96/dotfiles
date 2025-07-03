@@ -28,11 +28,6 @@ if [ -n "$(lspci | grep -i 'nvidia')" ]; then
     KERNEL_HEADERS="linux-hardened-headers"
   fi
 
-  # Enable multilib repository for 32-bit libraries
-  if ! grep -q "^\[multilib\]" /etc/pacman.conf; then
-    sudo sed -i '/^#\[multilib\]/,/^#Include/ s/^#//' /etc/pacman.conf
-  fi
-
   # Install packages
   PACKAGES_TO_INSTALL=(
     "${KERNEL_HEADERS}"
@@ -45,7 +40,7 @@ if [ -n "$(lspci | grep -i 'nvidia')" ]; then
     "qt6-wayland"
   )
 
-  yes | yay -Syu --needed "${PACKAGES_TO_INSTALL[@]}" || true
+  yay -Syu --needed --noconfirm "${PACKAGES_TO_INSTALL[@]}"
 
   # Configure modprobe for early KMS
   echo "options nvidia_drm modeset=1" | sudo tee /etc/modprobe.d/nvidia.conf >/dev/null
@@ -57,7 +52,7 @@ if [ -n "$(lspci | grep -i 'nvidia')" ]; then
   NVIDIA_MODULES="nvidia nvidia_modeset nvidia_uvm nvidia_drm"
 
   # Create backup
-  sudo cp "$MKINITCPIO_CONF" "${MKINITCPIO_CONF}.backup" || true
+  sudo cp "$MKINITCPIO_CONF" "${MKINITCPIO_CONF}.backup"
 
   # Remove any old nvidia modules to prevent duplicates
   sudo sed -i -E 's/ nvidia_drm//g; s/ nvidia_uvm//g; s/ nvidia_modeset//g; s/ nvidia//g;' "$MKINITCPIO_CONF"

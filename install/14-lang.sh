@@ -1,6 +1,7 @@
 # Installs Langs using 'mise'
 
-if command_exists uv; then
+UV_INSTALLED=$(mise ls -g | grep -E '^uv')
+if [ -n "$UV_INSTALLED" ]; then
   msg "uv is already installed."
 else
   msg "Installing uv via mise..."
@@ -10,7 +11,8 @@ else
   mise use uv -g
 fi
 
-if command_exists ruby; then
+RUBY_INSTALLED=$(mise ls -g | grep -E '^ruby')
+if [ -n "$RUBY_INSTALLED" ]; then
   msg "Ruby is already installed."
 else
   msg "Installing Ruby via mise..."
@@ -31,17 +33,19 @@ else
 fi
 
 
-if command_exists rustc; then
-  msg "Rust is already installed."
+RUST_INSTALLED=$(mise ls -g | grep -E '^rust')
+if [ -n "$RUST_INSTALLED" ]; then
+  msg "Rust is already installed via mise. Version: $RUST_VERSION"
 else
-  msg "Installing Rust via mise..."
+  msg "Rust is not installed via mise. Installing Rust..."
   msg "Installing and setting global Rust version..."
 
   mise install rust@nightly
   mise use rust -g
 fi
 
-if command_exists go; then
+GO_INSTALLED=$(mise ls -g | grep -E '^go')
+if [ -n "$GO_INSTALLED" ]; then
   msg "Golang is already installed."
 else
   msg "Installing Golang via mise..."
@@ -51,7 +55,8 @@ else
   mise use go -g
 fi
 
-if command_exists node; then
+NODE_INSTALLED=$(mise ls -g | grep -E '^node')
+if [ -n "$NODE_INSTALLED" ]; then
   msg "Node is already installed."
 else
   msg "Installing Node via mise..."

@@ -1,7 +1,5 @@
 # --- boot.sh - Initial setup script for the dotfiles ---
 
-set -euo pipefail # Exit on error, undefined variable, or pipe failure.
-
 REPO_DIR="$HOME/.local/share/dotfiles"
 REPO_BACKUP_DIR="$HOME/.local/share/dotfiles.bak"
 REPO_URL="https://github.com/crnvl96/dotfiles.git"
@@ -11,11 +9,6 @@ REPO_SSH_URL="git@github.com:crnvl96/dotfiles.git"
 _msg() {
   echo -e "\n\033[1;34m=>\033[0;1m $1\033[0m"
 }
-
-if [ "$PWD" != "$HOME" ]; then
-  _msg "ERROR: Please run this script from your home directory (\$HOME: $HOME). Current directory: $PWD." >&2
-  exit 1
-fi
 
 _msg "Starting dotfiles installation..."
 
