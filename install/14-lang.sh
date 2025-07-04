@@ -41,7 +41,7 @@ else
   msg "Installing and setting global Rust version..."
 
   mise install rust@nightly
-  mise use rust -g
+  mise use rust@nightly -g
 fi
 
 GO_INSTALLED=$(mise ls -g | grep -E '^go')

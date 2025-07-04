@@ -29,6 +29,7 @@ vim.o.splitright = true
 vim.o.swapfile = false
 vim.o.undofile = true
 vim.o.writebackup = false
+vim.opt.fillchars:append("eob: ")
 
 vim.opt.diffopt = {
 	"internal",
