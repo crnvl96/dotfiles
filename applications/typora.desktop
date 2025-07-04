@@ -2,7 +2,8 @@
 Version=1.0
 Name=Typora
 GenericName=Markdown Editor
-Exec=typora --enable-features=UseOzonePlatform --ozone-platform=x11 --gtk-version=4 %U
+# nvidia
+Exec=typora --enable-features=UseOzonePlatform --ozone-platform=x11 %U
 Icon=typora
 Type=Application
 StartupNotify=true

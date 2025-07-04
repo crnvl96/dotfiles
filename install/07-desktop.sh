@@ -16,6 +16,7 @@ desktop_packages=(
   # Clipboard management
   "wl-clip-persist" # Persist clipboard content after closing apps
   "clipse"          # Clipboard manager
+  "cliphist"        # Manager for xwayland (nvidia)
 
   # Core GNOME utilities
   "nautilus" "sushi" "gnome-calculator"
