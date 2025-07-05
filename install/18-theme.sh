@@ -33,7 +33,7 @@ ln -snf ~/.config/dotfiles/current/theme/mako.ini ~/.config/mako/config
 # Set initial background
 source ~/.local/share/dotfiles/themes/nord/backgrounds.sh
 ln -snf ~/.config/dotfiles/backgrounds/nord ~/.config/dotfiles/current/backgrounds
-ln -snf ~/.config/dotfiles/current/backgrounds/2-nord.jpg ~/.config/dotfiles/current/background
+ln -snf ~/.config/dotfiles/current/backgrounds/nord-1.png ~/.config/dotfiles/current/background
 
 # Set ghostty theme
 source ~/.local/share/dotfiles/themes/nord/ghostty.sh
