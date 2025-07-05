@@ -9,6 +9,4 @@ extra_packages=(
 install_packages "${extra_packages[@]}"
 
 msg "Installing custom application icons..."
-
-# Copy over applications
 source ~/.local/share/dotfiles/bin/sync-applications || true
