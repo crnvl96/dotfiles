@@ -2,7 +2,7 @@
 
 msg "Configuring system themes..."
 
-# Use dark mode for QT apps (like VLC, kdenlive) via Kvantum.
+# Use dark mode for QT apps (like kdenlive) via Kvantum.
 install_packages kvantum-qt5
 
 # Set GTK theme to Adwaita-dark.

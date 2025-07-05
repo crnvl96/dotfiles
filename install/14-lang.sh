@@ -1,5 +1,15 @@
 # Installs Langs using 'mise'
 
+# Install Ruby using gcc-14 for compatibility.
+msg "Installing gcc14 as a build dependency for Ruby..."
+install_packages gcc14
+
+msg "Configuring mise to use gcc-14 for Ruby builds..."
+mise settings set ruby.ruby_build_opts "CC=gcc-14 CXX=g++-14"
+
+msg "Configuring mise to trust .ruby-version files..."
+mise settings add idiomatic_version_file_enable_tools ruby
+
 UV_INSTALLED=$(mise ls -g | grep -E '^uv')
 if [ -n "$UV_INSTALLED" ]; then
   msg "uv is already installed."
@@ -10,28 +20,6 @@ else
   mise install uv
   mise use uv -g
 fi
-
-RUBY_INSTALLED=$(mise ls -g | grep -E '^ruby')
-if [ -n "$RUBY_INSTALLED" ]; then
-  msg "Ruby is already installed."
-else
-  msg "Installing Ruby via mise..."
-
-  # Install Ruby using gcc-14 for compatibility.
-  msg "Installing gcc14 as a build dependency for Ruby..."
-  install_packages gcc14
-
-  msg "Configuring mise to use gcc-14 for Ruby builds..."
-  mise settings set ruby.ruby_build_opts "CC=gcc-14 CXX=g++-14"
-
-  msg "Installing and setting global Ruby version..."
-  mise install ruby
-  mise use ruby -g
-
-  msg "Configuring mise to trust .ruby-version files..."
-  mise settings add idiomatic_version_file_enable_tools ruby
-fi
-
 
 RUST_INSTALLED=$(mise ls -g | grep -E '^rust')
 if [ -n "$RUST_INSTALLED" ]; then

@@ -1,5 +1,8 @@
 # Applies core system and user configurations.
 
+# Ensure application directory exists for update-desktop-database
+mkdir -p ~/.local/share/applications
+
 msg "Copying user configuration files from dotfiles..."
 cp -R ~/.local/share/dotfiles/config/* ~/.config/
 

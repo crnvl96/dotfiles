@@ -15,14 +15,14 @@ desktop_packages=(
 
   # Clipboard management
   "wl-clip-persist" # Persist clipboard content after closing apps
-  "clipse"          # Clipboard manager
+  "clipse-bin"          # Clipboard manager
   # "cliphist"        # Manager for xwayland (nvidia)
 
   # Core GNOME utilities
   "nautilus" "sushi" "gnome-calculator"
 
   # Essential Apps
-  "chromium" "vlc" "evince" "imv"
+  "chromium" "mpv" "evince" "imv" "localsend-bin"
 )
 
 install_packages "${desktop_packages[@]}"

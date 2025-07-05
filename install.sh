@@ -1,4 +1,8 @@
-# --- install.sh - Main installer for all components. ---
+# Exit immediately if a command exits with a non-zero status
+set -e
+
+# Give a chance to retry running the installation
+trap 'echo "Dotfiles installation failed! You can retry by running: source ~/.local/share/dotfiles/install.sh"' ERR
 
 INSTALL_DIR="$REPO_DIR/install" # Directory that contails the installation scripts
 
