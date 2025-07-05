@@ -1,3 +1,5 @@
+source ~/.local/share/dotfiles/default/bash/functions
+
 web2app "Excalidraw" https://excalidraw.com/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/excalidraw.png
 web2app "WhatsApp" https://web.whatsapp.com/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/whatsapp.png
 web2app "YouTube" https://youtube.com/ https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/png/youtube.png
