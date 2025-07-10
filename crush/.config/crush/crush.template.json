@@ -1,0 +1,55 @@
+{
+  "$schema": "https://charm.land/crush.json",
+  "lsp": {
+    "python": {
+      "command": "pyright-langserver",
+      "args": [
+        "--stdio"
+      ]
+    },
+    "typescript": {
+      "command": "typescript-language-server",
+      "args": [
+        "--stdio"
+      ]
+    },
+    "go": {
+      "command": "gopls"
+    },
+    "lua": {
+      "command": "lua-language-server"
+    }
+  },
+  "mcp": {
+    "context7": {
+      "type": "http",
+      "url": "https://mcp.context7.com/mcp",
+      "headers": {
+        "CONTEXT7_API_KEY": "{CONTEXT7_API_KEY}"
+      }
+    },
+    "tavily": {
+      "type": "http",
+      "url": "https://mcp.tavily.com/mcp/?tavilyApiKey={TAVILY_API_KEY}"
+    },
+    "Ref": {
+      "type": "http",
+      "url": "https://api.ref.tools/mcp?apiKey={REF_API_KEY}"
+    },
+    "firecrawl": {
+      "type": "sse",
+      "url": "https://mcp.firecrawl.dev/{FIRECRAWL_API_KEY}/sse"
+    },
+    "serper": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "serper-search-scrape-mcp-server"
+      ],
+      "env": {
+        "SERPER_API_KEY": "{SERPER_API_KEY}"
+      }
+    }
+  }
+}

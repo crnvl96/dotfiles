@@ -1,0 +1,11 @@
+.env
+.git/
+.crush/
+
+**/.codex/**
+!**/.codex/config.template.toml
+
+.serena/
+
+crush.json
+opencode.jsonc
