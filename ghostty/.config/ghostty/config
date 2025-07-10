@@ -1,0 +1,95 @@
+# Copy the configuration below and add it to your
+# ~/.config/ghostty/config file
+
+# Colors (Root Loops)
+# via https://rootloops.sh?sugar=6&colors=6&sogginess=6&flavor=0&fruit=7&milk=1
+
+background = 0b262a
+foreground = a3e2ee
+
+# black
+palette = 0=#163d43
+palette = 8=#2a656f
+
+# red
+palette = 1=#c45c80
+palette = 9=#d87595
+
+# green
+palette = 2=#7c8d45
+palette = 10=#90a254
+
+# yellow
+palette = 3=#b07542
+palette = 11=#c88953
+
+# blue
+palette = 4=#488bb8
+palette = 12=#5ba1d0
+
+# purple
+palette = 5=#916eca
+palette = 13=#a586d9
+
+# aqua
+palette = 6=#469486
+palette = 14=#55aa9b
+
+# white
+palette = 7=#58b0bf
+palette = 15=#8cd9e7
+
+
+font-family = "JetBrainsMonoNerdFont"
+font-size = 12
+
+window-decoration = true
+
+window-theme = ghostty
+window-inherit-working-directory = true
+working-directory = inherit
+window-padding-x = 10,0
+window-padding-y = 10,0
+
+cursor-style-blink = false
+shell-integration-features = no-cursor
+
+confirm-close-surface = false
+
+keybind = alt+one=goto_tab:1
+keybind = alt+two=goto_tab:2
+keybind = alt+three=goto_tab:3
+keybind = alt+four=goto_tab:4
+keybind = alt+five=goto_tab:5
+keybind = alt+six=goto_tab:6
+keybind = alt+seven=goto_tab:7
+keybind = alt+eight=goto_tab:8
+keybind = alt+nine=goto_tab:9
+keybind = alt+zero=reset_font_size
+
+keybind = alt+shift+comma=move_tab:-1
+keybind = alt+shift+.=move_tab:1
+
+keybind = alt+equal=increase_font_size:1
+keybind = alt+minus=decrease_font_size:1
+
+keybind = alt+shift+k=goto_split:top
+keybind = alt+shift+j=goto_split:bottom
+keybind = alt+shift+h=goto_split:left
+keybind = alt+shift+l=goto_split:right
+
+keybind = alt+shift+up=resize_split:up,10
+keybind = alt+shift+down=resize_split:down,10
+keybind = alt+shift+right=resize_split:right,100
+keybind = alt+shift+left=resize_split:left,100
+
+keybind = alt+shift+c=new_tab
+keybind = alt+shift+x=close_surface
+keybind = alt+shift+v=new_split:right
+keybind = alt+shift+u=reload_config
+keybind = alt+shift+s=new_split:down
+keybind = alt+shift+f=scroll_page_down
+keybind = alt+shift+b=scroll_page_up
+keybind = alt+shift+r=prompt_tab_title
+keybind = alt+shift+y=write_screen_file:copy,plain
+keybind = alt+shift+p=toggle_command_palette

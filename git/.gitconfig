@@ -1,0 +1,42 @@
+[user]
+    name = Adran Carnavale
+    email = adran.carnavale@gmail.com
+    signingkey = ~/.ssh/id_ed25519.pub
+[github]
+    user = crnvl96
+[init]
+    defaultBranch = main
+[core]
+    editor = $EDITOR
+    excludesfile = ~/.gitignore_global
+[pager]
+    diff = diff-so-fancy | less --tabs=4 -RFXS --pattern '^(Date|added|deleted|modified): '
+[commit]
+    gpgsign = true
+[gpg]
+    format = ssh
+[pull]
+    rebase = false
+[fetch]
+    prune = true
+[merge]
+    conflictstyle = diff3
+[diff]
+    tool = nvim_difftool
+[difftool "nvim_difftool"]
+    cmd = nvim -c \"packadd nvim.difftool\" -d \"$LOCAL\" \"$REMOTE\"
+[color]
+    ui = true
+[color "diff-highlight"]
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22
+[color "diff"]
+    meta = 11
+    frag = magenta bold
+    func = 146 bold
+    commit = yellow bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
