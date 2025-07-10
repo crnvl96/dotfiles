@@ -176,6 +176,11 @@ Each time you are going to create a file, use a single concise sentence inform t
         },
       },
     },
+    -- [ ] openai
+    -- [X] anthropic
+    -- [ ] deepseek
+    -- [ ] xai
+    -- [ ] venice
     adapters = {
       openai = function()
         return require('codecompanion.adapters').extend('openai', {
