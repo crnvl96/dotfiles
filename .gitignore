@@ -1,0 +1,10 @@
+# mise
+mise/.config/mise/.env.local
+
+# Node
+node_modules/
+
+# Environment/secrets
+.env
+.env.*
+!.env.example

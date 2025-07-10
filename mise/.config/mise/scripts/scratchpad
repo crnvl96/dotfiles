@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+file="$(mktemp /tmp/scratchpad.XXXXXX.md)"
+"${EDITOR:-nvim}" "$file"
