@@ -1,0 +1,21 @@
+[github]
+    user = crnvl96
+[init]
+    defaultBranch = main
+[core]
+    editor = $EDITOR
+    excludesfile = ~/.gitignore_global
+[commit]
+    gpgsign = true
+[gpg]
+    format = ssh
+[pull]
+    rebase = true
+[user]
+    name = Adran Carnavale
+    email = adran@hey.com
+    signingkey = ~/.ssh/id_ed25519.pub
+[merge]
+	tool = nvimdiff
+[diff]
+	tool = nvimdiff
