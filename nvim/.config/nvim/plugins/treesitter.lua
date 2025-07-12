@@ -21,6 +21,7 @@ MiniDeps.now(function()
     'tsx',
     'ruby',
     'python',
+    'rust',
   }
 
   require('nvim-treesitter').install(parsers)
