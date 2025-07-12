@@ -41,6 +41,7 @@ MiniDeps.later(function()
       lua = { 'stylua' },
       markdown = { 'prettier', 'injected' },
       python = { 'ruff_fix', 'ruff_organize_imports', 'ruff_format' },
+      rust = { 'rustfmt' },
       typescript = { 'prettier' },
       typescriptreact = { 'prettier' },
     },

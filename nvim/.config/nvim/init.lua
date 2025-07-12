@@ -46,6 +46,7 @@ dofile(NVIM_DIR .. '/plugins/blink.lua')
 dofile(NVIM_DIR .. '/plugins/codecompanion.lua')
 dofile(NVIM_DIR .. '/plugins/fzf.lua')
 dofile(NVIM_DIR .. '/plugins/minifiles.lua')
+dofile(NVIM_DIR .. '/plugins/rustaceanvim.lua')
 
 -- MiniDeps.later(function()
 -- 	vim.cmd("set rtp+=~/Developer/personal/lazydocker.nvim/")

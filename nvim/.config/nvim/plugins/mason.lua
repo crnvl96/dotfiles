@@ -25,6 +25,14 @@ MiniDeps.now(function()
         'pyright',
         'ruff',
         'typescript-language-server', -- ts_ls
+        'tailwindcss-language-server', -- tailwindcss
+        'rust-analyzer', -- rust_analyzer
+
+        'bacon-ls', -- an alternative lsp for rust
+
+        -- Debuggers
+        'codelldb', -- rust debugger
+        'debugpy', -- python debuffer
       }) do
         local p = mr.get_package(tool)
         if not p:is_installed() then p:install() end
