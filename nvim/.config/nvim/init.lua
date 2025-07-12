@@ -22,7 +22,7 @@ require('mini.deps').setup({
 })
 
 local HOME = os.getenv('HOME')
-local node_version_cmd = "mise ls -g | grep '^node' | head -n 1 | awk '{print $2}'"
+local node_version_cmd = "mise ls --cd ~ | grep '^node' | head -n 1 | awk '{print $2}'"
 local node_version = vim.fn.system(node_version_cmd):gsub('\n', '')
 
 if node_version == '' then
