@@ -241,7 +241,7 @@ Each time you are going to create a file, use a single concise sentence inform t
           },
           schema = {
             model = {
-              default = 'dolphin-2.9.2-qwen2-72b',
+              default = 'mistral-31-24b',
             },
             temperature = {
               order = 2,
