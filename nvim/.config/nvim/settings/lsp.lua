@@ -1,5 +1,5 @@
 local lsp_dir = NVIM_DIR .. '/lsp'
-local excluded_servers = { 'basedpyright', 'pyrefly', 'rubocop' }
+local excluded_servers = {}
 
 local lsp_servers = {}
 for _, file in ipairs(vim.fn.glob(lsp_dir .. '/*.lua', true, true)) do

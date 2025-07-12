@@ -19,7 +19,6 @@ MiniDeps.now(function()
     'javascript',
     'typescript',
     'tsx',
-    'ruby',
     'python',
     'rust',
   }
