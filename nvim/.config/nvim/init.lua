@@ -15,31 +15,48 @@ if not vim.loop.fs_stat(MINI_PATH) then
   vim.cmd('echo "Installed `mini.nvim`" | redraw')
 end
 
-require('mini.deps').setup({
-  path = {
-    snapshot = NVIM_DIR .. '/mini-deps-snap',
-  },
-})
+require('mini.deps').setup({ path = { snapshot = NVIM_DIR .. '/mini-deps-snap' } })
+require('mini.icons').setup()
 
-local HOME = os.getenv('HOME')
-local node_version_cmd = "mise ls --cd ~ | grep '^node' | head -n 1 | awk '{print $2}'"
-local node_version = vim.fn.system(node_version_cmd):gsub('\n', '')
-
-if node_version == '' then
-  vim.notify(
-    'Could not determine Node.js version from mise. Please ensure mise is installed and a Node.js version is set.',
-    vim.log.levels.WARN
-  )
-else
-  local default_nodejs = HOME .. '/.local/share/mise/installs/node/' .. node_version .. '/bin/'
-  vim.g.node_host_prog = default_nodejs .. 'node'
-  vim.env.PATH = default_nodejs .. ':' .. vim.env.PATH
-end
-
+dofile(NVIM_DIR .. '/settings/path.lua')
 dofile(NVIM_DIR .. '/settings/theme.lua')
 dofile(NVIM_DIR .. '/settings/lsp.lua')
 dofile(NVIM_DIR .. '/settings/opts.lua')
 dofile(NVIM_DIR .. '/settings/keymaps.lua')
 dofile(NVIM_DIR .. '/settings/autocmds.lua')
 dofile(NVIM_DIR .. '/settings/onattach.lua')
-dofile(NVIM_DIR .. '/settings/plugins.lua')
+
+MiniDeps.now(function()
+  MiniDeps.add({ name = 'mini.nvim' })
+  MiniDeps.add('nvim-lua/plenary.nvim')
+  MiniDeps.add('neovim/nvim-lspconfig')
+  MiniDeps.add('tpope/vim-fugitive')
+  MiniDeps.add('tpope/vim-rhubarb')
+  MiniDeps.add('tpope/vim-sleuth')
+  MiniDeps.add('mbbill/undotree')
+end)
+
+dofile(NVIM_DIR .. '/plugins/mason.lua')
+dofile(NVIM_DIR .. '/plugins/treesitter.lua')
+dofile(NVIM_DIR .. '/plugins/grug-far.lua')
+dofile(NVIM_DIR .. '/plugins/conform.lua')
+dofile(NVIM_DIR .. '/plugins/nvim-lint.lua')
+dofile(NVIM_DIR .. '/plugins/nvim-dap.lua')
+dofile(NVIM_DIR .. '/plugins/blink.lua')
+dofile(NVIM_DIR .. '/plugins/codecompanion.lua')
+dofile(NVIM_DIR .. '/plugins/fzf.lua')
+dofile(NVIM_DIR .. '/plugins/minifiles.lua')
+
+-- MiniDeps.later(function()
+-- 	vim.cmd("set rtp+=~/Developer/personal/lazydocker.nvim/")
+-- 	require("lazydocker").setup({
+-- 		window = {
+-- 			settings = {
+-- 				width = 0.9,
+-- 				height = 0.9,
+-- 			},
+-- 		},
+-- 	})
+-- 	vim.keymap.set({ "n", "t" }, "<leader>zz", "<Cmd>lua LazyDocker.toggle()<CR>")
+-- 	vim.keymap.set({ "n", "t" }, "<leader>zp", "<Cmd>lua LazyDocker.toggle({engine='podman'})<CR>")
+-- end)
