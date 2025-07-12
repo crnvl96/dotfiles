@@ -11,14 +11,8 @@ MiniDeps.now(function()
   MiniDeps.add('tpope/vim-rhubarb')
   MiniDeps.add('tpope/vim-sleuth')
   MiniDeps.add('mbbill/undotree')
-  MiniDeps.add('christoomey/vim-tmux-navigator')
 
   require('mini.doc').setup()
-
-  vim.keymap.set('n', '<C-h>', '<Cmd>TmuxNavigateLeft<CR>')
-  vim.keymap.set('n', '<C-j>', '<Cmd>TmuxNavigateDown<CR>')
-  vim.keymap.set('n', '<C-k>', '<Cmd>TmuxNavigateUp<CR>')
-  vim.keymap.set('n', '<C-l>', '<Cmd>TmuxNavigateRight<CR>')
 end)
 
 MiniDeps.now(function()

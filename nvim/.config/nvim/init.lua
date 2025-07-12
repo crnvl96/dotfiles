@@ -36,10 +36,10 @@ else
   vim.env.PATH = default_nodejs .. ':' .. vim.env.PATH
 end
 
-dofile(NVIM_DIR .. '/theme.lua')
-dofile(NVIM_DIR .. '/lsp.lua')
-dofile(NVIM_DIR .. '/settings.lua')
-dofile(NVIM_DIR .. '/keymaps.lua')
-dofile(NVIM_DIR .. '/autocmds.lua')
-dofile(NVIM_DIR .. '/onattach.lua')
-dofile(NVIM_DIR .. '/plugins.lua')
+dofile(NVIM_DIR .. '/settings/theme.lua')
+dofile(NVIM_DIR .. '/settings/lsp.lua')
+dofile(NVIM_DIR .. '/settings/opts.lua')
+dofile(NVIM_DIR .. '/settings/keymaps.lua')
+dofile(NVIM_DIR .. '/settings/autocmds.lua')
+dofile(NVIM_DIR .. '/settings/onattach.lua')
+dofile(NVIM_DIR .. '/settings/plugins.lua')

@@ -1,11 +1,11 @@
 local methods = vim.lsp.protocol.Methods
 
-vim.diagnostic.config {
+vim.diagnostic.config({
   virtual_text = true,
   virtual_lines = false,
   float = true,
   signs = false,
-}
+})
 
 local function on_attach(client, bufnr)
   vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
@@ -34,10 +34,7 @@ local function on_attach(client, bufnr)
     local toggle = function()
       local enabled = vim.lsp.inlay_hint.is_enabled()
       vim.lsp.inlay_hint.enable(not enabled)
-      vim.notify(
-        enabled and 'Enabled' or 'Disabled' .. ' inlay hints.',
-        vim.log.levels.INFO
-      )
+      vim.notify(enabled and 'Enabled' or 'Disabled' .. ' inlay hints.', vim.log.levels.INFO)
     end
 
     set('g=', toggle)
@@ -47,11 +44,7 @@ local function on_attach(client, bufnr)
     client.server_capabilities.documentFormattingProvider = true
   end
 
-  -- if client:supports_method(methods.textDocument_documentColor) then
-  --   vim.lsp.document_color.enable(true, bufnr)
-  -- end
-
-  vim.bo[bufnr].indentexpr = 'v:lua.require\'nvim-treesitter\'.indentexpr()'
+  vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
 
   local win = vim.api.nvim_get_current_win()
 
