@@ -16,7 +16,7 @@ MiniDeps.later(function()
         ['ctrl-t'] = actions.file_tabedit,
         ['alt-x'] = actions.file_sel_to_qf,
         ['alt-X'] = actions.file_sel_to_ll,
-        ['alt-i'] = actions.toggle_ignore,
+        ['alt-u'] = actions.toggle_ignore,
         ['alt-.'] = actions.toggle_hidden,
         ['alt-f'] = actions.toggle_follow,
       },
