@@ -265,7 +265,7 @@ default_mode "locked"
 //   - "default" (default, enabled)
 //   - "compact"
 //
-default_layout "compact"
+default_layout "default"
 
 // Toggle having pane frames around the panes
 // Options:
