@@ -1,10 +1,25 @@
 MiniDeps.later(function()
   MiniDeps.add('ibhagwan/fzf-lua')
 
+  local actions = require('fzf-lua').actions
   require('fzf-lua').setup({
     'hide',
     fzf_opts = {
       ['--cycle'] = '',
+    },
+    actions = {
+      files = {
+        true,
+        ['enter'] = actions.file_edit_or_qf,
+        ['ctrl-s'] = actions.file_split,
+        ['ctrl-v'] = actions.file_vsplit,
+        ['ctrl-t'] = actions.file_tabedit,
+        ['alt-x'] = actions.file_sel_to_qf,
+        ['alt-X'] = actions.file_sel_to_ll,
+        ['alt-i'] = actions.toggle_ignore,
+        ['alt-.'] = actions.toggle_hidden,
+        ['alt-f'] = actions.toggle_follow,
+      },
     },
     winopts = {
       preview = {
