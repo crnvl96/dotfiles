@@ -167,8 +167,13 @@ Each time you are going to create a file, use a single concise sentence inform t
       },
     },
     strategies = {
+      -- [X] anthropic
+      -- [ ] openai
+      -- [ ] deepseek
+      -- [ ] xai
+      -- [ ] venice
       chat = {
-        adapter = 'xai',
+        adapter = 'venice',
         keymaps = { completion = { modes = { i = '<C-n>' } } },
         slash_commands = {
           file = { opts = { provider = 'fzf_lua' } },
@@ -176,11 +181,6 @@ Each time you are going to create a file, use a single concise sentence inform t
         },
       },
     },
-    -- [ ] openai
-    -- [X] anthropic
-    -- [ ] deepseek
-    -- [ ] xai
-    -- [ ] venice
     adapters = {
       openai = function()
         return require('codecompanion.adapters').extend('openai', {
