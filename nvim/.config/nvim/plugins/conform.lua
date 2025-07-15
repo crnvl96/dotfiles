@@ -37,13 +37,29 @@ MiniDeps.later(function()
           return { 'prettier' }
         end
       end,
+      typescript = function(bufnr)
+        local biome_root_files = { 'biome.json', 'biome.jsonc' }
+
+        if get_root_dir(biome_root_files, bufnr) then
+          return { 'biome', 'biome-check', 'biome-organize-imports' }
+        else
+          return { 'prettier' }
+        end
+      end,
+      typescriptreact = function(bufnr)
+        local biome_root_files = { 'biome.json', 'biome.jsonc' }
+
+        if get_root_dir(biome_root_files, bufnr) then
+          return { 'biome', 'biome-check', 'biome-organize-imports' }
+        else
+          return { 'prettier' }
+        end
+      end,
       json = { 'prettier' },
       lua = { 'stylua' },
       markdown = { 'prettier', 'injected' },
       python = { 'ruff_fix', 'ruff_organize_imports', 'ruff_format' },
       rust = { 'rustfmt' },
-      typescript = { 'prettier' },
-      typescriptreact = { 'prettier' },
     },
     format_on_save = function() return vim.g.conform and { timeout_ms = 3000, lsp_format = 'fallback' } end,
   })
