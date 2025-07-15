@@ -27,7 +27,7 @@ MiniDeps.now(function()
 
   vim.api.nvim_create_autocmd('FileType', {
     group = vim.api.nvim_create_augroup('crnvl96-treesitter', {}),
-    pattern = vim.tbl_deep_extend('force', parsers, { 'codecompanion' }),
+    pattern = vim.tbl_deep_extend('force', parsers, { 'codecompanion', 'javascriptreact', 'typescriptreact' }),
     callback = function() vim.treesitter.start() end,
   })
 end)
