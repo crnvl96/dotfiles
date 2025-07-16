@@ -9,53 +9,25 @@ MiniDeps.later(function()
     return vim.fs.dirname(vim.fs.find(root_files, { path = fname, upward = true })[1])
   end
 
+  local function get_web_formatter(bufnr)
+    if get_root_dir({ 'biome.json', 'biome.jsonc' }, bufnr) then
+      return { 'biome', 'biome-check', 'biome-organize-imports' }
+    else
+      return { 'prettier' }
+    end
+  end
+
   require('conform').setup({
     notify_on_error = true,
-    formatters = {
-      injected = {
-        ignore_errors = true,
-      },
-    },
+    formatters = { injected = { ignore_errors = true } },
     formatters_by_ft = {
       ['_'] = { 'trim_whitespace', 'trim_newlines' },
-      css = { 'prettier' },
-      javascript = function(bufnr)
-        local biome_root_files = { 'biome.json', 'biome.jsonc' }
-
-        if get_root_dir(biome_root_files, bufnr) then
-          return { 'biome', 'biome-check', 'biome-organize-imports' }
-        else
-          return { 'prettier' }
-        end
-      end,
-      javascriptreact = function(bufnr)
-        local biome_root_files = { 'biome.json', 'biome.jsonc' }
-
-        if get_root_dir(biome_root_files, bufnr) then
-          return { 'biome', 'biome-check', 'biome-organize-imports' }
-        else
-          return { 'prettier' }
-        end
-      end,
-      typescript = function(bufnr)
-        local biome_root_files = { 'biome.json', 'biome.jsonc' }
-
-        if get_root_dir(biome_root_files, bufnr) then
-          return { 'biome', 'biome-check', 'biome-organize-imports' }
-        else
-          return { 'prettier' }
-        end
-      end,
-      typescriptreact = function(bufnr)
-        local biome_root_files = { 'biome.json', 'biome.jsonc' }
-
-        if get_root_dir(biome_root_files, bufnr) then
-          return { 'biome', 'biome-check', 'biome-organize-imports' }
-        else
-          return { 'prettier' }
-        end
-      end,
       json = { 'prettier' },
+      css = get_web_formatter,
+      javascript = get_web_formatter,
+      javascriptreact = get_web_formatter,
+      typesCRipt = get_web_formatter,
+      typescriptreact = get_web_formatter,
       lua = { 'stylua' },
       markdown = { 'prettier', 'injected' },
       python = { 'ruff_fix', 'ruff_organize_imports', 'ruff_format' },

@@ -1,0 +1,10 @@
+[pyprland]
+plugins = ["scratchpads", "toggle_special"]
+
+[scratchpads.scratch_upper_term]
+animation = "fromTop"
+command = "alacritty --class=scratch_upper_term"
+class = "scratch_upper_term"
+size = "75% 60%"
+max_size = "1920px 100%"
+margin = 50

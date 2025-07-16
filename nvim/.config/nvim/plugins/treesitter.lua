@@ -19,15 +19,16 @@ MiniDeps.now(function()
     'javascript',
     'typescript',
     'tsx',
+    'jsx',
     'python',
     'rust',
   }
 
   require('nvim-treesitter').install(parsers)
 
-  vim.api.nvim_create_autocmd('FileType', {
-    group = vim.api.nvim_create_augroup('crnvl96-treesitter', {}),
-    pattern = vim.tbl_deep_extend('force', parsers, { 'codecompanion', 'javascriptreact', 'typescriptreact' }),
-    callback = function() vim.treesitter.start() end,
-  })
+  local group = vim.api.nvim_create_augroup('crnvl96-treesitter', {})
+  local pattern = vim.tbl_deep_extend('force', parsers, { 'codecompanion', 'javascriptreact', 'typescriptreact' })
+  local callback = function() vim.treesitter.start() end
+
+  vim.api.nvim_create_autocmd('FileType', { group = group, pattern = pattern, callback = callback })
 end)
