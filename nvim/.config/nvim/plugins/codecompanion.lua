@@ -69,12 +69,12 @@ MiniDeps.later(function()
     },
     strategies = {
       -- [X] anthropic
+      -- [X] xai
       -- [ ] openai
       -- [ ] deepseek
-      -- [ ] xai
       -- [ ] venice
       chat = {
-        adapter = 'venice',
+        adapter = 'xai',
         keymaps = { completion = { modes = { i = '<C-n>' } } },
         slash_commands = {
           file = { opts = { provider = 'fzf_lua' } },
@@ -126,7 +126,7 @@ MiniDeps.later(function()
           },
           schema = {
             model = {
-              default = 'grok-3',
+              default = 'grok-4-0709',
             },
           },
         })
