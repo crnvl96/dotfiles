@@ -29,6 +29,12 @@ local function retrieve_llm_key(key_name)
   return nil
 end
 
+-- [X] anthropic
+-- [X] xai
+-- [ ] openai
+-- [ ] deepseek
+-- [ ] venice
+
 MiniDeps.later(function()
   local function build_mcp(params)
     vim.notify('Building mcphub.nvim', vim.log.levels.INFO)
@@ -68,13 +74,8 @@ MiniDeps.later(function()
       },
     },
     strategies = {
-      -- [X] anthropic
-      -- [X] xai
-      -- [ ] openai
-      -- [ ] deepseek
-      -- [ ] venice
       chat = {
-        adapter = 'xai',
+        adapter = 'venice',
         keymaps = { completion = { modes = { i = '<C-n>' } } },
         slash_commands = {
           file = { opts = { provider = 'fzf_lua' } },
@@ -142,7 +143,8 @@ MiniDeps.later(function()
           },
           schema = {
             model = {
-              default = 'mistral-31-24b',
+              default = 'deepseek-r1-671b',
+              -- default = 'qwen3-235b',
             },
             temperature = {
               order = 2,
