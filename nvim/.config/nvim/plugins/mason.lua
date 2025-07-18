@@ -27,6 +27,7 @@ MiniDeps.now(function()
         'typescript-language-server', -- ts_ls
         'tailwindcss-language-server', -- tailwindcss
         'rust-analyzer', -- rust_analyzer
+        'jq', -- json
 
         'bacon-ls', -- an alternative lsp for rust
 
