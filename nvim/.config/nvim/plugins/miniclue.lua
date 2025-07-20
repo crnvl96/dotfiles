@@ -39,7 +39,7 @@ MiniDeps.later(function()
     },
     window = {
       config = {},
-      delay = vim.o.timeoutlen,
+      delay = math.floor(vim.o.timeoutlen / 5),
       scroll_down = '<C-d>',
       scroll_up = '<C-u>',
     },

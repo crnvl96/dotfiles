@@ -2,6 +2,31 @@ _G.HOME = os.getenv('HOME')
 _G.NVIM_DIR = HOME .. '/.config/nvim'
 _G.MINI_PATH = vim.fn.stdpath('data') .. '/site/pack/deps/start/mini.nvim'
 
+vim.diagnostic.config({
+  virtual_text = true,
+  virtual_lines = false,
+  float = true,
+  signs = false,
+})
+
+vim.filetype.add({
+  filename = {
+    ['.eslintrc.json'] = 'jsonc',
+  },
+  pattern = {
+    ['tsconfig*.json'] = 'jsonc',
+    ['.*/%.vscode/.*%.json'] = 'jsonc',
+    ['.*'] = function(path, bufnr)
+      return vim.bo[bufnr]
+          and vim.bo[bufnr].filetype ~= 'bigfile'
+          and path
+          and vim.fn.getfsize(path) > (1024 * 500) -- 500kb
+          and 'bigfile'
+        or nil
+    end,
+  },
+})
+
 if not vim.loop.fs_stat(MINI_PATH) then
   local clone_cmd = {
     'git',
@@ -24,7 +49,6 @@ dofile(NVIM_DIR .. '/settings/lsp.lua')
 dofile(NVIM_DIR .. '/settings/opts.lua')
 dofile(NVIM_DIR .. '/settings/keymaps.lua')
 dofile(NVIM_DIR .. '/settings/autocmds.lua')
-dofile(NVIM_DIR .. '/settings/onattach.lua')
 
 MiniDeps.now(function()
   MiniDeps.add({ name = 'mini.nvim' })

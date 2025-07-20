@@ -1,5 +1,4 @@
 vim.cmd([[
-
 set background=dark
 
 hi clear
