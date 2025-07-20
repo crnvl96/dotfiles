@@ -27,8 +27,15 @@ MiniDeps.now(function()
   require('nvim-treesitter').install(parsers)
 
   local group = vim.api.nvim_create_augroup('crnvl96-treesitter', {})
-  local pattern = vim.tbl_deep_extend('force', parsers, { 'codecompanion', 'javascriptreact', 'typescriptreact' })
-  local callback = function() vim.treesitter.start() end
 
-  vim.api.nvim_create_autocmd('FileType', { group = group, pattern = pattern, callback = callback })
+  local callback = function(e)
+    local filetype = e.match
+    local lang = vim.treesitter.language.get_lang(filetype) or ''
+    if vim.treesitter.language.add(lang) then
+      vim.bo[e.buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      vim.treesitter.start()
+    end
+  end
+
+  vim.api.nvim_create_autocmd('FileType', { group = group, callback = callback })
 end)

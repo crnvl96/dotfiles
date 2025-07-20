@@ -1,7 +1,7 @@
 local lsp_dir = NVIM_DIR .. '/lsp'
 local excluded_servers = {}
-
 local lsp_servers = {}
+
 for _, file in ipairs(vim.fn.glob(lsp_dir .. '/*.lua', true, true)) do
   local server_name = vim.fn.fnamemodify(file, ':t:r')
   if not vim.tbl_contains(excluded_servers, server_name) then

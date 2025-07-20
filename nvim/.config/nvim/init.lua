@@ -49,15 +49,15 @@ dofile(NVIM_DIR .. '/plugins/minifiles.lua')
 dofile(NVIM_DIR .. '/plugins/rustaceanvim.lua')
 
 -- MiniDeps.later(function()
--- 	vim.cmd("set rtp+=~/Developer/personal/lazydocker.nvim/")
--- 	require("lazydocker").setup({
--- 		window = {
--- 			settings = {
--- 				width = 0.9,
--- 				height = 0.9,
--- 			},
--- 		},
--- 	})
--- 	vim.keymap.set({ "n", "t" }, "<leader>zz", "<Cmd>lua LazyDocker.toggle()<CR>")
--- 	vim.keymap.set({ "n", "t" }, "<leader>zp", "<Cmd>lua LazyDocker.toggle({engine='podman'})<CR>")
+--   vim.cmd('set rtp+=~/Developer/personal/lazydocker.nvim/')
+--   require('lazydocker').setup({
+--     window = {
+--       settings = {
+--         width = 0.9,
+--         height = 0.9,
+--       },
+--     },
+--   })
+--   vim.keymap.set({ 'n', 't' }, '<leader>zz', '<Cmd>lua LazyDocker.toggle()<CR>')
+--   vim.keymap.set({ 'n', 't' }, '<leader>zp', "<Cmd>lua LazyDocker.toggle({engine='podman'})<CR>")
 -- end)

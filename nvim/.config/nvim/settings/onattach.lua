@@ -1,13 +1,18 @@
 local methods = vim.lsp.protocol.Methods
 
 vim.diagnostic.config({
-  virtual_text = true,
+  virtual_text = false,
   virtual_lines = false,
   float = true,
   signs = false,
 })
 
-local function on_attach(client, bufnr)
+local function on_attach(client, event)
+  local bufnr = event.buf
+  local win = vim.api.nvim_get_current_win()
+  local filetype = event.match
+  local lang = vim.treesitter.language.get_lang(filetype) or ''
+
   vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
   local set = function(lhs, rhs, opts, mode)
@@ -30,28 +35,14 @@ local function on_attach(client, bufnr)
   set('gS', vim.lsp.buf.workspace_symbol)
   set('<C-k>', vim.lsp.buf.signature_help, {}, 'i')
 
-  if client:supports_method(methods.textDocument_inlayHint) then
-    local toggle = function()
-      local enabled = vim.lsp.inlay_hint.is_enabled()
-      vim.lsp.inlay_hint.enable(not enabled)
-      vim.notify(enabled and 'Enabled' or 'Disabled' .. ' inlay hints.', vim.log.levels.INFO)
-    end
-
-    set('g=', toggle)
-  end
-
   if client:supports_method(methods.textDocument_formatting) then
     client.server_capabilities.documentFormattingProvider = true
   end
 
-  vim.bo[bufnr].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-
-  local win = vim.api.nvim_get_current_win()
-
   if client:supports_method(methods.textDocument_foldingRange) then
     vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
   else
-    vim.wo[win][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+    if vim.treesitter.language.add(lang) then vim.wo[win][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()' end
   end
 end
 
@@ -67,9 +58,9 @@ end
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('crnvl96-on-lsp-attach', {}),
-  callback = function(args)
-    local client = vim.lsp.get_client_by_id(args.data.client_id)
+  callback = function(e)
+    local client = vim.lsp.get_client_by_id(e.data.client_id)
     if not client then return end
-    on_attach(client, args.buf)
+    on_attach(client, e)
   end,
 })

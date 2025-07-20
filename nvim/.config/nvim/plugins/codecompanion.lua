@@ -1,33 +1,4 @@
-local function retrieve_llm_key(key_name)
-  local filepath = NVIM_DIR .. '/.env'
-  local file = io.open(filepath, 'r')
-
-  if not file then return nil end
-
-  for line in file:lines() do
-    line = line:match('^%s*(.-)%s*$')
-
-    if line ~= '' and not line:match('^#') then
-      local eq_pos = line:find('=')
-      if eq_pos then
-        local current_key = line:sub(1, eq_pos - 1)
-        local current_value = line:sub(eq_pos + 1)
-
-        current_key = current_key:match('^%s*(.-)%s*$')
-        current_value = current_value:match('^%s*(.-)%s*$')
-
-        if current_key == key_name then
-          file:close()
-          return current_value
-        end
-      end
-    end
-  end
-
-  file:close()
-
-  return nil
-end
+local H = {}
 
 -- [X] anthropic
 -- [X] xai
@@ -36,43 +7,9 @@ end
 -- [ ] venice
 
 MiniDeps.later(function()
-  local function build_mcp(params)
-    vim.notify('Building mcphub.nvim', vim.log.levels.INFO)
-
-    local obj = vim.system({ 'npm', 'install', '-g', 'mcp-hub@latest' }, { cwd = params.path }):wait()
-
-    if obj.code == 0 then
-      vim.notify('Building mcphub.nvim done', vim.log.levels.INFO)
-    else
-      vim.notify('Building mcphub.nvim failed', vim.log.levels.ERROR)
-    end
-  end
-
-  MiniDeps.add({
-    source = 'ravitemer/mcphub.nvim',
-    hooks = {
-      post_install = build_mcp,
-      post_checkout = build_mcp,
-    },
-  })
-
   MiniDeps.add('olimorris/codecompanion.nvim')
 
-  require('mcphub').setup({
-    config = vim.fn.expand(NVIM_DIR .. '/mcp-servers.json'),
-  })
-
   require('codecompanion').setup({
-    extensions = {
-      mcphub = {
-        callback = 'mcphub.extensions.codecompanion',
-        opts = {
-          show_result_in_chat = true,
-          make_vars = true,
-          make_slash_commands = true,
-        },
-      },
-    },
     strategies = {
       chat = {
         adapter = 'venice',
@@ -86,50 +23,32 @@ MiniDeps.later(function()
     adapters = {
       openai = function()
         return require('codecompanion.adapters').extend('openai', {
-          env = { api_key = retrieve_llm_key('OPENAI_API_KEY') },
+          env = { api_key = H.retrieve_llm_key('OPENAI_API_KEY') },
           schema = { model = { default = 'gpt-4.1' } },
         })
       end,
       anthropic = function()
         return require('codecompanion.adapters').extend('anthropic', {
-          env = {
-            api_key = retrieve_llm_key('ANTHROPIC_API_KEY'),
-          },
-          schema = {
-            model = {
-              default = 'claude-sonnet-4-20250514',
-            },
-          },
+          env = { api_key = H.retrieve_llm_key('ANTHROPIC_API_KEY') },
+          schema = { model = { default = 'claude-sonnet-4-20250514' } },
         })
       end,
       gemini = function()
         return require('codecompanion.adapters').extend('gemini', {
-          env = { api_key = retrieve_llm_key('GEMINI_API_KEY') },
+          env = { api_key = H.retrieve_llm_key('GEMINI_API_KEY') },
           schema = { model = { default = 'gemini-2.5-pro-preview-05-06' } },
         })
       end,
       deepseek = function()
         return require('codecompanion.adapters').extend('deepseek', {
-          env = {
-            api_key = retrieve_llm_key('DEEPSEEK_API_KEY'),
-          },
-          schema = {
-            model = {
-              default = 'deepseek-chat',
-            },
-          },
+          env = { api_key = H.retrieve_llm_key('DEEPSEEK_API_KEY') },
+          schema = { model = { default = 'deepseek-chat' } },
         })
       end,
       xai = function()
         return require('codecompanion.adapters').extend('xai', {
-          env = {
-            api_key = retrieve_llm_key('XAI_API_KEY'),
-          },
-          schema = {
-            model = {
-              default = 'grok-4-0709',
-            },
-          },
+          env = { api_key = H.retrieve_llm_key('XAI_API_KEY') },
+          schema = { model = { default = 'grok-4-0709' } },
         })
       end,
       venice = function()
@@ -139,7 +58,7 @@ MiniDeps.later(function()
           env = {
             url = 'https://api.venice.ai/api',
             chat_url = '/v1/chat/completions',
-            api_key = retrieve_llm_key('VENICE_API_KEY'),
+            api_key = H.retrieve_llm_key('VENICE_API_KEY'),
           },
           schema = {
             model = {
@@ -216,18 +135,9 @@ MiniDeps.later(function()
               },
             },
           },
-          roles = {
-            llm = 'assistant',
-            user = 'user',
-          },
-          opts = {
-            stream = true,
-          },
-          features = {
-            text = true,
-            tokens = true,
-            vision = false,
-          },
+          roles = { llm = 'assistant', user = 'user' },
+          opts = { stream = true },
+          features = { text = true, tokens = true, vision = false },
         })
       end,
     },
@@ -237,3 +147,39 @@ MiniDeps.later(function()
   vim.keymap.set({ 'n', 'v' }, '<Leader>cc', '<cmd>CodeCompanionChat Toggle<cr>')
   vim.keymap.set('v', 'ga', '<cmd>CodeCompanionChat Add<cr>')
 end)
+
+---
+--- Helpers
+---
+
+function H.retrieve_llm_key(key_name)
+  local filepath = NVIM_DIR .. '/.env'
+  local file = io.open(filepath, 'r')
+
+  if not file then return nil end
+
+  for line in file:lines() do
+    line = line:match('^%s*(.-)%s*$')
+
+    if line ~= '' and not line:match('^#') then
+      local eq_pos = line:find('=')
+
+      if eq_pos then
+        local current_key = line:sub(1, eq_pos - 1)
+        local current_value = line:sub(eq_pos + 1)
+
+        current_key = current_key:match('^%s*(.-)%s*$')
+        current_value = current_value:match('^%s*(.-)%s*$')
+
+        if current_key == key_name then
+          file:close()
+          return current_value
+        end
+      end
+    end
+  end
+
+  file:close()
+
+  return nil
+end
