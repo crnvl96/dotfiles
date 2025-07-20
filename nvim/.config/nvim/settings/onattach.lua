@@ -1,7 +1,7 @@
 local methods = vim.lsp.protocol.Methods
 
 vim.diagnostic.config({
-  virtual_text = false,
+  virtual_text = true,
   virtual_lines = false,
   float = true,
   signs = false,

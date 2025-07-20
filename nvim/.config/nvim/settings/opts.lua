@@ -8,7 +8,7 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_netrw = 1
 
-vim.o.guicursor = ''
+vim.o.timeoutlen = 200
 vim.o.scrolloff = 8
 vim.o.sidescrolloff = 24
 vim.o.wrap = false
