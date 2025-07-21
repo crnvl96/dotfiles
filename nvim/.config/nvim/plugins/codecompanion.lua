@@ -2,6 +2,7 @@ local H = {}
 
 -- [X] anthropic
 -- [X] xai
+--
 -- [ ] openai
 -- [ ] deepseek
 -- [ ] venice
@@ -62,8 +63,8 @@ MiniDeps.later(function()
           },
           schema = {
             model = {
-              default = 'deepseek-r1-671b',
-              -- default = 'qwen3-235b',
+              -- default = 'deepseek-r1-671b',
+              default = 'qwen3-235b',
             },
             temperature = {
               order = 2,
