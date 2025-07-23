@@ -5,7 +5,7 @@ _G.MINI_PATH = vim.fn.stdpath('data') .. '/site/pack/deps/start/mini.nvim'
 vim.diagnostic.config({
   virtual_text = true,
   virtual_lines = false,
-  float = true,
+  float = { source = true },
   signs = false,
 })
 

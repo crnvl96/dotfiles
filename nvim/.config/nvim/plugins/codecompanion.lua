@@ -144,9 +144,9 @@ MiniDeps.later(function()
     },
   })
 
-  vim.keymap.set({ 'n', 'v' }, '<Leader>ca', '<cmd>CodeCompanionActions<cr>', { desc = 'Actions' })
-  vim.keymap.set({ 'n', 'v' }, '<Leader>cc', '<cmd>CodeCompanionChat Toggle<cr>', { desc = 'Toggle' })
-  vim.keymap.set('v', 'ga', '<cmd>CodeCompanionChat Add<cr>', { desc = 'Add to chat' })
+  vim.keymap.set({ 'n', 'v' }, '<Leader>ca', ':<C-U>CodeCompanionActions<CR>', { desc = 'Actions' })
+  vim.keymap.set({ 'n', 'v' }, '<Leader>cc', ':<C-U>CodeCompanionChat Toggle<CR>', { desc = 'Toggle' })
+  vim.keymap.set('v', 'ga', ':<C-U>CodeCompanionChat Add<CR>', { desc = 'Add to chat' })
 end)
 
 ---
