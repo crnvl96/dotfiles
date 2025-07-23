@@ -51,7 +51,8 @@ MiniDeps.later(function()
           },
           schema = {
             model = {
-              default = 'qwen3-235b',
+              -- default = 'qwen3-235b',
+              default = 'deepseek-r1-671b',
             },
           },
         })
