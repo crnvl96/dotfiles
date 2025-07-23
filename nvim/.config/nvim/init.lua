@@ -1,6 +1,14 @@
+---
+--- Global Variables
+---
+
 _G.HOME = os.getenv('HOME')
 _G.NVIM_DIR = HOME .. '/.config/nvim'
 _G.MINI_PATH = vim.fn.stdpath('data') .. '/site/pack/deps/start/mini.nvim'
+
+---
+--- Diagnostics
+---
 
 vim.diagnostic.config({
   virtual_text = true,
@@ -8,6 +16,10 @@ vim.diagnostic.config({
   float = { source = true },
   signs = false,
 })
+
+---
+--- Filetypes
+---
 
 vim.filetype.add({
   filename = {
@@ -27,6 +39,10 @@ vim.filetype.add({
   },
 })
 
+---
+--- Package Manager
+---
+
 if not vim.loop.fs_stat(MINI_PATH) then
   local clone_cmd = {
     'git',
@@ -43,12 +59,20 @@ end
 require('mini.deps').setup({ path = { snapshot = NVIM_DIR .. '/mini-deps-snap' } })
 require('mini.icons').setup()
 
+---
+--- Settings
+---
+
 dofile(NVIM_DIR .. '/settings/path.lua')
 dofile(NVIM_DIR .. '/settings/theme.lua')
 dofile(NVIM_DIR .. '/settings/lsp.lua')
 dofile(NVIM_DIR .. '/settings/opts.lua')
 dofile(NVIM_DIR .. '/settings/keymaps.lua')
 dofile(NVIM_DIR .. '/settings/autocmds.lua')
+
+---
+--- Plugins
+---
 
 MiniDeps.now(function()
   MiniDeps.add({ name = 'mini.nvim' })
