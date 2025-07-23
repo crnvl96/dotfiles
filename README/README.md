@@ -31,5 +31,9 @@ These are some simple tweaks I did on top of [Omarchy](https://omarchy.org/), an
    ```
 
    ```bash
-   stow -R -t ~ --ignore=^/README.* --adopt * && git restore .
+   stow -R -t ~ --ignore=^/README.* --adopt *
+   ```
+
+   ```bash
+   git restore .
    ```
