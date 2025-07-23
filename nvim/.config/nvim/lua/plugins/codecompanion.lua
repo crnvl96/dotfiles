@@ -1,12 +1,5 @@
 local H = {}
 
--- [X] anthropic
--- [X] xai
---
--- [ ] openai
--- [ ] deepseek
--- [ ] venice
-
 MiniDeps.later(function()
   MiniDeps.add('olimorris/codecompanion.nvim')
 
