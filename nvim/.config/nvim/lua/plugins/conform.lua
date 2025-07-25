@@ -1,9 +1,6 @@
 MiniDeps.later(function()
   MiniDeps.add('stevearc/conform.nvim')
 
-  vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-  vim.g.conform = true
-
   local function get_root_dir(root_files, bufnr)
     local fname = vim.api.nvim_buf_get_name(bufnr)
     return vim.fs.dirname(vim.fs.find(root_files, { path = fname, upward = true })[1])
@@ -16,6 +13,9 @@ MiniDeps.later(function()
       return { 'prettier' }
     end
   end
+
+  vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+  vim.g.conform = true
 
   require('conform').setup({
     notify_on_error = true,
