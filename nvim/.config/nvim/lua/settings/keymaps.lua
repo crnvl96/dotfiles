@@ -14,6 +14,8 @@ vim.keymap.set('n', '<C-Down>', '<Cmd>resize -5<CR>')
 vim.keymap.set('n', '<C-Left>', '<Cmd>vertical resize -20<CR>')
 vim.keymap.set('n', '<C-Right>', '<Cmd>vertical resize +20<CR>')
 
+vim.keymap.set({ 'i', 'n', 'x', 'o' }, '<C-s>', '<Esc>:noh<CR>:w<CR><Esc>')
+
 vim.keymap.set('x', '<', '<gv')
 vim.keymap.set('x', '>', '>gv')
 

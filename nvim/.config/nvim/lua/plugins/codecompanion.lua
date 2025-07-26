@@ -71,7 +71,7 @@ MiniDeps.later(function()
     },
     strategies = {
       chat = {
-        adapter = 'xai',
+        adapter = 'openai',
         keymaps = { completion = { modes = { i = '<C-n>' } } },
         slash_commands = {
           file = { opts = { provider = 'fzf_lua' } },
@@ -135,7 +135,7 @@ MiniDeps.later(function()
     },
   })
 
-  vim.keymap.set('n', 'gp', '<cmd>PasteImage<cr>', { desc = 'Paste image from system clipboard' })
+  vim.keymap.set('n', '<Leader>cp', '<cmd>PasteImage<cr>', { desc = 'Paste image from system clipboard' })
   vim.keymap.set({ 'n', 'v' }, '<Leader>cc', '<Cmd>CodeCompanionChat Toggle<CR>', { desc = 'Toggle' })
   vim.keymap.set('v', 'ga', ':CodeCompanionChat Add<CR>', { desc = 'Add to chat' })
 end)
