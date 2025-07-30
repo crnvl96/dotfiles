@@ -23,6 +23,7 @@ MiniDeps.later(function()
     formatters_by_ft = {
       ['_'] = { 'trim_whitespace', 'trim_newlines' },
       json = { 'jq' },
+      jsonc = { 'jq' },
       css = get_web_formatter,
       javascript = get_web_formatter,
       javascriptreact = get_web_formatter,
