@@ -5,4 +5,4 @@ alias ex="exit"
 alias lzg="lazygit"
 alias nv="nvim"
 
-. "$HOME/.local/share/../bin/env"
+# . "$HOME/.local/share/../bin/env"
