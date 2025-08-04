@@ -1,20 +1,9 @@
 return {
-  ["blink.cmp"] = "af22c527a451d162e5229a1eff9283ee840b4bca",
-  ["codecompanion.nvim"] = "99448f47c3e23a06009ac176ba4c785e162d9c10",
   ["conform.nvim"] = "973f3cb73887d510321653044791d7937c7ec0fa",
-  ["fzf-lua"] = "55a1b767e1b6b72e3fd73ee415ec93cba5f0b1d9",
-  ["grug-far.nvim"] = "45981a9af7f4e666a3cdaedb1d21d2ab926727a2",
-  ["mason.nvim"] = "8024d64e1330b86044fed4c8494ef3dcd483a67c",
-  ["mini.nvim"] = "77e20cd6ed80fdf1738c116c35da81e7d9ad997e",
-  ["nvim-dap"] = "5dd4d50f2e6a2eaf9e57fad023d294ef371bda35",
-  ["nvim-dap-python"] = "261ce649d05bc455a29f9636dc03f8cdaa7e0e2c",
-  ["nvim-lint"] = "a293900003b8e3a402839a243033db0c88aeb3a9",
-  ["nvim-lspconfig"] = "f47cd681d7cb6048876a2e908b6d8ba1e530d152",
-  ["nvim-treesitter"] = "d116118addd7444e7bd1b65a50de2d25bec32d28",
-  ["plenary.nvim"] = "857c5ac632080dba10aae49dba902ce3abf91b35",
-  rustaceanvim = "c86d5d36456fdaa91a3a9dddb4bac09c58fc8cd3",
-  undotree = "28f2f54a34baff90ea6f4a735ef1813ad875c743",
-  ["vim-fugitive"] = "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4",
-  ["vim-rhubarb"] = "5496d7c94581c4c9ad7430357449bb57fc59f501",
-  ["vim-sleuth"] = "be69bff86754b1aa5adcbb527d7fcd1635a84080"
+  ["fzf-lua"] = "19beea27b2e5e296dc1e6de8a19a9af0217a6a30",
+  ["mason.nvim"] = "9e25c98d4826998460926f8c5c2284848d80ae89",
+  ["mini.nvim"] = "efff26174ca363c059f92e906753db47e81d870b",
+  ["nvim-lspconfig"] = "63a38440989c58e1f100373ab603fd24665bdc9a",
+  ["nvim-treesitter"] = "3561e1fb19bcd9f03ba074d769a8a78d01717b19",
+  ["vim-fugitive"] = "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4"
 }
