@@ -31,18 +31,13 @@
       "models": [
         {
           "id": "deepseek-chat",
-          "name": "Deepseek V3"
-        }
-      ]
-    },
-    "venice": {
-      "type": "openai",
-      "base_url": "https://api.venice.ai/api/v1",
-      "api_key": "$VENICE_API_KEY",
-      "models": [
-        {
-          "id": "deepseek-r1-671b",
-          "name": "Venice Deepseek R1"
+          "name": "Deepseek V3",
+          "cost_per_1m_in": 0.27,
+          "cost_per_1m_out": 1.1,
+          "cost_per_1m_in_cached": 0.07,
+          "cost_per_1m_out_cached": 1.1,
+          "context_window": 64000,
+          "default_max_tokens": 5000
         }
       ]
     }

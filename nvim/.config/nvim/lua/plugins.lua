@@ -197,6 +197,9 @@ MiniDeps.later(function()
 
   require('fzf-lua').register_ui_select()
 
+  vim.keymap.set('n', '<C-t>', function() require('fzf-lua').tabs() end)
+  vim.keymap.set('t', '<C-t>', '<C-\\><C-n><Cmd>FzfLua tabs<CR>', { noremap = true, silent = true })
+
   vim.keymap.set('n', '<Leader>f', function() require('fzf-lua').files() end, { desc = 'Files' })
   vim.keymap.set('n', '<Leader>l', function() require('fzf-lua').blines() end, { desc = 'Lines' })
   vim.keymap.set('n', '<Leader>g', function() require('fzf-lua').live_grep() end, { desc = 'Grep' })
