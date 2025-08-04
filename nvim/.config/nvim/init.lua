@@ -119,7 +119,125 @@ require('plugins.mason')
 require('plugins.treesitter')
 require('plugins.conform')
 require('plugins.blink')
-require('plugins.fzf')
-require('plugins.minifiles')
--- require('plugins.miniclue')
--- require('plugins.codecompanion')
+
+---
+--- Fzf-lua.nvim - general fuzzy finder
+---
+
+MiniDeps.later(function()
+  MiniDeps.add('ibhagwan/fzf-lua')
+
+  local actions = require('fzf-lua').actions
+  require('fzf-lua').setup({
+    'hide',
+    fzf_opts = {
+      ['--cycle'] = '',
+    },
+    files = {
+      prompt = '🪿 ',
+    },
+    actions = {
+      files = {
+        true,
+        ['enter'] = actions.file_edit_or_qf,
+        ['ctrl-s'] = actions.file_split,
+        ['ctrl-v'] = actions.file_vsplit,
+        ['ctrl-t'] = actions.file_tabedit,
+        ['alt-x'] = actions.file_sel_to_qf,
+        ['alt-X'] = actions.file_sel_to_ll,
+        ['alt-i'] = actions.toggle_ignore,
+        ['alt-h'] = actions.toggle_hidden,
+        ['alt-f'] = actions.toggle_follow,
+      },
+    },
+    winopts = {
+      preview = {
+        vertical = 'down:45%',
+        horizontal = 'right:60%',
+        layout = 'flex',
+        flip_columns = 150,
+      },
+    },
+    keymap = {
+      fzf = {
+        ['ctrl-q'] = 'select-all+accept',
+        ['ctrl-r'] = 'toggle+down',
+        ['ctrl-e'] = 'toggle+up',
+        ['ctrl-a'] = 'select-all',
+        ['ctrl-o'] = 'toggle-all',
+        ['ctrl-u'] = 'half-page-up',
+        ['ctrl-d'] = 'half-page-down',
+        ['ctrl-x'] = 'jump',
+        ['ctrl-f'] = 'preview-page-down',
+        ['ctrl-b'] = 'preview-page-up',
+      },
+      builtin = {
+        ['<c-f>'] = 'preview-page-down',
+        ['<c-b>'] = 'preview-page-up',
+      },
+    },
+  })
+
+  require('fzf-lua').register_ui_select()
+
+  vim.keymap.set('n', '<Leader>f', function() require('fzf-lua').files() end, { desc = 'Files' })
+  vim.keymap.set('n', '<Leader>l', function() require('fzf-lua').blines() end, { desc = 'Lines' })
+  vim.keymap.set('n', '<Leader>g', function() require('fzf-lua').live_grep() end, { desc = 'Grep' })
+  vim.keymap.set('x', '<Leader>g', function() require('fzf-lua').grep_visual() end, { desc = 'Grep' })
+  vim.keymap.set('n', '<Leader>b', function() require('fzf-lua').buffers() end, { desc = 'Buffers' })
+  vim.keymap.set('n', "<Leader>'", function() require('fzf-lua').resume() end, { desc = 'Resume' })
+  vim.keymap.set('n', '<Leader>x', function() require('fzf-lua').quickfix() end, { desc = 'Quickfix' })
+end)
+
+---
+--- Mini.files - nvim file manager
+---
+
+MiniDeps.later(function()
+  local minifiles = require('mini.files')
+
+  local function map_split(bufnr, lhs, direction)
+    local function rhs()
+      local window = minifiles.get_explorer_state().target_window
+
+      if window == nil or minifiles.get_fs_entry().fs_type == 'directory' then return end
+
+      local new_target_window
+      vim.api.nvim_win_call(window, function()
+        vim.cmd(direction .. ' split')
+        new_target_window = vim.api.nvim_get_current_win()
+      end)
+
+      minifiles.set_target_window(new_target_window)
+      minifiles.go_in({ close_on_file = true })
+    end
+
+    vim.keymap.set('n', lhs, rhs, { buffer = bufnr, desc = 'Split ' .. string.sub(direction, 12) })
+  end
+
+  minifiles.setup({
+    mappings = {
+      show_help = '?',
+      go_in_plus = '<CR>',
+      go_out_plus = '-',
+      go_in = '',
+      go_out = '',
+    },
+  })
+
+  vim.keymap.set('n', '-', function()
+    local bufname = vim.api.nvim_buf_get_name(0)
+    local path = vim.fn.fnamemodify(bufname, ':p')
+    if path and vim.uv.fs_stat(path) then minifiles.open(bufname, false) end
+  end)
+
+  vim.api.nvim_create_autocmd('User', {
+    pattern = 'MiniFilesBufferCreate',
+    group = vim.api.nvim_create_augroup('crnvl96-minifiles', {}),
+    callback = function(e)
+      local bufnr = e.data.buf_id
+      map_split(bufnr, '<C-w>s', 'belowright horizontal')
+      map_split(bufnr, '<C-w>v', 'belowright vertical')
+    end,
+  })
+end)
