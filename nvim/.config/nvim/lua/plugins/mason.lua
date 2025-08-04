@@ -18,6 +18,7 @@ MiniDeps.now(function()
         'prettier',
 
         -- Language servers
+        'gopls',
         'biome',
         'css-lsp', -- cssls
         'eslint-lsp', -- eslint

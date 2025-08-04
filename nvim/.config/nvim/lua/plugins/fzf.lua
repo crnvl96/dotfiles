@@ -7,6 +7,9 @@ MiniDeps.later(function()
     fzf_opts = {
       ['--cycle'] = '',
     },
+    files = {
+      prompt = '🪿 ',
+    },
     actions = {
       files = {
         true,

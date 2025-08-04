@@ -69,7 +69,7 @@ vim.cmd.colorscheme('ansi')
 --- NodeJS path
 ---
 
-local node_version_cmd = "mise ls --cd ~ | grep '^node' | head -n 1 | awk '{print $2}'"
+local node_version_cmd = "mise ls --cd ~ | grep '^node' | grep '22\\.' | head -n 1 | awk '{print $2}'"
 local node_version = vim.fn.system(node_version_cmd):gsub('\n', '')
 
 if node_version == '' then
@@ -121,5 +121,5 @@ require('plugins.conform')
 require('plugins.blink')
 require('plugins.fzf')
 require('plugins.minifiles')
-require('plugins.miniclue')
+-- require('plugins.miniclue')
 -- require('plugins.codecompanion')
