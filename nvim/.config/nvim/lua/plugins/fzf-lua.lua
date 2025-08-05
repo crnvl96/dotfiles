@@ -51,14 +51,6 @@ MiniDeps.later(function()
 
   require('fzf-lua').register_ui_select()
 
-  vim.keymap.set('n', '<C-t>', function() require('fzf-lua').tabs() end)
-  vim.keymap.set(
-    't',
-    '<C-t>',
-    '<C-\\><C-n><Cmd>FzfLua tabs<CR>',
-    { noremap = true, silent = true }
-  )
-
   vim.keymap.set(
     'n',
     '<Leader>f',

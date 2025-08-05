@@ -52,53 +52,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
       client.server_capabilities.documentFormattingProvider = true
     end
 
-    if client:supports_method(methods.textDocument_completion) then
-      local str = 'abcdefghijklmnopqrstuvwxyz,.:\'"'
-      local char_table = {}
-
-      for i = 1, #str do
-        char_table[i] = str:sub(i, i)
-      end
-
-      client.server_capabilities.completionProvider.triggerCharacters = char_table
-
-      vim.lsp.completion.enable(true, client.id, e.buf, { autotrigger = true })
-      vim.cmd('set completeopt+=noselect')
-
-      local function keymap(lhs, rhs, opts, mode)
-        opts = type(opts) == 'string' and { desc = opts }
-          or vim.tbl_extend('error', opts --[[@as table]], { buffer = bufnr })
-        mode = mode or 'n'
-        vim.keymap.set(mode, lhs, rhs, opts)
-      end
-
-      local function feedkeys(keys)
-        vim.api.nvim_feedkeys(
-          vim.api.nvim_replace_termcodes(keys, true, false, true),
-          'n',
-          true
-        )
-      end
-
-      local function pumvisible() return tonumber(vim.fn.pumvisible()) ~= 0 end
-
-      keymap('<C-n>', function()
-        if pumvisible() then
-          feedkeys('<C-n>')
-        else
-          if next(vim.lsp.get_clients({ bufnr = e.buf })) then
-            vim.lsp.completion.get()
-          else
-            if vim.bo.omnifunc == '' then
-              feedkeys('<C-x><C-n>')
-            else
-              feedkeys('<C-x><C-o>')
-            end
-          end
-        end
-      end, 'Trigger/select next completion', 'i')
-    end
-
     if client:supports_method(methods.textDocument_foldingRange) then
       vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
     else

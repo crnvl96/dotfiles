@@ -1,8 +1,9 @@
 return {
+  ["blink.cmp"] = "33f0789297cfec5279c30c8f8980c035fdc91e34",
   ["conform.nvim"] = "973f3cb73887d510321653044791d7937c7ec0fa",
-  ["fzf-lua"] = "19beea27b2e5e296dc1e6de8a19a9af0217a6a30",
+  ["fzf-lua"] = "4e38d7566bb15c27a7dac30777b652cb6040684a",
   ["mason.nvim"] = "9e25c98d4826998460926f8c5c2284848d80ae89",
-  ["mini.nvim"] = "efff26174ca363c059f92e906753db47e81d870b",
+  ["mini.nvim"] = "03387f53f1cb8c6a8ba0798041c6aa3525ed11ba",
   ["nvim-lspconfig"] = "63a38440989c58e1f100373ab603fd24665bdc9a",
   ["nvim-treesitter"] = "3561e1fb19bcd9f03ba074d769a8a78d01717b19",
   ["vim-fugitive"] = "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4"

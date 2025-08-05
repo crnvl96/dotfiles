@@ -3,18 +3,17 @@ local set = vim.keymap.set
 set('x', 'p', 'P')
 set('x', 'Y', 'yg_')
 
-set({ 'n', 'x', 'o' }, '<Leader>p', '"+p', { desc = 'Paste from Clipboard' })
+set('n', '<C-t>', function()
+  vim.cmd('tabnext')
+  vim.cmd('startinsert')
+end)
 
-set(
-  { 'n', 'x', 'o' },
-  '<Leader>P',
-  '"+P',
-  { desc = 'Paste from Clipboard (before cursor)' }
-)
+set('t', '<C-t>', '<C-\\><C-n><Cmd>tabnext<CR>')
 
-set({ 'n', 'x', 'o' }, '<Leader>y', '"+y', { desc = 'Copy to Clipboard' })
-
-set({ 'n', 'x', 'o' }, '<Leader>Y', '"+yg_', { desc = 'Copy line to Clipboard' })
+set({ 'n', 'x', 'o' }, '<Leader>p', '"+p')
+set({ 'n', 'x', 'o' }, '<Leader>P', '"+P')
+set({ 'n', 'x', 'o' }, '<Leader>y', '"+y')
+set({ 'n', 'x', 'o' }, '<Leader>Y', '"+yg_')
 
 set({ 'n', 'x', 'i', 's' }, '<Esc>', '<Cmd>noh<CR><Esc>')
 set({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
