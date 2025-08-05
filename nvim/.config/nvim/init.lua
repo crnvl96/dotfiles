@@ -1,30 +1,22 @@
----
---- Global Variables
----
+require('globals')
+require('path')
 
-_G.HOME = os.getenv('HOME')
-_G.NVIM_DIR = HOME .. '/.config/nvim'
-_G.MINI_PATH = vim.fn.stdpath('data') .. '/site/pack/deps/start/mini.nvim'
+require('pack')
 
----
---- Package Manager
----
+require('lsp')
+require('filetype')
 
-if not vim.loop.fs_stat(MINI_PATH) then
-  local clone_cmd = {
-    'git',
-    'clone',
-    '--filter=blob:none',
-    'https://github.com/echasnovski/mini.nvim',
-    MINI_PATH,
-  }
-  vim.fn.system(clone_cmd)
-  vim.cmd('packadd mini.nvim | helptags ALL')
-  vim.cmd('echo "Installed `mini.nvim`" | redraw')
-end
+require('theme')
 
-require('mini.deps').setup({ path = { snapshot = NVIM_DIR .. '/mini-deps-snap' } })
-require('mini.icons').setup()
+require('config')
+require('keymaps')
+require('autocmds')
 
-require('settings')
-require('plugins')
+require('plugins.mini')
+require('plugins.lspconfig')
+require('plugins.fugitive')
+require('plugins.mason')
+require('plugins.treesitter')
+require('plugins.conform')
+require('plugins.fzf-lua')
+require('plugins.mini-files')
