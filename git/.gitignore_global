@@ -2,5 +2,6 @@
 .git/
 
 .aider*
+!.aider.conf.yml
 
 .env
