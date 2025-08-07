@@ -15,6 +15,13 @@ set({ 'n', 'x', 'o' }, '<Leader>P', '"+P')
 set({ 'n', 'x', 'o' }, '<Leader>y', '"+y')
 set({ 'n', 'x', 'o' }, '<Leader>Y', '"+yg_')
 
+set('n', '<C-d>', '<C-d>zz')
+set('n', '<C-u>', '<C-u>zz')
+set('n', 'n', 'nzzzv')
+set('n', 'N', 'Nzzzv')
+
+set('n', '=', 'mzgggqG`z<cmd>delmarks z<cr>zz')
+
 set({ 'n', 'x', 'i', 's' }, '<Esc>', '<Cmd>noh<CR><Esc>')
 set({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })
 set({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true })
