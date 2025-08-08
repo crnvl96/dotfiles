@@ -1,22 +1,6 @@
 {
   "$schema": "https://charm.land/crush.json",
-  "lsp": {
-    "go": {
-      "command": "gopls"
-    },
-    "typescript": {
-      "command": "typescript-language-server",
-      "args": [
-        "--stdio"
-      ]
-    },
-    "python": {
-      "command": "pyright-langserver",
-      "args": [
-        "--stdio"
-      ]
-    }
-  },
+  "lsp": {},
   "mcp": {
     "context7": {
       "type": "http",
