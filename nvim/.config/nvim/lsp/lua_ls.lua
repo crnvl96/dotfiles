@@ -7,29 +7,33 @@ return {
 
       if
         path ~= vim.fn.stdpath('config')
-        and (vim.loop.fs_stat(path .. '/.luarc.json') or vim.loop.fs_stat(path .. '/.luarc.jsonc'))
+        and (
+          vim.loop.fs_stat(path .. '/.luarc.json')
+          or vim.loop.fs_stat(path .. '/.luarc.jsonc')
+        )
       then
         return
       end
     end
 
-    client.config.settings.Lua = vim.tbl_deep_extend('force', client.config.settings.Lua, {
-      runtime = { version = 'LuaJIT' },
-      diagnostics = {
-        globals = {
-          'vim',
-          'MiniDeps',
+    client.config.settings.Lua =
+      vim.tbl_deep_extend('force', client.config.settings.Lua, {
+        runtime = { version = 'LuaJIT' },
+        diagnostics = {
+          globals = {
+            'vim',
+            'MiniDeps',
+          },
         },
-      },
-      workspace = {
-        checkThirdParty = false,
-        library = {
-          '$VIMRUNTIME',
-          '$XDG_DATA_HOME/nvim/site/pack/deps/opt',
-          '${3rd}/luv/library',
+        workspace = {
+          checkThirdParty = false,
+          library = {
+            '$VIMRUNTIME',
+            '$XDG_DATA_HOME/nvim/site/pack/deps/opt',
+            '${3rd}/luv/library',
+          },
         },
-      },
-    })
+      })
   end,
   settings = {
     Lua = {
