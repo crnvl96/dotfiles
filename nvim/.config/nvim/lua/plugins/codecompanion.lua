@@ -229,12 +229,11 @@ MiniDeps.later(function()
               },
             },
             venice_parameters = {
-              order = 9,
+              order = 10,
               mapping = 'parameters',
               type = 'object',
               optional = true,
               default = {
-                disable_thinking = true,
                 enable_web_search = 'on',
               },
               desc = 'Options to enable web search and disable think',
