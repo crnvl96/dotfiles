@@ -1,3 +1,6 @@
 .env
 .git/
 .crush/
+
+codex/
+!codex/.codex/config.toml
