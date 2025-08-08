@@ -10,9 +10,10 @@ MiniDeps.later(function()
     return vim.notify('Building blink.cmp failed', vim.log.levels.ERROR)
   end
 
-  local hooks = { post_install = build, post_checkout = build }
-
-  MiniDeps.add({ source = 'Saghen/blink.cmp', hooks = hooks })
+  MiniDeps.add({
+    source = 'Saghen/blink.cmp',
+    hooks = { post_install = build, post_checkout = build },
+  })
 
   require('blink.cmp').setup({
     completion = {

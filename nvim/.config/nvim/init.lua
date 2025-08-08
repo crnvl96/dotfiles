@@ -4,14 +4,15 @@ require('path')
 require('pack')
 
 require('lsp')
-require('filetype')
+require('marks')
 
 require('theme')
 
-require('config')
+require('opts')
 require('keymaps')
 require('autocmds')
 
+require('plugins.plenary')
 require('plugins.mini')
 require('plugins.lspconfig')
 require('plugins.fugitive')
@@ -21,3 +22,5 @@ require('plugins.treesitter')
 require('plugins.conform')
 require('plugins.fzf-lua')
 require('plugins.mini-files')
+require('plugins.floaterm')
+require('plugins.codecompanion')

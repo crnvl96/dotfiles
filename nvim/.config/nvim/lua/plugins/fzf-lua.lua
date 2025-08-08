@@ -3,7 +3,7 @@ MiniDeps.later(function()
 
   local actions = require('fzf-lua').actions
   require('fzf-lua').setup({
-    'hide',
+    { 'telescope', 'hide' },
     fzf_opts = {
       ['--cycle'] = '',
     },
@@ -27,6 +27,7 @@ MiniDeps.later(function()
         horizontal = 'right:60%',
         layout = 'flex',
         flip_columns = 150,
+        scrollbar = false,
       },
     },
     keymap = {

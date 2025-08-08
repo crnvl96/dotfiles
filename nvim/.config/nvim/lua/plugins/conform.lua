@@ -15,7 +15,18 @@ MiniDeps.later(function()
   end
 
   vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-  vim.g.conform = true
+
+  vim.g.autoformat = true
+
+  vim.api.nvim_create_user_command('ToggleFormat', function()
+    vim.g.autoformat = not vim.g.autoformat
+    vim.notify(
+      string.format('%s formatting...', vim.g.autoformat and 'Enabling' or 'Disabling'),
+      vim.log.levels.INFO
+    )
+  end, { desc = 'Toggle conform.nvim auto-formatting', nargs = 0 })
+
+  vim.keymap.set('n', '=', 'mzgggqG`z<cmd>delmarks z<cr>zz')
 
   require('conform').setup({
     notify_on_error = true,
@@ -35,7 +46,7 @@ MiniDeps.later(function()
       rust = { 'rustfmt' },
     },
     format_on_save = function()
-      return vim.g.conform and { timeout_ms = 3000, lsp_format = 'fallback' }
+      return vim.g.autoformat and { timeout_ms = 3000, lsp_format = 'fallback' }
     end,
   })
 end)

@@ -1,17 +1,14 @@
-local lsp_dir = NVIM_DIR .. '/lsp'
 local excluded_servers = {}
-local lsp_servers = {}
 
-for _, file in ipairs(vim.fn.glob(lsp_dir .. '/*.lua', true, true)) do
-  local server_name = vim.fn.fnamemodify(file, ':t:r')
-  if not vim.tbl_contains(excluded_servers, server_name) then
-    table.insert(lsp_servers, server_name)
-    local chunk = assert(loadfile(file))
-    vim.lsp.config(server_name, chunk())
-  end
-end
+local server_configs = vim
+  .iter(vim.api.nvim_get_runtime_file('lsp/*.lua', true))
+  :map(function(file)
+    local server_name = vim.fn.fnamemodify(file, ':t:r')
+    if not vim.tbl_contains(excluded_servers, server_name) then return server_name end
+  end)
+  :totable()
 
-vim.lsp.enable(lsp_servers)
+vim.lsp.enable(server_configs)
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('crnvl96-on-lsp-attach', {}),
