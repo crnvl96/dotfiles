@@ -12,3 +12,5 @@ if not vim.loop.fs_stat(MINI_PATH) then
 end
 
 require('mini.deps').setup({ path = { snapshot = NVIM_DIR .. '/mini-deps-snap' } })
+
+MiniDeps.add({ name = 'mini.nvim' })

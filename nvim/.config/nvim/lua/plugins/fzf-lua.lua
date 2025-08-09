@@ -3,7 +3,7 @@ MiniDeps.later(function()
 
   local actions = require('fzf-lua').actions
   require('fzf-lua').setup({
-    { 'telescope', 'hide' },
+    { 'border-fused', 'hide' },
     fzf_opts = {
       ['--cycle'] = '',
     },
