@@ -1,8 +1,5 @@
-[[ -z $DISPLAY && $(tty) == /dev/tty1 ]] && exec Hyprland
+#
+# ~/.bash_profile
+#
 
-# Source .bashrc if it exists
-if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
-fi
-
-. "$HOME/.local/share/../bin/env"
+[[ -f ~/.bashrc ]] && . ~/.bashrc
