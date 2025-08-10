@@ -59,7 +59,7 @@ vim.o.completeopt = 'menuone,noselect,noinsert'
 vim.o.pumheight = 15
 
 vim.opt.list = true
-vim.opt.listchars = { space = '⋅', trail = '⋅', tab = '  ↦' }
+vim.opt.listchars = { trail = '⋅', tab = '  ↦' }
 
 vim.opt.diffopt = {
   'internal',

@@ -1,14 +1,10 @@
-local excluded_servers = {}
-
-local server_configs = vim
+vim.lsp.enable(vim
   .iter(vim.api.nvim_get_runtime_file('lsp/*.lua', true))
   :map(function(file)
     local server_name = vim.fn.fnamemodify(file, ':t:r')
-    if not vim.tbl_contains(excluded_servers, server_name) then return server_name end
+    if not vim.tbl_contains({}, server_name) then return server_name end
   end)
-  :totable()
-
-vim.lsp.enable(server_configs)
+  :totable())
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('crnvl96-on-lsp-attach', {}),
