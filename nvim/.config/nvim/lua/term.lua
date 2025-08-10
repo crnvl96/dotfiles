@@ -42,18 +42,3 @@ set('t', '<C-b>', function()
   vim.api.nvim_feedkeys(code_term_esc, 't', true)
   require('fzf-lua').buffers()
 end)
-
-set('t', '<C-t>', function()
-  vim.api.nvim_feedkeys(code_term_esc, 't', true)
-  require('fzf-lua').tabs()
-end)
-
-set('t', ']]', function()
-  vim.api.nvim_feedkeys(code_term_esc, 't', true)
-  vim.cmd('tabnext')
-end)
-
-set('t', '[[', function()
-  vim.api.nvim_feedkeys(code_term_esc, 't', true)
-  vim.cmd('tabprevious')
-end)

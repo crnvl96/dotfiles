@@ -58,5 +58,4 @@ MiniDeps.later(function()
   vim.keymap.set('n', "<Leader>'", function() require('fzf-lua').resume() end)
 
   vim.keymap.set('n', '<C-b>', function() require('fzf-lua').buffers() end)
-  vim.keymap.set('n', '<C-t>', function() require('fzf-lua').tabs() end)
 end)
