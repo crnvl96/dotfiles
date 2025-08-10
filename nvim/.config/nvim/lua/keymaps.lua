@@ -16,14 +16,9 @@ set('n', 'Y', function()
 end, { expr = true })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-  group = vim.api.nvim_create_augroup(
-    'crnvl96-save-cursor-pos-on-yank',
-    { clear = true }
-  ),
+  group = vim.api.nvim_create_augroup('crnvl96-save-cursor-pos-on-yank', { clear = true }),
   callback = function()
-    if vim.v.event.operator == 'y' and cursorPreYank then
-      vim.api.nvim_win_set_cursor(0, cursorPreYank)
-    end
+    if vim.v.event.operator == 'y' and cursorPreYank then vim.api.nvim_win_set_cursor(0, cursorPreYank) end
   end,
 })
 
@@ -48,3 +43,6 @@ set('n', '<C-h>', '<C-w>h')
 set('n', '<C-j>', '<C-w>j')
 set('n', '<C-k>', '<C-w>k')
 set('n', '<C-l>', '<C-w>l')
+
+set('n', ']]', '<Cmd>tabnext<CR>')
+set('n', '[[', '<Cmd>tabprevious<CR>')

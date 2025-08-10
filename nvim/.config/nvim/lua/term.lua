@@ -10,22 +10,6 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
 
       vim.cmd.startinsert()
     end
-
-    local code_term_esc = vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, true, true)
-
-    for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
-      vim.keymap.set('t', '<C-' .. key .. '>', function()
-        local code_dir = vim.api.nvim_replace_termcodes('<C-' .. key .. '>', true, true, true)
-        vim.api.nvim_feedkeys(code_term_esc .. code_dir, 't', true)
-      end, { noremap = true })
-    end
-
-    vim.keymap.set('t', '<C-e><C-e>', function() vim.api.nvim_feedkeys(code_term_esc, 't', true) end)
-
-    vim.keymap.set('t', '<C-b>', function()
-      vim.api.nvim_feedkeys(code_term_esc, 't', true)
-      require('fzf-lua').buffers()
-    end)
   end,
 })
 
@@ -33,3 +17,43 @@ vim.api.nvim_create_autocmd('TermEnter', {
   group = vim.api.nvim_create_augroup('crnvl96-autoinsertmode', { clear = true }),
   callback = function() vim.cmd.startinsert() end,
 })
+
+vim.api.nvim_create_autocmd('TabEnter', {
+  group = vim.api.nvim_create_augroup('crnvl96-autoinsertmode', { clear = true }),
+  callback = function(e)
+    if vim.bo[e.buf].filetype == 'terminal' then vim.cmd.startinsert() end
+  end,
+})
+
+local code_term_esc = vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, true, true)
+
+for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
+  vim.keymap.set('t', '<C-' .. key .. '>', function()
+    local code_dir = vim.api.nvim_replace_termcodes('<C-' .. key .. '>', true, true, true)
+    vim.api.nvim_feedkeys(code_term_esc .. code_dir, 't', true)
+  end, { noremap = true })
+end
+
+local set = vim.keymap.set
+
+set('t', '<C-e><C-e>', function() vim.api.nvim_feedkeys(code_term_esc, 't', true) end)
+
+set('t', '<C-b>', function()
+  vim.api.nvim_feedkeys(code_term_esc, 't', true)
+  require('fzf-lua').buffers()
+end)
+
+set('t', '<C-t>', function()
+  vim.api.nvim_feedkeys(code_term_esc, 't', true)
+  require('fzf-lua').tabs()
+end)
+
+set('t', ']]', function()
+  vim.api.nvim_feedkeys(code_term_esc, 't', true)
+  vim.cmd('tabnext')
+end)
+
+set('t', '[[', function()
+  vim.api.nvim_feedkeys(code_term_esc, 't', true)
+  vim.cmd('tabprevious')
+end)
