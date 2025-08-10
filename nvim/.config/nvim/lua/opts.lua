@@ -24,7 +24,6 @@ vim.g.loaded_node_provider = 0
 
 vim.o.guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block-TermCursor'
 
-vim.o.timeoutlen = 1000
 vim.o.cursorline = true
 vim.o.scrolloff = 8
 vim.o.sidescrolloff = 24
@@ -53,7 +52,9 @@ vim.o.foldcolumn = '1'
 vim.o.foldlevelstart = 99
 vim.wo.foldtext = ''
 vim.o.updatetime = 300
-vim.o.timeoutlen = 500
+vim.o.timeoutlen = 1000
+vim.o.showcmd = false
+vim.o.ruler = false
 vim.o.ttimeoutlen = 10
 vim.opt.wildignore:append({ '.DS_Store' })
 vim.o.completeopt = 'menuone,noselect,noinsert'

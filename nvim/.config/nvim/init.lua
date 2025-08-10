@@ -3,14 +3,14 @@ require('path')
 
 require('pack')
 
-require('lsp')
-require('marks')
-
-require('theme')
-
 require('opts')
 require('keymaps')
 require('autocmds')
+
+require('theme')
+require('lsp')
+require('marks')
+require('term')
 
 require('plugins.mason')
 require('plugins.lspconfig')
