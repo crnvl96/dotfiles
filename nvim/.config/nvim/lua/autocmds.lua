@@ -81,7 +81,7 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
       end, { noremap = true })
     end
 
-    vim.keymap.set('t', '<Esc><Esc>', function() vim.api.nvim_feedkeys(code_term_esc, 't', true) end)
+    vim.keymap.set('t', '<C-b><C-b>', function() vim.api.nvim_feedkeys(code_term_esc, 't', true) end)
   end,
 })
 

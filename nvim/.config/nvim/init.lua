@@ -20,5 +20,7 @@ require('plugins.unnest')
 require('plugins.blink')
 require('plugins.conform')
 require('plugins.fzf-lua')
+
 require('plugins.fugitive')
 require('plugins.sleuth')
+require('plugins.vinegar')
