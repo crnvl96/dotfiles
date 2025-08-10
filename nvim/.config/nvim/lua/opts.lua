@@ -83,6 +83,7 @@ vim.opt.fillchars = {
 vim.opt.diffopt:append('vertical,context:99')
 
 vim.opt.shortmess:append({
-  w = true,
+  a = true,
   s = true,
+  W = true,
 })
