@@ -25,6 +25,7 @@ vim.g.loaded_netrw = 1
 vim.o.guicursor = 'n-v-c-sm:block,i-ci-ve:ver25,r-cr-o:hor20,t:block-TermCursor'
 
 vim.o.timeoutlen = 1000
+vim.o.cursorline = true
 vim.o.scrolloff = 8
 vim.o.sidescrolloff = 24
 vim.o.wrap = false

@@ -22,9 +22,7 @@ vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('crnvl96-big-file', { clear = true }),
   pattern = 'bigfile', -- defined on filetype.lua
   callback = function(args)
-    vim.schedule(
-      function() vim.bo[args.buf].syntax = vim.filetype.match({ buf = args.buf }) or '' end
-    )
+    vim.schedule(function() vim.bo[args.buf].syntax = vim.filetype.match({ buf = args.buf }) or '' end)
   end,
 })
 
@@ -53,43 +51,12 @@ vim.api.nvim_create_autocmd({ 'UIEnter', 'ColorScheme' }, {
   group = vim.api.nvim_create_augroup('crnvl96-term-colorscheme', { clear = true }),
   callback = function()
     if vim.api.nvim_get_hl(0, { name = 'Normal' }).bg then
-      io.write(
-        string.format(
-          '\027]11;#%06x\027\\',
-          vim.api.nvim_get_hl(0, { name = 'Normal' }).bg
-        )
-      )
+      io.write(string.format('\027]11;#%06x\027\\', vim.api.nvim_get_hl(0, { name = 'Normal' }).bg))
     end
     vim.api.nvim_create_autocmd('UILeave', {
       callback = function() io.write('\027]111\027\\') end,
     })
   end,
-})
-
-vim.api.nvim_create_autocmd('CmdlineEnter', {
-  group = vim.api.nvim_create_augroup(
-    'crnvl96-cmdheight-1-on-cmdlineenter',
-    { clear = true }
-  ),
-  desc = "Don't hide the status line when typing a command",
-  command = ':set cmdheight=1',
-})
-
-vim.api.nvim_create_autocmd('CmdlineLeave', {
-  group = vim.api.nvim_create_augroup(
-    'crnvl96-cmdheight-0-on-cmdlineleave',
-    { clear = true }
-  ),
-  desc = 'Hide cmdline when not typing a command',
-  command = ':set cmdheight=0',
-})
-
-vim.api.nvim_create_autocmd('BufWritePost', {
-  group = vim.api.nvim_create_augroup(
-    'crnvl96-hide-message-after-write',
-    { clear = true }
-  ),
-  command = 'redrawstatus',
 })
 
 vim.api.nvim_create_autocmd({ 'TermOpen' }, {
@@ -105,22 +72,16 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
       vim.cmd.startinsert()
     end
 
-    local code_term_esc =
-      vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, true, true)
+    local code_term_esc = vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, true, true)
 
     for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
       vim.keymap.set('t', '<C-' .. key .. '>', function()
-        local code_dir =
-          vim.api.nvim_replace_termcodes('<C-' .. key .. '>', true, true, true)
+        local code_dir = vim.api.nvim_replace_termcodes('<C-' .. key .. '>', true, true, true)
         vim.api.nvim_feedkeys(code_term_esc .. code_dir, 't', true)
       end, { noremap = true })
     end
 
-    vim.keymap.set(
-      't',
-      '<C-t>',
-      function() vim.api.nvim_feedkeys(code_term_esc, 't', true) end
-    )
+    vim.keymap.set('t', '<Esc><Esc>', function() vim.api.nvim_feedkeys(code_term_esc, 't', true) end)
   end,
 })
 
@@ -128,15 +89,5 @@ vim.api.nvim_create_autocmd('WinEnter', {
   group = vim.api.nvim_create_augroup('crnvl96-autoinsertmode', { clear = true }),
   callback = function()
     if vim.opt.buftype:get() == 'terminal' then vim.cmd.startinsert() end
-  end,
-})
-
-vim.api.nvim_create_autocmd('WinResized', {
-  group = vim.api.nvim_create_augroup('crnvl96-autowrap', { clear = true }),
-  callback = function()
-    local win_width = vim.api.nvim_win_get_width(0)
-    local text_width = vim.opt.textwidth._value
-    local wide_enough = win_width < text_width + 1
-    vim.api.nvim_set_option_value('wrap', wide_enough, {})
   end,
 })
