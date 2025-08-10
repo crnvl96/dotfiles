@@ -1,5 +1,5 @@
 ```bash
-stow -t ~ --ignore=^/README.* --adopt */
+stow -t ~ --ignore=^/README.* --adopt *
 ```
 
 ```bash
