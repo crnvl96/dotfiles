@@ -12,14 +12,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = vim.lsp.get_client_by_id(e.data.client_id)
     if not client then return end
 
-    local methods = vim.lsp.protocol.Methods
-
     local bufnr = e.buf
-    local win = vim.api.nvim_get_current_win()
-    local filetype = e.match
-    local lang = vim.treesitter.language.get_lang(filetype) or ''
-
-    vim.bo[bufnr].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
     local set = function(lhs, rhs, opts, mode)
       opts = vim.tbl_extend('error', opts or {}, { buffer = bufnr })
@@ -40,17 +33,5 @@ vim.api.nvim_create_autocmd('LspAttach', {
     set('gs', vim.lsp.buf.document_symbol)
     set('gS', vim.lsp.buf.workspace_symbol)
     set('<C-k>', vim.lsp.buf.signature_help, {}, 'i')
-
-    if client:supports_method(methods.textDocument_formatting) then
-      client.server_capabilities.documentFormattingProvider = true
-    end
-
-    if client:supports_method(methods.textDocument_foldingRange) then
-      vim.wo[win][0].foldexpr = 'v:lua.vim.lsp.foldexpr()'
-    else
-      if vim.treesitter.language.add(lang) then
-        vim.wo[win][0].foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-      end
-    end
   end,
 })

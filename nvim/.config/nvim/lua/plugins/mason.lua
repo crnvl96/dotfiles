@@ -16,6 +16,7 @@ MiniDeps.now(function()
         -- Formatters
         'stylua',
         'prettier',
+        'gofumpt',
 
         -- Language servers
         'gopls',
