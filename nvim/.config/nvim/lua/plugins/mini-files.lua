@@ -71,4 +71,6 @@ MiniDeps.later(function()
       map_split(buf_id, '<C-w>v', 'belowright vertical')
     end,
   })
+
+  vim.api.nvim_set_hl(0, 'MiniFilesCursorLine', { bg = nil, fg = nil })
 end)
