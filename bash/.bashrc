@@ -2,8 +2,10 @@
 # (don't mess with these directly, just overwrite them here!)
 source ~/.local/share/omarchy/default/bash/rc
 
-alias l='lazygit'
-alias n='nvim'
+alias lzg='lazygit'
+alias ex='exit'
+alias cl='clear'
+alias nv='nvim'
 alias y='yazi'
 
 # Add your own exports, aliases, and functions here.
