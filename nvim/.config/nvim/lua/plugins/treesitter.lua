@@ -7,8 +7,6 @@ MiniDeps.now(function()
     },
   })
 
-  -- MiniDeps.add('nvim-treesitter/nvim-treesitter-textobjects')
-
   require('nvim-treesitter').install({
     'c',
     'lua',

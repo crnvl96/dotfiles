@@ -15,7 +15,6 @@ MiniDeps.later(function()
   end
 
   vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-
   vim.g.autoformat = true
 
   vim.api.nvim_create_user_command('ToggleFormat', function()
