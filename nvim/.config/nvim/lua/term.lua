@@ -14,9 +14,11 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
   end,
 })
 
-vim.api.nvim_create_autocmd('TermEnter', {
+vim.api.nvim_create_autocmd('WinEnter', {
   group = vim.api.nvim_create_augroup('crnvl96-term-autoinsertmode', {}),
-  callback = function() vim.cmd.startinsert() end,
+  callback = function()
+    if vim.bo.filetype == 'terminal' then vim.cmd.startinsert() end
+  end,
 })
 
 local code_term_esc = vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, true, true)
