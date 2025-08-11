@@ -1,7 +1,1 @@
-MiniDeps.now(
-  function()
-    MiniDeps.add({
-      source = 'brianhuster/unnest.nvim',
-    })
-  end
-)
+MiniDeps.now(function() MiniDeps.add('brianhuster/unnest.nvim') end)

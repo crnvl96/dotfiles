@@ -3,6 +3,7 @@
 source ~/.local/share/omarchy/default/bash/rc
 
 alias l='lazygit'
+alias n='nvim'
 alias y='yazi'
 
 # Add your own exports, aliases, and functions here.

@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd({ 'TermOpen' }, {
-  group = vim.api.nvim_create_augroup('crnvl96-termopts', { clear = true }),
+  group = vim.api.nvim_create_augroup('crnvl96-termopts', {}),
   callback = function()
     if vim.opt.buftype:get() == 'terminal' then
       local set = vim.opt_local
@@ -14,15 +14,8 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
 })
 
 vim.api.nvim_create_autocmd('TermEnter', {
-  group = vim.api.nvim_create_augroup('crnvl96-autoinsertmode', { clear = true }),
+  group = vim.api.nvim_create_augroup('crnvl96-term-autoinsertmode', {}),
   callback = function() vim.cmd.startinsert() end,
-})
-
-vim.api.nvim_create_autocmd('TabEnter', {
-  group = vim.api.nvim_create_augroup('crnvl96-autoinsertmode', { clear = true }),
-  callback = function(e)
-    if vim.bo[e.buf].filetype == 'terminal' then vim.cmd.startinsert() end
-  end,
 })
 
 local code_term_esc = vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, true, true)

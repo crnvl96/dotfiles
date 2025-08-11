@@ -20,10 +20,7 @@ MiniDeps.later(function()
 
   vim.api.nvim_create_user_command('ToggleFormat', function()
     vim.g.autoformat = not vim.g.autoformat
-    vim.notify(
-      string.format('%s formatting...', vim.g.autoformat and 'Enabling' or 'Disabling'),
-      vim.log.levels.INFO
-    )
+    vim.notify(string.format('%s formatting...', vim.g.autoformat and 'Enabling' or 'Disabling'), vim.log.levels.INFO)
   end, { desc = 'Toggle conform.nvim auto-formatting', nargs = 0 })
 
   vim.keymap.set('n', '=', 'mzgggqG`z<cmd>delmarks z<cr>zz')
@@ -45,8 +42,6 @@ MiniDeps.later(function()
       python = { 'ruff_fix', 'ruff_organize_imports', 'ruff_format' },
       rust = { 'rustfmt' },
     },
-    format_on_save = function()
-      return vim.g.autoformat and { timeout_ms = 3000, lsp_format = 'fallback' }
-    end,
+    format_on_save = function() return vim.g.autoformat and { timeout_ms = 3000, lsp_format = 'fallback' } end,
   })
 end)

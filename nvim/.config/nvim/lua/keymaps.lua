@@ -16,7 +16,7 @@ set('n', 'Y', function()
 end, { expr = true })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-  group = vim.api.nvim_create_augroup('crnvl96-save-cursor-pos-on-yank', { clear = true }),
+  group = vim.api.nvim_create_augroup('crnvl96-save-cursor-pos-on-yank', {}),
   callback = function()
     if vim.v.event.operator == 'y' and cursorPreYank then vim.api.nvim_win_set_cursor(0, cursorPreYank) end
   end,

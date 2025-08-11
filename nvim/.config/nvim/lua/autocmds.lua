@@ -1,5 +1,5 @@
 vim.api.nvim_create_autocmd('BufReadPost', {
-  group = vim.api.nvim_create_augroup('crnvl96-last-location', { clear = true }),
+  group = vim.api.nvim_create_augroup('crnvl96-last-location', {}),
   callback = function(args)
     local mark = vim.api.nvim_buf_get_mark(args.buf, '"')
     local line_count = vim.api.nvim_buf_line_count(args.buf)
@@ -8,7 +8,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 })
 
 vim.api.nvim_create_autocmd('TextYankPost', {
-  group = vim.api.nvim_create_augroup('crnvl96-yank-hl', { clear = true }),
+  group = vim.api.nvim_create_augroup('crnvl96-yank-hl', {}),
   callback = function()
     vim.hl.on_yank({
       priority = 250,
@@ -19,7 +19,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 })
 
 vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('crnvl96-big-file', { clear = true }),
+  group = vim.api.nvim_create_augroup('crnvl96-big-file', {}),
   pattern = 'bigfile', -- defined on filetype.lua
   callback = function(args)
     vim.schedule(function() vim.bo.syntax = vim.filetype.match({ buf = args.buf }) or '' end)
@@ -27,7 +27,7 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.api.nvim_create_autocmd({ 'InsertLeave', 'WinEnter' }, {
-  group = vim.api.nvim_create_augroup('crnvl96-show-cursorline', { clear = true }),
+  group = vim.api.nvim_create_augroup('crnvl96-show-cursorline', {}),
   callback = function()
     if vim.w.auto_cursorline then
       vim.wo.cursorline = true
@@ -37,7 +37,7 @@ vim.api.nvim_create_autocmd({ 'InsertLeave', 'WinEnter' }, {
 })
 
 vim.api.nvim_create_autocmd({ 'InsertEnter', 'WinLeave' }, {
-  group = vim.api.nvim_create_augroup('crnvl96-hide-cursorline', { clear = true }),
+  group = vim.api.nvim_create_augroup('crnvl96-hide-cursorline', {}),
   callback = function()
     if vim.wo.cursorline then
       vim.w.auto_cursorline = true
