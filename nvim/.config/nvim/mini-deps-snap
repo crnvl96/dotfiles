@@ -1,12 +1,13 @@
 return {
+  ["SchemaStore.nvim"] = "a23c631533b60f8d24ca9826bf28c9e21bec0424",
   ["blink.cmp"] = "10f2ebe48849726608f79e21bc9eb89c567a22f3",
   ["conform.nvim"] = "973f3cb73887d510321653044791d7937c7ec0fa",
-  ["fzf-lua"] = "504b45d6cedec32d6f0ddeb82f3d7117a94b622b",
+  ["fzf-lua"] = "df916902bcefde1119c05a57376d679a388db5fc",
   ["mason.nvim"] = "7dc4facca9702f95353d5a1f87daf23d78e31c2a",
   ["mini.nvim"] = "4035ef97407a6661ae9ff913ff980e271a658502",
   ["nvim-lspconfig"] = "d6dc63670d3dc5204b1e874af4cbf340cb5d9d18",
   ["nvim-treesitter"] = "9866036ec3c5db40700a9178494e0cfdcfe6ecfd",
-  ["unnest.nvim"] = "63ea6a3cabc8204070ae88b2288993bcd448c164",
+  ["unnest.nvim"] = "90c658bab6afe589e00a638b5e0f21ec3c84f0c6",
   ["vim-fugitive"] = "61b51c09b7c9ce04e821f6cf76ea4f6f903e3cf4",
   ["vim-sleuth"] = "be69bff86754b1aa5adcbb527d7fcd1635a84080"
 }

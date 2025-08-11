@@ -4,9 +4,13 @@ MiniDeps.later(function()
   local map_multistep = require('mini.keymap').map_multistep
   local map_combo = require('mini.keymap').map_combo
 
-  map_multistep('i', '<C-n>', { 'blink_next' })
-  map_multistep('i', '<C-p>', { 'blink_prev' })
-  map_multistep('i', '<CR>', { 'blink_accept' })
+  map_multistep('i', '<C-n>', { 'blink_next', 'pmenu_next' })
+  map_multistep('i', '<C-p>', { 'blink_prev', 'pmenu_prev' })
+
+  map_multistep('i', '<Tab>', { 'blink_next', 'pmenu_next' })
+  map_multistep('i', '<S-Tab>', { 'blink_prev', 'pmenu_prev' })
+
+  map_multistep('i', '<CR>', { 'blink_accept', 'pmenu_accept' })
 
   map_combo({ 'i', 'c', 'x', 's' }, 'jk', '<BS><BS><Esc>')
   map_combo({ 'i', 'c', 'x', 's' }, 'kj', '<BS><BS><Esc>')
