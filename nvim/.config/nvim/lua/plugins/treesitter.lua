@@ -7,11 +7,11 @@ MiniDeps.now(function()
     },
   })
 
-  local parsers = {
+  -- MiniDeps.add('nvim-treesitter/nvim-treesitter-textobjects')
+
+  require('nvim-treesitter').install({
     'c',
     'lua',
-    'prisma',
-    'vim',
     'vimdoc',
     'query',
     'markdown',
@@ -22,21 +22,18 @@ MiniDeps.now(function()
     'jsx',
     'python',
     'rust',
-  }
-
-  require('nvim-treesitter').install(parsers)
-
-  vim.api.nvim_create_autocmd('FileType', {
-    group = vim.api.nvim_create_augroup('crnvl96-treesitter', {}),
-    callback = function(e)
-      local filetype = e.match
-      local lang = vim.treesitter.language.get_lang(filetype) or ''
-
-      if vim.treesitter.language.add(lang) then
-        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-        vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-        vim.treesitter.start()
-      end
-    end,
+    'bash',
+    'gitcommit',
+    'html',
+    'hyprlang',
+    'json',
+    'json5',
+    'jsonc',
+    'rasi',
+    'regex',
+    'scss',
+    'toml',
+    'vim',
+    'yaml',
   })
 end)

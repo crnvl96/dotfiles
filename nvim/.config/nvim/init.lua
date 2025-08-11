@@ -25,3 +25,8 @@ require('plugins.fzf-lua')
 require('plugins.mini-files')
 
 require('plugins.fugitive')
+require('plugins.mini-clue')
+require('plugins.mini-keymaps')
+require('plugins.mini-jump2d')
+require('plugins.mini-indentscope')
+require('plugins.schemastore-nvim')

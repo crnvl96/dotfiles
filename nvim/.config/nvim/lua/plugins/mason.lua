@@ -19,6 +19,9 @@ MiniDeps.now(function()
         'gofumpt',
 
         -- Language servers
+        'json-lsp', -- jsonls
+        'yaml-language-server', -- yamlls
+        'taplo',
         'gopls',
         'biome',
         'css-lsp', -- cssls

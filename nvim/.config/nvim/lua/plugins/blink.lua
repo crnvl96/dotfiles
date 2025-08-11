@@ -8,21 +8,35 @@ MiniDeps.later(function()
 
   MiniDeps.add({
     source = 'Saghen/blink.cmp',
-    hooks = { post_install = build, post_checkout = build },
+    hooks = {
+      post_install = build,
+      post_checkout = build,
+    },
   })
 
   require('blink.cmp').setup({
     completion = {
       list = {
-        selection = { preselect = false, auto_insert = true },
+        selection = {
+          preselect = false,
+          auto_insert = true,
+        },
         max_items = 10,
       },
-      documentation = { auto_show = true },
+      documentation = {
+        auto_show = true,
+      },
     },
     cmdline = {
       enabled = true,
-      keymap = { preset = 'inherit' },
-      completion = { menu = { auto_show = true } },
+      keymap = {
+        preset = 'inherit',
+      },
+      completion = {
+        menu = {
+          auto_show = true,
+        },
+      },
     },
   })
 end)

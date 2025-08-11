@@ -1,19 +1,6 @@
-local set = vim.keymap.set
-
-set('x', 'p', 'P')
-set('x', 'Y', 'yg_')
-
 local cursorPreYank
 
-set({ 'n', 'x' }, 'y', function()
-  cursorPreYank = vim.api.nvim_win_get_cursor(0)
-  return 'y'
-end, { expr = true })
-
-set('n', 'Y', function()
-  cursorPreYank = vim.api.nvim_win_get_cursor(0)
-  return 'y_'
-end, { expr = true })
+local set = vim.keymap.set
 
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('crnvl96-save-cursor-pos-on-yank', {}),
@@ -21,6 +8,19 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     if vim.v.event.operator == 'y' and cursorPreYank then vim.api.nvim_win_set_cursor(0, cursorPreYank) end
   end,
 })
+
+local function save_cursor_pos_on_pre_yank(cmd)
+  return function()
+    cursorPreYank = vim.api.nvim_win_get_cursor(0)
+    return cmd
+  end
+end
+
+set('x', 'p', 'P')
+set('x', 'Y', 'yg_')
+
+set({ 'n', 'x' }, 'y', save_cursor_pos_on_pre_yank('y'), { expr = true })
+set('n', 'Y', save_cursor_pos_on_pre_yank('y$'), { expr = true })
 
 set({ 'n', 'x', 'o' }, '<Leader>p', '"+p')
 set({ 'n', 'x', 'o' }, '<Leader>P', '"+P')

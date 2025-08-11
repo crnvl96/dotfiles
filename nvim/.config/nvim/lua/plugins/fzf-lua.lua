@@ -1,8 +1,10 @@
 MiniDeps.later(function()
   MiniDeps.add('ibhagwan/fzf-lua')
 
-  local actions = require('fzf-lua').actions
-  require('fzf-lua').setup({
+  local fzf_lua = require('fzf-lua')
+  local actions = fzf_lua.actions
+
+  fzf_lua.setup({
     { 'border-fused', 'hide' },
     fzf_opts = {
       ['--cycle'] = '',
@@ -22,6 +24,7 @@ MiniDeps.later(function()
       },
     },
     winopts = {
+      border = 'single',
       preview = {
         vertical = 'down:45%',
         horizontal = 'right:60%',
@@ -50,12 +53,19 @@ MiniDeps.later(function()
     },
   })
 
-  require('fzf-lua').register_ui_select()
+  fzf_lua.register_ui_select()
 
-  vim.keymap.set('n', '<Leader>f', function() require('fzf-lua').files() end)
-  vim.keymap.set('n', '<Leader>l', function() require('fzf-lua').blines() end)
-  vim.keymap.set('n', '<Leader>g', function() require('fzf-lua').live_grep() end)
-  vim.keymap.set('n', "<Leader>'", function() require('fzf-lua').resume() end)
+  local set = vim.keymap.set
+  local function feed(key) vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), 't', true) end
 
-  vim.keymap.set('n', '<C-b>', function() require('fzf-lua').buffers() end)
+  set('n', '<Leader>f', '<Cmd>FzfLua files<CR>', { desc = 'Find files' })
+  set('n', '<Leader>l', '<Cmd>FzfLua blines<CR>', { desc = 'Search in buffer lines' })
+  set('n', '<Leader>g', '<Cmd>FzfLua live_grep<CR>', { desc = 'Live grep' })
+  set('n', "<Leader>'", '<Cmd>FzfLua resume<CR>', { desc = 'Resume last picker' })
+  set('n', '<C-f>', '<Cmd>FzfLua buffers<CR>', { desc = 'List buffers' })
+
+  set('t', '<C-f>', function()
+    feed('<C-\\><C-n>')
+    fzf_lua.buffers()
+  end)
 end)

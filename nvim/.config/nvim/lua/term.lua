@@ -26,12 +26,3 @@ for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
     vim.api.nvim_feedkeys(code_term_esc .. code_dir, 't', true)
   end, { noremap = true })
 end
-
-local set = vim.keymap.set
-
-set('t', '<C-e><C-e>', function() vim.api.nvim_feedkeys(code_term_esc, 't', true) end)
-
-set('t', '<C-b>', function()
-  vim.api.nvim_feedkeys(code_term_esc, 't', true)
-  require('fzf-lua').buffers()
-end)
