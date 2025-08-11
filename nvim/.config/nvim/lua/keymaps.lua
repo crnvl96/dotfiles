@@ -17,15 +17,14 @@ local function save_cursor_pos_on_pre_yank(cmd)
 end
 
 set('x', 'p', 'P')
-set('x', 'Y', 'yg_')
 
 set({ 'n', 'x' }, 'y', save_cursor_pos_on_pre_yank('y'), { expr = true })
-set('n', 'Y', save_cursor_pos_on_pre_yank('y$'), { expr = true })
+set({ 'n', 'x' }, 'Y', save_cursor_pos_on_pre_yank('yg_'), { expr = true })
 
-set({ 'n', 'x', 'o' }, '<Leader>p', '"+p')
-set({ 'n', 'x', 'o' }, '<Leader>P', '"+P')
-set({ 'n', 'x', 'o' }, '<Leader>y', '"+y')
-set({ 'n', 'x', 'o' }, '<Leader>Y', '"+yg_')
+set({ 'n', 'x', 'o' }, '<Leader>p', '"+p', { desc = 'Paste from clipboard' })
+set({ 'n', 'x', 'o' }, '<Leader>P', '"+P', { desc = 'Paste from clipboard before cursor' })
+set({ 'n', 'x', 'o' }, '<Leader>y', '"+y', { desc = 'Yank to clipboard' })
+set({ 'n', 'x', 'o' }, '<Leader>Y', '"+yg_', { desc = 'Yank to clipboard till end of line' })
 
 set({ 'n', 'x', 'i', 's' }, '<Esc>', '<Cmd>noh<CR><Esc>')
 set({ 'n', 'x' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true })

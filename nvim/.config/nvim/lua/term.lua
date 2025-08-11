@@ -7,6 +7,7 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
       set.relativenumber = false
       set.scrolloff = 0 -- Don't scroll when at the top or bottom of the terminal buffer
       vim.opt.filetype = 'terminal'
+      vim.b.miniindentscope_disable = true
 
       vim.cmd.startinsert()
     end

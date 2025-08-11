@@ -1,6 +1,15 @@
 {
   "$schema": "https://charm.land/crush.json",
-  "lsp": {},
+  "lsp": {
+    "python": {
+      "command": "uv",
+      "args": [
+        "run",
+        "pyright-langserver",
+        "--stdio"
+      ]
+    }
+  },
   "mcp": {
     "context7": {
       "type": "http",
