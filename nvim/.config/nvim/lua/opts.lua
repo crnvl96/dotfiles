@@ -22,7 +22,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
 vim.o.completeopt = 'menuone,noselect,noinsert'
-vim.o.cursorline = false
+vim.o.cursorline = true
 vim.o.expandtab = true
 vim.o.foldcolumn = '1'
 vim.o.foldlevelstart = 99

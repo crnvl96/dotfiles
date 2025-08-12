@@ -33,7 +33,7 @@ set({ 'n', 'x' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true })
 set('n', '<C-Down>', '<Cmd>resize -5<CR>')
 set('n', '<C-Left>', '<Cmd>vertical resize -20<CR>')
 set('n', '<C-Right>', '<Cmd>vertical resize +20<CR>')
-set({ 'i', 'n', 'x', 'o' }, '<C-s>', '<Esc><Cmd>noh<CR><Cmd>write<CR><Esc>')
+set({ 'n', 'i', 'x' }, '<C-S>', '<Esc><Cmd>silent! update | redraw<CR>')
 
 set('x', '<', '<gv')
 set('x', '>', '>gv')

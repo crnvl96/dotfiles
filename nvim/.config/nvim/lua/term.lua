@@ -14,7 +14,7 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
   end,
 })
 
-vim.api.nvim_create_autocmd('WinEnter', {
+vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
   group = vim.api.nvim_create_augroup('crnvl96-term-autoinsertmode', {}),
   callback = function()
     if vim.bo.filetype == 'terminal' then vim.cmd.startinsert() end
@@ -29,3 +29,13 @@ for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
     vim.api.nvim_feedkeys(code_term_esc .. code_dir, 't', true)
   end, { noremap = true })
 end
+
+vim.keymap.set('t', '<C-6>', function()
+  vim.api.nvim_feedkeys(code_term_esc, 't', true)
+  vim.cmd('b#')
+end)
+
+vim.keymap.set('t', '<C-5>', function()
+  vim.api.nvim_feedkeys(code_term_esc, 't', true)
+  require('fzf-lua').buffers()
+end)

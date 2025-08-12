@@ -28,6 +28,8 @@ MiniDeps.later(function()
   require('mini.files').setup({
     mappings = {
       show_help = '?',
+      go_in = '',
+      go_out = '',
       go_in_plus = '<CR>',
       go_out_plus = '-',
     },

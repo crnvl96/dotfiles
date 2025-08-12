@@ -28,3 +28,5 @@ require('plugins.fugitive')
 require('plugins.mini-clue')
 require('plugins.mini-keymaps')
 require('plugins.schemastore-nvim')
+
+require('plugins.grug-far')

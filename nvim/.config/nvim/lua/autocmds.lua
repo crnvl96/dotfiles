@@ -13,7 +13,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     vim.hl.on_yank({
       priority = 250,
       higroup = 'IncSearch',
-      timeout = 250,
+      timeout = 150,
     })
   end,
 })

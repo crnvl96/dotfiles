@@ -5,7 +5,7 @@ MiniDeps.later(function()
   local actions = fzf_lua.actions
 
   fzf_lua.setup({
-    { 'border-fused', 'hide' },
+    'border-fused',
     fzf_opts = {
       ['--cycle'] = '',
     },
@@ -24,8 +24,13 @@ MiniDeps.later(function()
       },
     },
     winopts = {
+      height = 0.4,
+      width = 0.4,
+      row = 0.5,
+      col = 0.5,
       border = 'single',
       preview = {
+        hidden = true,
         vertical = 'down:45%',
         horizontal = 'right:60%',
         layout = 'flex',
@@ -56,16 +61,7 @@ MiniDeps.later(function()
   fzf_lua.register_ui_select()
 
   local set = vim.keymap.set
-  local function feed(key) vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), 't', true) end
 
   set('n', '<Leader>f', '<Cmd>FzfLua files<CR>', { desc = 'Find files' })
-  set('n', '<Leader>l', '<Cmd>FzfLua blines<CR>', { desc = 'Search in buffer lines' })
-  set('n', '<Leader>g', '<Cmd>FzfLua live_grep<CR>', { desc = 'Live grep' })
-  set('n', "<Leader>'", '<Cmd>FzfLua resume<CR>', { desc = 'Resume last picker' })
-  set('n', '<M-g>', '<Cmd>FzfLua buffers<CR>', { desc = 'List buffers' })
-
-  set('t', '<M-g>', function()
-    feed('<C-\\><C-n>')
-    fzf_lua.buffers()
-  end)
+  set('n', '<C-5>', '<Cmd>FzfLua buffers<CR>', { desc = 'List buffers' })
 end)

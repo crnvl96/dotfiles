@@ -44,7 +44,6 @@ MiniDeps.now(function()
       if vim.treesitter.language.add(lang) then
         vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
         vim.wo.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-        print('called')
         vim.treesitter.start()
       end
     end,
