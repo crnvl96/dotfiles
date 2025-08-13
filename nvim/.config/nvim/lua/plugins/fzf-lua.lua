@@ -63,5 +63,4 @@ MiniDeps.later(function()
   local set = vim.keymap.set
 
   set('n', '<Leader>f', '<Cmd>FzfLua files<CR>', { desc = 'Find files' })
-  set('n', '<C-5>', '<Cmd>FzfLua buffers<CR>', { desc = 'List buffers' })
 end)

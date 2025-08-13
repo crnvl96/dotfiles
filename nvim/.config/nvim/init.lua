@@ -7,10 +7,14 @@ require('opts')
 require('keymaps')
 require('autocmds')
 
-require('theme')
 require('lsp')
 require('marks')
 require('term')
+
+-- require('colorschemes.catppuccin-latte')
+require('colorschemes.catppuccin')
+
+require('transparency')
 
 require('plugins.mini-icons')
 require('plugins.mason')

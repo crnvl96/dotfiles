@@ -84,6 +84,9 @@ vim.opt.fillchars = {
   msgsep = '─',
 }
 
+vim.opt.wildoptions:append('fuzzy')
+vim.cmd([[set wc=^N]])
+
 vim.opt.wildignore:append({ '.DS_Store' })
 
 vim.opt.shortmess:append({

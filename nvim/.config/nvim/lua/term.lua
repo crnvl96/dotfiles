@@ -7,35 +7,24 @@ vim.api.nvim_create_autocmd({ 'TermOpen' }, {
       set.relativenumber = false
       set.scrolloff = 0 -- Don't scroll when at the top or bottom of the terminal buffer
       vim.opt.filetype = 'terminal'
-      vim.b.miniindentscope_disable = true
 
       vim.cmd.startinsert()
     end
   end,
 })
 
-vim.api.nvim_create_autocmd({ 'WinEnter', 'BufEnter' }, {
-  group = vim.api.nvim_create_augroup('crnvl96-term-autoinsertmode', {}),
-  callback = function()
-    if vim.bo.filetype == 'terminal' then vim.cmd.startinsert() end
-  end,
-})
+local set = vim.keymap.set
 
-local code_term_esc = vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, true, true)
-
-for _, key in ipairs({ 'h', 'j', 'k', 'l' }) do
-  vim.keymap.set('t', '<C-' .. key .. '>', function()
-    local code_dir = vim.api.nvim_replace_termcodes('<C-' .. key .. '>', true, true, true)
-    vim.api.nvim_feedkeys(code_term_esc .. code_dir, 't', true)
-  end, { noremap = true })
+local function term_send(key)
+  vim.api.nvim_feedkeys(
+    vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, true, true)
+      .. vim.api.nvim_replace_termcodes(key, true, true, true),
+    't',
+    true
+  )
 end
 
-vim.keymap.set('t', '<C-6>', function()
-  vim.api.nvim_feedkeys(code_term_esc, 't', true)
-  vim.cmd('b#')
-end)
-
-vim.keymap.set('t', '<C-5>', function()
-  vim.api.nvim_feedkeys(code_term_esc, 't', true)
-  require('fzf-lua').buffers()
-end)
+set('t', '<C-h>', function() term_send('<C-h>') end, { noremap = true })
+set('t', '<C-j>', function() term_send('<C-j>') end, { noremap = true })
+set('t', '<C-k>', function() term_send('<C-k>') end, { noremap = true })
+set('t', '<C-l>', function() term_send('<C-l>') end, { noremap = true })
