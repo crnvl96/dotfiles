@@ -12,6 +12,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
     local client = vim.lsp.get_client_by_id(e.data.client_id)
     if not client then return end
 
+    if client.name == 'ruff' then
+      -- Disable hover in favor of Pyright
+      client.server_capabilities.hoverProvider = false
+    end
+
     local bufnr = e.buf
 
     local set = function(lhs, rhs, opts, mode)

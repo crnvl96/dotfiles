@@ -37,7 +37,7 @@ MiniDeps.later(function()
       typesCRipt = get_web_formatter,
       typescriptreact = get_web_formatter,
       lua = { 'stylua' },
-      markdown = { 'prettier', 'injected' },
+      markdown = { 'injected' },
       python = { 'ruff_fix', 'ruff_organize_imports', 'ruff_format' },
       rust = { 'rustfmt' },
     },

@@ -1,25 +1,8 @@
-local cursorPreYank
-
 local set = vim.keymap.set
-
-vim.api.nvim_create_autocmd('TextYankPost', {
-  group = vim.api.nvim_create_augroup('crnvl96-save-cursor-pos-on-yank', {}),
-  callback = function()
-    if vim.v.event.operator == 'y' and cursorPreYank then vim.api.nvim_win_set_cursor(0, cursorPreYank) end
-  end,
-})
-
-local function save_cursor_pos_on_pre_yank(cmd)
-  return function()
-    cursorPreYank = vim.api.nvim_win_get_cursor(0)
-    return cmd
-  end
-end
 
 set('x', 'p', 'P')
 
-set({ 'n', 'x' }, 'y', save_cursor_pos_on_pre_yank('y'), { expr = true })
-set({ 'n', 'x' }, 'Y', save_cursor_pos_on_pre_yank('yg_'), { expr = true })
+set({ 'n', 'x' }, 'Y', 'yg_')
 
 set({ 'n', 'x', 'o' }, '<Leader>p', '"+p', { desc = 'Paste from clipboard' })
 set({ 'n', 'x', 'o' }, '<Leader>P', '"+P', { desc = 'Paste from clipboard before cursor' })

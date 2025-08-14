@@ -25,7 +25,7 @@ require('plugins.unnest')
 
 require('plugins.blink')
 require('plugins.conform')
-require('plugins.fzf-lua')
+require('plugins.mini-pick')
 require('plugins.mini-files')
 
 require('plugins.fugitive')
