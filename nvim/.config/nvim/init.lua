@@ -11,8 +11,7 @@ require('lsp')
 require('marks')
 require('term')
 
--- require('colorschemes.catppuccin-latte')
-require('colorschemes.catppuccin')
+require('colorschemes.ansi')
 
 require('transparency')
 
@@ -25,7 +24,6 @@ require('plugins.unnest')
 
 require('plugins.blink')
 require('plugins.conform')
-require('plugins.mini-pick')
 require('plugins.mini-files')
 
 require('plugins.fugitive')
@@ -33,4 +31,5 @@ require('plugins.mini-clue')
 require('plugins.mini-keymaps')
 require('plugins.schemastore-nvim')
 
+require('plugins.mini-pick')
 require('plugins.grug-far')

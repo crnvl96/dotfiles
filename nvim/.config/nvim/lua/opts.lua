@@ -22,7 +22,7 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ','
 
 vim.o.completeopt = 'menuone,noselect,noinsert'
-vim.o.cursorline = true
+vim.o.cursorline = false
 vim.o.expandtab = true
 vim.o.foldcolumn = '1'
 vim.o.foldlevelstart = 99
@@ -47,6 +47,7 @@ vim.o.smartcase = true
 vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.swapfile = false
+vim.o.termguicolors = false
 vim.o.tabstop = 4
 vim.o.timeoutlen = 1000
 vim.o.ttimeoutlen = 10

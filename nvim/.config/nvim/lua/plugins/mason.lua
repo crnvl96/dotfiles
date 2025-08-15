@@ -17,6 +17,7 @@ MiniDeps.now(function()
         'stylua',
         'prettier',
         'gofumpt',
+        'pyproject-fmt',
 
         -- Language servers
         'json-lsp', -- jsonls
