@@ -14,14 +14,6 @@ vim.api.nvim_create_user_command('Scratch', function()
   end
 end, { desc = 'Open a scratch buffer', nargs = 0 })
 
-vim.api.nvim_create_autocmd('FileType', {
-  group = vim.api.nvim_create_augroup('crnvl96-big-file', {}),
-  pattern = 'bigfile', -- defined on filetype.lua
-  callback = function(args)
-    vim.schedule(function() vim.bo.syntax = vim.filetype.match({ buf = args.buf }) or '' end)
-  end,
-})
-
 vim.api.nvim_create_autocmd('TextYankPost', {
   group = vim.api.nvim_create_augroup('crnvl96-yank-hl', {}),
   callback = function()

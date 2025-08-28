@@ -4,8 +4,6 @@ _G.HOME = os.getenv('HOME') -- Home directory
 _G.NVIM_DIR = HOME .. '/.config/nvim' -- Nvim config directory
 _G.MINI_PATH = vim.fn.stdpath('data') .. '/site/pack/deps/start/mini.nvim' -- Mini.deps default directory
 
--- Functions ================================================================
-
 -- A small helper for retrieving env vars ================================================================
 
 function _G.RetrieveFromEnv(key_name)

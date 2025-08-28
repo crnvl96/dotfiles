@@ -19,6 +19,7 @@ require('nvim-treesitter').install({
   'jsx',
   'python',
   'rust',
+  'ron',
   'bash',
   'gitcommit',
   'html',

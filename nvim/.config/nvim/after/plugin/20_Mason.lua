@@ -17,6 +17,8 @@ require('mason-registry').refresh(function()
     -- Language servers
     'json-lsp', -- jsonls
     'yaml-language-server', -- yamlls
+    'bacon',
+    'bacon-ls', -- bacon_ls
     'taplo',
     'gopls',
     'biome',
