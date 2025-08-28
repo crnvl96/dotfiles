@@ -41,57 +41,16 @@ MiniDeps.add('brianhuster/unnest.nvim')
 
 MiniDeps.add('tpope/vim-fugitive')
 
--- Mini.keymaps ================================================================
-
-local map = require('mini.keymap')
-
-map.setup()
-
-map.map_multistep('i', '<C-n>', { 'blink_next', 'pmenu_next' })
-map.map_multistep('i', '<C-p>', { 'blink_prev', 'pmenu_prev' })
-map.map_multistep('i', '<Tab>', { 'blink_next', 'pmenu_next' })
-map.map_multistep('i', '<S-Tab>', { 'blink_prev', 'pmenu_prev' })
-map.map_multistep('i', '<CR>', { 'blink_accept', 'pmenu_accept' })
-map.map_combo({ 'i', 'c', 'x', 's' }, 'jk', '<BS><BS><Esc>')
-map.map_combo({ 'i', 'c', 'x', 's' }, 'kj', '<BS><BS><Esc>')
-map.map_combo('t', 'jk', '<BS><BS><C-\\><C-n>')
-map.map_combo('t', 'kj', '<BS><BS><C-\\><C-n>')
-
 -- Mini.pick ================================================================
 
-local extra = require('mini.extra')
-extra.setup()
+MiniDeps.add({ source = 'dmtrKovalenko/fff.nvim', hooks = {
+  post_install = Build,
+  post_checkout = Build,
+} })
 
-local pick = require('mini.pick')
-pick.setup({
-  options = { use_cache = true },
-  window = {
-    prompt_caret = '▇ ',
-    prompt_prefix = ' ',
-  },
-})
+require('fff').setup({ prompt = '🪿 ' })
 
-vim.keymap.set('n', '<Leader>f', '<Cmd>Pick files<CR>', { desc = 'Find files' })
-vim.keymap.set('n', '<Leader>b', '<Cmd>Pick buffers<CR>', { desc = 'Find files' })
-vim.keymap.set('n', '<Leader>g', '<Cmd>Pick grep_live<CR>', { desc = 'Grep live' })
-vim.keymap.set('n', '<Leader>l', '<Cmd>Pick buf_lines scope="current"<CR>', { desc = 'Lines' })
-
-vim.ui.select = pick.ui_select
-
-for _, hl in ipairs({
-  'MiniPickBorder',
-  'MiniPickBorderBusy',
-  'MiniPickBorderText',
-  'MiniPickIconDirectory',
-  'MiniPickIconFile',
-  'MiniPickHeader',
-  'MiniPickNormal',
-  'MiniPickPrompt',
-  'MiniPickPromptCaret',
-  'MiniPickPromptPrefix',
-}) do
-  CustomHL(hl, { bg = 'none' })
-end
+vim.keymap.set('n', '<Leader>f', function() require('fff').find_files() end, { desc = 'FFFind files' })
 
 -- Blink.cmp ================================================================
 
@@ -188,14 +147,43 @@ end
 
 MiniDeps.add('MagicDuck/grug-far.nvim')
 
-require('grug-far').setup({ transient = true })
+require('grug-far').setup({
+  transient = true,
+})
 
-vim.keymap.set('n', '<Leader>G', '<Cmd>GrugFar<CR>', { desc = 'Live grep' })
+vim.api.nvim_create_autocmd('FileType', {
+  group = vim.api.nvim_create_augroup('crnvl96-grug-far-keybindings', { clear = true }),
+  pattern = { 'grug-far' },
+  callback = function()
+    vim.keymap.set('n', '<C-enter>', function()
+      require('grug-far').get_instance(0):open_location()
+      require('grug-far').get_instance(0):close()
+    end, { buffer = true })
+  end,
+})
+
 vim.keymap.set(
   'n',
-  '<Leader>L',
-  function() require('grug-far').open({ prefills = { paths = vim.fn.expand('%') } }) end,
-  { desc = 'Find lines' }
+  '<Leader>g',
+  function()
+    require('grug-far').toggle_instance({
+      instanceName = 'far',
+      staticTitle = 'Find and Replace',
+    })
+  end,
+  { desc = 'Live grep' }
+)
+
+vim.keymap.set(
+  'n',
+  '<Leader>l',
+  function()
+    require('grug-far').toggle_instance({
+      instanceName = 'far',
+      staticTitle = 'Find and Replace',
+      prefills = { paths = vim.fn.expand('%') },
+    })
+  end
 )
 
 -- Snacks ================================================================
@@ -203,20 +191,10 @@ vim.keymap.set(
 MiniDeps.add('folke/snacks.nvim')
 
 require('snacks').setup({
-  terminal = {
-    win = {
-      border = 'single',
-    },
-  },
+  terminal = { win = { border = 'single' } },
   styles = {
-    terminal = {
-      height = 0.95,
-      width = 0.95,
-    },
-    lazygit = {
-      height = 0.95,
-      width = 0.95,
-    },
+    terminal = { height = 0.95, width = 0.95 },
+    lazygit = { height = 0.95, width = 0.95 },
   },
 })
 
@@ -226,3 +204,35 @@ vim.keymap.set({ 'n', 't' }, '<C-a>', function() Snacks.terminal('opencode') end
 if vim.fn.executable('lazygit') == 1 then
   vim.keymap.set('n', '<leader>s', function() Snacks.lazygit() end, { desc = 'Lazygit' })
 end
+
+-- OpenCode ================================================================
+
+MiniDeps.add('NickvanDyke/opencode.nvim')
+
+local o = require('opencode')
+o.setup()
+
+vim.keymap.set('n', '<leader>oo', function() o.ask() end, { desc = 'Ask opencode' })
+vim.keymap.set('v', '<leader>oo', function() o.ask('@selection: ') end, { desc = 'Ask opencode' })
+vim.keymap.set('n', '<leader>ot', function() o.toggle() end, { desc = 'Toggle opencode' })
+vim.keymap.set('n', '<leader>on', function() o.command('session_new') end, { desc = 'New session' })
+vim.keymap.set('n', '<leader>oy', function() o.command('messages_copy') end, { desc = 'Copy last message' })
+vim.keymap.set('n', '<S-C-u>', function() o.command('messages_half_page_up') end, { desc = 'Scroll messages up' })
+vim.keymap.set('n', '<S-C-d>', function() o.command('messages_half_page_down') end, { desc = 'Scroll messages down' })
+vim.keymap.set({ 'n', 'v' }, '<leader>op', function() o.select_prompt() end, { desc = 'Select prompt' })
+
+-- Mini.keymaps ================================================================
+
+local map = require('mini.keymap')
+
+map.setup()
+
+map.map_multistep('i', '<C-n>', { 'blink_next', 'pmenu_next' })
+map.map_multistep('i', '<C-p>', { 'blink_prev', 'pmenu_prev' })
+map.map_multistep('i', '<Tab>', { 'blink_next', 'pmenu_next' })
+map.map_multistep('i', '<S-Tab>', { 'blink_prev', 'pmenu_prev' })
+map.map_multistep('i', '<CR>', { 'blink_accept', 'pmenu_accept' })
+map.map_combo({ 'i', 'c', 'x', 's' }, 'jk', '<BS><BS><Esc>')
+map.map_combo({ 'i', 'c', 'x', 's' }, 'kj', '<BS><BS><Esc>')
+map.map_combo('t', 'jk', '<BS><BS><C-\\><C-n>')
+map.map_combo('t', 'kj', '<BS><BS><C-\\><C-n>')

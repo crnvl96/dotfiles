@@ -34,6 +34,14 @@ vim.o.number = true
 vim.o.pumheight = 15
 vim.o.relativenumber = true
 vim.o.clipboard = 'unnamed'
+
+vim.cmd([[
+if executable('rg')
+    set grepprg=rg\ --vimgrep\ --no-heading\ --smart-case\ --hidden
+    set grepformat=%f:%l:%c:%m,%f:%l:%m
+endif
+]])
+
 vim.o.ruler = false
 vim.o.scrolloff = 8
 vim.o.shiftwidth = 4
@@ -77,3 +85,4 @@ vim.opt.shortmess:append({ a = true, s = true, W = true })
 vim.cmd([[filetype plugin indent on]])
 vim.cmd([[set wildmode=noselect:lastused,full]])
 vim.cmd([[set wc=^N]])
+vim.cmd([[packadd cfilter]])
