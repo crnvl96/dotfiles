@@ -9,7 +9,7 @@ require('snacks').setup({
 })
 
 vim.keymap.set({ 'n', 't' }, '<C-t>', function() Snacks.terminal() end, { desc = 'Terminal' })
-vim.keymap.set({ 'n', 't' }, '<C-a>', function() Snacks.terminal('opencode') end, { desc = 'Terminal' })
+vim.keymap.set({ 'n', 't' }, '<C-a>', function() Snacks.terminal('opencode') end, { desc = 'Opencode' })
 
 if vim.fn.executable('lazygit') == 1 then
   vim.keymap.set('n', '<leader>s', function() Snacks.lazygit() end, { desc = 'Lazygit' })

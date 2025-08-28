@@ -8,4 +8,4 @@ MiniDeps.add({
 
 require('fff').setup({ prompt = '🪿 ' })
 
-vim.keymap.set('n', '<Leader>f', function() require('fff').find_files() end, { desc = 'FFFind files' })
+vim.keymap.set('n', '<Leader>f', function() require('fff').find_files() end, { desc = 'Find files' })

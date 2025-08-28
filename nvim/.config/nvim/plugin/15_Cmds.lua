@@ -40,24 +40,24 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     local bufnr = e.buf
 
-    local s = function(lhs, rhs, opts, mode)
-      opts = vim.tbl_extend('error', opts or {}, { buffer = bufnr })
+    local s = function(lhs, rhs, desc, mode)
+      local opts = { buffer = bufnr, desc = desc }
       mode = mode or 'n'
       return vim.keymap.set(mode, lhs, rhs, opts)
     end
 
-    s('E', vim.diagnostic.open_float)
-    s('K', vim.lsp.buf.hover)
-    s('gra', vim.lsp.buf.code_action)
-    s('grn', vim.lsp.buf.rename)
-    s('grd', vim.lsp.buf.definition)
-    s('grD', vim.lsp.buf.declaration)
-    s('grr', vim.lsp.buf.references, { nowait = true })
-    s('gri', vim.lsp.buf.implementation)
-    s('grt', vim.lsp.buf.type_definition)
-    s('gre', vim.diagnostic.setqflist)
-    s('grs', vim.lsp.buf.document_symbol)
-    s('grS', vim.lsp.buf.workspace_symbol)
-    s('<C-k>', vim.lsp.buf.signature_help, {}, 'i')
+    s('E', vim.diagnostic.open_float, 'Show Error')
+    s('K', vim.lsp.buf.hover, 'Hover')
+    s('gra', vim.lsp.buf.code_action, 'Code Actions')
+    s('grn', vim.lsp.buf.rename, 'Rename Symbol')
+    s('grd', vim.lsp.buf.definition, 'Goto Definition')
+    s('grD', vim.lsp.buf.declaration, 'Goto Declaration')
+    s('grr', vim.lsp.buf.references, 'Goto References')
+    s('gri', vim.lsp.buf.implementation, 'Goto Implementations')
+    s('grt', vim.lsp.buf.type_definition, 'Goto T[y]pe Definitions')
+    s('gre', vim.diagnostic.setqflist, 'Send Diagnostics to Qf list')
+    s('grs', vim.lsp.buf.document_symbol, 'Show Document Symbols')
+    s('grS', vim.lsp.buf.workspace_symbol, 'Show Workspace Symbols')
+    s('<C-k>', vim.lsp.buf.signature_help, 'Signature Help', 'i')
   end,
 })
