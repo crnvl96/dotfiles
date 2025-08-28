@@ -1,13 +1,12 @@
 return {
   settings = {
     pyright = {
-      -- Using Ruff's import organizer
-      disableOrganizeImports = true,
+
+      disableOrganizeImports = true, -- Using Ruff's import organizer
     },
     python = {
       analysis = {
-        -- Ignore all files for analysis to exclusively use Ruff for linting
-        ignore = { '*' },
+        ignore = { '*' }, -- Ignore all files for analysis to exclusively use Ruff for linting
       },
     },
   },

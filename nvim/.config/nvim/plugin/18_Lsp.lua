@@ -1,18 +1,6 @@
--- LSP ================================================================
-
 local lsp_dir = NVIM_DIR .. '/lsp'
-local excluded_servers = {}
+local excluded_servers = { 'rust_analyzer' }
 local lsp_servers = {}
-
--- Schemastore ================================================================
-
-MiniDeps.add('b0o/SchemaStore.nvim')
-
--- Lspconfig ================================================================
-
-MiniDeps.add('neovim/nvim-lspconfig')
-
--- Servers ================================================================
 
 local function default_capabilities()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -40,9 +28,3 @@ for _, file in ipairs(vim.fn.glob(lsp_dir .. '/*.lua', true, true)) do
 end
 
 vim.lsp.enable(lsp_servers)
-
--- Venv-lsp ================================================================
-
-MiniDeps.add('jglasovic/venv-lsp.nvim')
-
-require('venv-lsp').setup()

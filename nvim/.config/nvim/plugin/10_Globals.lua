@@ -1,10 +1,6 @@
--- Variables ================================================================
-
-_G.HOME = os.getenv('HOME') -- Home directory
-_G.NVIM_DIR = HOME .. '/.config/nvim' -- Nvim config directory
-_G.MINI_PATH = vim.fn.stdpath('data') .. '/site/pack/deps/start/mini.nvim' -- Mini.deps default directory
-
--- A small helper for retrieving env vars ================================================================
+_G.HOME = os.getenv('HOME')
+_G.NVIM_DIR = HOME .. '/.config/nvim'
+_G.MINI_PATH = vim.fn.stdpath('data') .. '/site/pack/deps/start/mini.nvim'
 
 function _G.RetrieveFromEnv(key_name)
   local filepath = NVIM_DIR .. '/.env'
@@ -37,8 +33,6 @@ function _G.RetrieveFromEnv(key_name)
   return nil
 end
 
--- A small helper for some plugins that require building ================================================================
-
 function _G.Build(params, cmd)
   cmd = cmd or 'cargo +nightly build --release'
   vim.notify('Building ' .. params.name, vim.log.levels.INFO)
@@ -46,8 +40,6 @@ function _G.Build(params, cmd)
   if out.code == 0 then return vim.notify('Building ' .. params.name .. ' done', vim.log.levels.INFO) end
   return vim.notify('Building ' .. params.name .. ' failed', vim.log.levels.ERROR)
 end
-
--- A small helper for HLs ================================================================
 
 function _G.CustomHL(hl_name, opts)
   local is_ok, hl_def = pcall(vim.api.nvim_get_hl_by_name, hl_name, true)

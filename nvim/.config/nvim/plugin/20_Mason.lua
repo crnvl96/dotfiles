@@ -1,5 +1,3 @@
--- Mason ================================================================
-
 MiniDeps.add({
   source = 'mason-org/mason.nvim',
   hooks = { post_checkout = function() vim.cmd('MasonUpdate') end },
@@ -8,17 +6,16 @@ MiniDeps.add({
 require('mason').setup()
 require('mason-registry').refresh(function()
   for _, tool in ipairs({
-    -- Formatters
     'stylua',
     'prettier',
     'gofumpt',
     'pyproject-fmt',
 
-    -- Language servers
     'json-lsp', -- jsonls
     'yaml-language-server', -- yamlls
     'bacon',
     'bacon-ls', -- bacon_ls
+    'rust-analyzer',
     'taplo',
     'gopls',
     'biome',

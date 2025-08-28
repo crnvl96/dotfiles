@@ -1,5 +1,3 @@
--- Treesitter ================================================================
-
 MiniDeps.add({
   source = 'nvim-treesitter/nvim-treesitter',
   checkout = 'main',

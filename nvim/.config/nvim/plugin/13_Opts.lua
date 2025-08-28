@@ -1,6 +1,3 @@
--- Opts ================================================================
-
--- Path ================================================================
 -- Command to find the current node version (v22.x is the lts) installed by mise
 -- Tracking about versions can be found at https://nodejs.org/en/about/previous-releases
 -- This is needed to avoid nvim reading a wrong node version due to a project setting it at its root folder
@@ -19,9 +16,15 @@ else
   vim.env.PATH = default_nodejs .. ':' .. vim.env.PATH
 end
 
+vim.cmd.colorscheme('minigrey')
+
 vim.ui.select = require('mini.pick').ui_select
 
+require('mini.notify').setup()
+vim.notify = require('mini.notify').make_notify()
+
 vim.diagnostic.config({
+  update_in_insert = true,
   virtual_text = true,
   virtual_lines = false,
   float = { source = true },

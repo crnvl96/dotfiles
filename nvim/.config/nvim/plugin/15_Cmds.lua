@@ -1,5 +1,3 @@
--- [Auto]Commands ================================================================
-
 vim.api.nvim_create_user_command('Scratch', function()
   vim.cmd('bel 10new')
   local buf = vim.api.nvim_get_current_buf()
@@ -50,16 +48,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
 
     s('E', vim.diagnostic.open_float)
     s('K', vim.lsp.buf.hover)
-    s('ga', vim.lsp.buf.code_action)
-    s('gn', vim.lsp.buf.rename)
-    s('gd', vim.lsp.buf.definition)
-    s('gD', vim.lsp.buf.declaration)
-    s('gr', vim.lsp.buf.references, { nowait = true })
-    s('gi', vim.lsp.buf.implementation)
-    s('gy', vim.lsp.buf.type_definition)
-    s('ge', vim.diagnostic.setqflist)
-    s('gs', vim.lsp.buf.document_symbol)
-    s('gS', vim.lsp.buf.workspace_symbol)
+    s('gra', vim.lsp.buf.code_action)
+    s('grn', vim.lsp.buf.rename)
+    s('grd', vim.lsp.buf.definition)
+    s('grD', vim.lsp.buf.declaration)
+    s('grr', vim.lsp.buf.references, { nowait = true })
+    s('gri', vim.lsp.buf.implementation)
+    s('grt', vim.lsp.buf.type_definition)
+    s('gre', vim.diagnostic.setqflist)
+    s('grs', vim.lsp.buf.document_symbol)
+    s('grS', vim.lsp.buf.workspace_symbol)
     s('<C-k>', vim.lsp.buf.signature_help, {}, 'i')
   end,
 })

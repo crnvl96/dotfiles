@@ -14,15 +14,3 @@ vim.keymap.set('n', '-', function()
   local path = vim.fn.fnamemodify(bufname, ':p')
   if path and vim.uv.fs_stat(path) then files.open(bufname, false) end
 end)
-
-for _, hl in ipairs({
-  'MiniFilesBorder',
-  'MiniFilesBorderModified',
-  'MiniFilesDirectory',
-  'MiniFilesFile',
-  'MiniFilesNormal',
-  'MiniFilesTitle',
-  'MiniFilesTitleFocused',
-}) do
-  CustomHL(hl, { bg = 'none' })
-end

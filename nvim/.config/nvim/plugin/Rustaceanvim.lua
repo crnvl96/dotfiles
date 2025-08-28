@@ -11,7 +11,6 @@ vim.g.rustaceanvim = {
       )
     end,
     default_settings = {
-      -- rust-analyzer language server configuration
       ['rust-analyzer'] = {
         cargo = {
           allFeatures = true,
@@ -20,12 +19,8 @@ vim.g.rustaceanvim = {
             enable = true,
           },
         },
-        -- Remove clippy lints for Rust due to bacon
-        checkOnSave = false,
-        -- Disable diagnostics due to bacon
-        diagnostics = {
-          enable = false,
-        },
+        checkOnSave = false, -- Remove clippy lints for Rust due to bacon
+        diagnostics = { enable = false }, -- Disable diagnostics due to bacon
         procMacro = {
           enable = true,
           ignored = {
