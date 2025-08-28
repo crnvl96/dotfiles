@@ -25,5 +25,6 @@ vim.keymap.set(
       staticTitle = 'Find and Replace',
       prefills = { paths = vim.fn.expand('%') },
     })
-  end
+  end,
+  { desc = 'Buffer lines' }
 )
