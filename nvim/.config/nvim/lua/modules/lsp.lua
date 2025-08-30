@@ -1,27 +1,7 @@
-vim.lsp.config('*', {
-  capabilities = vim.tbl_deep_extend(
-    'force',
-    vim.lsp.protocol.make_client_capabilities(),
-    { general = { positionEncodings = { 'utf-16' } } }
-  ),
-})
+local l = require('utils.lsp')
 
-local all_lsp_servers = vim.fn.glob(os.getenv('HOME') .. '/.config/nvim/lsp/*.lua', true, true)
-local excluded_lsp_servers = { 'rust_analyzer' }
-local allowed_lsp_servers = {}
-
-for _, file in ipairs(all_lsp_servers) do
-  local server_name = vim.fn.fnamemodify(file, ':t:r')
-  local is_server_allowed = not vim.tbl_contains(excluded_lsp_servers, server_name)
-
-  if is_server_allowed then
-    table.insert(allowed_lsp_servers, server_name)
-    local content = assert(loadfile(file))
-    vim.lsp.config(server_name, content())
-  end
-end
-
-vim.lsp.enable(allowed_lsp_servers)
+l.set_global_config()
+l.enable_allowed_servers()
 
 vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('crnvl96-on-lsp-attach', { clear = true }),
@@ -40,7 +20,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     set('gn', vim.lsp.buf.rename, 'Rename Symbol')
     set('gd', vim.lsp.buf.definition, 'Goto Definition')
     set('gD', vim.lsp.buf.declaration, 'Goto Declaration')
-    set('gR', vim.lsp.buf.references, 'Goto References')
+    set('gr', vim.lsp.buf.references, 'Goto References')
     set('gi', vim.lsp.buf.implementation, 'Goto Implementations')
     set('gt', vim.lsp.buf.type_definition, 'Goto T[y]pe Definitions')
     set('ge', vim.diagnostic.setqflist, 'Send Diagnostics to Qf list')

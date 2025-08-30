@@ -1,31 +1,6 @@
-require('nvim-treesitter').install({
-  'c',
-  'lua',
-  'vimdoc',
-  'query',
-  'markdown',
-  'markdown_inline',
-  'javascript',
-  'typescript',
-  'tsx',
-  'jsx',
-  'python',
-  'rust',
-  'ron',
-  'bash',
-  'gitcommit',
-  'html',
-  'hyprlang',
-  'json',
-  'json5',
-  'jsonc',
-  'rasi',
-  'regex',
-  'scss',
-  'toml',
-  'vim',
-  'yaml',
-})
+local c = require('utils.constants')
+
+require('nvim-treesitter').install(c.ts_tools)
 
 vim.api.nvim_create_autocmd('FileType', {
   group = vim.api.nvim_create_augroup('crnvl96-treesitter', {}),

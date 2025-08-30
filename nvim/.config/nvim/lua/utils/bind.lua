@@ -36,32 +36,4 @@ function M.xmap(lhs, rhs, desc) M.map(lhs, rhs, desc, 'x') end
 ---@return nil
 function M.tmap(lhs, rhs, desc) M.map(lhs, rhs, desc, 't') end
 
---- Simulates a key combo on terminal: first, <Esc> is pressed, and them the key sent as parameter
----@param key string Key to be executed on the terminal
----@return function
-function M.term_send_esc(key)
-  return function()
-    vim.api.nvim_feedkeys(
-      vim.api.nvim_replace_termcodes('<C-\\><C-n>', true, true, true)
-        .. vim.api.nvim_replace_termcodes(key, true, true, true),
-      't',
-      true
-    )
-  end
-end
-
-function M.create_scratch_buf()
-  vim.cmd('bel 10new')
-  local buf = vim.api.nvim_get_current_buf()
-  for name, value in pairs({
-    filetype = 'scratch',
-    buftype = 'nofile',
-    bufhidden = 'wipe',
-    swapfile = false,
-    modifiable = true,
-  }) do
-    vim.api.nvim_set_option_value(name, value, { buf = buf })
-  end
-end
-
 return M

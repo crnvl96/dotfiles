@@ -1,16 +1,14 @@
+require('config.opts')
+
 require('modules.mini')
 require('modules.path')
 require('modules.sources')
 require('modules.lsp')
-require('modules.theme')
 require('modules.marks')
 
-require('config.opts')
 require('config.keymaps')
 require('config.autocmds')
 
-require('plugins.mini-files')
-require('plugins.mini-keymaps')
 require('plugins.fff')
 require('plugins.grug-far')
 require('plugins.venv-lsp')
@@ -22,4 +20,3 @@ require('plugins.codecompanion')
 require('plugins.conform')
 require('plugins.crates')
 require('plugins.rustacenvim')
-require('plugins.mini-clue')
