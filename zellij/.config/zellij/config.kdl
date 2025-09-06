@@ -1,0 +1,36 @@
+// https://github.com/zellij-org/zellij/blob/main/example/default.kdl
+
+keybinds clear-defaults=true {
+    locked {
+        bind "Ctrl f" { SwitchToMode "normal"; }
+        bind "Alt h" { MoveFocus "left"; }
+        bind "Alt j" { MoveFocus "down"; }
+        bind "Alt k" { MoveFocus "up"; }
+        bind "Alt l" { MoveFocus "right"; }
+        bind "Alt p" { GoToPreviousTab; SwitchToMode "locked"; }
+        bind "Alt n" { GoToNextTab; SwitchToMode "locked"; }
+    }
+    normal {
+        bind "c" { NewPane; SwitchToMode "locked"; }
+        bind "r" { SwitchToMode "renamepane"; PaneNameInput 0; SwitchToMode "locked"; }
+        bind "t" { NewTab; SwitchToMode "locked"; }
+        bind "." {
+            LaunchOrFocusPlugin "configuration" {
+                floating true
+                move_to_focused_tab true
+            }
+            SwitchToMode "locked"
+        }
+    }
+}
+
+web_client {
+    font "monospace"
+}
+
+
+theme "ansi"
+default_mode "locked"
+pane_frames false
+copy_command "wl-copy"
+default_layout "compact"
