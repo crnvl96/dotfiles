@@ -10,6 +10,9 @@ alias y='yazi'
 
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
+PATH="$PATH":"$HOME/.local/scripts/"
+bind '"\C-f":"tmux-sessionizer\n"'
+
 # Add your own exports, aliases, and functions here.
 #
 # Make an alias for invoking commands you use constantly
