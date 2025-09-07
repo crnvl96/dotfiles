@@ -164,7 +164,7 @@ install_cargo_tool() {
 
 sync_mise_tools() {
     local list; list=$(join_by ', ' "${MISE_TOOLS[@]}")
-    slog info "Syncing tools" manager mise action install tools "$list"
+    slog info "Syncing tools" manager mise action sync tools "$list"
     local t
     for t in "${MISE_TOOLS[@]}"; do
         install_mise_tool "$t"
@@ -174,14 +174,14 @@ sync_mise_tools() {
 
 sync_yay_tools() {
     local list; list=$(join_by ', ' "${YAY_TOOLS[@]}")
-    slog info "Syncing tools" manager aur action install tools "$list"
+    slog info "Syncing tools" manager aur action sync tools "$list"
     install_yay_tools "${YAY_TOOLS[@]}"
     success "aur sync complete: $list"
 }
 
 sync_uv_tools() {
     local list; list=$(join_by ', ' "${UV_TOOLS[@]}")
-    slog info "Syncing tools" manager uv action install tools "$list"
+    slog info "Syncing tools" manager uv action sync tools "$list"
     local t
     for t in "${UV_TOOLS[@]}"; do
         install_uv_tool "$t"
@@ -191,7 +191,7 @@ sync_uv_tools() {
 
 sync_npm_tools() {
     local list; list=$(join_by ', ' "${NPM_TOOLS[@]}")
-    slog info "Syncing tools" manager npm action install tools "$list"
+    slog info "Syncing tools" manager npm action sync tools "$list"
     local t
     for t in "${NPM_TOOLS[@]}"; do
         install_npm_tool "$t"
@@ -201,7 +201,7 @@ sync_npm_tools() {
 
 sync_cargo_tools() {
     local list; list=$(join_by ', ' "${CARGO_TOOLS[@]}")
-    slog info "Syncing tools" manager cargo action install tools "$list"
+    slog info "Syncing tools" manager cargo action sync tools "$list"
     local t
     for t in "${CARGO_TOOLS[@]}"; do
         install_cargo_tool "$t"
