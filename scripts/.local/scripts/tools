@@ -69,7 +69,7 @@ spin_if_gum() {
 
 MISE_TOOLS=(
     biome
-    node@20.18.0
+    node@22.18.0
     go
     rust
     uv
@@ -98,8 +98,8 @@ NPM_TOOLS=(
 )
 
 CARGO_TOOLS=(
-    # bacon
-    # bacon-ls
+    bacon
+    bacon-ls
 )
 
 install_mise_tool() {
