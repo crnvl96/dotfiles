@@ -27,13 +27,13 @@ keybinds clear-defaults=true {
 
     }
     normal {
-        bind "r" { SwitchToMode "renamepane"; PaneNameInput 0; }
-        bind "c" { NewPane; SwitchToMode "locked"; }
-        bind "x" { CloseFocus; SwitchToMode "locked"; }
+        bind "R" { SwitchToMode "renamepane"; PaneNameInput 0; }
+        bind "n" { NewPane; SwitchToMode "locked"; }
+        bind "X" { CloseFocus; SwitchToMode "locked"; }
 
-        bind "t" { NewTab; SwitchToMode "locked"; }
-        bind "R" { SwitchToMode "renametab"; TabNameInput 0; }
-        bind "X" { CloseTab; SwitchToMode "locked"; }
+        bind "c" { NewTab; SwitchToMode "locked"; }
+        bind "r" { SwitchToMode "renametab"; TabNameInput 0; }
+        bind "x" { CloseTab; SwitchToMode "locked"; }
 
         bind "q" { SwitchToMode "locked"; }
 
@@ -44,15 +44,14 @@ keybinds clear-defaults=true {
         bind "S" { LaunchOrFocusPlugin "zellij:share" { floating true; move_to_focused_tab true; }; SwitchToMode "locked"; }
     }
     renametab {
-        bind "esc" { SwitchToMode "locked"; }
+        bind "Enter" { SwitchToMode "locked"; }
+        bind "esc" { UndoRenameTab; SwitchToMode "locked"; }
         bind "Ctrl c" { UndoRenameTab; SwitchToMode "locked"; }
     }
     renamepane {
-        bind "esc" { SwitchToMode "locked"; }
+        bind "Enter" { SwitchToMode "locked"; }
+        bind "esc" { UndoRenamePane; SwitchToMode "locked"; }
         bind "Ctrl c" { UndoRenamePane; SwitchToMode "locked"; }
-    }
-    session {
-        bind "Ctrl q" { SwitchToMode "locked"; }
     }
 }
 
