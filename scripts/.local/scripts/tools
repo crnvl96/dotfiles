@@ -8,8 +8,10 @@ YELLOW='\033[1;33m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
+command_exists() { command -v "$1" >/dev/null 2>&1; }
+
 info() {
-    if command -v gum >/dev/null 2>&1; then
+    if command_exists gum; then
         gum log --level info "$*"
     else
         echo -e "${BLUE}[INFO]${NC} $*"
@@ -17,7 +19,7 @@ info() {
 }
 
 success() {
-    if command -v gum >/dev/null 2>&1; then
+    if command_exists gum; then
         gum log --level info "$*"
     else
         echo -e "${GREEN}[SUCCESS]${NC} $*"
@@ -25,7 +27,7 @@ success() {
 }
 
 warning() {
-    if command -v gum >/dev/null 2>&1; then
+    if command_exists gum; then
         gum log --level warn "$*"
     else
         echo -e "${YELLOW}[WARNING]${NC} $*"
@@ -33,15 +35,11 @@ warning() {
 }
 
 error() {
-    if command -v gum >/dev/null 2>&1; then
+    if command_exists gum; then
         gum log --level error "$*"
     else
         echo -e "${RED}[ERROR]${NC} $*"
     fi
-}
-
-command_exists() {
-    command -v "$1" >/dev/null 2>&1
 }
 
 slog() {
@@ -49,7 +47,7 @@ slog() {
     if command_exists gum; then
         gum log --structured --level "$level" "$@"
     else
-        local msg="$1"; shift
+        local msg="${1:-}"; if [ "$#" -gt 0 ]; then shift; fi
         local out="[$(echo "$level" | tr '[:lower:]' '[:upper:]')] $msg"
         while [ "$#" -gt 1 ]; do
             out+=" $1=$2"; shift 2
@@ -69,146 +67,156 @@ spin_if_gum() {
     fi
 }
 
-UV_TOOLS=(pyright ruff)
-MISE_TOOLS=(stylua taplo prettier jq dprint lua-language-server)
-NPM_TOOLS=(vscode-langservers-extracted typescript-language-server yaml-language-server)
+MISE_TOOLS=(
+    biome
+    node@20.18.0
+    go
+    rust
+    uv
+    stylua
+    taplo
+    prettier
+    jq
+    dprint
+    lua-language-server
+)
 
-install_uv_tools() {
-    local list; list=$(join_by ', ' "${UV_TOOLS[@]}")
-    slog info "Installing tools" manager uv action install tools "$list"
-    if command_exists uv; then
-        local t
-        for t in "${UV_TOOLS[@]}"; do
-            slog info "Installing" manager uv tool "$t"
-            spin_if_gum "uv: installing $t" uv tool install "$t"
-        done
-        success "uv install complete: $list"
-    else
-        error "uv is not installed. Please install uv first."
-        return 1
-    fi
-}
+YAY_TOOLS=(
+    zellij
+    crush-bin
+)
 
-update_uv_tools() {
-    local list; list=$(join_by ', ' "${UV_TOOLS[@]}")
-    slog info "Updating tools" manager uv action update tools "$list"
-    if command_exists uv; then
-        local t
-        for t in "${UV_TOOLS[@]}"; do
-            slog info "Updating" manager uv tool "$t"
-            spin_if_gum "uv: updating $t" uv tool upgrade "$t"
-        done
-        success "uv update complete: $list"
-    else
-        error "uv is not installed"
-        return 1
-    fi
-}
+UV_TOOLS=(
+    pyright
+    ruff
+)
 
-install_mise_tools() {
-    local list; list=$(join_by ', ' "${MISE_TOOLS[@]}")
-    slog info "Installing tools" manager mise action install tools "$list"
+NPM_TOOLS=(
+    vscode-langservers-extracted
+    typescript-language-server
+    yaml-language-server
+)
+
+CARGO_TOOLS=(
+    # bacon
+    # bacon-ls
+)
+
+install_mise_tool() {
+    local t="$1"
+    local spec="$t"
+    case "$t" in
+        *@*) : ;;
+        *) spec="${t}@latest" ;;
+    esac
     if command_exists mise; then
-        local t
-        for t in "${MISE_TOOLS[@]}"; do
-            slog info "Installing" manager mise tool "$t"
-            spin_if_gum "mise: installing $t" mise use -g "$t"
-        done
-        success "mise install complete: $list"
+        slog info "Syncing" manager mise tool "$spec"
+        spin_if_gum "mise: syncing $spec" mise use --cd ~ --force --pin "$spec"
     else
         error "mise is not installed. Please install mise first."
         return 1
     fi
 }
 
-update_mise_tools() {
-    local list; list=$(join_by ', ' "${MISE_TOOLS[@]}")
-    slog info "Updating tools" manager mise action update tools "$list"
-    if command_exists mise; then
-        local t
-        for t in "${MISE_TOOLS[@]}"; do
-            slog info "Updating" manager mise tool "$t"
-            spin_if_gum "mise: updating $t" mise upgrade --bump "$t"
-        done
-        success "mise update complete: $list"
+install_yay_tools() {
+    if ! command_exists yay; then
+        error "yay is not installed. Please install yay first."
+        return 1
+    fi
+    [ "$#" -gt 0 ] || return 0
+    sudo -v
+    slog info "Syncing" manager aur tools "$(join_by ', ' "$@")"
+    spin_if_gum "aur: syncing ${*}" yay --sudoloop -Sy --needed --noconfirm "$@"
+}
+
+install_uv_tool() {
+    local t="$1"
+    if command_exists uv; then
+        slog info "Syncing" manager uv tool "$t"
+        spin_if_gum "uv: syncing $t" uv tool install --upgrade "$t"
     else
-        error "mise is not installed"
+        error "uv is not installed. Please install uv first."
         return 1
     fi
 }
 
-install_npm_tools() {
-    local list; list=$(join_by ', ' "${NPM_TOOLS[@]}")
-    slog info "Installing tools" manager npm action install tools "$list"
+install_npm_tool() {
+    local t="$1"
     if command_exists npm; then
-        local t
-        for t in "${NPM_TOOLS[@]}"; do
-            slog info "Installing" manager npm tool "$t"
-            spin_if_gum "npm: installing $t" npm i -g "$t"
-        done
-        success "npm install complete: $list"
+        slog info "Syncing" manager npm tool "$t"
+        spin_if_gum "npm: syncing $t" npm i -g "${t}@latest"
     else
         error "npm is not installed. Please install npm first."
         return 1
     fi
 }
 
-update_npm_tools() {
-    local list; list=$(join_by ', ' "${NPM_TOOLS[@]}")
-    slog info "Updating tools" manager npm action update tools "$list"
-    if command_exists npm; then
-        local t
-        for t in "${NPM_TOOLS[@]}"; do
-            slog info "Updating" manager npm tool "$t"
-            spin_if_gum "npm: updating $t" npm i -g "${t}@latest"
-        done
-        success "npm update complete: $list"
+install_cargo_tool() {
+    local t="$1"
+    if command_exists cargo; then
+        slog info "Syncing" manager cargo tool "$t"
+        spin_if_gum "cargo: syncing $t" cargo install --force --locked "$t"
     else
-        error "npm is not installed"
+        error "cargo is not installed. Please install cargo first."
         return 1
     fi
 }
 
-install_select() {
-    if ! command_exists gum; then
-        error "gum is not installed"
-        return 1
-    fi
-    local choices selection
-    choices=$(printf "%s\n" uv mise npm)
-    selection=$(echo "$choices" | gum choose --no-limit --height 10 --header "Select installers to run") || true
-    if [ -z "${selection:-}" ]; then
-        warning "No selection made"
-        return 1
-    fi
-    for s in $selection; do
-        case "$s" in
-            uv) install_uv_tools ;;
-            mise) install_mise_tools ;;
-            npm) install_npm_tools ;;
-        esac
+sync_mise_tools() {
+    local list; list=$(join_by ', ' "${MISE_TOOLS[@]}")
+    slog info "Syncing tools" manager mise action install tools "$list"
+    local t
+    for t in "${MISE_TOOLS[@]}"; do
+        install_mise_tool "$t"
     done
+    success "mise sync complete: $list"
 }
 
-update_select() {
-    if ! command_exists gum; then
-        error "gum is not installed"
-        return 1
-    fi
-    local choices selection
-    choices=$(printf "%s\n" uv mise npm)
-    selection=$(echo "$choices" | gum choose --no-limit --height 10 --header "Select updaters to run") || true
-    if [ -z "${selection:-}" ]; then
-        warning "No selection made"
-        return 1
-    fi
-    for s in $selection; do
-        case "$s" in
-            uv) update_uv_tools ;;
-            mise) update_mise_tools ;;
-            npm) update_npm_tools ;;
-        esac
+sync_yay_tools() {
+    local list; list=$(join_by ', ' "${YAY_TOOLS[@]}")
+    slog info "Syncing tools" manager aur action install tools "$list"
+    install_yay_tools "${YAY_TOOLS[@]}"
+    success "aur sync complete: $list"
+}
+
+sync_uv_tools() {
+    local list; list=$(join_by ', ' "${UV_TOOLS[@]}")
+    slog info "Syncing tools" manager uv action install tools "$list"
+    local t
+    for t in "${UV_TOOLS[@]}"; do
+        install_uv_tool "$t"
     done
+    success "uv sync complete: $list"
+}
+
+sync_npm_tools() {
+    local list; list=$(join_by ', ' "${NPM_TOOLS[@]}")
+    slog info "Syncing tools" manager npm action install tools "$list"
+    local t
+    for t in "${NPM_TOOLS[@]}"; do
+        install_npm_tool "$t"
+    done
+    success "npm sync complete: $list"
+}
+
+sync_cargo_tools() {
+    local list; list=$(join_by ', ' "${CARGO_TOOLS[@]}")
+    slog info "Syncing tools" manager cargo action install tools "$list"
+    local t
+    for t in "${CARGO_TOOLS[@]}"; do
+        install_cargo_tool "$t"
+    done
+    success "cargo sync complete: $list"
+}
+
+sync_all() {
+    info "Starting sync of all tools..."
+    sync_mise_tools
+    sync_yay_tools
+    sync_uv_tools
+    sync_cargo_tools
+    sync_npm_tools
+    success "All tools sync completed"
 }
 
 menu() {
@@ -218,43 +226,24 @@ menu() {
     fi
     local actions selection
     actions=$(printf "%s\n" \
-        install-all update-all \
-        install-uv update-uv \
-        install-mise update-mise \
-        install-npm update-npm \
-        install-select update-select \
+        sync-all \
+        sync-yay \
+        sync-uv \
+        sync-cargo \
+        sync-mise \
+        sync-npm \
         quit)
     selection=$(echo "$actions" | gum choose --height 15 --header "Tools Manager") || true
     case "${selection:-}" in
-        install-all) install_all ;;
-        update-all) update_all ;;
-        install-uv) install_uv_tools ;;
-        update-uv) update_uv_tools ;;
-        install-mise) install_mise_tools ;;
-        update-mise) update_mise_tools ;;
-        install-npm) install_npm_tools ;;
-        update-npm) update_npm_tools ;;
-        install-select) install_select ;;
-        update-select) update_select ;;
+        sync-all) sync_all ;;
+        sync-yay) sync_yay_tools ;;
+        sync-uv) sync_uv_tools ;;
+        sync-cargo) sync_cargo_tools ;;
+        sync-mise) sync_mise_tools ;;
+        sync-npm) sync_npm_tools ;;
         ""|quit) : ;;
         *) error "Unknown selection: $selection" ;;
     esac
-}
-
-install_all() {
-    info "Starting installation of all tools..."
-    install_uv_tools
-    install_mise_tools
-    install_npm_tools
-    success "All tools installation completed"
-}
-
-update_all() {
-    info "Starting update of all tools..."
-    update_uv_tools
-    update_mise_tools
-    update_npm_tools
-    success "All tools update completed"
 }
 
 show_help() {
@@ -264,35 +253,27 @@ Tools Management Script
 Usage: tools [command]
 
 Commands:
-  install-all      Install all tools
-  update-all       Update all tools
-  install-uv       Install uv managed tools (pyright, ruff)
-  update-uv        Update uv managed tools
-  install-mise     Install mise managed tools (stylua, taplo, prettier, jq, dprint, lua-language-server)
-  update-mise      Update mise managed tools
-  install-npm      Install npm managed tools (vscode-langservers-extracted, typescript-language-server, yaml-language-server)
-  update-npm       Update npm managed tools
-  install-select   Select which installers to run (gum)
-  update-select    Select which updaters to run (gum)
-  menu             Interactive menu (gum)
-  help             Show this help message
+  sync-all      Sync all tools
+  sync-yay      Sync yay (AUR) managed tools
+  sync-uv       Sync uv managed tools
+  sync-cargo    Sync cargo managed tools
+  sync-mise     Sync mise managed tools
+  sync-npm      Sync npm managed tools
+  menu          Interactive menu (gum)
+  help          Show this help message
 
 EOF
 }
 
 case "${1:-}" in
-    "install-all") install_all ;;
-    "update-all") update_all ;;
-    "install-uv") install_uv_tools ;;
-    "update-uv") update_uv_tools ;;
-    "install-mise") install_mise_tools ;;
-    "update-mise") update_mise_tools ;;
-    "install-npm") install_npm_tools ;;
-    "update-npm") update_npm_tools ;;
-    "install-select") install_select ;;
-    "update-select") update_select ;;
-    "menu") menu ;;
-    "help" | "-h" | "--help") show_help ;;
+    sync-all) sync_all ;;
+    sync-yay) sync_yay_tools ;;
+    sync-uv) sync_uv_tools ;;
+    sync-cargo) sync_cargo_tools ;;
+    sync-mise) sync_mise_tools ;;
+    sync-npm) sync_npm_tools ;;
+    menu) menu ;;
+    help|-h|--help) show_help ;;
     "") if command_exists gum; then menu; else show_help; fi ;;
     *) error "Unknown command: $1"; show_help; exit 1 ;;
 esac
