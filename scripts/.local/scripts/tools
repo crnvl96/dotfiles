@@ -84,6 +84,7 @@ MISE_TOOLS=(
 YAY_TOOLS=(
     zellij
     crush-bin
+    opencode-bin
 )
 
 UV_TOOLS=(
