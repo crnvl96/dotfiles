@@ -85,6 +85,7 @@ YAY_TOOLS=(
     zellij
     crush-bin
     opencode-bin
+    bob
 )
 
 UV_TOOLS=(

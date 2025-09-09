@@ -12,6 +12,8 @@ export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
 PATH=$PATH:$HOME/.local/scripts/
 
+. "/home/adran/.local/share/bob/env/env.sh"
+
 # Add your own exports, aliases, and functions here.
 #
 # Make an alias for invoking commands you use constantly
