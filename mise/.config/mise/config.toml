@@ -1,0 +1,20 @@
+[settings]
+idiomatic_version_file_enable_tools = ["ruby"]
+
+[settings.ruby]
+ruby_build_opts = "CC=gcc-14 CXX=g++-14"
+
+[tools]
+python = "3.13.7"
+rust = "1.89.0"
+go = "1.25.1"
+uv = "0.8.15"
+gofumpt = "latest"
+prettier = "3.6.2"
+biome = "2.2.3"
+lua-language-server = "3.15.0"
+stylua = "2.1.0"
+taplo = "0.10.0"
+dprint = "0.50.1"
+jq = "1.8.1"
+node = "22.18.0"
