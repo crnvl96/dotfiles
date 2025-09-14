@@ -79,6 +79,8 @@ MISE_TOOLS=(
     jq
     dprint
     lua-language-server
+    python
+    gofumpt
 )
 
 YAY_TOOLS=(
@@ -102,6 +104,10 @@ NPM_TOOLS=(
 CARGO_TOOLS=(
     bacon
     bacon-ls
+)
+
+GO_TOOLS=(
+    golang.org/x/tools/gopls@latest
 )
 
 install_mise_tool() {
@@ -164,6 +170,17 @@ install_cargo_tool() {
     fi
 }
 
+install_go_tool() {
+    local t="$1"
+    if command_exists go; then
+        slog info "Syncing" manager go tool "$t"
+        spin_if_gum "go: syncing $t" go install "$t"
+    else
+        error "go is not installed. Please install go first."
+        return 1
+    fi
+}
+
 sync_mise_tools() {
     local list; list=$(join_by ', ' "${MISE_TOOLS[@]}")
     slog info "Syncing tools" manager mise action sync tools "$list"
@@ -211,6 +228,16 @@ sync_cargo_tools() {
     success "cargo sync complete: $list"
 }
 
+sync_go_tools() {
+    local list; list=$(join_by ', ' "${GO_TOOLS[@]}")
+    slog info "Syncing tools" manager go action sync tools "$list"
+    local t
+    for t in "${GO_TOOLS[@]}"; do
+        install_go_tool "$t"
+    done
+    success "go sync complete: $list"
+}
+
 sync_all() {
     info "Starting sync of all tools..."
     sync_mise_tools
@@ -218,6 +245,7 @@ sync_all() {
     sync_uv_tools
     sync_cargo_tools
     sync_npm_tools
+    sync_go_tools
     success "All tools sync completed"
 }
 
@@ -234,6 +262,7 @@ menu() {
         sync-cargo \
         sync-mise \
         sync-npm \
+        sync-go \
         quit)
     selection=$(echo "$actions" | gum choose --height 15 --header "Tools Manager") || true
     case "${selection:-}" in
@@ -243,6 +272,7 @@ menu() {
         sync-cargo) sync_cargo_tools ;;
         sync-mise) sync_mise_tools ;;
         sync-npm) sync_npm_tools ;;
+        sync-go) sync_go_tools ;;
         ""|quit) : ;;
         *) error "Unknown selection: $selection" ;;
     esac
@@ -261,6 +291,7 @@ Commands:
   sync-cargo    Sync cargo managed tools
   sync-mise     Sync mise managed tools
   sync-npm      Sync npm managed tools
+  sync-go       Sync go managed tools
   menu          Interactive menu (gum)
   help          Show this help message
 
@@ -274,6 +305,7 @@ case "${1:-}" in
     sync-cargo) sync_cargo_tools ;;
     sync-mise) sync_mise_tools ;;
     sync-npm) sync_npm_tools ;;
+    sync-go) sync_go_tools ;;
     menu) menu ;;
     help|-h|--help) show_help ;;
     "") if command_exists gum; then menu; else show_help; fi ;;
