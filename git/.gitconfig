@@ -18,6 +18,7 @@
 [fetch]
     prune = true
 [merge]
+    conflictstyle = diff3
     tool = nvimdiff
 [diff]
     tool = nvimdiff
