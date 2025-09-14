@@ -86,6 +86,7 @@ MISE_TOOLS=(
 YAY_TOOLS=(
     zellij
     crush-bin
+    calibre-bin
     opencode-bin
     bob
 )
