@@ -3,6 +3,26 @@
   "theme": "system",
   "autoupdate": true,
   "mcp": {
+    "Ref": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://api.ref.tools/mcp?apiKey={REF_API_KEY}"
+    },
+    "serper": {
+      "enabled": true,
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "serper-search-scrape-mcp-server"
+      ],
+      "environment": {
+        "SERPER_API_KEY": "{SERPER_API_KEY}"
+      }
+    },
+
+    // Not used at the moment
+
     "context7": {
       "enabled": true,
       "type": "remote",
@@ -16,11 +36,6 @@
       "type": "remote",
       "url": "https://mcp.tavily.com/mcp/?tavilyApiKey={TAVILY_API_KEY}"
     },
-    "Ref": {
-      "enabled": true,
-      "type": "remote",
-      "url": "https://api.ref.tools/mcp?apiKey={REF_API_KEY}"
-    },
     "firecrawl": {
       "enabled": true,
       "type": "local",
@@ -31,18 +46,6 @@
       ],
       "environment": {
         "FIRECRAWL_API_KEY": "{FIRECRAWL_API_KEY}"
-      }
-    },
-    "serper": {
-      "enabled": true,
-      "type": "local",
-      "command": [
-        "npx",
-        "-y",
-        "serper-search-scrape-mcp-server"
-      ],
-      "environment": {
-        "SERPER_API_KEY": "{SERPER_API_KEY}"
       }
     }
   }
