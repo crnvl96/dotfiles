@@ -9,6 +9,7 @@ alias nv='nvim'
 alias y='yazi'
 
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
+export FZF_DEFAULT_COMMAND='fd . --path-separator / --strip-cwd-prefix --type f --hidden --follow --exclude .git'
 
 PATH=$PATH:$HOME/.local/scripts/
 
