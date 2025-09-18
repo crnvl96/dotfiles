@@ -9,7 +9,20 @@ alias nv='nvim'
 alias y='yazi'
 
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
-export FZF_DEFAULT_COMMAND='fd . --path-separator / --strip-cwd-prefix --type f --hidden --follow --exclude .git'
+
+export FZF_DEFAULT_OPTS="--cycle \
+    --multi \
+    --bind 'ctrl-x:toggle' \
+    --bind 'ctrl-y:select-all' \
+    --bind 'ctrl-z:toggle-all'"
+
+export FZF_DEFAULT_COMMAND="fd . \
+    --path-separator / \
+    --strip-cwd-prefix \
+    --type f \
+    --hidden \
+    --follow \
+    --exclude .git"
 
 PATH=$PATH:$HOME/.local/scripts/
 
