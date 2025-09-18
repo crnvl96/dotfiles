@@ -18,6 +18,7 @@ export FZF_DEFAULT_OPTS="--cycle \
     --separator='' \
     --scrollbar='' \
     --layout='reverse-list' \
+    --info='default' \
     --bind 'ctrl-x:toggle' \
     --bind 'ctrl-y:select-all' \
     --bind 'ctrl-z:toggle-all'"
