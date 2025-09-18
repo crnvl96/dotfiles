@@ -12,9 +12,16 @@ export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
 export FZF_DEFAULT_OPTS="--cycle \
     --multi \
+    --border='none' \
+    --border-label='none' \
+    --preview-window='border-none' \
+    --separator='' \
+    --scrollbar='' \
+    --layout='reverse-list' \
     --bind 'ctrl-x:toggle' \
     --bind 'ctrl-y:select-all' \
     --bind 'ctrl-z:toggle-all'"
+
 
 export FZF_DEFAULT_COMMAND="fd . \
     --path-separator / \
