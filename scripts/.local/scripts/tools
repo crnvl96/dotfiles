@@ -101,6 +101,7 @@ NPM_TOOLS=(
     typescript-language-server
     yaml-language-server
     codex
+    @typescript/native-preview
 )
 
 CARGO_TOOLS=(

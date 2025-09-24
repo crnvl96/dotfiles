@@ -20,7 +20,7 @@ export FZF_DEFAULT_OPTS="--cycle \
     --layout='reverse-list' \
     --info='default' \
     --bind 'ctrl-x:toggle' \
-    --bind 'ctrl-y:select-all' \
+    --bind 'ctrl-o:select-all' \
     --bind 'ctrl-z:toggle-all'"
 
 
