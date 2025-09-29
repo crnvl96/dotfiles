@@ -2,6 +2,7 @@
 # (don't mess with these directly, just overwrite them here!)
 source ~/.local/share/omarchy/default/bash/rc
 
+alias ci='zi'
 alias lzg='lazygit'
 alias ex='exit'
 alias cl='clear'
