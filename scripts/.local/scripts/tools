@@ -102,6 +102,7 @@ NPM_TOOLS=(
     yaml-language-server
     codex
     @typescript/native-preview
+    @github/copilot-language-server
 )
 
 CARGO_TOOLS=(
