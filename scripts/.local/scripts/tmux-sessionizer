@@ -8,7 +8,7 @@ if [[ $# -eq 1 ]]; then
     selected=$1
 else
     # Use fzf to interactively select a directory from Developer and tests folders
-    selected=$(find ~/Developer ~/tests -mindepth 1 -maxdepth 2 -type d | fzf)
+    selected=$(find ~/Developer -mindepth 1 -maxdepth 2 -type d | fzf)
 fi
 
 # Exit early if no directory was selected (e.g., user pressed ESC in fzf)
