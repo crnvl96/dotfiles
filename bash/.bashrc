@@ -1,3 +1,7 @@
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  tmux a -t default || exec tmux new -s default && exit;
+fi
+
 # All the default Omarchy aliases and functions
 # (don't mess with these directly, just overwrite them here!)
 source ~/.local/share/omarchy/default/bash/rc
