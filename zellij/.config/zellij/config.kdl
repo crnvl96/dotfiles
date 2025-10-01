@@ -6,3 +6,4 @@ on_force_close "quit"
 copy_command "wl-copy" // wayland
 copy_on_select true
 session_serialization false
+show_startup_tips false
