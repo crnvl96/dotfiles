@@ -1,0 +1,18 @@
+notARepository: 'quit'
+
+git:
+  overrideGpg: true
+  paging:
+    colorArg: always
+
+os:
+  editPreset: nvim
+
+gui:
+  showBottomLine: false
+  border: double
+  nerdFontsVersion: '3'
+
+keybinding:
+  files:
+    commitChangesWithoutHook: <disabled>
