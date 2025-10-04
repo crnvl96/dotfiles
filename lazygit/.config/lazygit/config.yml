@@ -6,7 +6,7 @@ git:
     colorArg: always
 
 os:
-  editPreset: nvim
+  editPreset: nvim-remote
 
 gui:
   showBottomLine: false
