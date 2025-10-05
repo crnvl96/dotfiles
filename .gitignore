@@ -1,13 +1,17 @@
+# General
 .env
 .git/
-.crush/
 
+# charmbracelet/crush
+.crush/
+crush.json
+
+# openai/codex
 **/.codex/**
 !**/.codex/config.template.toml
 
-.serena/
-
+# vim plug
 plugged/
 
-crush.json
+# sst/opencode
 opencode.jsonc
