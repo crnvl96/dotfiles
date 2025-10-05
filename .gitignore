@@ -7,5 +7,7 @@
 
 .serena/
 
+autoload/
+
 crush.json
 opencode.jsonc
