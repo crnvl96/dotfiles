@@ -112,6 +112,7 @@ CARGO_TOOLS=(
 
 GO_TOOLS=(
     golang.org/x/tools/gopls@latest
+    github.com/mattn/efm-langserver@latest
 )
 
 install_mise_tool() {
