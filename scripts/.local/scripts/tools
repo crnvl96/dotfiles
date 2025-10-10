@@ -103,6 +103,7 @@ NPM_TOOLS=(
     codex
     @typescript/native-preview
     @github/copilot-language-server
+    @fsouza/prettierd
 )
 
 CARGO_TOOLS=(
