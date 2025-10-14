@@ -6,6 +6,8 @@
     user = crnvl96
 [init]
     defaultBranch = main
+[alias]
+    d = difftool -d
 [core]
     editor = $EDITOR
     excludesfile = ~/.gitignore_global
