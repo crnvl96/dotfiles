@@ -12,6 +12,7 @@ alias ex='exit'
 alias cl='clear'
 alias nv='nvim'
 alias y='yazi'
+alias spot='spot -t ~/.config/nvim -t ~/.vim -t ~/.local/share/notes -t ~/Developer'
 
 export RIPGREP_CONFIG_PATH=~/.ripgreprc
 
