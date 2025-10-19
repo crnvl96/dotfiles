@@ -5,6 +5,9 @@ alias ex='exit'
 alias cl='clear'
 alias nv='nvim'
 alias dt='dirt -t ~/Developer -t ~/.config/nvim'
+alias nvim='~/.local/nvim-linux-x86_64/bin/nvim'
+alias nv='~/.local/nvim-linux-x86_64/bin/nvim'
+alias n='~/.local/nvim-linux-x86_64/bin/nvim'
 
 export FZF_DEFAULT_OPTS="--cycle \
     --multi \
@@ -29,7 +32,3 @@ export FZF_DEFAULT_COMMAND="fd . \
     --exclude .git"
 
 PATH=$PATH:$HOME/.local/scripts/
-
-. "/home/crnvl96/.local/share/bob/env/env.sh"
-
-eval "$(/home/crnvl96/.local/bin/mise activate bash)" # added by https://mise.run/bash
