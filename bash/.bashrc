@@ -4,6 +4,8 @@ alias lzg='lazygit'
 alias ex='exit'
 alias cl='clear'
 alias nv='nvim'
+alias dt='dirt -t ~/Developer -t ~/.config/nvim'
+
 export FZF_DEFAULT_OPTS="--cycle \
     --multi \
     --border='none' \
@@ -29,3 +31,5 @@ export FZF_DEFAULT_COMMAND="fd . \
 PATH=$PATH:$HOME/.local/scripts/
 
 . "/home/crnvl96/.local/share/bob/env/env.sh"
+
+eval "$(/home/crnvl96/.local/bin/mise activate bash)" # added by https://mise.run/bash
