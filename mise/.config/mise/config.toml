@@ -1,5 +1,4 @@
 [tools]
-bob = "4.1.4"
 go = "1.25.3"
 gofumpt = "0.9.1"
 lua-language-server = "3.15.0"
