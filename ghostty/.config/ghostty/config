@@ -7,10 +7,12 @@ font-style = Regular
 font-size = 13
 
 # Window
+window-theme = ghostty
 window-padding-x = 14
 window-padding-y = 14
 confirm-close-surface=false
 resize-overlay = never
+gtk-toolbar-style = flat
 
 # Cursor styling
 cursor-style = "block"
@@ -19,6 +21,8 @@ shell-integration-features = no-cursor
 
 # Keyboard bindings
 keybind = f11=toggle_fullscreen
+keybind = control+shift+v=paste_from_clipboard
+keybind = control+shift+c=copy_to_clipboard
 
 # Key bindings:
 keybind = alt+one=goto_tab:1
@@ -49,3 +53,6 @@ keybind = alt+shift+enter=toggle_fullscreen
 
 keybind = alt+shift+i=inspector:toggle
 keybind = alt+shift+b=write_screen_file:paste
+
+# SSH session terminfo
+shell-integration-features = ssh-env
