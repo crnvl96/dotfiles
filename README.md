@@ -17,7 +17,7 @@ var GO_TOOLS = []string{
 	"github.com/crnvl96/dirt@latest",
 }
 
-var YAY_TOOLS = []strint{
+var YAY_TOOLS = []string{
   "calibre-bin",
   "stow",
 }
