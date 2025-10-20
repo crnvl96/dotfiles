@@ -32,3 +32,6 @@ export FZF_DEFAULT_COMMAND="fd . \
     --exclude .git"
 
 PATH=$PATH:$HOME/.local/scripts/
+
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
