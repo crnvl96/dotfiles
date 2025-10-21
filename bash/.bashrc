@@ -9,6 +9,8 @@ alias nvim='~/.local/nvim-linux-x86_64/bin/nvim'
 alias nv='~/.local/nvim-linux-x86_64/bin/nvim'
 alias n='~/.local/nvim-linux-x86_64/bin/nvim'
 
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
 export FZF_DEFAULT_OPTS="--cycle \
     --multi \
     --border='none' \
@@ -31,7 +33,7 @@ export FZF_DEFAULT_COMMAND="fd . \
     --follow \
     --exclude .git"
 
-PATH=$PATH:$HOME/.local/scripts/
+PATH="$PATH:$HOME/.local/scripts/"
 
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
