@@ -5,9 +5,6 @@ alias ex='exit'
 alias cl='clear'
 alias nv='nvim'
 alias dt='dirt -t ~/Developer -t ~/.config/nvim'
-alias nvim='~/.local/nvim-linux-x86_64/bin/nvim'
-alias nv='~/.local/nvim-linux-x86_64/bin/nvim'
-alias n='~/.local/nvim-linux-x86_64/bin/nvim'
 
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
