@@ -11,7 +11,7 @@ alias ex='exit'
 alias cl='clear'
 alias nv='nvim'
 alias nvf='NVIM_APPNAME=nvim-nvfnl nvim'
-alias dt='dirt -t ~/Developer -t ~/.config/nvim -t ~/.emacs.d -t ~/.config/nvim-nvfnl'
+alias dt='dirt -t ~/Developer -t ~/.config/nvim -t ~/.emacs.d'
 alias clj_repl="clj -Sdeps '{:deps {nrepl/nrepl {:mvn/version \"1.0.0\"} cider/cider-nrepl {:mvn/version \"0.42.1\"}}}' -M -m nrepl.cmdline --middleware '[\"cider.nrepl/cider-middleware\"]' --interactive"
 
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
