@@ -1,10 +1,17 @@
+# If not running interactively, don't do anything (leave this at the top of this file)
+[[ $- != *i* ]] && return
+
+[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
+  source "$EAT_SHELL_INTEGRATION_DIR/bash"
+
 source ~/.local/share/omarchy/default/bash/rc
 
 alias lzg='lazygit'
 alias ex='exit'
 alias cl='clear'
 alias nv='nvim'
-alias dt='dirt -t ~/Developer -t ~/.config/nvim'
+alias nvf='NVIM_APPNAME=nvim-nvfnl nvim'
+alias dt='dirt -t ~/Developer -t ~/.config/nvim -t ~/.emacs.d -t ~/.config/nvim-nvfnl'
 alias clj_repl="clj -Sdeps '{:deps {nrepl/nrepl {:mvn/version \"1.0.0\"} cider/cider-nrepl {:mvn/version \"0.42.1\"}}}' -M -m nrepl.cmdline --middleware '[\"cider.nrepl/cider-middleware\"]' --interactive"
 
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
@@ -35,3 +42,6 @@ PATH="$PATH:$HOME/.local/scripts/"
 
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
+
+# uv
+export PATH="/home/crnvl96/.local/share/../bin:$PATH"
