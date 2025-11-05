@@ -1,18 +1,14 @@
 notARepository: 'quit'
-
 git:
   overrideGpg: true
-  paging:
-    colorArg: always
-
+  pagers:
+    - colorArg: always
 os:
   editPreset: nvim-remote
-
 gui:
   showBottomLine: false
   border: double
   nerdFontsVersion: '3'
-
 keybinding:
   files:
     commitChangesWithoutHook: <disabled>
