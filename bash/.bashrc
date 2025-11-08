@@ -1,21 +1,13 @@
-# If not running interactively, don't do anything (leave this at the top of this file)
-[[ $- != *i* ]] && return
-
-[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
-  source "$EAT_SHELL_INTEGRATION_DIR/bash"
-
-source ~/.local/share/omarchy/default/bash/rc
-
 alias lzg='lazygit'
 alias ex='exit'
 alias cl='clear'
 alias nv='nvim'
-alias nvf='NVIM_APPNAME=nvim-nvfnl nvim'
 alias dt='dirt -t ~/Developer -t ~/.config/nvim -t ~/.emacs.d'
-alias clj_repl="clj -Sdeps '{:deps {nrepl/nrepl {:mvn/version \"1.0.0\"} cider/cider-nrepl {:mvn/version \"0.42.1\"}}}' -M -m nrepl.cmdline --middleware '[\"cider.nrepl/cider-middleware\"]' --interactive"
 
+# rg
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
+# fzf
 export FZF_DEFAULT_OPTS="--cycle \
     --multi \
     --border='none' \
@@ -29,7 +21,6 @@ export FZF_DEFAULT_OPTS="--cycle \
     --bind 'ctrl-o:select-all' \
     --bind 'ctrl-z:toggle-all'"
 
-
 export FZF_DEFAULT_COMMAND="fd . \
     --path-separator / \
     --strip-cwd-prefix \
@@ -38,10 +29,13 @@ export FZF_DEFAULT_COMMAND="fd . \
     --follow \
     --exclude .git"
 
-PATH="$PATH:$HOME/.local/scripts/"
-
+# bun
 export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
+PATH="$BUN_INSTALL/bin:$PATH"
 
 # uv
-export PATH="/home/crnvl96/.local/share/../bin:$PATH"
+PATH="/home/crnvl96/.local/share/../bin:$PATH"
+
+export PATH
+
+eval "$(/home/adran/.local/bin/mise activate bash)" # added by https://mise.run/bash

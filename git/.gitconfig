@@ -6,8 +6,6 @@
     user = crnvl96
 [init]
     defaultBranch = main
-[alias]
-    d = difftool -d
 [core]
     editor = $EDITOR
     excludesfile = ~/.gitignore_global
@@ -21,8 +19,3 @@
     prune = true
 [merge]
     conflictstyle = diff3
-    tool = nvimdiff
-[diff]
-    tool = nvim_difftool
-[difftool "nvim_difftool"]
-    cmd = nvim -c \"packadd nvim.difftool\" -c \"DiffTool $LOCAL $REMOTE\"
