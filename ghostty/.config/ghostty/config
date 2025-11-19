@@ -1,11 +1,16 @@
 font-family = "Berkeley Mono"
-font-size = 10
+font-size = 8
 
 adjust-cell-width = -5%
 adjust-cell-height = 20%
 adjust-underline-position = 6
 adjust-underline-thickness = 40%
 adjust-cursor-thickness = 150%
+
+cursor-color = F8F8F2
+cursor-style-blink = false
+cursor-text = 000000
+shell-integration-features = no-cursor
 
 keybind = alt+one=goto_tab:1
 keybind = alt+two=goto_tab:2
@@ -14,7 +19,7 @@ keybind = alt+four=goto_tab:4
 keybind = alt+five=goto_tab:5
 
 keybind = alt+shift+t=new_tab
-keybind = alt+shift+comma=reload_config
+keybind = alt+shift+r=reload_config
 keybind = alt+shift+q=close_surface
 
 keybind = alt+equal=increase_font_size:1
