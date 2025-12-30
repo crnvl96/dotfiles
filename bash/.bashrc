@@ -29,13 +29,17 @@ export FZF_DEFAULT_COMMAND="fd . \
     --follow \
     --exclude .git"
 
-# bun
-export BUN_INSTALL="$HOME/.bun"
-PATH="$BUN_INSTALL/bin:$PATH"
-
 # uv
 PATH="/home/crnvl96/.local/share/../bin:$PATH"
 
+# path
 export PATH
 
-eval "$(/home/adran/.local/bin/mise activate bash)" # added by https://mise.run/bash
+# mise
+eval "$(mise activate bash)"
+
+# brew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# cargo (rust)
+. "$HOME/.cargo/env"
