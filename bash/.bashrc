@@ -31,6 +31,7 @@ export FZF_DEFAULT_COMMAND="fd . \
 
 # uv
 PATH="/home/crnvl96/.local/share/../bin:$PATH"
+PATH="/home/adr/.local/bin:$PATH"
 
 # path
 export PATH
