@@ -33,6 +33,9 @@ export FZF_DEFAULT_COMMAND="fd . \
 PATH="/home/crnvl96/.local/share/../bin:$PATH"
 PATH="/home/adr/.local/bin:$PATH"
 
+# opencode
+PATH=/home/adr/.opencode/bin:$PATH
+
 # path
 export PATH
 
