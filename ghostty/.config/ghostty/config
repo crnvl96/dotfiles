@@ -3,18 +3,24 @@ theme = "Everforest Dark Hard"
 window-decoration = none
 window-padding-y = 20,0
 window-padding-x = 10
+window-theme = ghostty
 
-font-family = "HackNerdFontMono"
+font-family = "HackNerdFontMono-Regular"
+font-family-bold = "HackNerdFontMono-Bold"
+font-family-italic = "HackNerdFontMono-Italic"
+font-family-bold-italic = "HackNerdFontMono-BoldItalic"
+font-style = "regular"
 font-size = 11
-adjust-cell-width = 2%
-adjust-cell-height = -2%
+
+adjust-cell-width = 3%
+adjust-cell-height = 5%
 adjust-underline-position = 6
 adjust-underline-thickness = 20%
 adjust-cursor-thickness = 150%
-window-theme = ghostty
 
 cursor-style-blink = false
 shell-integration-features = no-cursor
+confirm-close-surface = false
 
 keybind = alt+a=goto_tab:1
 keybind = alt+s=goto_tab:2
@@ -40,6 +46,3 @@ keybind = alt+l=goto_split:right
 
 keybind = alt+c=copy_to_clipboard
 keybind = alt+b=write_screen_file:paste
-keybind = alt+enter=toggle_fullscreen
-
-confirm-close-surface = false
