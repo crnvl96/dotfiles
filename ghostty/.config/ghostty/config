@@ -1,4 +1,4 @@
-theme = "Everforest Dark Hard"
+# theme = "Everforest Dark Hard"
 
 window-decoration = none
 window-padding-y = 20,0
@@ -10,7 +10,7 @@ font-family-bold = "HackNerdFontMono-Bold"
 font-family-italic = "HackNerdFontMono-Italic"
 font-family-bold-italic = "HackNerdFontMono-BoldItalic"
 font-style = "regular"
-font-size = 11
+font-size = 10
 
 adjust-cell-width = 3%
 adjust-cell-height = 5%
