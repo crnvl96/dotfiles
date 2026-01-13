@@ -1,3 +1,5 @@
+theme = Nvim Light
+
 window-padding-y = 20,0
 window-padding-x = 10
 
