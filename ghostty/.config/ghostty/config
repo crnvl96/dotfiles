@@ -1,4 +1,9 @@
-theme = Nvim Light
+theme = Gruvbox Material Light
+
+cursor-color = 30d5c8
+cursor-style-blink = false
+cursor-text = 000000
+shell-integration-features = no-cursor
 
 window-padding-y = 20,0
 window-padding-x = 10
