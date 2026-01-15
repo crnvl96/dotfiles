@@ -1,8 +1,8 @@
 theme = Gruvbox Material Light
 
-cursor-color = 30d5c8
+cursor-color = 3cb371
 cursor-style-blink = false
-cursor-text = 000000
+cursor-text = FFFFFF
 shell-integration-features = no-cursor
 
 window-padding-y = 20,0
