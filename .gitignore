@@ -15,3 +15,7 @@ plugged/
 
 # sst/opencode
 opencode.jsonc
+
+# rassumfrassum
+__pycache__/
+.ruff_cache/
