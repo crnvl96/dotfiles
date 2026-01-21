@@ -1,11 +1,12 @@
-theme = Gruvbox Material Light
+# theme = Gruvbox Material Light
+theme = Gruvbox Material
 
 cursor-color = 3cb371
 cursor-text = FFFFFF
 cursor-style-blink = false
 shell-integration-features = no-cursor
 
-window-padding-y = 20,0
+window-padding-y = 10,0
 window-padding-x = 10
 
 window-theme = ghostty
@@ -22,6 +23,8 @@ adjust-cell-height = 5%
 adjust-underline-position = 6
 adjust-underline-thickness = 20%
 adjust-cursor-thickness = 150%
+
+window-inherit-working-directory = true
 
 cursor-style-blink = false
 shell-integration-features = no-cursor

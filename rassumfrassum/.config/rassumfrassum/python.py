@@ -14,22 +14,27 @@ class PythonLogic(LspLogic):
             params["initializationOptions"] = dmerge(
                 params.get("initializationOptions") or {},
                 {
-                    # Pyright settings
-                    "pyright": {"disableOrganizeImports": True},
-                    "python": {
-                        "analysis": {
-                            "ignore": ["*"],
-                            "autoSearchPaths": True,
-                            "useLibraryCodeForTypes": True,
-                            "diagnosticMode": "openFilesOnly",
+                    "settings": {
+                        # Pyright settings
+                        "pyright": {
+                            "disableOrganizeImports": True,
                         },
+                        "python": {
+                            "analysis": {
+                                "ignore": ["*"],
+                                "autoSearchPaths": True,
+                                "useLibraryCodeForTypes": True,
+                                "diagnosticMode": "openFilesOnly",
+                                "typeCheckingMode": "off"
+                            },
+                        },
+                        # Ruff
+                        "logLevel": "debug",
+                        "fixAll": True,
+                        "organizeImports": True,
+                        "lint": {"enable": True},
+                        "format": {"backend": "uv"},
                     },
-                    # Ruff settings
-                    "logLevel": "debug",
-                    "fixAll": True,
-                    "organizeImports": True,
-                    "lint": {"enable": True},
-                    "format": {"backend": "uv"},
                 },
             )
 
