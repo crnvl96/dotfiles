@@ -1,6 +1,6 @@
 from rassumfrassum.frassum import LspLogic, Server
 from rassumfrassum.json import JSON
-from rassumfrassum.util import dmerge, debug
+from rassumfrassum.util import dmerge, debug, info, event
 
 
 class PythonLogic(LspLogic):
@@ -10,25 +10,14 @@ class PythonLogic(LspLogic):
         params: JSON,
         servers: list[Server],
     ):
+        info(f"Requesting method: {method!s}")
+
         if method == "initialize":
             params["initializationOptions"] = dmerge(
                 params.get("initializationOptions") or {},
                 {
+                    # Ruff
                     "settings": {
-                        # Pyright settings
-                        "pyright": {
-                            "disableOrganizeImports": True,
-                        },
-                        "python": {
-                            "analysis": {
-                                "ignore": ["*"],
-                                "autoSearchPaths": True,
-                                "useLibraryCodeForTypes": True,
-                                "diagnosticMode": "openFilesOnly",
-                                "typeCheckingMode": "off"
-                            },
-                        },
-                        # Ruff
                         "logLevel": "debug",
                         "fixAll": True,
                         "organizeImports": True,
@@ -39,7 +28,6 @@ class PythonLogic(LspLogic):
             )
 
         return await super().on_client_request(method, params, servers)
-
 
 def servers():
     return [["pyright-langserver", "--stdio"], ["ruff", "server"]]
