@@ -36,9 +36,6 @@ PATH="/home/adr/.local/bin:$PATH"
 # opencode
 PATH=/home/adr/.opencode/bin:$PATH
 
-# path
-export PATH
-
 # mise
 eval "$(mise activate bash)"
 
@@ -47,3 +44,10 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # cargo (rust)
 . "$HOME/.cargo/env"
+
+# set default NodeJS path
+# set it later so that local nodejs paths are found first
+PATH=$PATH:/home/adr/.local/share/mise/installs/node/24.12.0/bin
+
+# path
+export PATH
