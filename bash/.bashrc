@@ -30,7 +30,7 @@ export FZF_DEFAULT_COMMAND="fd . \
     --exclude .git"
 
 # uv
-PATH="/home/crnvl96/.local/share/../bin:$PATH"
+PATH="/home/adr/.local/share/../bin:$PATH"
 PATH="/home/adr/.local/bin:$PATH"
 
 # opencode
