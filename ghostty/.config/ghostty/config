@@ -2,8 +2,8 @@
 theme = Gruvbox Material
 confirm-close-surface = false
 
-# cursor-color = 3cb371
-# cursor-text = FFFFFF
+working-directory = inherit
+
 cursor-style-blink = false
 shell-integration-features = no-cursor
 
