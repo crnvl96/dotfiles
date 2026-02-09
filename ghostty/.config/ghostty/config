@@ -1,5 +1,5 @@
 # theme = Gruvbox Material Light
-theme = Gruvbox Material
+theme = TokyoNight Storm
 confirm-close-surface = false
 
 working-directory = inherit
