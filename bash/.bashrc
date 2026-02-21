@@ -39,6 +39,9 @@ PATH=/home/adr/.opencode/bin:$PATH
 # nvim
 PATH=/opt/nvim-linux-x86_64/bin:$PATH
 
+# bat
+PATH="/home/adr/.local/bin:$PATH"
+
 # mise
 eval "$(mise activate bash)"
 

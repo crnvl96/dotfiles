@@ -5,7 +5,7 @@ git:
     - colorArg: always
       pager: diff-so-fancy
 os:
-  editPreset: nvim-remote
+  editPreset: nvim
 gui:
   showBottomLine: false
   border: rounded
