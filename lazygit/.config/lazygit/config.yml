@@ -1,0 +1,13 @@
+notARepository: "quit"
+git:
+  overrideGpg: true
+  pagers:
+    - colorArg: always
+      pager: diff-so-fancy
+os:
+  editPreset: nvim-remote
+gui:
+  showBottomLine: false
+  border: rounded
+  nerdFontsVersion: "3"
+  skipDiscardChangeWarning: true
