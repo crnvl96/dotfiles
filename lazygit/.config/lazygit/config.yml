@@ -9,5 +9,5 @@ os:
 gui:
   showBottomLine: false
   border: rounded
-  nerdFontsVersion: "3"
+  # nerdFontsVersion: "3"
   skipDiscardChangeWarning: true
