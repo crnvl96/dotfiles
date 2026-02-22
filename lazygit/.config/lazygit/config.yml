@@ -1,5 +1,6 @@
 notARepository: "quit"
 git:
+  overrideGpg: true
   pagers:
     - colorArg: always
       pager: diff-so-fancy
