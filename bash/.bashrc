@@ -3,6 +3,7 @@ alias ex='exit'
 alias cl='clear'
 alias nv='nvim'
 alias dt='dirt -t ~/Developer -t ~/.config/nvim -t ~/.emacs.d'
+alias ll="lazygit"
 
 # rg
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"

@@ -31,11 +31,11 @@ keybind = alt+equal=increase_font_size:2
 keybind = alt+minus=decrease_font_size:2
 keybind = alt+zero=reset_font_size
 
-keybind = alt+one=goto_tab:1
-keybind = alt+two=goto_tab:2
-keybind = alt+three=goto_tab:3
-keybind = alt+four=goto_tab:4
-keybind = alt+five=goto_tab:5
+keybind = alt+shift+one=goto_tab:1
+keybind = alt+shift+two=goto_tab:2
+keybind = alt+shift+three=goto_tab:3
+keybind = alt+shift+four=goto_tab:4
+keybind = alt+shift+five=goto_tab:5
 
 keybind = alt+shift+t=new_tab
 keybind = alt+shift+r=reload_config
