@@ -52,5 +52,13 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 # cargo (rust)
 . "$HOME/.cargo/env"
 
+# pnpm
+export PNPM_HOME="/home/adr/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
 # path
 export PATH
+
