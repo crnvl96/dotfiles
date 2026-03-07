@@ -1,10 +1,3 @@
 notARepository: "quit"
 git:
   overrideGpg: true
-  pagers:
-    - colorArg: always
-      pager: diff-so-fancy
-os:
-  editPreset: nvim
-gui:
-  nerdFontsVersion: "3"
