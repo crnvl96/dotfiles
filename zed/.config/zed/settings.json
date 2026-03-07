@@ -40,7 +40,6 @@
   },
   "languages": {
     "TypeScript": {
-      "soft_wrap": "preferred_line_length",
       "language_servers": ["tsgo"],
     },
     "TSX": {
