@@ -1,0 +1,20 @@
+{
+    "claudeCode.preferredLocation": "sidebar",
+    "editor.inlayHints.enabled": "off",
+    "breadcrumbs.enabled": false,
+    "[python]": {
+        "editor.defaultFormatter": "charliermarsh.ruff"
+    },
+    "editor.formatOnSave": true,
+    "editor.smoothScrolling": true,
+    "editor.cursorSmoothCaretAnimation": "on",
+    "workbench.list.smoothScrolling": true,
+    "terminal.integrated.smoothScrolling": true,
+    "editor.cursorBlinking": "smooth",
+    "editor.lineHeight": 1.8,
+    "editor.renderLineHighlight": "none",
+    "workbench.statusBar.visible": false,
+    "editor.stickyScroll.enabled": false,
+    "editor.occurrencesHighlight": "off",
+    "git.autofetch": true
+}
