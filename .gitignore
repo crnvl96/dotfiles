@@ -2,20 +2,6 @@
 .env
 .git/
 
-# charmbracelet/crush
-.crush/
-crush.json
-
-# openai/codex
-**/.codex/**
-!**/.codex/config.template.toml
-
-# vim plug
-plugged/
-
-# sst/opencode
-opencode.jsonc
-
-# rassumfrassum
-__pycache__/
-.ruff_cache/
+# VSCode
+Code/
+!**/User//settings.json
