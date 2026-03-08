@@ -3,8 +3,8 @@ font-size = 12
 
 window-theme = ghostty
 window-decoration = none
-window-padding-x = 20
-window-padding-y = 20
+# window-padding-x = 20
+# window-padding-y = 20
 
 cursor-color = F8F8F2
 cursor-style-blink = false
