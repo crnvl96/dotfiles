@@ -1,5 +1,4 @@
 {
-  // Editor
   "editor.lineHeight": 1.8,
   "editor.renderLineHighlight": "none",
   "editor.inlayHints.enabled": "off",
@@ -11,34 +10,22 @@
   "editor.quickSuggestions": {
     "strings": "on"
   },
-
-  // UI
   "breadcrumbs.enabled": false,
   "workbench.list.smoothScrolling": true,
   "terminal.integrated.smoothScrolling": true,
-
-  // Formatters
   "editor.formatOnSave": true,
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff"
   },
-
-  // Linters
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "always"
   },
-
-  // Git
   "git.autofetch": true,
   "git.confirmSync": false,
-
-  // Files
   "files.associations": {
     "*.css": "tailwindcss"
   },
-
-  // Extensions
   "claudeCode.preferredLocation": "sidebar",
   "oxc.fmt.configPath": ".oxfmtrc.json"
 }
