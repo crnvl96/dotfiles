@@ -8,6 +8,8 @@ adjust-underline-thickness = 40%
 adjust-cursor-thickness = 150%
 
 window-theme = ghostty
+window-inherit-working-directory = true
+working-directory = inherit
 
 cursor-color = F8F8F2
 cursor-style-blink = false

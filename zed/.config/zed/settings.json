@@ -38,12 +38,49 @@
     "light": "Gruvbox Light",
     "dark": "One Dark",
   },
+  "lsp": {
+    "oxfmt": {
+      "initialization_options": {
+        "settings": {
+          "fmt.configPath": null,
+        },
+      },
+    },
+  },
   "languages": {
     "TypeScript": {
       "language_servers": ["tsgo"],
+      "format_on_save": "on",
+      "prettier": {
+        "allowed": false,
+      },
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt",
+          },
+        },
+      ],
     },
     "TSX": {
       "language_servers": ["tsgo"],
+      "format_on_save": "on",
+      "prettier": {
+        "allowed": false,
+      },
+      "formatter": [
+        {
+          "language_server": {
+            "name": "oxfmt",
+          },
+        },
+      ],
+    },
+    "JSON": {
+      "format_on_save": "on",
+      "prettier": {
+        "allowed": true,
+      },
     },
     "JavaScript": {
       "language_servers": ["tsgo"],
