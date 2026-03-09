@@ -8,13 +8,10 @@ working-directory = inherit
 window-padding-x = 10,0
 window-padding-y = 10,0
 
-cursor-color = 556b2f
+cursor-color = 005085
 cursor-style-blink = false
 cursor-text = e0e4de
 shell-integration-features = no-cursor
-
-unfocused-split-opacity = 0.4
-split-divider-color = A7DFEF
 
 keybind = alt+one=goto_tab:1
 keybind = alt+two=goto_tab:2
