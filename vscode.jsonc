@@ -1,0 +1,53 @@
+{
+  "window.titleBarStyle": "native",
+  "telemetry.telemetryLevel": "off",
+  "window.zoomLevel": 1.25,
+
+  // workbench settings.
+  "workbench.sideBar.location": "right",
+  "workbench.startupEditor": "none",
+  "workbench.tree.indent": 20,
+  "workbench.iconTheme": "vscode-jetbrains-icon-theme-2023-light",
+  "workbench.colorTheme": "React Dev Theme (light)",
+  "workbench.activityBar.location": "top",
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.tree.enableStickyScroll": false,
+  "workbench.tree.renderIndentGuides": "none",
+  "workbench.layoutControl.enabled": false,
+  "breadcrumbs.enabled": false,
+  "window.commandCenter": false,
+
+  // editor settings.
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.fontSize": 14,
+  "editor.fontLigatures": true,
+  "editor.letterSpacing": 0.3,
+  "editor.lineHeight": 1.7,
+  "editor.hover.delay": 500,
+  "editor.hover.enabled": "on",
+  "editor.lightbulb.enabled": "off",
+  "editor.selectionHighlight": false,
+  "editor.overviewRulerBorder": false,
+  "editor.renderLineHighlight": "none",
+  "editor.showFoldingControls": "always",
+  "editor.guides.bracketPairsHorizontal": false,
+  "editor.minimap.enabled": false,
+  "editor.stickyScroll.enabled": false,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.oxc": "always",
+  },
+
+  // terminal.
+  "terminal.integrated.cursorStyle": "underline",
+  "terminal.integrated.cursorStyleInactive": "underline",
+  "terminal.integrated.fontSize": 16,
+  "terminal.external.osxExec": "iTerm.app",
+  "search.useIgnoreFiles": false,
+  "window.customTitleBarVisibility": "never",
+
+  // languages.
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+  },
+}
