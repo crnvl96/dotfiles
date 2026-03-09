@@ -1,11 +1,5 @@
-font-family = "SauceCodeProNerdFontMono"
+font-family = "JetBrainsMonoNerdFont"
 font-size = 14
-
-adjust-cell-width = -5%
-adjust-cell-height = 20%
-adjust-underline-position = 6
-adjust-underline-thickness = 40%
-adjust-cursor-thickness = 150%
 
 window-theme = ghostty
 window-inherit-working-directory = true
