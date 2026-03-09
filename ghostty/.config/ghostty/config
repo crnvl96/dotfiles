@@ -1,13 +1,16 @@
+theme = "Seoulbones Light"
 font-family = "JetBrainsMonoNerdFont"
 font-size = 14
 
 window-theme = ghostty
 window-inherit-working-directory = true
 working-directory = inherit
+window-padding-x = 10,0
+window-padding-y = 10,0
 
-cursor-color = F8F8F2
+cursor-color = 556b2f
 cursor-style-blink = false
-cursor-text = 000000
+cursor-text = e0e4de
 shell-integration-features = no-cursor
 
 unfocused-split-opacity = 0.4
