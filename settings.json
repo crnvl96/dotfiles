@@ -19,10 +19,10 @@
 
   // editor settings.
   "editor.fontFamily": "JetBrainsMono Nerd Font",
-  "editor.fontSize": 14,
+  "editor.fontSize": 16,
   "editor.fontLigatures": true,
   "editor.letterSpacing": 0.3,
-  "editor.lineHeight": 1.7,
+  "editor.lineHeight": 1.6,
   "editor.hover.delay": 500,
   "editor.hover.enabled": "on",
   "editor.lightbulb.enabled": "off",
@@ -35,7 +35,7 @@
   "editor.stickyScroll.enabled": false,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.oxc": "always",
+    "source.fixAll.oxc": "always"
   },
 
   // terminal.
@@ -48,6 +48,6 @@
 
   // languages.
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
-  },
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
