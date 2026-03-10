@@ -1,4 +1,4 @@
-theme = "Seoulbones Light"
+# theme = "Seoulbones Light"
 font-family = "JetBrainsMonoNerdFont"
 font-size = 14
 
@@ -8,9 +8,10 @@ working-directory = inherit
 window-padding-x = 10,0
 window-padding-y = 10,0
 
-cursor-color = 005085
+# cursor-color = 005085
+cursor-color = FFFFFF
 cursor-style-blink = false
-cursor-text = e0e4de
+cursor-text = 000000
 shell-integration-features = no-cursor
 
 keybind = alt+one=goto_tab:1
