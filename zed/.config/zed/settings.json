@@ -1,4 +1,11 @@
 {
+  "cursor_blink": false,
+  "vim": {
+    "gdefault": true,
+    "use_smartcase_find": true,
+    "toggle_relative_line_numbers": true,
+  },
+  "vim_mode": true,
   "ui_font_weight": 400.0,
   "ui_font_family": "JetBrainsMono Nerd Font Mono",
   "buffer_line_height": "comfortable",
@@ -16,5 +23,29 @@
     "mode": "system",
     "light": "Gruvbox Light",
     "dark": "Gruvbox Dark",
+  },
+  "lsp": {
+    "oxlint": {},
+    "oxfmt": {},
+  },
+  "languages": {
+    "TypeScript": {
+      "language_servers": ["tsgo", "oxfmt", "oxlint"],
+      "format_on_save": "on",
+      "prettier": { "allowed": false },
+      "formatter": [{ "language_server": { "name": "oxfmt" } }],
+    },
+    "TSX": {
+      "language_servers": ["tsgo", "oxfmt", "oxlint"],
+      "format_on_save": "on",
+      "prettier": { "allowed": false },
+      "formatter": [{ "language_server": { "name": "oxfmt" } }],
+    },
+    "JavaScript": {
+      "language_servers": ["tsgo", "oxfmt", "oxlint"],
+      "format_on_save": "on",
+      "prettier": { "allowed": false },
+      "formatter": [{ "language_server": { "name": "oxfmt" } }],
+    },
   },
 }
