@@ -1,33 +1,26 @@
 {
-  "ui_font_size": 24.0,
+  "theme": "One Dark",
+  "buffer_font_size": 15.0,
+  "ui_font_size": 18.0,
+  "agent_ui_font_size": 18.0,
+  "agent_buffer_font_size": 15.0,
   "cursor_blink": false,
+  "vim_mode": false,
   "vim": {
     "gdefault": true,
     "use_smartcase_find": true,
     "toggle_relative_line_numbers": true,
   },
-  "vim_mode": true,
-  "ui_font_weight": 400.0,
-  "ui_font_family": "JetBrainsMono Nerd Font Mono",
-  "buffer_line_height": "comfortable",
-  "buffer_font_size": 16.0,
   "buffer_font_family": "JetBrainsMono Nerd Font Mono",
+  "buffer_line_height": "comfortable",
   "git": {
-    "blame": {
-      "show_avatar": false,
-    },
-    "inline_blame": {
-      "enabled": false,
-    },
-  },
-  "theme": {
-    "mode": "system",
-    "light": "Gruvbox Light",
-    "dark": "Gruvbox Dark",
+    "blame": { "show_avatar": false },
+    "inline_blame": { "enabled": false },
   },
   "lsp": {
     "oxlint": {},
     "oxfmt": {},
+    "ruff": {},
   },
   "languages": {
     "TypeScript": {
@@ -47,6 +40,11 @@
       "format_on_save": "on",
       "prettier": { "allowed": false },
       "formatter": [{ "language_server": { "name": "oxfmt" } }],
+    },
+    "Python": {
+      "language_servers": ["ty", "ruff"],
+      "code_actions_on_format": { "source.organizeImports.ruff": true },
+      "formatter": [{ "language_server": { "name": "ruff" } }],
     },
   },
 }
