@@ -1,33 +1,66 @@
 {
-  "window.titleBarStyle": "native",
   "telemetry.telemetryLevel": "off",
-  "window.zoomLevel": 1.25,
+  "breadcrumbs.enabled": false,
+
+  "search.exclude": {
+    "**/.venv": true
+  },
+
+  // languages.
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+
+  // git
+  "git.confirmSync": false,
+  "git.autofetch": true,
+
+  // aws
+  "aws.cloudformation.telemetry.enabled": false,
+  "aws.telemetry": false,
+
+  // diff
+  "diffEditor.hideUnchangedRegions.enabled": true,
+  "diffEditor.renderSideBySideInlineBreakpoint": 1200,
+
+  // claude
+  "claudeCode.useTerminal": true,
+
+  // terminal.
+  "terminal.integrated.cursorStyle": "underline",
+  "terminal.integrated.cursorStyleInactive": "underline",
+  "search.useIgnoreFiles": true,
+  "window.customTitleBarVisibility": "never",
 
   // workbench settings.
-  "workbench.sideBar.location": "right",
-  "workbench.startupEditor": "none",
+  "workbench.startupEditor": "terminal",
   "workbench.tree.indent": 20,
-  "workbench.iconTheme": "vscode-jetbrains-icon-theme-2023-light",
-  "workbench.colorTheme": "React Dev Theme (light)",
-  "workbench.activityBar.location": "top",
+  "workbench.iconTheme": "vscode-jetbrains-icon-theme-2023-auto",
+  "workbench.colorTheme": "One Dark Pro",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.tree.enableStickyScroll": false,
   "workbench.tree.renderIndentGuides": "none",
   "workbench.layoutControl.enabled": false,
-  "breadcrumbs.enabled": false,
+
+  // window
+  "window.zoomLevel": 0.5,
   "window.commandCenter": false,
 
   // editor settings.
   "editor.fontFamily": "JetBrainsMono Nerd Font",
-  "editor.fontSize": 16,
   "editor.fontLigatures": true,
   "editor.letterSpacing": 0.3,
   "editor.lineHeight": 1.6,
   "editor.hover.delay": 500,
+  "editor.fontSize": 14,
   "editor.hover.enabled": "on",
   "editor.lightbulb.enabled": "off",
   "editor.selectionHighlight": false,
   "editor.overviewRulerBorder": false,
+  "editor.inlayHints.enabled": "off",
   "editor.renderLineHighlight": "none",
   "editor.showFoldingControls": "always",
   "editor.guides.bracketPairsHorizontal": false,
@@ -36,18 +69,5 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "always"
-  },
-
-  // terminal.
-  "terminal.integrated.cursorStyle": "underline",
-  "terminal.integrated.cursorStyleInactive": "underline",
-  "terminal.integrated.fontSize": 16,
-  "terminal.external.osxExec": "iTerm.app",
-  "search.useIgnoreFiles": false,
-  "window.customTitleBarVisibility": "never",
-
-  // languages.
-  "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
   }
 }
