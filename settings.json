@@ -2,6 +2,7 @@
   "telemetry.telemetryLevel": "off",
   "breadcrumbs.enabled": false,
 
+  "search.useIgnoreFiles": true,
   "search.exclude": {
     "**/.venv": true
   },
@@ -13,6 +14,13 @@
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff"
   },
+  "[skill]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+
+  // chat
+  "chat.fontSize": 16,
+  "chat.editor.fontSize": 15,
 
   // git
   "git.confirmSync": false,
@@ -23,17 +31,61 @@
   "aws.telemetry": false,
 
   // diff
-  "diffEditor.hideUnchangedRegions.enabled": true,
   "diffEditor.renderSideBySideInlineBreakpoint": 1200,
 
-  // claude
-  "claudeCode.useTerminal": true,
+  // vim
+  "vim.easymotion": false,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.visualstar": true,
+  "vim.highlightedyank.enable": true,
+
+  "vim.leader": "<space>",
+
+  "vim.handleKeys": {
+    "<C-a>": false,
+    "<C-f>": false,
+    "<C-s>": false,
+    "<C-p>": false
+  },
+
+  "extensions.experimental.affinity": {
+    "vscodevim.vim": 1
+  },
+
+  "vim.insertModeKeyBindings": [
+    { "before": ["j", "k"], "after": ["<Esc>"] },
+    { "before": ["k", "j"], "after": ["<Esc>"] }
+  ],
+  "vim.normalModeKeyBindingsNonRecursive": [],
+  "vim.normalModeKeyBindings": [
+    {
+      "before": [":"],
+      "commands": ["workbench.action.showCommands"],
+      "silent": true
+    }
+  ],
+  "vim.visualModeKeyBindings": [
+    {
+      "before": [">"],
+      "commands": ["editor.action.indentLines"]
+    },
+    {
+      "before": ["<"],
+      "commands": ["editor.action.outdentLines"]
+    }
+  ],
+  "vim.visualModeKeyBindingsNonRecursive": [
+    {
+      "before": ["p"],
+      "after": ["p", "g", "v", "y"]
+    }
+  ],
 
   // terminal.
-  "terminal.integrated.cursorStyle": "underline",
-  "terminal.integrated.cursorStyleInactive": "underline",
-  "search.useIgnoreFiles": true,
-  "window.customTitleBarVisibility": "never",
+  "terminal.integrated.sendKeybindingsToShell": true,
 
   // workbench settings.
   "workbench.startupEditor": "terminal",
@@ -48,6 +100,7 @@
   // window
   "window.zoomLevel": 0.5,
   "window.commandCenter": false,
+  "window.customTitleBarVisibility": "never",
 
   // editor settings.
   "editor.fontFamily": "JetBrainsMono Nerd Font",
@@ -69,5 +122,9 @@
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "always"
-  }
+  },
+  "claudeCode.preferredLocation": "panel",
+  "claudeCode.useTerminal": true,
+  "editor.wordWrap": "on",
+  "editor.wordWrapColumn": 120
 }
