@@ -2,6 +2,8 @@
   "telemetry.telemetryLevel": "off",
   "breadcrumbs.enabled": false,
 
+  "ruff.format.backend": "uv",
+
   "search.useIgnoreFiles": true,
   "search.exclude": {
     "**/.venv": true
@@ -15,6 +17,9 @@
     "editor.defaultFormatter": "charliermarsh.ruff"
   },
   "[skill]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[markdown]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
 
@@ -33,6 +38,10 @@
   // diff
   "diffEditor.renderSideBySideInlineBreakpoint": 1200,
 
+  // claude
+  "claudeCode.preferredLocation": "panel",
+  "claudeCode.useTerminal": true,
+
   // vim
   "vim.easymotion": false,
   "vim.incsearch": true,
@@ -41,7 +50,7 @@
   "vim.hlsearch": true,
   "vim.visualstar": true,
   "vim.highlightedyank.enable": true,
-
+  "vim.smartRelativeLine": true,
   "vim.leader": "<space>",
 
   "vim.handleKeys": {
@@ -117,14 +126,12 @@
   "editor.renderLineHighlight": "none",
   "editor.showFoldingControls": "always",
   "editor.guides.bracketPairsHorizontal": false,
+  "editor.lineNumbers": "relative",
   "editor.minimap.enabled": false,
   "editor.stickyScroll.enabled": false,
   "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.oxc": "always"
-  },
-  "claudeCode.preferredLocation": "panel",
-  "claudeCode.useTerminal": true,
+  "editor.codeActionsOnSave": { "source.fixAll.oxc": "always" },
   "editor.wordWrap": "on",
-  "editor.wordWrapColumn": 120
+  "editor.wordWrapColumn": 120,
+  "editor.cursorBlinking": "solid"
 }
