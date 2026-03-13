@@ -1,17 +1,17 @@
-# theme = "Seoulbones Light"
+theme = light:Kanagawa Lotus,dark:Kanagawa Wave
 font-family = "JetBrainsMonoNerdFont"
-font-size = 14
+font-size = 12
 
-window-theme = ghostty
+window-theme = system
 window-inherit-working-directory = true
 working-directory = inherit
 window-padding-x = 10,0
 window-padding-y = 10,0
 
 # cursor-color = 005085
-cursor-color = FFFFFF
+# cursor-color = FFFFFF
 cursor-style-blink = false
-cursor-text = 000000
+# cursor-text = 000000
 shell-integration-features = no-cursor
 
 keybind = alt+one=goto_tab:1
