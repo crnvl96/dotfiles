@@ -9,9 +9,12 @@
     "**/.venv": true
   },
 
+  "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
+  "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose",
+
   // languages.
   "[jsonc]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
+    "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[python]": {
     "editor.defaultFormatter": "charliermarsh.ruff"
@@ -20,6 +23,9 @@
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[markdown]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescript]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
 
@@ -68,15 +74,112 @@
     { "before": ["j", "k"], "after": ["<Esc>"] },
     { "before": ["k", "j"], "after": ["<Esc>"] }
   ],
-  "vim.normalModeKeyBindingsNonRecursive": [],
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["<leader>", "e"],
+      "commands": ["workbench.action.toggleSidebarVisibility"]
+    }
+  ],
   "vim.normalModeKeyBindings": [
     {
       "before": [":"],
       "commands": ["workbench.action.showCommands"],
       "silent": true
+    },
+    {
+      "before": ["<Leader>", "c"],
+      "commands": [":tabclose"]
+    },
+    {
+      "before": ["<Leader>", "h"],
+      "commands": [":noh"]
+    },
+    {
+      "before": ["<leader>", "f", "o"],
+      "commands": ["workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup"]
+    },
+    {
+      "before": ["<Leader>", "f", "f"],
+      "commands": ["workbench.action.quickOpen"]
+    },
+    {
+      "before": ["<Leader>", "f", "g"],
+      "commands": ["workbench.action.findInFiles"]
+    },
+    {
+      "before": ["<C-d>"],
+      "after": ["<C-d>", "z", "z"]
+    },
+    {
+      "before": ["<C-u>"],
+      "after": ["<C-u>", "z", "z"]
+    },
+    {
+      "before": ["<C-h>"],
+      "after": ["<C-w>", "h"]
+    },
+    {
+      "before": ["<C-j>"],
+      "after": ["<C-w>", "j"]
+    },
+    {
+      "before": ["<C-k>"],
+      "after": ["<C-w>", "k"]
+    },
+    {
+      "before": ["<C-l>"],
+      "after": ["<C-w>", "l"]
+    },
+    {
+      "before": ["K"],
+      "commands": ["editor.action.showDefinitionPreviewHover"]
+    },
+    {
+      "before": ["<leader>", "l", "s"],
+      "commands": ["workbench.action.gotoSymbol"]
+    },
+    {
+      "before": ["<Leader>", "l", "r"],
+      "commands": ["editor.action.rename"]
+    },
+    {
+      "before": ["<Leader>", "l", "f"],
+      "commands": ["editor.action.formatDocument"]
+    },
+    {
+      "before": ["<Leader>", "l", "a"],
+      "commands": ["editor.action.quickFix"]
+    },
+    {
+      "before": ["<Leader>", "l", "r"],
+      "commands": ["editor.action.goToReferences"]
+    },
+    {
+      "before": ["<Leader>", "l", "D"],
+      "commands": ["editor.action.goToDeclaration"]
+    },
+    {
+      "before": ["<Leader>", "l", "y"],
+      "commands": ["editor.action.goToTypeDefinition"]
+    },
+    {
+      "before": ["<Leader>", "l", "i"],
+      "commands": ["editor.action.goToImplementation"]
+    },
+    {
+      "before": ["<Leader>", "l", "d"],
+      "commands": ["editor.action.goToDefinition"]
     }
   ],
   "vim.visualModeKeyBindings": [
+    {
+      "before": ["J"],
+      "commands": ["editor.action.moveLinesDownAction"]
+    },
+    {
+      "before": ["K"],
+      "commands": ["editor.action.moveLinesUpAction"]
+    },
     {
       "before": [">"],
       "commands": ["editor.action.indentLines"]
@@ -99,8 +202,7 @@
   // workbench settings.
   "workbench.startupEditor": "terminal",
   "workbench.tree.indent": 20,
-  "workbench.iconTheme": "vscode-jetbrains-icon-theme-2023-auto",
-  "workbench.colorTheme": "One Dark Pro",
+  "workbench.colorTheme": "Nord",
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.tree.enableStickyScroll": false,
   "workbench.tree.renderIndentGuides": "none",
