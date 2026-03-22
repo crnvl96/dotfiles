@@ -9,10 +9,8 @@ pagers:
 gui:
   showBottomLine: false
   theme:
-    activeBorderColor:
-      - magenta
     selectedLineBgColor:
-      - black
+      - magenta
     unstagedChangesColor:
       - yellow
   border: rounded
