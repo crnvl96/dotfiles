@@ -1,3 +1,23 @@
 notARepository: "quit"
 git:
   overrideGpg: true
+os:
+  editPreset: "nvim-remote"
+pagers:
+  - colorArg: always
+    pager: diff-so-fancy
+gui:
+  showBottomLine: false
+  theme:
+    activeBorderColor:
+      - magenta
+    selectedLineBgColor:
+      - black
+    unstagedChangesColor:
+      - yellow
+  border: rounded
+  nerdFontsVersion: "3"
+  skipDiscardChangeWarning: true
+keybinding:
+  files:
+    commitChangesWithoutHook: <disabled>
