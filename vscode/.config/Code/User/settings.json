@@ -1,4 +1,3 @@
-// Personal VSCode config
 {
   "telemetry.telemetryLevel": "off",
   "ruff.format.backend": "uv",
