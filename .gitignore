@@ -1,7 +1,22 @@
-# General
-.env
-.git/
+*
 
-# VSCode
-Code/
-!**/User//settings.json
+# VsCode
+!**/User/settings.json
+
+# Ghostty
+!**/ghostty/config
+
+# Git
+!**/git
+
+# Keyd
+!keyd-default.conf
+
+# Lazygit
+!**/lazygit/config.yml
+
+# Ripgrep
+!.ripgreprc
+
+# Zed
+!**/zed/settings.json
