@@ -1,0 +1,45 @@
+// Personal VSCode config
+{
+  "telemetry.telemetryLevel": "off",
+  "ruff.format.backend": "uv",
+  "search.useIgnoreFiles": true,
+  "search.exclude": {
+    "**/.venv": true
+  },
+  "containers.containerClient": "com.microsoft.visualstudio.containers.docker",
+  "containers.orchestratorClient": "com.microsoft.visualstudio.orchestrators.dockercompose",
+  "[jsonc]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff"
+  },
+  "[skill]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "aws.cloudformation.telemetry.enabled": false,
+  "aws.telemetry": false,
+  "terminal.integrated.sendKeybindingsToShell": true,
+  "window.zoomLevel": 0.5,
+  "editor.fontFamily": "JetBrainsMono Nerd Font",
+  "editor.fontLigatures": true,
+  "editor.hover.delay": 500,
+  "editor.fontSize": 12,
+  "editor.formatOnSave": true,
+  "[instructions]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "claudeCode.preferredLocation": "panel",
+  "python.terminal.activateEnvironment": false
+}

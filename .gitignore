@@ -1,22 +1,32 @@
 *
+!*/
 
 # VsCode
-!**/User/settings.json
+!vscode/.config/Code/User/settings.json
 
 # Ghostty
-!**/ghostty/config
+!ghostty/config
 
 # Git
-!**/git
+!git/.gitconfig
+!git/.gitignore_global
 
 # Keyd
 !keyd-default.conf
 
 # Lazygit
-!**/lazygit/config.yml
+!lazygit/config.yml
 
 # Ripgrep
 !.ripgreprc
 
 # Zed
-!**/zed/settings.json
+!zed/settings.json
+
+# Television
+!television/.config/television/config.toml
+
+# Yazi
+!yazi/.config/yazi/yazi.toml
+!yazi/.config/yazi/keymap.toml
+!yazi/.config/yazi/theme.toml
