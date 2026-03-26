@@ -8,11 +8,11 @@ pagers:
     pager: diff-so-fancy
 gui:
   showBottomLine: false
-  theme:
-    selectedLineBgColor:
-      - magenta
-    unstagedChangesColor:
-      - yellow
+  # theme:
+  #   selectedLineBgColor:
+  #     - magenta
+  #   unstagedChangesColor:
+  #     - yellow
   border: rounded
   nerdFontsVersion: "3"
   skipDiscardChangeWarning: true
