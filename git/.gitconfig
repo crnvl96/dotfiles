@@ -19,3 +19,7 @@
     prune = true
 [merge]
     conflictstyle = diff3
+[diff]
+  tool = nvim_difftool
+[difftool "nvim_difftool"]
+  cmd = nvim -c \"packadd nvim.difftool\" -d \"$LOCAL\" \"$REMOTE\"
