@@ -2,7 +2,7 @@ theme = light:Kanagawa Lotus,dark:Kanagawa Wave
 font-family = "JetBrainsMonoNerdFont"
 font-size = 12
 
-window-decoration = false
+window-decoration = true
 
 window-theme = ghostty
 window-inherit-working-directory = true
