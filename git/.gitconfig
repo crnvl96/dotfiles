@@ -13,6 +13,10 @@
     gpgsign = true
 [gpg]
     format = ssh
+[alias]
+    st = status
+    c = commit
+    dt = difftool -y
 [pull]
     rebase = false
 [fetch]
