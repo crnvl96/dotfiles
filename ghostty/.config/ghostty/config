@@ -47,5 +47,7 @@ keybind = alt+equal=increase_font_size:1
 keybind = alt+minus=decrease_font_size:1
 keybind = alt+zero=reset_font_size
 
+keybind = alt+shift+y=write_screen_file:copy,plain
+
 keybind = alt+shift+p=toggle_command_palette
 
