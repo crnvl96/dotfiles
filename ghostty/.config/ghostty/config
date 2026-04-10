@@ -26,7 +26,9 @@ keybind = alt+eight=goto_tab:8
 keybind = alt+nine=goto_tab:9
 keybind = alt+zero=reset_font_size
 
-keybind = alt+shift+comma=reload_config
+keybind = alt+shift+comma=move_tab:-1
+keybind = alt+shift+.=move_tab:1
+
 keybind = alt+equal=increase_font_size:1
 keybind = alt+minus=decrease_font_size:1
 
@@ -43,6 +45,7 @@ keybind = alt+shift+left=resize_split:left,20
 keybind = alt+shift+c=new_tab
 keybind = alt+shift+x=close_surface
 keybind = alt+shift+v=new_split:right
+keybind = alt+shift+u=reload_config
 keybind = alt+shift+s=new_split:down
 keybind = alt+shift+r=prompt_tab_title
 keybind = alt+shift+y=write_screen_file:copy,plain
