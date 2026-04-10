@@ -27,8 +27,8 @@ keybind = alt+nine=goto_tab:9
 
 keybind = alt+shift+comma=reload_config
 
-keybind = alt+shift+t=new_tab
-keybind = alt+shift+c=close_surface
+keybind = alt+shift+c=new_tab
+keybind = alt+shift+x=close_surface
 
 keybind = alt+shift+v=new_split:right
 keybind = alt+shift+s=new_split:down
@@ -47,5 +47,5 @@ keybind = alt+equal=increase_font_size:1
 keybind = alt+minus=decrease_font_size:1
 keybind = alt+zero=reset_font_size
 
-keybind = ctrl+shift+p=toggle_command_palette
+keybind = alt+shift+p=toggle_command_palette
 
