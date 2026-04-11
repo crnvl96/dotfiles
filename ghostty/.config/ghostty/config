@@ -37,10 +37,10 @@ keybind = alt+shift+j=goto_split:bottom
 keybind = alt+shift+h=goto_split:left
 keybind = alt+shift+l=goto_split:right
 
-keybind = alt+shift+up=resize_split:up,5
-keybind = alt+shift+down=resize_split:down,5
-keybind = alt+shift+right=resize_split:right,20
-keybind = alt+shift+left=resize_split:left,20
+keybind = alt+shift+up=resize_split:up,10
+keybind = alt+shift+down=resize_split:down,10
+keybind = alt+shift+right=resize_split:right,100
+keybind = alt+shift+left=resize_split:left,100
 
 keybind = alt+shift+c=new_tab
 keybind = alt+shift+x=close_surface
