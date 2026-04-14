@@ -1,4 +1,6 @@
-theme = light:Kanagawa Lotus,dark:Kanagawa Wave
+# theme = light:Kanagawa Lotus,dark:Kanagawa Wave
+theme = Black Metal (Burzum)
+
 font-family = "JetBrainsMonoNerdFont"
 font-size = 12
 
