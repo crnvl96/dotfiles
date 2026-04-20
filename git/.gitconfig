@@ -9,18 +9,12 @@
 [core]
     editor = $EDITOR
     excludesfile = ~/.gitignore_global
-    pager = diff-so-fancy | less --tabs=4 -RF
 [pager]
-    dsf = diff-so-fancy | less --tabs=4 -RFXS
+    diff = diff-so-fancy | less --tabs=4 -RFXS --pattern '^(Date|added|deleted|modified): '
 [commit]
     gpgsign = true
 [gpg]
     format = ssh
-[alias]
-    st = status
-    c = commit
-    dt = difftool -y
-    dsf = diff --color
 [pull]
     rebase = false
 [fetch]
@@ -28,10 +22,21 @@
 [merge]
     conflictstyle = diff3
 [diff]
-  tool = nvim_difftool
+    tool = nvim_difftool
 [difftool "nvim_difftool"]
-  cmd = nvim -c \"packadd nvim.difftool\" -d \"$LOCAL\" \"$REMOTE\"
-[diff-so-fancy]
-  markEmptyLines = false
-  changeHunkIndicators = false
-  ; stripLeadingSymbols = false
+    cmd = nvim -c \"packadd nvim.difftool\" -d \"$LOCAL\" \"$REMOTE\"
+[color]
+    ui = true
+[color "diff-highlight"]
+    oldNormal = red bold
+    oldHighlight = red bold 52
+    newNormal = green bold
+    newHighlight = green bold 22
+[color "diff"]
+    meta = 11
+    frag = magenta bold
+    func = 146 bold
+    commit = yellow bold
+    old = red bold
+    new = green bold
+    whitespace = red reverse
