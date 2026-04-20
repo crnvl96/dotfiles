@@ -9,6 +9,9 @@
 [core]
     editor = $EDITOR
     excludesfile = ~/.gitignore_global
+    pager = diff-so-fancy | less --tabs=4 -RF
+[pager]
+    dsf = diff-so-fancy | less --tabs=4 -RFXS
 [commit]
     gpgsign = true
 [gpg]
@@ -17,6 +20,7 @@
     st = status
     c = commit
     dt = difftool -y
+    dsf = diff --color
 [pull]
     rebase = false
 [fetch]
@@ -27,3 +31,7 @@
   tool = nvim_difftool
 [difftool "nvim_difftool"]
   cmd = nvim -c \"packadd nvim.difftool\" -d \"$LOCAL\" \"$REMOTE\"
+[diff-so-fancy]
+  markEmptyLines = false
+  changeHunkIndicators = false
+  ; stripLeadingSymbols = false
