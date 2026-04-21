@@ -1,11 +1,10 @@
 notARepository: "quit"
 git:
   overrideGpg: true
+  pagers:
+    - pager: diff-so-fancy
 os:
   editPreset: "nvim-remote"
-pagers:
-  - colorArg: always
-    pager: diff-so-fancy
 gui:
   showBottomLine: false
   theme:
