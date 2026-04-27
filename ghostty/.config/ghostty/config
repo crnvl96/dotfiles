@@ -1,5 +1,4 @@
-# theme = light:Kanagawa Lotus,dark:Kanagawa Wave
-theme = Kanagawa Dragon
+theme = light:Flexoki Light,dark:Flexoki Dark
 
 font-family = "JetBrainsMonoNerdFont"
 font-size = 12
