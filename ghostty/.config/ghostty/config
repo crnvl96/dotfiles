@@ -48,6 +48,8 @@ keybind = alt+shift+x=close_surface
 keybind = alt+shift+v=new_split:right
 keybind = alt+shift+u=reload_config
 keybind = alt+shift+s=new_split:down
+keybind = alt+shift+f=scroll_page_down
+keybind = alt+shift+b=scroll_page_up
 keybind = alt+shift+r=prompt_tab_title
 keybind = alt+shift+y=write_screen_file:copy,plain
 keybind = alt+shift+p=toggle_command_palette
