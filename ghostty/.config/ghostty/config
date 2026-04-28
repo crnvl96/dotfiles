@@ -1,4 +1,43 @@
-theme = light:Flexoki Light,dark:Flexoki Dark
+# Copy the configuration below and add it to your
+# ~/.config/ghostty/config file
+
+# Colors (Root Loops)
+# via https://rootloops.sh?sugar=8&colors=10&sogginess=7&flavor=1&fruit=9.8&milk=1.11
+
+background = 352062
+foreground = c6baf4
+
+# black
+palette = 0=#492e82
+palette = 8=#6a47b4
+
+# red
+palette = 1=#ff828f
+palette = 9=#ffa9af
+
+# green
+palette = 2=#6aca00
+palette = 10=#78e300
+
+# yellow
+palette = 3=#e79d00
+palette = 11=#ffb333
+
+# blue
+palette = 4=#73b1ff
+palette = 12=#9cc7ff
+
+# purple
+palette = 5=#da84ff
+palette = 13=#e4a9ff
+
+# aqua
+palette = 6=#00c7c7
+palette = 14=#00dfe0
+
+# white
+palette = 7=#a087e7
+palette = 15=#bfb1f2
 
 font-family = "JetBrainsMonoNerdFont"
 font-size = 12
