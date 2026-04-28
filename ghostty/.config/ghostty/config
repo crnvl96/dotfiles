@@ -1,4 +1,43 @@
-# theme = "RootLoops"
+# Copy the configuration below and add it to your
+# ~/.config/ghostty/config file
+
+# Colors (Root Loops)
+# via https://rootloops.sh?sugar=6&colors=5&sogginess=10&flavor=1&fruit=7.3&milk=0.69
+
+background = 000f15
+foreground = d1f4ff
+
+# black
+palette = 0=#002d37
+palette = 8=#005e72
+
+# red
+palette = 1=#bb676f
+palette = 9=#cf7e85
+
+# green
+palette = 2=#6d9059
+palette = 10=#80a66b
+
+# yellow
+palette = 3=#a07d4c
+palette = 11=#b7915c
+
+# blue
+palette = 4=#5c86bc
+palette = 12=#739bcf
+
+# purple
+palette = 5=#9e6db4
+palette = 13=#b284c6
+
+# aqua
+palette = 6=#4e9190
+palette = 14=#5ea7a7
+
+# white
+palette = 7=#00bce1
+palette = 15=#a4eaff
 
 font-family = "JetBrainsMonoNerdFont"
 font-size = 12
