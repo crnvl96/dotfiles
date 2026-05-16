@@ -2,42 +2,42 @@
 # ~/.config/ghostty/config file
 
 # Colors (Root Loops)
-# via https://rootloops.sh?sugar=6&colors=6&sogginess=6&flavor=0&fruit=7&milk=1
+# via https://rootloops.sh?sugar=6&colors=7&sogginess=2&flavor=1&fruit=10&milk=0
 
-background = 0b262a
-foreground = a3e2ee
+background = 060509
+foreground = f4f3f6
 
 # black
-palette = 0=#163d43
-palette = 8=#2a656f
+palette = 0=#24202c
+palette = 8=#554e63
 
 # red
-palette = 1=#c45c80
-palette = 9=#d87595
+palette = 1=#d05465
+palette = 9=#e36f7c
 
 # green
-palette = 2=#7c8d45
-palette = 10=#90a254
+palette = 2=#639447
+palette = 10=#74aa54
 
 # yellow
-palette = 3=#b07542
-palette = 11=#c88953
+palette = 3=#a87a34
+palette = 11=#c18e40
 
 # blue
-palette = 4=#488bb8
-palette = 12=#5ba1d0
+palette = 4=#4885d1
+palette = 12=#629be3
 
 # purple
-palette = 5=#916eca
-palette = 13=#a586d9
+palette = 5=#ab5ccb
+palette = 13=#bd77db
 
 # aqua
-palette = 6=#469486
-palette = 14=#55aa9b
+palette = 6=#389494
+palette = 14=#44abab
 
 # white
-palette = 7=#58b0bf
-palette = 15=#8cd9e7
+palette = 7=#aea7be
+palette = 15=#e3e1ea
 
 
 font-family = "JetBrainsMonoNerdFont"
