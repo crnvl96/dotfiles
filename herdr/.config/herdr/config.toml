@@ -1,0 +1,77 @@
+onboarding = false
+
+[ui.toast]
+delivery = "herdr"
+
+[theme]
+name = "one-dark"
+auto_switch = false
+
+[ui.sound]
+enabled = true
+
+[ui]
+show_agent_labels_on_pane_borders = true
+prompt_new_tab_name = false
+sidebar_width = 36
+
+[keys]
+prefix = "ctrl+a"
+
+detach = "prefix+q"
+copy_mode = "prefix+y"
+zoom = "prefix+z"
+toggle_sidebar = "prefix+e"
+last_pane = "alt+shift+,"
+
+resize_mode = "prefix+0"
+
+previous_agent = "ctrl+,"
+next_agent = "ctrl+."
+
+goto = "alt+shift+."
+
+workspace_picker = "alt+shift+f"
+new_workspace = "prefix+shift+n"
+rename_workspace = "prefix+shift+r"
+close_workspace = "prefix+shift+x"
+
+navigate_workspace_up = "ctrl+k"
+navigate_workspace_down = "ctrl+j"
+
+navigate_pane_left = "h"
+navigate_pane_down = "j"
+navigate_pane_up = "k"
+navigate_pane_right = "l"
+
+focus_pane_left = "alt+shift+h"
+focus_pane_down = "alt+shift+j"
+focus_pane_up = "alt+shift+k"
+focus_pane_right = "alt+shift+l"
+
+swap_pane_left = "prefix+shift+h"
+swap_pane_down = "prefix+shift+j"
+swap_pane_up = "prefix+shift+k"
+swap_pane_right = "prefix+shift+l"
+
+new_tab = "prefix+c"
+previous_tab = "alt+p"
+next_tab = "alt+n"
+switch_tab = "prefix+1..9"
+rename_tab = "prefix+r"
+close_tab = "prefix+x"
+
+split_vertical = "alt+shift+v"
+split_horizontal = "alt+shift+s"
+
+new_worktree = ""
+remote_image_paste = ""
+cycle_pane_next = ""
+cycle_pane_previous = ""
+close_pane = ""
+
+[[keys.command]]
+key = "prefix+g"
+type = "pane"
+command = "lazygit"
+description = "run lazygit"
