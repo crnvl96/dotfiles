@@ -1,0 +1,10 @@
+theme = "one-dark-pro"
+mode = "auto"
+vcs = "git"
+watch = false
+exclude_untracked = false
+line_numbers = false
+wrap_lines = false
+menu_bar = false
+agent_notes = false
+transparent_background = true
