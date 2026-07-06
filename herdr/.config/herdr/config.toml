@@ -1,5 +1,8 @@
 onboarding = false
 
+[experimental]
+kitty_graphics = true
+
 [ui.toast]
 delivery = "herdr"
 
@@ -23,8 +26,6 @@ navigate_pane_left = "h"
 navigate_pane_down = "j"
 navigate_pane_up = "k"
 navigate_pane_right = "l"
-
-remote_image_paste = "ctrl+v"
 
 navigate_workspace_up = "ctrl+k"
 navigate_workspace_down = "ctrl+j"
@@ -67,6 +68,7 @@ new_worktree = ""
 cycle_pane_next = ""
 cycle_pane_previous = ""
 close_pane = ""
+remote_image_paste = ""
 
 [[keys.command]]
 key = "prefix+g"
@@ -79,3 +81,9 @@ key = "prefix+v"
 type = "pane"
 command = "nvim"
 description = "run nvim"
+
+[[keys.command]]
+key = "prefix+o"
+type = "pane"
+command = "lazydocker"
+description = "run lazydocker"
