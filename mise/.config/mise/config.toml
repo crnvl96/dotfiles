@@ -38,7 +38,7 @@ typst = "latest"
 uv = "latest"
 zoxide = "latest"
 neovim = "0.12.3"
-node = "24"
+node = "24.13.1"
 python = "3.14"
 
 [env]
@@ -72,3 +72,4 @@ cat = "bat"
 dtool = "git difftool -d"
 dmain = "git difftool -d origin/main"
 cc = "claude --dangerously-skip-permissions"
+x = "xdg-open"

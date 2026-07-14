@@ -87,3 +87,9 @@ key = "prefix+o"
 type = "pane"
 command = "lazydocker"
 description = "run lazydocker"
+
+[[keys.command]]
+key = "prefix+t"
+type = "pane"
+command = "/usr/bin/bash"
+description = "run temporary shell"
