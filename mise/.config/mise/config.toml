@@ -1,43 +1,7 @@
-redactions = [
-  "MONGODB_URI",
-  "N8N_WEBHOOK_URL",
-  "DG_SERVICE_API_KEY",
-  "PERPLEXITY_API_KEY",
-  "OPENROUTER_API_KEY",
-]
-
 [settings]
 env_shell_expand = true
 
 [tools]
-aube = "latest"
-aws = { version = "latest", symlink_bins = "true" }
-bat = "latest"
-biome = "latest"
-bun = "latest"
-difftastic = "latest"
-eza = "latest"
-fd = "latest"
-fzf = "latest"
-gh = "latest"
-go = "latest"
-lazydocker = "latest"
-lazygit = "latest"
-lua-language-server = "latest"
-mongosh = "latest"
-oxfmt = "latest"
-oxlint = "latest"
-ripgrep = "latest"
-ruff = "latest"
-rust = "latest"
-stylua = "latest"
-tmux = "latest"
-tree-sitter = "latest"
-ty = "latest"
-typst = "latest"
-uv = "latest"
-zoxide = "latest"
-neovim = "0.12.3"
 node = "24.13.1"
 python = "3.14"
 
@@ -45,12 +9,10 @@ python = "3.14"
 _.file = { path = "$HOME/.config/mise/.env.local", redact = true }
 _.path = [
   "$HOME/.local/bin",
-  "$HOME/.bun/bin",
   "$HOME/.config/mise/scripts",
   "$HOME/.local/share/pnpm/bin",
   "$HOME/.opencode/bin",
 ]
-PNPM_HOME="$HOME/.local/share/pnpm"
 EDITOR = "nvim"
 VISUAL = "nvim"
 RIPGREP_CONFIG_PATH = "$HOME/.ripgreprc"
@@ -61,15 +23,9 @@ lzg = "lazygit"
 ex = "exit"
 cl = "clear"
 nv = "nvim"
-vim = "vimx"
-vi = "vimx"
 so = "source .venv/bin/activate"
 nt = "scratchpad"
 pin = "pi --no-session"
 ls = "eza -l"
 la = "eza -la"
 cat = "bat"
-dtool = "git difftool -d"
-dmain = "git difftool -d origin/main"
-cc = "claude --dangerously-skip-permissions"
-x = "xdg-open"
