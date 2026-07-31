@@ -7,25 +7,56 @@ stow_dir=$PWD
 # Packages that install outside $HOME (system-wide). These are stowed with
 # sudo into the given target instead of into $HOME.
 # Format: "package:target"
-system_packages=(
-  "keyd:/etc/keyd"
-)
+# Only packages for the current OS are stowed. This keeps Linux-only
+# configuration from being applied on macOS, and vice versa.
+system_packages=()
+case "$(uname -s)" in
+  Linux)
+    platform=linux
+    shell_package=bash
+    system_packages=("keyd:/etc/keyd")
+    ;;
+  Darwin)
+    platform=macos
+    shell_package=zsh
+    ;;
+  *)
+    echo "Unsupported operating system: $(uname -s)" >&2
+    exit 1
+    ;;
+esac
+
+if [[ ! -d "$shell_package" ]]; then
+  echo "Missing shell package for this OS: $shell_package" >&2
+  exit 1
+fi
 
 usage() {
   local sys_names=() entry
-  for entry in "${system_packages[@]}"; do sys_names+=("${entry%%:*} -> ${entry#*:}"); done
+  if ((${#system_packages[@]} > 0)); then
+    for entry in "${system_packages[@]}"; do
+      sys_names+=("${entry%%:*} -> ${entry#*:}")
+    done
+  fi
   cat <<EOF
 Usage: $0 [OPTIONS]
 
-Stow all dotfiles packages. User packages are stowed into \$HOME; system
-packages are stowed into their system targets with sudo:
+Stow dotfiles packages for $(uname -s). The active shell package is
+'$shell_package'. User packages are stowed into \$HOME; system packages
+are stowed into their system targets with sudo:
 
-$(printf '  %s\n' "${sys_names[@]}")
+EOF
+  if ((${#sys_names[@]} > 0)); then
+    printf '  %s\n' "${sys_names[@]}"
+  else
+    printf '  (none)\n'
+  fi
+  cat <<EOF
 
 node_modules/ is never stowed (managed by the runtime, e.g. pnpm).
 
 Options:
-  --fresh    Unstow all packages first, then restow (clean slate)
+  --fresh    Unstow selected packages first, then restow (clean slate)
   -h, --help Show this help message and exit
 
 Packages found in: $stow_dir
@@ -35,6 +66,9 @@ EOF
 # Print the system target for a package name, or return 1 if it is a user package.
 system_target() {
   local pkg=$1 entry
+  if ((${#system_packages[@]} == 0)); then
+    return 1
+  fi
   for entry in "${system_packages[@]}"; do
     if [[ "${entry%%:*}" == "$pkg" ]]; then
       printf '%s\n' "${entry#*:}"
@@ -90,10 +124,20 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-# Discover packages (one top-level directory each).
+# Discover packages (one top-level directory each), excluding packages for
+# the other operating system.
 all_packages=()
 for dir in */; do
-  all_packages+=("${dir%/}")
+  pkg=${dir%/}
+  case "$pkg" in
+    bash | kitty | keyd)
+      [[ "$platform" == linux ]] || continue
+      ;;
+    zsh | ghostty)
+      [[ "$platform" == macos ]] || continue
+      ;;
+  esac
+  all_packages+=("$pkg")
 done
 
 if [[ ${#all_packages[@]} -eq 0 ]]; then

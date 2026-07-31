@@ -1,31 +1,3 @@
-[settings]
-env_shell_expand = true
-
 [tools]
 node = "24.13.1"
 python = "3.14"
-
-[env]
-_.file = { path = "$HOME/.config/mise/.env.local", redact = true }
-_.path = [
-  "$HOME/.local/bin",
-  "$HOME/.config/mise/scripts",
-  "$HOME/.local/share/pnpm/bin",
-  "$HOME/.opencode/bin",
-]
-EDITOR = "nvim"
-VISUAL = "nvim"
-RIPGREP_CONFIG_PATH = "$HOME/.ripgreprc"
-_ZO_RESOLVE_SYMLINKS = "1"
-
-[shell_alias]
-lzg = "lazygit"
-ex = "exit"
-cl = "clear"
-nv = "nvim"
-so = "source .venv/bin/activate"
-nt = "scratchpad"
-pin = "pi --no-session"
-ls = "eza -l"
-la = "eza -la"
-cat = "bat"

@@ -1,0 +1,21 @@
+font-family = "IosevkaTerm Nerd Font Mono"
+window-title-font-family = "IosevkaTerm Nerd Font Mono"
+
+cursor-style-blink = false
+cursor-text = 000000
+shell-integration-features = no-cursor
+
+bell-features = attention,no-system,no-title,no-border
+notify-on-command-finish = unfocused
+
+font-size = 16
+
+macos-option-as-alt = true
+macos-window-shadow = false
+quit-after-last-window-closed = true
+mouse-hide-while-typing = true
+
+keybind = cmd+shift+v=new_split:right
+keybind = cmd+shift+s=new_split:down
+
+# keybind = clear
