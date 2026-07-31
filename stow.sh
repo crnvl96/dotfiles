@@ -1,11 +1,18 @@
 #!/usr/bin/env bash
+
+# Use strict Bash behavior: stop on errors, reject unset variables, and fail a
+# pipeline when any command in it fails. Individual exceptions are handled
+# explicitly below where the script needs to inspect a command's exit status.
 set -euo pipefail
 
+# Stow package paths are relative to this script, not to the directory from
+# which the user invokes it. Changing directory here also makes the -d path
+# passed to Stow deterministic.
 cd "$(dirname "${BASH_SOURCE[0]}")"
 stow_dir=$PWD
 
-# Keep this list explicit so adding an unrelated top-level directory does not
-# automatically make it a Stow package.
+# Each directory listed here is a Stow package. Keeping the list explicit
+# prevents an unrelated top-level directory from being treated as a package.
 common_packages=(
 	bin
 	git
@@ -15,10 +22,14 @@ common_packages=(
 	shell
 )
 
-# Packages that install outside $HOME (system-wide). These are stowed with
-# sudo into the given target instead of into the user's home directory.
-# Format: "package:target"
+# Most packages are linked into the user's home directory. Packages listed
+# here are exceptions: their contents belong outside $HOME and must be stowed
+# into the target shown after the colon. Format: "package:target".
 system_package_targets=()
+
+# Select the platform-specific packages. The shell package is kept separate
+# because it is also used in the help text and in the validation below. The
+# package names must match directories next to this script.
 case "$(uname -s)" in
 Linux)
 	shell_package=bash
@@ -35,8 +46,14 @@ Darwin)
 	;;
 esac
 
+# Stow every platform package as well as the packages shared by all platforms.
+# Bash and zsh are mutually exclusive here because only the active platform's
+# shell package is included.
 all_packages=("${platform_packages[@]}" "${common_packages[@]}")
 
+# Print the available options and the package/target selection made for this
+# operating system. Keeping this in a function lets --help exit before any
+# dependency checks or filesystem changes are attempted.
 usage() {
 	local sys_names=() entry
 	if ((${#system_package_targets[@]} > 0)); then
@@ -72,7 +89,9 @@ Packages found in: $stow_dir
 EOF
 }
 
-# Print the system target for a package name, or return 1 if it is a user package.
+# Look up the non-home target for a package. A successful lookup means the
+# package needs special handling (and normally sudo); a failed lookup means it
+# is an ordinary package that should be stowed into $HOME.
 system_target() {
 	local pkg="$1" entry
 	if ((${#system_package_targets[@]} == 0)); then
@@ -87,6 +106,8 @@ system_target() {
 	return 1
 }
 
+# Fail early with a readable message instead of letting a missing dependency
+# produce a less useful error later in the script.
 require_command() {
 	local command_name="$1"
 	if ! command -v "$command_name" >/dev/null 2>&1; then
@@ -95,8 +116,10 @@ require_command() {
 	fi
 }
 
-# Print a command, optionally ask for confirmation, stream its output, and
-# retain the output in a temporary file only when the command fails.
+# Run one Stow (or sudo Stow) command consistently. The command is printed so
+# the user can review it, and interactive runs require confirmation unless
+# --yes was supplied. In --dry-run mode Stow still runs, but its --no flag
+# prevents changes from being made.
 run_command() {
 	local cmd=("$@")
 	printf 'Command:'
@@ -123,12 +146,15 @@ run_command() {
 		esac
 	fi
 
+	# Capture normal command output on screen while retaining it if either the
+	# command or tee fails. The temporary file is removed after success.
 	local output_file
 	output_file=$(mktemp "${TMPDIR:-/tmp}/stow.output.XXXXXX")
 
 	local -a pipeline_status
 	# Keep the pipeline in an if condition so set -e does not exit before
-	# PIPESTATUS can be captured.
+	# PIPESTATUS can be captured. PIPESTATUS[0] is the Stow command and
+	# PIPESTATUS[1] is tee, so both failures can be reported accurately.
 	if "${cmd[@]}" 2>&1 | tee "$output_file"; then
 		pipeline_status=("${PIPESTATUS[@]}")
 	else
@@ -151,6 +177,8 @@ run_command() {
 	return "$status"
 }
 
+# Parse options before checking packages or dependencies. These flags affect
+# both confirmation behavior and whether Stow is allowed to modify anything.
 dry_run=false
 assume_yes=false
 while [[ $# -gt 0 ]]; do
@@ -175,6 +203,9 @@ while [[ $# -gt 0 ]]; do
 	esac
 done
 
+# Validate the package layout before invoking Stow. A missing directory usually
+# indicates an incomplete checkout or a package name that was added to the
+# arrays without adding the corresponding directory.
 if [[ ! -d "$stow_dir/$shell_package" ]]; then
 	echo "Missing shell package for this OS: $shell_package" >&2
 	exit 1
@@ -194,7 +225,9 @@ if ((${#system_package_targets[@]} > 0)) && [[ "$dry_run" == false ]]; then
 	require_command sudo
 fi
 
-# Split into user (-> $HOME) and system (-> system target) packages.
+# Split the selected packages by destination. User packages can be combined
+# into one Stow invocation, while system packages are handled individually so
+# each one can use its own target directory.
 user_packages=()
 selected_system_packages=()
 for pkg in "${all_packages[@]}"; do
@@ -205,20 +238,32 @@ for pkg in "${all_packages[@]}"; do
 	fi
 done
 
-# Common Stow flags. --no-folding symlinks individual files instead of folding
-# whole directories; --ignore keeps generated/runtime trees (e.g. node_modules)
-# out of $HOME. --no is added for --dry-run.
+# Build the flags shared by every Stow invocation:
+#   --verbose=2  show enough detail to review the links being created
+#   --no-folding  link individual files instead of folding whole directories
+#   --ignore      keep generated/runtime trees such as node_modules unmanaged
+#   -d            tell Stow where the package directories live
+# Stow's --no option is added for --dry-run; run_command still displays and
+# executes the planned command so the user can inspect Stow's output.
 stow_common=(--verbose=2 --no-folding --ignore='node_modules' -d "$stow_dir")
 if [[ "$dry_run" == true ]]; then
 	stow_common+=(--no)
 fi
 
+# Link all home-directory packages into the user's home. -R means restow: Stow
+# removes stale links for the selected packages and then creates the current
+# ones. The explicit -t target avoids relying on Stow's default target rules.
 if ((${#user_packages[@]} > 0)); then
 	run_command stow "${stow_common[@]}" -t "$HOME" -R "${user_packages[@]}"
 fi
 
+# System packages cannot be combined with home packages because each target may
+# be different. Real system changes use sudo; dry runs deliberately do not, so
+# inspecting the plan never prompts for a password.
 if ((${#selected_system_packages[@]} > 0)); then
 	for pkg in "${selected_system_packages[@]}"; do
+		# Resolve the target again here so the command is built from the same
+		# package-to-target mapping used during classification.
 		target=$(system_target "$pkg")
 		if [[ "$dry_run" == true ]]; then
 			# A dry run does not need elevated privileges and should not prompt for
