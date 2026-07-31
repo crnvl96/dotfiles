@@ -18,16 +18,14 @@ common_packages=(
 # Packages that install outside $HOME (system-wide). These are stowed with
 # sudo into the given target instead of into the user's home directory.
 # Format: "package:target"
-system_packages=()
+system_package_targets=()
 case "$(uname -s)" in
   Linux)
-    platform=linux
     shell_package=bash
     platform_packages=(bash kitty keyd)
-    system_packages=("keyd:/etc/keyd")
+    system_package_targets=("keyd:/etc/keyd")
     ;;
   Darwin)
-    platform=macos
     shell_package=zsh
     platform_packages=(ghostty zsh)
     ;;
@@ -41,8 +39,8 @@ all_packages=("${platform_packages[@]}" "${common_packages[@]}")
 
 usage() {
   local sys_names=() entry
-  if ((${#system_packages[@]} > 0)); then
-    for entry in "${system_packages[@]}"; do
+  if ((${#system_package_targets[@]} > 0)); then
+    for entry in "${system_package_targets[@]}"; do
       sys_names+=("${entry%%:*} -> ${entry#*:}")
     done
   fi
@@ -77,10 +75,10 @@ EOF
 # Print the system target for a package name, or return 1 if it is a user package.
 system_target() {
   local pkg="$1" entry
-  if ((${#system_packages[@]} == 0)); then
+  if ((${#system_package_targets[@]} == 0)); then
     return 1
   fi
-  for entry in "${system_packages[@]}"; do
+  for entry in "${system_package_targets[@]}"; do
     if [[ "${entry%%:*}" == "$pkg" ]]; then
       printf '%s\n' "${entry#*:}"
       return 0
@@ -99,7 +97,7 @@ require_command() {
 
 # Print a command, optionally ask for confirmation, stream its output, and
 # retain the output in a temporary file only when the command fails.
-run_confirmed() {
+run_command() {
   local cmd=("$@")
   printf 'Command:'
   printf ' %q' "${cmd[@]}"
@@ -129,6 +127,8 @@ run_confirmed() {
   output_file=$(mktemp "${TMPDIR:-/tmp}/stow.output.XXXXXX")
 
   local -a pipeline_status
+  # Keep the pipeline in an if condition so set -e does not exit before
+  # PIPESTATUS can be captured.
   if "${cmd[@]}" 2>&1 | tee "$output_file"; then
     pipeline_status=("${PIPESTATUS[@]}")
   else
@@ -190,16 +190,16 @@ done
 require_command stow
 require_command mktemp
 require_command tee
-if ((${#system_packages[@]} > 0)) && [[ "$dry_run" == false ]]; then
+if ((${#system_package_targets[@]} > 0)) && [[ "$dry_run" == false ]]; then
   require_command sudo
 fi
 
 # Split into user (-> $HOME) and system (-> system target) packages.
 user_packages=()
-system_pkgs=()
+selected_system_packages=()
 for pkg in "${all_packages[@]}"; do
   if system_target "$pkg" >/dev/null; then
-    system_pkgs+=("$pkg")
+    selected_system_packages+=("$pkg")
   else
     user_packages+=("$pkg")
   fi
@@ -214,18 +214,18 @@ if [[ "$dry_run" == true ]]; then
 fi
 
 if ((${#user_packages[@]} > 0)); then
-  run_confirmed stow "${stow_common[@]}" -t "$HOME" -R "${user_packages[@]}"
+  run_command stow "${stow_common[@]}" -t "$HOME" -R "${user_packages[@]}"
 fi
 
-if ((${#system_pkgs[@]} > 0)); then
-  for pkg in "${system_pkgs[@]}"; do
+if ((${#selected_system_packages[@]} > 0)); then
+  for pkg in "${selected_system_packages[@]}"; do
     target=$(system_target "$pkg")
     if [[ "$dry_run" == true ]]; then
       # A dry run does not need elevated privileges and should not prompt for
       # a sudo password merely to inspect the planned changes.
-      run_confirmed stow "${stow_common[@]}" -t "$target" -R "$pkg"
+      run_command stow "${stow_common[@]}" -t "$target" -R "$pkg"
     else
-      run_confirmed sudo stow "${stow_common[@]}" -t "$target" -R "$pkg"
+      run_command sudo stow "${stow_common[@]}" -t "$target" -R "$pkg"
     fi
   done
 fi
