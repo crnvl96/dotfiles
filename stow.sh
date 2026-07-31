@@ -4,21 +4,32 @@ set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 stow_dir=$PWD
 
+# Keep this list explicit so adding an unrelated top-level directory does not
+# automatically make it a Stow package.
+common_packages=(
+  bin
+  git
+  lazygit
+  mise
+  ripgrep
+  shell
+)
+
 # Packages that install outside $HOME (system-wide). These are stowed with
-# sudo into the given target instead of into $HOME.
+# sudo into the given target instead of into the user's home directory.
 # Format: "package:target"
-# Only packages for the current OS are stowed. This keeps Linux-only
-# configuration from being applied on macOS, and vice versa.
 system_packages=()
 case "$(uname -s)" in
   Linux)
     platform=linux
     shell_package=bash
+    platform_packages=(bash kitty keyd)
     system_packages=("keyd:/etc/keyd")
     ;;
   Darwin)
     platform=macos
     shell_package=zsh
+    platform_packages=(ghostty zsh)
     ;;
   *)
     echo "Unsupported operating system: $(uname -s)" >&2
@@ -26,10 +37,7 @@ case "$(uname -s)" in
     ;;
 esac
 
-if [[ ! -d "$shell_package" ]]; then
-  echo "Missing shell package for this OS: $shell_package" >&2
-  exit 1
-fi
+all_packages=("${platform_packages[@]}" "${common_packages[@]}")
 
 usage() {
   local sys_names=() entry
@@ -43,7 +51,7 @@ Usage: $0 [OPTIONS]
 
 Stow dotfiles packages for $(uname -s). The active shell package is
 '$shell_package'. User packages are stowed into \$HOME; system packages
-are stowed into their system targets with sudo:
+are stowed into their system targets with sudo.
 
 EOF
   if ((${#sys_names[@]} > 0)); then
@@ -53,19 +61,22 @@ EOF
   fi
   cat <<EOF
 
-node_modules/ is never stowed (managed by the runtime, e.g. pnpm).
+Packages: ${all_packages[*]}
 
 Options:
-  --fresh    Unstow selected packages first, then restow (clean slate)
+  --dry-run  Show what Stow would do without changing any files
+  -y, --yes  Skip confirmation prompts (sudo may still ask for a password)
   -h, --help Show this help message and exit
 
+Generated node_modules/ directories are never stowed.
+Packages are defined explicitly in this script.
 Packages found in: $stow_dir
 EOF
 }
 
 # Print the system target for a package name, or return 1 if it is a user package.
 system_target() {
-  local pkg=$1 entry
+  local pkg="$1" entry
   if ((${#system_packages[@]} == 0)); then
     return 1
   fi
@@ -78,38 +89,78 @@ system_target() {
   return 1
 }
 
-# Print a command, ask for confirmation, run it, and capture output to a temp
-# file (path printed on success or failure).
+require_command() {
+  local command_name="$1"
+  if ! command -v "$command_name" >/dev/null 2>&1; then
+    printf 'Required command not found: %s\n' "$command_name" >&2
+    return 1
+  fi
+}
+
+# Print a command, optionally ask for confirmation, stream its output, and
+# retain the output in a temporary file only when the command fails.
 run_confirmed() {
   local cmd=("$@")
   printf 'Command:'
   printf ' %q' "${cmd[@]}"
-  printf '\n\nRun this command? [y/N] '
-  local answer
-  read -r answer
-  case "$answer" in
-    [yY] | [yY][eE][sS]) ;;
-    *)
+  printf '\n'
+
+  if [[ "$dry_run" == true ]]; then
+    printf 'Dry run: no changes will be made.\n'
+  elif [[ "$assume_yes" == true ]]; then
+    printf 'Skipping confirmation (--yes).\n'
+  else
+    printf '\nRun this command? [y/N] '
+    local answer
+    if ! read -r answer; then
       echo "Aborted."
       return 1
-      ;;
-  esac
-  local output_file status
-  output_file=$(mktemp "${TMPDIR:-/tmp}/stow.output.XXXXXX")
-  if "${cmd[@]}" >"$output_file" 2>&1; then
-    printf 'Output written to: %s\n' "$output_file"
-  else
-    status=$?
-    printf 'Output written to: %s\n' "$output_file"
-    return "$status"
+    fi
+    case "$answer" in
+      [yY] | [yY][eE][sS]) ;;
+      *)
+        echo "Aborted."
+        return 1
+        ;;
+    esac
   fi
+
+  local output_file
+  output_file=$(mktemp "${TMPDIR:-/tmp}/stow.output.XXXXXX")
+
+  local -a pipeline_status
+  if "${cmd[@]}" 2>&1 | tee "$output_file"; then
+    pipeline_status=("${PIPESTATUS[@]}")
+  else
+    pipeline_status=("${PIPESTATUS[@]}")
+  fi
+
+  local command_status=${pipeline_status[0]}
+  local tee_status=${pipeline_status[1]}
+  if ((command_status == 0 && tee_status == 0)); then
+    rm -f "$output_file"
+    return 0
+  fi
+
+  local status=$command_status
+  if ((status == 0)); then
+    status=$tee_status
+  fi
+  printf 'Command failed with status %d; output saved to: %s\n' \
+    "$status" "$output_file" >&2
+  return "$status"
 }
 
-fresh=false
+dry_run=false
+assume_yes=false
 while [[ $# -gt 0 ]]; do
   case "$1" in
-    --fresh)
-      fresh=true
+    --dry-run)
+      dry_run=true
+      shift
+      ;;
+    -y | --yes)
+      assume_yes=true
       shift
       ;;
     -h | --help)
@@ -124,28 +175,26 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-# Discover packages (one top-level directory each), excluding packages for
-# the other operating system.
-all_packages=()
-for dir in */; do
-  pkg=${dir%/}
-  case "$pkg" in
-    bash | kitty | keyd)
-      [[ "$platform" == linux ]] || continue
-      ;;
-    zsh | ghostty)
-      [[ "$platform" == macos ]] || continue
-      ;;
-  esac
-  all_packages+=("$pkg")
-done
-
-if [[ ${#all_packages[@]} -eq 0 ]]; then
-  echo "No packages found to stow." >&2
+if [[ ! -d "$stow_dir/$shell_package" ]]; then
+  echo "Missing shell package for this OS: $shell_package" >&2
   exit 1
 fi
 
-# Split into user (-> $HOME) and system (-> sudo target) packages.
+for pkg in "${all_packages[@]}"; do
+  if [[ ! -d "$stow_dir/$pkg" ]]; then
+    echo "Missing Stow package: $pkg" >&2
+    exit 1
+  fi
+done
+
+require_command stow
+require_command mktemp
+require_command tee
+if ((${#system_packages[@]} > 0)) && [[ "$dry_run" == false ]]; then
+  require_command sudo
+fi
+
+# Split into user (-> $HOME) and system (-> system target) packages.
 user_packages=()
 system_pkgs=()
 for pkg in "${all_packages[@]}"; do
@@ -156,31 +205,27 @@ for pkg in "${all_packages[@]}"; do
   fi
 done
 
-# Common stow flags. --no-folding symlinks individual files instead of folding
+# Common Stow flags. --no-folding symlinks individual files instead of folding
 # whole directories; --ignore keeps generated/runtime trees (e.g. node_modules)
-# out of $HOME so the runtime owns them.
+# out of $HOME. --no is added for --dry-run.
 stow_common=(--verbose=2 --no-folding --ignore='node_modules' -d "$stow_dir")
-
-if "$fresh"; then
-  printf 'Fresh mode: unstowing first\n\n'
-  if [[ ${#user_packages[@]} -gt 0 ]]; then
-    run_confirmed stow "${stow_common[@]}" -t "$HOME" -D "${user_packages[@]}"
-  fi
-  if [[ ${#system_pkgs[@]} -gt 0 ]]; then
-    for pkg in "${system_pkgs[@]}"; do
-      target=$(system_target "$pkg")
-      run_confirmed sudo stow "${stow_common[@]}" -t "$target" -D "$pkg"
-    done
-  fi
-  printf '\n'
+if [[ "$dry_run" == true ]]; then
+  stow_common+=(--no)
 fi
 
-if [[ ${#user_packages[@]} -gt 0 ]]; then
+if ((${#user_packages[@]} > 0)); then
   run_confirmed stow "${stow_common[@]}" -t "$HOME" -R "${user_packages[@]}"
 fi
-if [[ ${#system_pkgs[@]} -gt 0 ]]; then
+
+if ((${#system_pkgs[@]} > 0)); then
   for pkg in "${system_pkgs[@]}"; do
     target=$(system_target "$pkg")
-    run_confirmed sudo stow "${stow_common[@]}" -t "$target" -R "$pkg"
+    if [[ "$dry_run" == true ]]; then
+      # A dry run does not need elevated privileges and should not prompt for
+      # a sudo password merely to inspect the planned changes.
+      run_confirmed stow "${stow_common[@]}" -t "$target" -R "$pkg"
+    else
+      run_confirmed sudo stow "${stow_common[@]}" -t "$target" -R "$pkg"
+    fi
   done
 fi
