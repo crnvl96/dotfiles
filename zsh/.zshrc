@@ -33,3 +33,14 @@ alias pin='pi --no-session'
 alias ls='eza -l'
 alias la='eza -la'
 alias cat='bat'
+
+eval "$(mise activate zsh)"
+eval "$(starship init zsh)"
+eval "$(zoxide init --cmd cd zsh)"
+
+# bun completions
+[ -s "/Users/velozient/.bun/_bun" ] && source "/Users/velozient/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
