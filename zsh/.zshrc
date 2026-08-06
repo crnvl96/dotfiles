@@ -34,13 +34,25 @@ alias ls='eza -l'
 alias la='eza -la'
 alias cat='bat'
 
-eval "$(mise activate zsh)"
-eval "$(starship init zsh)"
-eval "$(zoxide init --cmd cd zsh)"
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh)"
+else
+  print -u2 "zshrc: mise not found — skipping activation"
+fi
 
-# bun completions
-[ -s "/Users/velozient/.bun/_bun" ] && source "/Users/velozient/.bun/_bun"
+if command -v starship >/dev/null 2>&1; then
+  eval "$(starship init zsh)"
+else
+  print -u2 "zshrc: starship not found — skipping init"
+fi
 
-# bun
+if command -v zoxide >/dev/null 2>&1; then
+  eval "$(zoxide init --cmd cd zsh)"
+else
+  print -u2 "zshrc: zoxide not found — skipping init"
+fi
+
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
