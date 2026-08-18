@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-set -euo pipefail
-
-tmp="$(mktemp "${TMPDIR:-/tmp}/scratchpad.XXXXXX")"
-file="${tmp}.md"
-mv "$tmp" "$file"
-
-"${EDITOR:-nvim}" "$file"
