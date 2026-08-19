@@ -1,7 +1,0 @@
-# Node
-node_modules/
-
-# Environment/secrets
-.env
-.env.*
-!.env.local.example
