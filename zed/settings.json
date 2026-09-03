@@ -1,0 +1,62 @@
+// Zed settings for utilityos.
+//
+// These exist because of this repository's layout and tooling, so they live
+// here instead of ~/.config/zed/settings.json and apply to this project only.
+// Untracked: ignored via ~/.gitignore_global, not the repo's .gitignore.
+{
+  "languages": {
+    // This repo deliberately does not format TypeScript. Its .prettierignore is
+    // an allowlist that leaves .ts/.tsx out, and "npm run format" is
+    // eslint --fix, run by hand. Off so saving never rewrites these files.
+    "TypeScript": {
+      "format_on_save": "off",
+    },
+    "TSX": {
+      "format_on_save": "off",
+    },
+    // Reproduces "make lint-markdown" (npx prettier from the repo root), so a
+    // saved .md is exactly what CI checks. npx rather than Zed's bundled
+    // prettier so the version follows the project.
+    "Markdown": {
+      "format_on_save": "on",
+      "formatter": {
+        "external": {
+          "command": "npx",
+          "arguments": [
+            "--yes",
+            "prettier",
+            "--stdin-filepath",
+            "{buffer_path}",
+          ],
+        },
+      },
+    },
+  },
+  "lsp": {
+    // vtsls only looks for TypeScript at the repo root, and this repo keeps it
+    // under services/app. Without this it silently uses its own bundled
+    // TypeScript instead of the project's. Confirm with the
+    // "Using tsserver from:" line in "dev: open language server logs".
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "tsdk": "services/app/node_modules/typescript/lib",
+        },
+        "javascript": {
+          "tsdk": "services/app/node_modules/typescript/lib",
+        },
+      },
+    },
+    "gopls": {
+      "initialization_options": {
+        // This repo keeps its integration, e2e and seeder suites behind build
+        // tags; without these gopls reports "no package metadata" for those
+        // files and offers no completion, diagnostics or go-to-definition.
+        // The fourth tag, "tools", is deliberately absent: it makes
+        // services/api/tools.go declare package tools alongside package main,
+        // which gopls reports as a package mismatch for the whole directory.
+        "buildFlags": ["-tags=integration,e2e,seeder"],
+      },
+    },
+  },
+}
